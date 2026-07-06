@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raptorai.ru/sitemap.xml
+
+# Block unnecessary paths
+Disallow: /api/
+Disallow: /_next/
