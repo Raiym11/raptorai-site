@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "RaptorAI — Автоматизация бизнеса с ИИ",
   description: "Создаём ИИ-агентов, чат-боты и автоматизации на n8n. 100+ проектов, 100% успешных сдач.",
   keywords: "ИИ агент, автоматизация бизнеса, n8n, ChatGPT, Claude, Gemini, чат-бот",
+  icons: {
+    icon: "/assets/favicon.png",
+  },
   openGraph: {
     title: "RaptorAI — Автоматизация бизнеса с ИИ",
     description: "Создаём ИИ-агентов, чат-боты и автоматизации на n8n.",
