@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Кейс: как мы построили ИИ-консультанта на базе RAG и Pinecone для интернет-магазина с каталогом 13 000+ товаров.">
+<title>RAG-агент для интернет-магазина: как мы проиндексировали 13 000 товаров — RaptorAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080B0F; --bg2: #0D1117; --bg3: #111820;
+  --cyan: #00D4FF; --cyan-dim: #00D4FF18; --cyan-mid: #00D4FF44;
+  --white: #F0F4F8; --gray: #8899AA; --border: #1E2A36; --card: #0F1923;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(8,11,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-logo img { height: 48px; display: block; }
+.nav-back { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.nav-back:hover { color: var(--cyan); }
+main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
+.article-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--cyan-dim); border: 1px solid var(--cyan-mid); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+.article-meta { display: flex; gap: 16px; font-size: 13px; color: var(--gray); margin-bottom: 40px; }
+.article-body p { font-size: 16px; color: var(--gray); line-height: 1.9; margin-bottom: 20px; }
+.article-body strong { color: var(--white); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan-mid); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 48px 24px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+footer img { height: 44px; opacity: 0.85; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--gray); font-size: 13px; text-decoration: none; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { color: var(--gray); font-size: 13px; }
+@media (max-width: 768px) { nav { padding: 0 16px; } main { padding: 120px 20px 70px; } .footer-inner { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="RaptorAI"></a>
+  <a href="index.html#blog" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Все статьи</a>
+</nav>
+
+<main>
+  <div class="article-tag"><i class="fa-solid fa-robot" style="font-size:10px"></i> ИИ-агент</div>
+  <h1>RAG-агент для интернет-магазина: как мы проиндексировали 13 000 товаров</h1>
+  <div class="article-meta">
+    <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>25.06.2026</span>
+    <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>10 мин</span>
+  </div>
+  <div class="article-body">
+    <p>Клиент — интернет-магазин запчастей с каталогом из 13 000+ позиций. Проблема была не в трафике, а в консультации: покупатели присылали неточные названия деталей, а менеджеры тратили часы на подбор аналогов вручную.</p>
+    <p><strong>База знаний.</strong> Весь каталог был превращён в векторные представления и загружен в Pinecone — это позволяет искать товары не по точному совпадению текста, а по смыслу запроса.</p>
+    <p><strong>Логика ответа.</strong> Когда покупатель пишет что-то вроде «нужна прокладка для двигателя такой-то модели», агент на GPT-4o-mini находит релевантные позиции в базе, сверяет совместимость и формулирует понятный ответ вместо простого списка артикулов.</p>
+    <p><strong>Работа 24/7.</strong> Агент подключён к сайту и мессенджерам магазина и отвечает клиентам в любое время суток, а сложные или нестандартные случаи передаёт живому менеджеру.</p>
+    <p>Итог — нагрузка на отдел консультаций снизилась примерно на 70%, а покупатели получают ответ мгновенно, а не после рабочего дня.</p>
+  </div>
+  <a href="index.html#blog" class="back-link"><i class="fa-solid fa-arrow-left"></i>Все статьи</a>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <img src="assets/logo.png" alt="RaptorAI">
+    <div class="footer-links">
+      <a href="index.html#services">Услуги</a>
+      <a href="index.html#cases">Кейсы</a>
+      <a href="index.html#contact">Контакт</a>
+    </div>
+    <p class="footer-copy">© 2026 RaptorAI. Автоматизация с ИИ. Все права защищены.</p>
+  </div>
+</footer>
+
+</body>
+</html>
