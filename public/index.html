@@ -656,11 +656,14 @@ function toggleSubmitState() {
   btn.disabled = !consent.checked;
 }
 
-function submitForm() {
+const CONTACT_FORM_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/contact-form';
+
+async function submitForm() {
   const name = document.getElementById('f-name').value.trim();
   const surname = document.getElementById('f-surname').value.trim();
   const email = document.getElementById('f-email').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
+  const task = document.getElementById('f-task').value.trim();
   const consent = document.getElementById('f-consent').checked;
   if (!consent) {
     alert('Пожалуйста, подтвердите согласие на обработку данных.');
@@ -670,8 +673,26 @@ function submitForm() {
     alert('Пожалуйста, заполните все обязательные поля.');
     return;
   }
-  document.getElementById('form-body').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
+
+  const btn = document.getElementById('form-submit-btn');
+  btn.disabled = true;
+  const originalBtnText = btn.textContent;
+  btn.textContent = 'Отправка...';
+
+  try {
+    const response = await fetch(CONTACT_FORM_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name + ' ' + surname, email, phone, task })
+    });
+    if (!response.ok) throw new Error('Request failed with status ' + response.status);
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch (err) {
+    alert('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.');
+    btn.disabled = false;
+    btn.textContent = originalBtnText;
+  }
 }
 
 // SCROLL REVEAL
