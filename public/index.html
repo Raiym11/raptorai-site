@@ -952,7 +952,8 @@ body.theme-newyear #chat-panel { border-color: #A8D8FF33; box-shadow: 0 20px 60p
 <script>
 // ===== CHAT WIDGET (Дмитрий, n8n) =====
 // TODO: замените на реальный webhook-адрес вашего workflow в n8n
-const CHAT_WEBHOOK_URL = 'https://YOUR-N8N-INSTANCE.example.com/webhook/raptorai-chat';
+const CHAT_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/raptorai-chat';
+const CHAT_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
 
 let chatOpened = false;
 let chatGatePassed = false;
@@ -1072,7 +1073,10 @@ async function sendChatMessage() {
   try {
     const response = await fetch(CHAT_WEBHOOK_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Webhook-Secret': CHAT_WEBHOOK_SECRET
+      },
       body: JSON.stringify({
         name: chatUserName,
         email: chatUserEmail,
