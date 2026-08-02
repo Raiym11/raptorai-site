@@ -662,6 +662,7 @@ function toggleSubmitState() {
 }
 
 const CONTACT_FORM_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/contact-form';
+const CONTACT_FORM_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
 
 async function submitForm() {
   const name = document.getElementById('f-name').value.trim();
@@ -688,7 +689,10 @@ async function submitForm() {
   try {
     const response = await fetch(CONTACT_FORM_WEBHOOK_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Webhook-Secret': CONTACT_FORM_WEBHOOK_SECRET
+      },
       body: JSON.stringify({ name: name + ' ' + surname, email, phone, telegram, task })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
