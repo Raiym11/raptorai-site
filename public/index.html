@@ -956,6 +956,8 @@ body.theme-newyear #chat-panel { border-color: #A8D8FF33; box-shadow: 0 20px 60p
 .chat-icon-btn:hover { color: var(--cyan); background: var(--cyan-dim); }
 .chat-send-btn { background: var(--cyan); color: #000; border: none; border-radius: 8px; width: 36px; height: 36px; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 .chat-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.chat-cta-btn { align-self: flex-start; margin-top: -4px; background: var(--cyan); color: #000; border: none; border-radius: 8px; padding: 10px 18px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: none; display: inline-block; transition: transform 0.15s, box-shadow 0.15s; }
+.chat-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px #00D4FF40; }
 @media (max-width: 480px) { #chat-panel { width: calc(100vw - 24px); right: 12px; bottom: 84px; } #chat-launcher { right: 16px; bottom: 16px; } }
 </style>
 
@@ -1033,7 +1035,7 @@ function restoreChatHistory() {
     document.getElementById('chat-body').style.display = 'flex';
     document.getElementById('chat-input-row').style.display = 'flex';
     (data.messages || []).forEach(function(m) {
-      appendChatMessage(m.role, m.text, m.imageUrl, m.time);
+      appendChatMessage(m.role, m.text, m.imageUrl, m.time, m.cta);
     });
     chatHistoryMessages = data.messages || [];
   } catch (e) { /* corrupted history, ignore */ }
@@ -1106,7 +1108,7 @@ function removeChatImage() {
   updateSendButtonState();
 }
 
-function appendChatMessage(role, text, imageUrl, savedTime) {
+function appendChatMessage(role, text, imageUrl, savedTime, showConsultCta) {
   const body = document.getElementById('chat-body');
   const div = document.createElement('div');
   div.className = 'chat-msg ' + role;
@@ -1122,10 +1124,26 @@ function appendChatMessage(role, text, imageUrl, savedTime) {
   timeEl.textContent = timeStr;
   div.appendChild(timeEl);
   body.appendChild(div);
+
+  if (showConsultCta) {
+    const cta = document.createElement('a');
+    cta.href = '#contact';
+    cta.className = 'chat-cta-btn';
+    cta.textContent = 'Консультация';
+    cta.onclick = function () {
+      toggleChat();
+      setTimeout(function () {
+        const target = document.getElementById('contact');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    };
+    body.appendChild(cta);
+  }
+
   body.scrollTop = body.scrollHeight;
 
   if (!savedTime) {
-    chatHistoryMessages.push({ role: role, text: text || '', imageUrl: imageUrl || null, time: timeStr });
+    chatHistoryMessages.push({ role: role, text: text || '', imageUrl: imageUrl || null, time: timeStr, cta: !!showConsultCta });
     saveChatHistory();
   }
 }
@@ -1175,7 +1193,10 @@ async function sendChatMessage() {
     });
     const data = await response.json();
     hideChatTyping();
-    appendChatMessage('bot', data.reply || 'Принял, скоро отвечу подробнее.');
+    let replyText = data.reply || 'Принял, скоро отвечу подробнее.';
+    const hasCta = /\[CTA:CONSULT\]/i.test(replyText);
+    replyText = replyText.replace(/\[CTA:CONSULT\]/gi, '').trim();
+    appendChatMessage('bot', replyText, null, null, hasCta);
   } catch (err) {
     hideChatTyping();
     appendChatMessage('bot', 'Не получилось отправить сообщение — попробуйте ещё раз чуть позже или напишите нам через форму на сайте.');
