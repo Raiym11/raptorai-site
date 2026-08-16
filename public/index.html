@@ -556,6 +556,10 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
             <label>Опишите вашу задачу <span style="color:var(--gray);font-weight:400">(по желанию)</span></label>
             <textarea id="f-task" rows="4" placeholder="Например: хочу автоматизировать обработку заявок из Telegram..."></textarea>
           </div>
+          <div style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <p class="form-note" style="margin-bottom:16px"><i class="fa-solid fa-lock" style="color:var(--cyan);margin-right:6px;font-size:11px"></i>Ваши данные в безопасности и не передаются третьим лицам</p>
           <label class="form-consent">
             <input type="checkbox" id="f-consent" onchange="toggleSubmitState()">
@@ -668,6 +672,12 @@ const CONTACT_FORM_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/contact-form';
 const CONTACT_FORM_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
 
 async function submitForm() {
+  const honeypot = document.getElementById('f-website').value.trim();
+  if (honeypot) {
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return;
+  }
   const name = document.getElementById('f-name').value.trim();
   const surname = document.getElementById('f-surname').value.trim();
   const email = document.getElementById('f-email').value.trim();
