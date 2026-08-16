@@ -6,16 +6,20 @@ const inter = Inter({ subsets: ["latin", "cyrillic"] });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.raptorai.ru"),
   title: "RaptorAI — Автоматизация бизнеса с ИИ",
   description: "Создаём ИИ-агентов, чат-боты и автоматизации на n8n. 100+ проектов, 100% успешных сдач.",
   keywords: "ИИ агент, автоматизация бизнеса, n8n, ChatGPT, Claude, Gemini, чат-бот",
   icons: {
     icon: "/assets/favicon.png",
   },
+  alternates: {
+    canonical: "https://www.raptorai.ru",
+  },
   openGraph: {
     title: "RaptorAI — Автоматизация бизнеса с ИИ",
     description: "Создаём ИИ-агентов, чат-боты и автоматизации на n8n.",
-    url: "https://raptorai.ru",
+    url: "https://www.raptorai.ru",
     siteName: "RaptorAI",
     locale: "ru_RU",
     type: "website",
