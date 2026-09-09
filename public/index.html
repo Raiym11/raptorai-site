@@ -723,6 +723,9 @@ async function submitForm() {
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
     document.getElementById('form-body').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
+    if (typeof ym !== 'undefined') {
+      ym(112281876, 'reachGoal', 'form_submit');
+    }
   } catch (err) {
     alert('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.');
     btn.disabled = false;
