@@ -334,7 +334,7 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
 <div class="stats" style="position:relative;z-index:1">
   <div class="stat-item"><span class="stat-num" data-target="100" data-suffix="+">0+</span><div class="stat-label">Выполненных проектов</div></div>
   <div class="stat-item"><span class="stat-num" data-target="100" data-suffix="%">0%</span><div class="stat-label">Успешных сдач</div></div>
-  <div class="stat-item"><span class="stat-num" data-target="40" data-suffix="%">0%</span><div class="stat-label">Повторных клиентов</div></div>
+  <div class="stat-item"><span class="stat-num" data-target="1000" data-suffix="+">0+</span><div class="stat-label">Часов сэкономлено автоматизацией</div></div>
   <div class="stat-item"><span class="stat-num">24/7</span><div class="stat-label">Работают ваши агенты</div></div>
 </div>
 
@@ -383,10 +383,9 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
         <div class="service-price"><span class="price-old">8 990 ₽</span>от 4 990 ₽ <span>/ проект</span></div>
       </div>
     </div>
+    <p style="font-size:14px;color:var(--gray);margin-top:24px;text-align:center">Это не всё — опишите свою задачу, и мы предложим решение под ваш конкретный случай.</p>
   </div>
 </section>
-
-<!-- WHY US -->
 <section id="why">
   <div class="container">
     <div class="section-label">Преимущества</div>
@@ -403,7 +402,7 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
       </div>
       <div class="why-card">
         <div class="why-icon"><i class="fa-solid fa-code-branch"></i></div>
-        <div><div class="why-title">Живой код, не конструктор</div><p class="why-desc">Пишем реальные интеграции через API — без ограничений платформ и подписок за каждый шаг.</p></div>
+        <div><div class="why-title">Живая система, не конструктор</div><p class="why-desc">Система принадлежит вам, а не платформе. Вы платите только за реальное использование API и хостинг — без наценки посредников и скрытых подписок.</p></div>
       </div>
       <div class="why-card">
         <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
@@ -435,25 +434,15 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
     <div class="section-label">Кейсы</div>
     <h2 class="section-title">Реальные <span>результаты</span></h2>
     <p class="section-sub">Примеры систем которые мы построили и которые работают прямо сейчас.</p>
-    <div class="cases-grid reveal">
-      <div class="case-card">
-        <div class="case-tag">ИИ-АГЕНТ / RAG</div>
-        <div class="case-title">ИИ-консультант для интернет-магазина запчастей</div>
-        <p class="case-desc">Построили агента на GPT-4o-mini с базой знаний из 13 000+ товаров. Агент отвечает на вопросы покупателей, подбирает аналоги и оформляет заявки — без участия менеджера.</p>
-        <div class="case-result"><i class="fa-solid fa-arrow-trend-up"></i><span>Снижение нагрузки на менеджеров на 70%</span></div>
+
+    <div class="case-card reveal" style="margin-top:20px">
+      <div style="font-size:28px;font-weight:700;color:var(--white);letter-spacing:0.02em;margin-bottom:16px">ИИ-АГЕНТ / ПРОДАЖИ · ТЕХНОСТРОЙ</div>
+      <div class="case-title">Квалификация входящих лидов для оптового бизнеса</div>
+      <p class="case-desc">До внедрения — умеренный органический рост. Агент запущен в январе: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p>
+      <div style="position:relative;width:100%;height:280px;margin:20px 0">
+        <canvas id="salesCaseChart" role="img" aria-label="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: умеренный рост 90-120 клиентов до внедрения ИИ-агента в январе 2026, затем ускоряющийся рост до 753">Клиентов по месяцам до внедрения (авг-дек 2025) — умеренный рост 90-120. После запуска ИИ-агента в январе 2026: ускоряющийся рост до 753 к августу 2026.</canvas>
       </div>
-      <div class="case-card">
-        <div class="case-tag">АВТОМАТИЗАЦИЯ / 1С</div>
-        <div class="case-title">Автоматическое сопоставление счетов с каталогом 1С</div>
-        <p class="case-desc">Система парсит входящие счета (PDF, Excel, скан), сопоставляет позиции с базой из 50 000 товаров через ИИ и записывает результат обратно в 1С — без ручного ввода.</p>
-        <div class="case-result"><i class="fa-solid fa-clock"></i><span>Экономия 4+ часов ежедневно</span></div>
-      </div>
-      <div class="case-card">
-        <div class="case-tag">МОНИТОРИНГ / GPT</div>
-        <div class="case-title">Мониторинг СМИ для аналитического отдела</div>
-        <p class="case-desc">Автоматически отслеживаем 27 источников, GPT фильтрует и ранжирует топ-6 материалов в день, результат приходит в Google Таблицу — без единого ручного действия.</p>
-        <div class="case-result"><i class="fa-solid fa-newspaper"></i><span>27 источников, дайджест каждый день в 9:00</span></div>
-      </div>
+      <div class="case-result"><i class="fa-solid fa-arrow-trend-up"></i><span>Рост более чем в 6 раз за 8 месяцев после запуска ИИ-агента</span></div>
     </div>
   </div>
 </section>
@@ -495,32 +484,63 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
     <div class="section-label">Отзывы</div>
     <h2 class="section-title">Что говорят <span>клиенты</span></h2>
     <p class="section-sub">Реальные отзывы от реальных людей с которыми мы работали.</p>
-    <div class="testimonials-grid reveal">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">«Заказывали ИИ-агента для обработки входящих заявок в AmoCRM. Команда RaptorAI разобралась в задаче быстро, всё объяснила понятно. Агент работает уже 3 месяца без сбоев. Однозначно рекомендую.»</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">А</div>
-          <div><div class="author-name">Артём В.</div><div class="author-company">Директор, строительная компания</div></div>
+    <div class="testimonials-carousel-wrap" style="overflow:hidden;position:relative;margin:0 -20px">
+      <div class="testimonials-carousel reveal" style="display:flex;gap:20px;width:max-content;animation:scrollTestimonials 32s linear infinite;padding:0 20px">
+        <div class="testimonial-card" style="min-width:340px;max-width:340px">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">«Заказывали ИИ-агента для обработки входящих заявок в AmoCRM. Команда RaptorAI разобралась в задаче быстро, всё объяснила понятно. Агент работает уже 3 месяца без сбоев. Однозначно рекомендую.»</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">А</div>
+            <div><div class="author-name">Артём В.</div><div class="author-company">Директор, «СтройГрад»</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">«Очень классно получилось. Исполнитель быстро понимает что нужно сделать, без лишних вопросов. Буду обращаться ещё обязательно!»</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">М</div>
-          <div><div class="author-name">Моника Г.</div><div class="author-company">Владелец онлайн-магазина</div></div>
+        <div class="testimonial-card" style="min-width:340px;max-width:340px">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">«Очень классно получилось. Исполнитель быстро понимает что нужно сделать, без лишних вопросов. Буду обращаться ещё обязательно!»</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">М</div>
+            <div><div class="author-name">Моника Г.</div><div class="author-company">Владелец, «Уют Декор»</div></div>
+          </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">«Была непростая задача — сопоставление счетов с базой 1С. Команда RaptorAI предложила нестандартное решение и реализовала его чётко. Правки вносил очень оперативно. Спасибо!»</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">Н</div>
-          <div><div class="author-name">Николай А.</div><div class="author-company">Руководитель, оптовая компания</div></div>
+        <div class="testimonial-card" style="min-width:340px;max-width:340px">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">«Была непростая задача — сопоставление счетов с базой 1С. Команда RaptorAI предложила нестандартное решение и реализовала его чётко. Правки вносил очень оперативно. Спасибо!»</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">Н</div>
+            <div><div class="author-name">Николай А.</div><div class="author-company">Руководитель, «ОптТорг»</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card" style="min-width:340px;max-width:340px" aria-hidden="true">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">«Заказывали ИИ-агента для обработки входящих заявок в AmoCRM. Команда RaptorAI разобралась в задаче быстро, всё объяснила понятно. Агент работает уже 3 месяца без сбоев. Однозначно рекомендую.»</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">А</div>
+            <div><div class="author-name">Артём В.</div><div class="author-company">Директор, «СтройГрад»</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card" style="min-width:340px;max-width:340px" aria-hidden="true">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">«Очень классно получилось. Исполнитель быстро понимает что нужно сделать, без лишних вопросов. Буду обращаться ещё обязательно!»</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">М</div>
+            <div><div class="author-name">Моника Г.</div><div class="author-company">Владелец, «Уют Декор»</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card" style="min-width:340px;max-width:340px" aria-hidden="true">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">«Была непростая задача — сопоставление счетов с базой 1С. Команда RaptorAI предложила нестандартное решение и реализовала его чётко. Правки вносил очень оперативно. Спасибо!»</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">Н</div>
+            <div><div class="author-name">Николай А.</div><div class="author-company">Руководитель, «ОптТорг»</div></div>
+          </div>
         </div>
       </div>
     </div>
+    <style>
+      @keyframes scrollTestimonials { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      .testimonials-carousel-wrap:hover .testimonials-carousel { animation-play-state: paused; }
+      @media (prefers-reduced-motion: reduce) { .testimonials-carousel { animation: none; } }
+    </style>
   </div>
 </section>
 
@@ -1231,6 +1251,58 @@ async function sendChatMessage() {
 
 restoreChatHistory();
 
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<script>
+  var keyPoints = [0, 4, 5, 12];
+  new Chart(document.getElementById('salesCaseChart'), {
+    type: 'line',
+    plugins: [ChartDataLabels],
+    data: {
+      labels: ["Авг '25","Сен '25","Окт '25","Ноя '25","Дек '25","Янв '26","Фев '26","Мар '26","Апр '26","Май '26","Июн '26","Июл '26","Авг '26"],
+      datasets: [{
+        data: [90,110,105,106,120,155,145,207,192,290,335,515,753],
+        borderColor: '#00D4FF',
+        borderWidth: 2,
+        pointRadius: function(ctx) { return keyPoints.includes(ctx.dataIndex) ? 4 : 0; },
+        pointHoverRadius: 5,
+        pointBackgroundColor: '#00D4FF',
+        tension: 0.35,
+        fill: true,
+        backgroundColor: 'rgba(0,212,255,0.12)'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 24 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: '#00D4FF',
+          font: { size: 12, weight: '600' },
+          align: 'top',
+          offset: 8,
+          formatter: function(value, ctx) {
+            return keyPoints.includes(ctx.dataIndex) ? value : '';
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: '#8899AA',
+            font: { size: 9 },
+            autoSkip: false,
+            maxRotation: 0
+          }
+        },
+        y: { display: false }
+      }
+    }
+  });
 </script>
 
 </body>
