@@ -26,12 +26,26 @@ export const metadata: Metadata = {
   },
 };
 
+// Та же политика, что в <meta> файлов public/*.html
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
+  "img-src 'self' data: https:",
+  "connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru",
+  "frame-src 'self' https://mc.yandex.ru https://mc.yandex.md",
+  "object-src 'none'",
+  "base-uri 'self'",
+].join("; ");
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <meta httpEquiv="Content-Security-Policy" content={CSP} />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css" />
                 <script dangerouslySetInnerHTML={{ __html: `
           (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

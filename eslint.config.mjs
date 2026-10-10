@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Сторонние библиотеки, скачанные с CDN
+    "public/vendor/**",
   ]),
 ]);
 
