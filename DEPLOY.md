@@ -82,13 +82,13 @@ http://www.raptorai.ru.website.yandexcloud.net
 | Запись | Тип | Значение |
 |---|---|---|
 | `www` | CNAME | `www.raptorai.ru.website.yandexcloud.net.` |
-| `@` (raptorai.ru) | ANAME / ALIAS | `raptorai.ru.website.yandexcloud.net.` |
+| `@` (raptorai.ru) | A | `213.180.193.247` |
 
-- Старые записи Vercel для `www` и `@` удалите. **Не трогайте** запись `n8n` и записи почты (MX, TXT).
-- Для корневого домена (`@`) обычный CNAME нельзя. Если регистратор не поддерживает ANAME/ALIAS,
-  есть два пути: перенести DNS-зону в Yandex Cloud DNS (поддерживает ANAME) или включить
-  у регистратора услугу «перенаправление домена» на `https://www.raptorai.ru`.
-- За сутки до переключения уменьшите TTL записей до 300, чтобы смена прошла быстрее.
+- **Сделано 11.10.2026.** DNS домена — в SpaceWeb (cp.sweb.ru → Домены → raptorai.ru → DNS).
+- **Не трогайте** записи `n8n`, `crm`, `_acme-challenge*` (по ним продлевается сертификат) и почту (MX, SRV, TXT).
+- SpaceWeb не поддерживает ANAME, поэтому корневой домен указывает A-записью на IP
+  `website.yandexcloud.net`. Если когда-нибудь `raptorai.ru` (без www) перестанет открываться —
+  проверьте текущий IP командой `nslookup website.yandexcloud.net` и обновите A-запись.
 
 Через 5–60 минут сайт начнёт открываться с Yandex Cloud.
 
