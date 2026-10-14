@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/assets/favicon.png",
   },
-  alternates: {
-    canonical: "https://www.raptorai.ru",
-  },
+  // Страницы app/ — черновая многостраничная версия без навигации, дублирующая главную
+  // (public/index.html). Закрыты от индексации, чтобы не конкурировать с основным сайтом.
+  robots: { index: false, follow: true },
   openGraph: {
     title: "RaptorAI — Автоматизация бизнеса с ИИ",
     description: "Создаём ИИ-агентов, чат-боты и автоматизации на n8n.",
