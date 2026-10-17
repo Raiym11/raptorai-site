@@ -1,4 +1,7 @@
 var keyPoints = [0, 4, 5, 12];
+// На узком экране 13 подписей не помещаются — показываем только эти месяцы
+var mobileTicks = [0, 3, 5, 8, 10, 12];
+function isNarrow(chart) { return chart.width < 520; }
 new Chart(document.getElementById('salesCaseChart'), {
   type: 'line',
   plugins: [ChartDataLabels],
@@ -18,7 +21,7 @@ new Chart(document.getElementById('salesCaseChart'), {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    layout: { padding: { top: 24 } },
+    layout: { padding: { top: 24, left: 8, right: 16 } },
     plugins: {
       legend: { display: false },
       datalabels: {
@@ -36,9 +39,17 @@ new Chart(document.getElementById('salesCaseChart'), {
         grid: { display: false },
         ticks: {
           color: '#8899AA',
-          font: { size: 9 },
+          font: function(ctx) { return { size: isNarrow(ctx.chart) ? 11 : 9 }; },
           autoSkip: false,
-          maxRotation: 0
+          maxRotation: 0,
+          callback: function(value, index) {
+            var label = this.getLabelForValue(value);
+            if (!isNarrow(this.chart)) return label;
+            if (mobileTicks.indexOf(index) === -1) return '';
+            // «Янв '26» → две строки: «Янв» и «2026»
+            var parts = label.split(" '");
+            return [parts[0], '20' + parts[1]];
+          }
         }
       },
       y: { display: false }
