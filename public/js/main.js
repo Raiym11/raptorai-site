@@ -26,7 +26,6 @@ async function submitForm() {
     return;
   }
   const name = document.getElementById('f-name').value.trim();
-  const surname = document.getElementById('f-surname').value.trim();
   const email = document.getElementById('f-email').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const telegram = document.getElementById('f-telegram').value.trim();
@@ -36,8 +35,12 @@ async function submitForm() {
     alert('Пожалуйста, подтвердите согласие на обработку данных.');
     return;
   }
-  if (!name || !surname || !email || !phone) {
-    alert('Пожалуйста, заполните все обязательные поля.');
+  if (!name) {
+    alert('Пожалуйста, укажите, как к вам обращаться.');
+    return;
+  }
+  if (!phone && !telegram) {
+    alert('Пожалуйста, укажите телефон или Telegram, чтобы мы могли с вами связаться.');
     return;
   }
 
@@ -53,7 +56,7 @@ async function submitForm() {
         'Content-Type': 'application/json',
         'X-Webhook-Secret': CONTACT_FORM_WEBHOOK_SECRET
       },
-      body: JSON.stringify({ name: name + ' ' + surname, email, phone, telegram, task })
+      body: JSON.stringify({ name, email, phone, telegram, task })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
     document.getElementById('form-body').style.display = 'none';
