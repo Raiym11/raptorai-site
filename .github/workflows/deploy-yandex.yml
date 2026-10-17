@@ -29,3 +29,17 @@ jobs:
           YC_BUCKET: ${{ vars.YC_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+
+      # Сообщаем Яндексу и Bing об обновлённых страницах (IndexNow).
+      # Ключ — файл public/<ключ>.txt на сайте.
+      - name: Notify search engines (IndexNow)
+        continue-on-error: true
+        run: |
+          KEY=$(basename -a -s .txt public/*.txt | grep -E '^[0-9a-f]{32}$' | head -1)
+          URLS=$(grep -oE '<loc>[^<]+' public/sitemap.xml | sed 's/<loc>//' | jq -R . | jq -sc .)
+          BODY=$(jq -nc --arg k "$KEY" --argjson u "$URLS" \
+            '{host: "www.raptorai.ru", key: $k, keyLocation: "https://www.raptorai.ru/\($k).txt", urlList: $u}')
+          for EP in https://yandex.com/indexnow https://api.indexnow.org/indexnow; do
+            curl -s -o /dev/null -w "$EP -> %{http_code}\n" -X POST "$EP" \
+              -H "Content-Type: application/json; charset=utf-8" --data "$BODY"
+          done
