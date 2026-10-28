@@ -26,19 +26,27 @@ async function submitForm() {
     return;
   }
   const name = document.getElementById('f-name').value.trim();
-  const surname = document.getElementById('f-surname').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  const telegram = document.getElementById('f-telegram').value.trim();
+  const contact = document.getElementById('f-contact').value.trim();
   const task = document.getElementById('f-task').value.trim();
   const consent = document.getElementById('f-consent').checked;
   if (!consent) {
     alert('Пожалуйста, подтвердите согласие на обработку данных.');
     return;
   }
-  if (!name || !surname || !email || !phone) {
-    alert('Пожалуйста, заполните все обязательные поля.');
+  if (!name || !contact) {
+    alert('Пожалуйста, укажите имя и как с вами связаться.');
     return;
+  }
+  // Определяем тип контакта, чтобы заявка попала в нужное поле
+  let email = '', phone = '', telegram = '';
+  if (/^(https?:\/\/)?t\.me\//i.test(contact) || /^@[A-Za-z0-9_]{3,}$/.test(contact)) {
+    telegram = contact;
+  } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) {
+    email = contact;
+  } else if (contact.replace(/\D/g, '').length >= 6) {
+    phone = contact;
+  } else {
+    telegram = contact;
   }
 
   const btn = document.getElementById('form-submit-btn');
@@ -53,7 +61,7 @@ async function submitForm() {
         'Content-Type': 'application/json',
         'X-Webhook-Secret': CONTACT_FORM_WEBHOOK_SECRET
       },
-      body: JSON.stringify({ name: name + ' ' + surname, email, phone, telegram, task })
+      body: JSON.stringify({ name, email, phone, telegram, contact, task })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
     document.getElementById('form-body').style.display = 'none';
