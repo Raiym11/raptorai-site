@@ -161,6 +161,7 @@ section { padding: 100px 24px; }
 .form-consent { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px; cursor: pointer; }
 .form-consent input[type="checkbox"] { margin-top: 3px; width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--cyan); cursor: pointer; }
 .form-consent span { font-size: 13px; color: var(--gray); line-height: 1.5; }
+.form-consent span a { color: var(--cyan); }
 .btn-primary.form-submit:disabled { opacity: 0.45; cursor: not-allowed; }
 .form-note { font-size: 12px; color: var(--gray); margin-top: 8px; }
 .form-submit { width: 100%; padding: 16px; font-size: 16px; }
@@ -589,10 +590,10 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
             <label for="f-website">Website</label>
             <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
           </div>
-          <p class="form-note" style="margin-bottom:16px"><i class="fa-solid fa-lock" style="color:var(--cyan);margin-right:6px;font-size:11px"></i>Ваши данные в безопасности и не передаются третьим лицам</p>
+          <p class="form-note" style="margin-bottom:16px"><i class="fa-solid fa-lock" style="color:var(--cyan);margin-right:6px;font-size:11px"></i>Данные нужны только для ответа на вашу заявку</p>
           <label class="form-consent">
             <input type="checkbox" id="f-consent" onchange="toggleSubmitState()">
-            <span>Я согласен на обработку своих данных</span>
+            <span>Я согласен на обработку персональных данных и ознакомлен с <a href="/privacy.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Политикой обработки персональных данных</a></span>
           </label>
           <button class="btn-primary form-submit" id="form-submit-btn" onclick="submitForm()" disabled>Отправить заявку</button>
         </div>
@@ -618,6 +619,18 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
 <!-- BLOG-CARDS-START -->
       <article class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color 0.3s,transform 0.3s;cursor:pointer;position:relative" onmouseover="this.style.borderColor='var(--cyan-mid)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
         <div style="display:inline-flex;align-items:center;gap:6px;background:var(--cyan-dim);border:1px solid var(--cyan-mid);color:var(--cyan);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:16px;font-family:monospace">
+          <i class="fa-solid fa-flask" style="font-size:10px"></i> Тест
+        </div>
+        <h3 style="font-size:17px;font-weight:700;margin-bottom:10px"><a href="/blog/test-statya.html" class="blog-card-link">Тестовая статья: проверка генератора</a></h3>
+        <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px">Проверяем, как генератор собирает страницу статьи с обложкой, подзаголовками, списками и таблицей.</p>
+        <div style="display:flex;gap:16px;font-size:12px;color:var(--gray)">
+          <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>17.10.2026</span>
+          <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>2 мин</span>
+        </div>
+      </article>
+
+      <article class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color 0.3s,transform 0.3s;cursor:pointer;position:relative" onmouseover="this.style.borderColor='var(--cyan-mid)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <div style="display:inline-flex;align-items:center;gap:6px;background:var(--cyan-dim);border:1px solid var(--cyan-mid);color:var(--cyan);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:16px;font-family:monospace">
           <i class="fa-solid fa-diagram-project" style="font-size:10px"></i> n8n
         </div>
         <h3 style="font-size:17px;font-weight:700;margin-bottom:10px"><a href="/blog-amocrm-n8n.html" class="blog-card-link">Как автоматизировать AmoCRM с помощью n8n: полный гайд</a></h3>
@@ -639,19 +652,13 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
           <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>10 мин</span>
         </div>
       </article>
-
-      <article class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color 0.3s,transform 0.3s;cursor:pointer;position:relative" onmouseover="this.style.borderColor='var(--cyan-mid)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-        <div style="display:inline-flex;align-items:center;gap:6px;background:var(--cyan-dim);border:1px solid var(--cyan-mid);color:var(--cyan);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:16px;font-family:monospace">
-          <i class="fa-solid fa-brain" style="font-size:10px"></i> Сравнение
-        </div>
-        <h3 style="font-size:17px;font-weight:700;margin-bottom:10px"><a href="/blog-llm-comparison.html" class="blog-card-link">ChatGPT vs Claude vs Gemini: какую модель выбрать для бизнеса</a></h3>
-        <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px">Практическое сравнение трёх топовых LLM без маркетинга — только реальный опыт из проектов.</p>
-        <div style="display:flex;gap:16px;font-size:12px;color:var(--gray)">
-          <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>18.06.2026</span>
-          <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>7 мин</span>
-        </div>
-      </article>
 <!-- BLOG-CARDS-END -->
+    </div>
+
+    <div style="text-align:center">
+      <a href="/blog.html" style="display:inline-block;background:transparent;color:var(--cyan);border:1px solid var(--cyan-mid);padding:12px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px">
+        <i class="fa-solid fa-arrow-right" style="margin-right:8px"></i>Все статьи
+      </a>
     </div>
   </div>
 </section>
@@ -668,11 +675,26 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
       <a href="#testimonials">Отзывы</a>
       <a href="#blog">Блог</a>
       <a href="#contact">Контакт</a>
+      <a href="/privacy.html">Политика конфиденциальности</a>
       <a href="https://t.me/raptorai_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Telegram</a>
     </div>
     <p class="footer-copy">© 2026 RaptorAI. Автоматизация с ИИ.<br>Все права защищены.</p>
   </div>
 </footer>
+
+<!-- COOKIE NOTICE -->
+<style>
+#cookie-note { position: fixed; left: 16px; bottom: 16px; max-width: 420px; background: #0F1923; border: 1px solid #1E2A36; border-radius: 12px; padding: 14px 16px; z-index: 3500; display: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); font-size: 13px; line-height: 1.5; color: #8899AA; }
+#cookie-note a { color: #00D4FF; }
+#cookie-note button { margin-top: 10px; background: #00D4FF; color: #000; border: none; border-radius: 8px; padding: 8px 18px; font-weight: 700; font-size: 13px; cursor: pointer; }
+@media (max-width: 480px) { #cookie-note { left: 8px; right: 8px; bottom: 8px; max-width: none; } }
+</style>
+<div id="cookie-note" role="dialog" aria-label="Уведомление о cookie">Мы используем cookie и Яндекс Метрику, чтобы понимать, как работает сайт. Подробнее в <a href="/privacy.html">политике</a>.<br><button type="button" id="cookie-ok">Понятно</button></div>
+<script>
+(function(){try{if(localStorage.getItem('cookie_ok')==='1')return;}catch(e){}
+var n=document.getElementById('cookie-note');if(!n)return;n.style.display='block';
+document.getElementById('cookie-ok').addEventListener('click',function(){n.style.display='none';try{localStorage.setItem('cookie_ok','1');}catch(e){}});})();
+</script>
 
 <script src="/js/main.js" defer></script>
 </div>

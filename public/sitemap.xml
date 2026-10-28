@@ -2,18 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.raptorai.ru/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.raptorai.ru/blog.html</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.raptorai.ru/blog/test-statya.html</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://www.raptorai.ru/blog-amocrm-n8n.html</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-07-01</lastmod>
   </url>
   <url>
     <loc>https://www.raptorai.ru/blog-rag-agent.html</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-06-25</lastmod>
   </url>
   <url>
     <loc>https://www.raptorai.ru/blog-llm-comparison.html</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-06-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.raptorai.ru/privacy.html</loc>
+    <lastmod>2026-10-28</lastmod>
   </url>
 </urlset>
