@@ -204,7 +204,7 @@
     var tt = reduce ? 6.5 : el;
     mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
     var ox = -1000, oy = -1000, orad = 1, alpha = 0;
-    if (anchor) {
+    if (anchor && window.__fxHero && window.__fxHero.mode === 'orb') {
       var r = anchor.getBoundingClientRect();
       var vh = window.innerHeight;
       if (r.bottom > 0 && r.top < vh && r.width > 0) {
@@ -499,4 +499,203 @@
       else { if (e.intersectionRatio === 0) armed = true; }
     }, { threshold: [0, .38, .6] }).observe(cv);
   } else { visible = true; play(); }
+})();
+
+
+/* ---------- stats: rolling digits ---------- */
+(function () {
+  'use strict';
+  var els = document.querySelectorAll('.stat-num[data-roll]');
+  if (!els.length || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || !('IntersectionObserver' in window)) return;
+  var band = els[0].closest('.stats');
+  var rows = [];
+  els.forEach(function (el, idx) {
+    var txt = el.getAttribute('data-roll'), strips = [], k = 0, i;
+    el.setAttribute('role', 'img'); el.setAttribute('aria-label', txt); el.textContent = '';
+    for (i = 0; i < txt.length; i++) {
+      var ch = txt.charAt(i);
+      if (/\d/.test(ch)) {
+        var d = +ch, n = (2 + k) * 10 + d, html = '', j;
+        for (j = 0; j <= n; j++) html += '<i>' + (j % 10) + '</i>';
+        var dg = document.createElement('span'); dg.className = 'dg'; dg.setAttribute('aria-hidden', 'true');
+        var st = document.createElement('span'); st.className = 'dgi'; st.innerHTML = html;
+        dg.appendChild(st); el.appendChild(dg); strips.push({ st: st, n: n, k: k }); k++;
+      } else {
+        var sx = document.createElement('span'); sx.className = 'sx'; sx.setAttribute('aria-hidden', 'true'); sx.textContent = ch; el.appendChild(sx);
+      }
+    }
+    rows.push({ item: el.closest('.stat-item'), strips: strips, idx: idx });
+  });
+  if (band) band.classList.add('roll');
+  function reset() {
+    rows.forEach(function (r) { r.item.classList.remove('go', 'hit'); r.strips.forEach(function (s) { s.st.style.transition = 'none'; s.st.style.transform = 'translateY(0)'; }); });
+    if (band) band.classList.remove('fire');
+  }
+  function play() {
+    reset();
+    void band.offsetHeight;
+    if (band) band.classList.add('fire');
+    rows.forEach(function (r) {
+      var delay = r.idx * 140, longest = 0;
+      r.strips.forEach(function (s) {
+        var dur = 1700 + s.k * 420, dl = delay + s.k * 90;
+        s.st.style.transition = 'transform ' + dur + 'ms cubic-bezier(.3,.55,.25,1) ' + dl + 'ms';
+        s.st.style.transform = 'translateY(-' + (s.n * 1.1) + 'em)';
+        longest = Math.max(longest, dur + dl);
+      });
+      setTimeout(function () { r.item.classList.add('go'); }, delay + 250);
+      setTimeout(function () { r.item.classList.add('hit'); }, longest - 150);
+    });
+  }
+  reset();
+  var armed = true;
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.intersectionRatio >= 0.5 && armed) { armed = false; play(); }
+      else if (!e.isIntersecting && e.intersectionRatio === 0 && !armed) { armed = true; reset(); }
+    });
+  }, { threshold: [0, 0.55] }).observe(band || els[0]);
+})();
+
+
+/* ---------- hero visual: workflow / network / orb ---------- */
+(function () {
+  'use strict';
+  var host = document.getElementById('orb-anchor');
+  if (!host) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var netStop = null, tiltOn = null;
+  var q = (location.search.match(/[?&]hero=(flow|net|orb)/) || [])[1];
+  window.__fxHero = { mode: q || 'flow' };
+
+  function buildFlow() {
+    var N = [
+      { x: 16, y: 15, ic: 'fa-solid fa-globe', t: 'Сайт', c: '#00D4FF', c2: '#5CFFC8' },
+      { x: 13, y: 50, ic: 'fa-brands fa-telegram', t: 'Telegram', c: '#38BDF8', c2: '#8C7BFF' },
+      { x: 16, y: 85, ic: 'fa-solid fa-envelope', t: 'Почта', c: '#5CFFC8', c2: '#00D4FF' },
+      { x: 84, y: 15, ic: 'fa-solid fa-address-card', t: 'CRM', c: '#FF7AE0', c2: '#8C7BFF' },
+      { x: 87, y: 50, ic: 'fa-solid fa-table', t: 'Таблица', c: '#8C7BFF', c2: '#FF7AE0' },
+      { x: 84, y: 85, ic: 'fa-solid fa-user-tie', t: 'Менеджер', c: '#FFB86B', c2: '#FF7AE0' }
+    ];
+    var P = [
+      'M16 15 C36 15, 36 50, 50 50', 'M13 50 L50 50', 'M16 85 C36 85, 36 50, 50 50',
+      'M50 50 C64 50, 64 15, 84 15', 'M50 50 L87 50', 'M50 50 C64 50, 64 85, 84 85'
+    ];
+    var h = '<div class="hv hv-flow"><svg class="hf-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs></defs>';
+    P.forEach(function (d, i) { h += '<path id="hfp' + i + '" d="' + d + '"/>'; });
+    if (!reduce) P.forEach(function (d, i) {
+      var out = i > 2, col = out ? '#FF7AE0' : '#00D4FF';
+      [0, 1.3].forEach(function (off) {
+        h += '<circle r="1.05" fill="' + col + '"><animateMotion dur="' + (2.2 + (i % 3) * 0.35) + 's" begin="' + (off + i * 0.28) + 's" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#hfp' + i + '"/></animateMotion></circle>';
+      });
+    });
+    h += '</svg>';
+    N.forEach(function (n, i) {
+      h += '<div class="hn" style="left:' + n.x + '%;top:' + n.y + '%;--i:' + i + ';--c:' + n.c + ';--c2:' + n.c2 + '"><div class="hn-card"><span class="hn-ic"><i class="' + n.ic + '"></i></span><b>' + n.t + '</b></div></div>';
+    });
+    h += '<div class="hn hn-core" style="left:50%;top:50%;--i:6;--c:#00D4FF;--c2:#8C7BFF"><span class="hn-ring"></span><span class="hn-ring r2"></span><div class="hn-card"><span class="hn-ic"><i class="fa-solid fa-robot"></i></span><b>ИИ-агент</b></div></div>';
+    h += '<div class="hn-chip" style="left:50%;top:5%;--d:0s"><i class="fa-solid fa-circle-check"></i>Лид квалифицирован</div>';
+    h += '<div class="hn-chip" style="left:50%;top:95%;--d:3.5s"><i class="fa-solid fa-bolt"></i>Ответ клиенту за 2 сек</div>';
+    h += '</div>';
+    host.innerHTML = h;
+    var el = host.firstChild, raf = 0, px = 0, py = 0;
+    function mv(e) {
+      px = (e.clientX / window.innerWidth - 0.5) * 2; py = (e.clientY / window.innerHeight - 0.5) * 2;
+      if (!raf) raf = requestAnimationFrame(function () { raf = 0; el.style.setProperty('--px', px.toFixed(3)); el.style.setProperty('--py', py.toFixed(3)); });
+    }
+    if (!reduce) window.addEventListener('pointermove', mv, { passive: true });
+    tiltOn = function () { window.removeEventListener('pointermove', mv); };
+  }
+
+  function buildNet() {
+    var cv = document.createElement('canvas'); cv.className = 'hv hv-net'; cv.setAttribute('aria-hidden', 'true');
+    host.appendChild(cv);
+    var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = 1;
+    var NODES = [], i, j, EDGES = [], PULSES = [];
+    var COUNT = 74, ga = Math.PI * (3 - Math.sqrt(5));
+    for (i = 0; i < COUNT; i++) {
+      var y = 1 - (i / (COUNT - 1)) * 2, r = Math.sqrt(1 - y * y), th = ga * i;
+      var jr = 0.9 + ((i * 37) % 17) / 85;
+      NODES.push({ x: Math.cos(th) * r * jr, y: y * jr, z: Math.sin(th) * r * jr, s: 0.7 + ((i * 53) % 10) / 12 });
+    }
+    for (i = 0; i < COUNT; i++) for (j = i + 1; j < COUNT; j++) {
+      var dx = NODES[i].x - NODES[j].x, dy = NODES[i].y - NODES[j].y, dz = NODES[i].z - NODES[j].z;
+      if (dx * dx + dy * dy + dz * dz < 0.42) EDGES.push([i, j]);
+    }
+    for (i = 0; i < 22; i++) PULSES.push({ e: (i * 29) % EDGES.length, p: (i * 0.37) % 1, v: 0.004 + (i % 5) * 0.0016, dir: i % 2 ? 1 : -1 });
+    function size() { var r = host.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    size();
+    var ro = window.ResizeObserver ? new ResizeObserver(size) : null; if (ro) ro.observe(host);
+    var ang = 0.6, tx = 0, ty = 0, mx = 0, my = 0, run = true, vis = true, raf = 0, last = 0;
+    function mv(e) { tx = (e.clientX / window.innerWidth - 0.5) * 2; ty = (e.clientY / window.innerHeight - 0.5) * 2; }
+    if (!reduce) window.addEventListener('pointermove', mv, { passive: true });
+    var io = new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis && run && !raf) raf = requestAnimationFrame(draw); }, { threshold: 0 }); io.observe(host);
+    function col(t, a) { /* cyan -> violet -> pink */
+      var h = 190 + 130 * t; return 'hsla(' + h + ',95%,' + (62 + 8 * t) + '%,' + a + ')';
+    }
+    var proj = [];
+    function draw(now) {
+      raf = 0; if (!run || !vis) return;
+      var dt = Math.min(50, now - last || 16); last = now;
+      mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+      if (!reduce) ang += dt * 0.00028;
+      var cy = Math.cos(ang + mx * 0.5), sy = Math.sin(ang + mx * 0.5), tl = 0.38 + my * 0.22, ct = Math.cos(tl), st = Math.sin(tl);
+      var R = Math.min(W, H) * 0.36, cx0 = W / 2, cy0 = H / 2;
+      ctx.clearRect(0, 0, W, H);
+      var g = ctx.createRadialGradient(cx0, cy0, 0, cx0, cy0, R * 1.5);
+      g.addColorStop(0, 'rgba(140,123,255,.32)'); g.addColorStop(0.5, 'rgba(0,212,255,.1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      for (i = 0; i < COUNT; i++) {
+        var n = NODES[i], x1 = n.x * cy + n.z * sy, z1 = -n.x * sy + n.z * cy, y2 = n.y * ct - z1 * st, z2 = n.y * st + z1 * ct;
+        var f = 3.2 / (3.2 - z2);
+        proj[i] = { x: cx0 + x1 * R * f, y: cy0 + y2 * R * f, z: z2, f: f, t: (y2 + 1.1) / 2.2 };
+      }
+      ctx.lineWidth = 1;
+      for (i = 0; i < EDGES.length; i++) {
+        var a = proj[EDGES[i][0]], b = proj[EDGES[i][1]], al = 0.07 + 0.3 * ((a.z + b.z) / 2 + 1.1) / 2.2;
+        ctx.strokeStyle = col((a.t + b.t) / 2, al); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      for (i = 0; i < PULSES.length; i++) {
+        var pl = PULSES[i]; if (!reduce) pl.p += pl.v * dt / 16 * pl.dir;
+        if (pl.p > 1 || pl.p < 0) { pl.e = (pl.e + 7 + i) % EDGES.length; pl.p = pl.dir > 0 ? 0 : 1; }
+        var ea = proj[EDGES[pl.e][0]], eb = proj[EDGES[pl.e][1]], px = ea.x + (eb.x - ea.x) * pl.p, py = ea.y + (eb.y - ea.y) * pl.p, zt = (ea.z + eb.z) / 2;
+        var rr = 2.6 + zt * 1.2;
+        var gg = ctx.createRadialGradient(px, py, 0, px, py, rr * 4);
+        gg.addColorStop(0, 'rgba(255,255,255,.95)'); gg.addColorStop(0.25, col((ea.t + eb.t) / 2, 0.8)); gg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(px, py, rr * 4, 0, 6.2832); ctx.fill();
+      }
+      var order = proj.map(function (p, k) { return k; }).sort(function (u, v) { return proj[u].z - proj[v].z; });
+      for (var k = 0; k < order.length; k++) {
+        var pj = proj[order[k]], nd = NODES[order[k]], rad = (1.8 + nd.s * 1.5) * pj.f, aa = 0.45 + 0.55 * (pj.z + 1.1) / 2.2;
+        ctx.fillStyle = col(pj.t, aa); ctx.beginPath(); ctx.arc(pj.x, pj.y, rad, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,' + (aa * 0.7) + ')'; ctx.beginPath(); ctx.arc(pj.x - rad * 0.25, pj.y - rad * 0.25, rad * 0.4, 0, 6.2832); ctx.fill();
+      }
+      var pulse = 0.5 + 0.5 * Math.sin(now / 420);
+      var cg = ctx.createRadialGradient(cx0, cy0, 0, cx0, cy0, R * 0.34);
+      cg.addColorStop(0, 'rgba(255,255,255,.95)'); cg.addColorStop(0.3, 'rgba(160,230,255,' + (0.55 + 0.25 * pulse) + ')'); cg.addColorStop(1, 'rgba(140,123,255,0)');
+      ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx0, cy0, R * 0.34, 0, 6.2832); ctx.fill();
+      if (!reduce) raf = requestAnimationFrame(draw);
+    }
+    raf = requestAnimationFrame(draw);
+    netStop = function () { run = false; if (raf) cancelAnimationFrame(raf); io.disconnect(); if (ro) ro.disconnect(); window.removeEventListener('pointermove', mv); };
+  }
+
+  function setMode(m) {
+    if (netStop) { netStop(); netStop = null; }
+    if (tiltOn) { tiltOn(); tiltOn = null; }
+    host.innerHTML = '';
+    window.__fxHero.mode = m;
+    if (m === 'flow') buildFlow(); else if (m === 'net') buildNet();
+  }
+  setMode(window.__fxHero.mode);
+
+  if (/[?&]pick\b/.test(location.search)) {
+    var bar = document.createElement('div'); bar.className = 'hero-pick';
+    [['flow', 'Workflow'], ['net', 'Нейросеть'], ['orb', 'Шар']].forEach(function (o) {
+      var b = document.createElement('button'); b.textContent = o[1]; if (o[0] === window.__fxHero.mode) b.className = 'on';
+      b.onclick = function () { setMode(o[0]); Array.prototype.forEach.call(bar.children, function (x) { x.className = ''; }); b.className = 'on'; };
+      bar.appendChild(b);
+    });
+    document.body.appendChild(bar);
+  }
 })();
