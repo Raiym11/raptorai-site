@@ -8,14 +8,14 @@
   var small = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
 
   /* ---------- glass sheen + tilt on cards ---------- */
-  var CARD_SEL = '.service-card, .why-card, .case-card, .step, .testimonial-card, .contact-form, .stat-item';
+  var CARD_SEL = '.service-card, .why-card, .case-card, .step, .testimonial-card, .contact-form';
   function initCards() {
     var cards = document.querySelectorAll(CARD_SEL);
     for (var i = 0; i < cards.length; i++) {
       (function (el) {
         el.setAttribute('data-glass', '');
         if (!fine || reduce) return;
-        var tilt = !el.classList.contains('contact-form') && !el.classList.contains('stat-item');
+        var tilt = !el.classList.contains('contact-form') && !el.classList.contains('stat-item') && !el.classList.contains('case-hero');
         var raf = 0, ev = null;
         function apply() {
           raf = 0;
@@ -234,4 +234,269 @@
     else if (!running) { running = true; if (!reduce) requestAnimationFrame(frame); }
   });
   canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); running = false; root.classList.remove('gl-on'); root.classList.add('no-gl'); });
+})();
+
+
+/* ---------- case chart: custom canvas, aggressive reveal ---------- */
+(function () {
+  'use strict';
+  var cv = document.getElementById('caseFx');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var labels = ["Авг '25", "Сен '25", "Окт '25", "Ноя '25", "Дек '25", "Янв '26", "Фев '26", "Мар '26", "Апр '26", "Май '26", "Июн '26", "Июл '26", "Авг '26"];
+  var data = [90, 110, 105, 106, 120, 155, 145, 207, 192, 290, 335, 515, 753];
+  var N = data.length, LAUNCH = 5, KEY = [0, 4, 5, 9, 11, 12];
+  var kpi = document.getElementById('caseKpiValue');
+  var W = 0, H = 0, dpr = 1, narrow = false, pad = { l: 14, r: 30, t: 64, b: 38 };
+  var pts = [], mTan = [], DUR = 2900;
+  var state = 'idle', t0 = 0, visible = false, armed = true, raf = 0, hover = -1, pass = {}, doneAt = 0;
+
+  function ease(u) { return 1 - Math.pow(1 - u, 3.4); }
+  function back(u) { var c = 2.2; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); }
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+
+  function build() {
+    var max = 753 * 1.06, i;
+    pts = [];
+    for (i = 0; i < N; i++) {
+      pts.push({ x: pad.l + (W - pad.l - pad.r) * i / (N - 1), y: pad.t + (H - pad.t - pad.b) * (1 - data[i] / max) });
+    }
+    var d = [], m = [];
+    for (i = 0; i < N - 1; i++) d.push(pts[i + 1].y - pts[i].y);
+    m[0] = d[0]; m[N - 1] = d[N - 2];
+    for (i = 1; i < N - 1; i++) m[i] = (d[i - 1] * d[i] <= 0) ? 0 : (d[i - 1] + d[i]) / 2;
+    for (i = 0; i < N - 1; i++) {
+      if (d[i] === 0) { m[i] = 0; m[i + 1] = 0; continue; }
+      var a = m[i] / d[i], b = m[i + 1] / d[i], s2 = a * a + b * b;
+      if (s2 > 9) { var tt = 3 / Math.sqrt(s2); m[i] = tt * a * d[i]; m[i + 1] = tt * b * d[i]; }
+    }
+    mTan = m;
+  }
+  function at(s) {
+    s = clamp(s, 0, N - 1);
+    var i = Math.min(Math.floor(s), N - 2), t = s - i, t2 = t * t, t3 = t2 * t;
+    var y = (2 * t3 - 3 * t2 + 1) * pts[i].y + (t3 - 2 * t2 + t) * mTan[i] + (-2 * t3 + 3 * t2) * pts[i + 1].y + (t3 - t2) * mTan[i + 1];
+    return { x: pts[i].x + (pts[i + 1].x - pts[i].x) * t, y: y };
+  }
+  function valueAt(s) {
+    s = clamp(s, 0, N - 1);
+    var i = Math.min(Math.floor(s), N - 2), t = s - i;
+    return data[i] + (data[i + 1] - data[i]) * t;
+  }
+  function size() {
+    var r = cv.parentNode.getBoundingClientRect();
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = Math.max(200, r.width); H = Math.max(200, r.height);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    narrow = W < 520;
+    pad = { l: 14, r: narrow ? 24 : 34, t: 64, b: narrow ? 46 : 38 };
+    build();
+  }
+
+  function pathTo(sHead, close) {
+    var steps = Math.max(2, Math.ceil(sHead * 14)), k, p;
+    ctx.beginPath();
+    for (k = 0; k <= steps; k++) {
+      p = at(sHead * k / steps);
+      if (k === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+    }
+    if (close) {
+      var e = at(sHead), base = H - pad.b;
+      ctx.lineTo(e.x, base); ctx.lineTo(pts[0].x, base); ctx.closePath();
+    }
+  }
+  function rr(x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+
+  function draw(now) {
+    var u = state === 'idle' ? 0 : (state === 'done' ? 1 : clamp((now - t0) / DUR, 0, 1));
+    var p = ease(u);
+    var sHead = p * (N - 1);
+    var time = now / 1000;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var base = H - pad.b, i;
+
+    /* grid */
+    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.setLineDash([3, 7]);
+    for (i = 1; i <= 3; i++) {
+      var gy = pad.t + (base - pad.t) * i / 4;
+      ctx.beginPath(); ctx.moveTo(pad.l, gy); ctx.lineTo(W - pad.r + 8, gy); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.strokeStyle = 'rgba(255,255,255,.16)';
+    ctx.beginPath(); ctx.moveTo(pad.l, base + .5); ctx.lineTo(W - pad.r + 8, base + .5); ctx.stroke();
+
+    /* x labels */
+    ctx.font = '600 ' + (narrow ? 11 : 11.5) + 'px Inter, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    var showIdx = narrow ? [0, 3, 5, 8, 10, 12] : null;
+    for (i = 0; i < N; i++) {
+      if (showIdx && showIdx.indexOf(i) < 0) continue;
+      var reached = sHead >= i - 0.01;
+      ctx.fillStyle = reached ? 'rgba(200,214,228,.85)' : 'rgba(136,153,170,.4)';
+      if (narrow) {
+        var pr = labels[i].split(" '");
+        ctx.fillText(pr[0], pts[i].x, base + 9); ctx.fillText('20' + pr[1], pts[i].x, base + 22);
+      } else ctx.fillText(labels[i], pts[i].x, base + 10);
+    }
+
+    if (sHead > 0.02) {
+      /* launch marker */
+      var lp = clamp((sHead - LAUNCH + 0.35) / 0.35, 0, 1);
+      if (lp > 0) {
+        var lx = pts[LAUNCH].x, ly = pts[LAUNCH].y;
+        ctx.save(); ctx.globalAlpha = lp;
+        var lg = ctx.createLinearGradient(0, 14, 0, base);
+        lg.addColorStop(0, 'rgba(255,122,224,.95)'); lg.addColorStop(1, 'rgba(255,122,224,0)');
+        ctx.strokeStyle = lg; ctx.lineWidth = 1.5; ctx.setLineDash([5, 5]);
+        ctx.beginPath(); ctx.moveTo(lx, 30); ctx.lineTo(lx, base); ctx.stroke(); ctx.setLineDash([]);
+        var txt = 'Запуск ИИ-агента';
+        ctx.font = '700 ' + (narrow ? 11.5 : 12.5) + 'px Inter, sans-serif';
+        var tw = ctx.measureText(txt).width + 24, tx = clamp(lx - tw / 2, 4, W - tw - 4);
+        var pop = back(lp);
+        ctx.translate(tx + tw / 2, 18); ctx.scale(pop, pop); ctx.translate(-(tx + tw / 2), -18);
+        rr(tx, 4, tw, 28, 14);
+        var bg = ctx.createLinearGradient(tx, 0, tx + tw, 0); bg.addColorStop(0, 'rgba(255,122,224,.9)'); bg.addColorStop(1, 'rgba(140,123,255,.9)');
+        ctx.fillStyle = bg; ctx.shadowColor = 'rgba(255,122,224,.7)'; ctx.shadowBlur = 18; ctx.fill(); ctx.shadowBlur = 0;
+        ctx.fillStyle = '#12081a'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(txt, tx + tw / 2, 19);
+        ctx.restore();
+        /* shock ring when the head crosses launch */
+        var pt = pass[LAUNCH];
+        if (pt) {
+          var age = (now - pt) / 900;
+          if (age < 1) {
+            ctx.save(); ctx.globalAlpha = (1 - age) * .9; ctx.strokeStyle = '#FF7AE0'; ctx.lineWidth = 2.5;
+            ctx.beginPath(); ctx.arc(lx, ly, 8 + age * 70, 0, 6.2832); ctx.stroke(); ctx.restore();
+          }
+        }
+      }
+
+      /* area */
+      pathTo(sHead, true);
+      var ag = ctx.createLinearGradient(0, pad.t, 0, base);
+      ag.addColorStop(0, 'rgba(0,212,255,.42)'); ag.addColorStop(.55, 'rgba(140,123,255,.16)'); ag.addColorStop(1, 'rgba(140,123,255,0)');
+      ctx.fillStyle = ag; ctx.fill();
+      ctx.save(); pathTo(sHead, true); ctx.clip();
+      var sh = ((time * .35) % 1.6 - .3) * W;
+      var sg = ctx.createLinearGradient(sh - 120, 0, sh + 120, 0);
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.5, 'rgba(255,255,255,.1)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H); ctx.restore();
+
+      /* line */
+      var head = at(sHead);
+      var lgrad = ctx.createLinearGradient(pad.l, 0, Math.max(head.x, pad.l + 1), 0);
+      lgrad.addColorStop(0, '#00D4FF'); lgrad.addColorStop(.5, '#8C7BFF'); lgrad.addColorStop(1, '#FF7AE0');
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      ctx.shadowColor = 'rgba(140,123,255,.9)'; ctx.shadowBlur = 22; ctx.strokeStyle = lgrad; ctx.lineWidth = 4;
+      pathTo(sHead, false); ctx.stroke();
+      ctx.shadowBlur = 0; ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 1.2;
+      pathTo(sHead, false); ctx.stroke();
+
+      /* comet tail */
+      if (state === 'playing') {
+        var tail = Math.max(0, sHead - 1.6), k, steps = 26;
+        for (k = 0; k < steps; k++) {
+          var a0 = at(tail + (sHead - tail) * k / steps), a1 = at(tail + (sHead - tail) * (k + 1) / steps);
+          ctx.strokeStyle = 'rgba(255,255,255,' + (k / steps * .9).toFixed(3) + ')'; ctx.lineWidth = 1 + k / steps * 5;
+          ctx.beginPath(); ctx.moveTo(a0.x, a0.y); ctx.lineTo(a1.x, a1.y); ctx.stroke();
+        }
+      }
+
+      /* key points */
+      ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      for (i = 0; i < KEY.length; i++) {
+        var ki = KEY[i];
+        if (narrow && (ki === 9 || ki === 11)) continue;
+        if (sHead < ki - 0.001 && !(state === 'done')) continue;
+        var pt2 = pass[ki] || 0, ag2 = state === 'done' && !pt2 ? 1 : clamp((now - pt2) / 520, 0, 1);
+        var sc = back(ag2), q = pts[ki];
+        ctx.save(); ctx.translate(q.x, q.y); ctx.scale(sc, sc);
+        ctx.fillStyle = '#0a1018'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 2.5;
+        ctx.shadowColor = 'rgba(0,212,255,.9)'; ctx.shadowBlur = 14;
+        ctx.beginPath(); ctx.arc(0, 0, 5.5, 0, 6.2832); ctx.fill(); ctx.stroke(); ctx.shadowBlur = 0;
+        ctx.font = '900 ' + (ki === N - 1 ? 22 : 15) + 'px Inter, sans-serif';
+        ctx.fillStyle = ki === N - 1 ? '#fff' : '#bff1ff'; ctx.shadowColor = 'rgba(140,123,255,.9)'; ctx.shadowBlur = ki === N - 1 ? 16 : 8;
+        var ty = ki === N - 1 ? -16 : -14;
+        var tx2 = ki === N - 1 ? -Math.min(14, W - pad.r - q.x + 14) : 0;
+        ctx.fillText(String(data[ki]), tx2 - (ki === N - 1 ? 8 : 0), ty); ctx.restore();
+      }
+
+      /* head glow */
+      var pulse = 1 + .25 * Math.sin(time * 6);
+      var hg = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 26 * pulse);
+      hg.addColorStop(0, 'rgba(255,255,255,.95)'); hg.addColorStop(.25, 'rgba(255,122,224,.65)'); hg.addColorStop(1, 'rgba(255,122,224,0)');
+      ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(head.x, head.y, 26 * pulse, 0, 6.2832); ctx.fill();
+
+      /* ripples on the final point once done */
+      if (state === 'done') {
+        for (i = 0; i < 3; i++) {
+          var rp = ((time * .55) + i / 3) % 1;
+          ctx.strokeStyle = 'rgba(0,212,255,' + ((1 - rp) * .6).toFixed(3) + ')'; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.arc(head.x, head.y, 8 + rp * 34, 0, 6.2832); ctx.stroke();
+        }
+      }
+    }
+
+    /* hover crosshair */
+    if (hover >= 0 && state !== 'idle' && (state === 'done' || sHead >= hover)) {
+      var hp = pts[hover];
+      ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(hp.x, pad.t - 18); ctx.lineTo(hp.x, base); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(hp.x, hp.y, 5, 0, 6.2832); ctx.fill();
+      var l1 = labels[hover], l2 = data[hover] + ' клиентов';
+      ctx.font = '600 11.5px Inter, sans-serif'; var w1 = ctx.measureText(l1).width;
+      ctx.font = '800 15px Inter, sans-serif'; var w2 = ctx.measureText(l2).width;
+      var bw = Math.max(w1, w2) + 28, bh = 52, bx = clamp(hp.x - bw / 2, 4, W - bw - 4), by = Math.max(4, hp.y - bh - 18);
+      rr(bx, by, bw, bh, 12); ctx.fillStyle = 'rgba(10,16,24,.92)'; ctx.fill();
+      ctx.strokeStyle = 'rgba(160,200,255,.5)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.font = '600 11.5px Inter, sans-serif'; ctx.fillStyle = '#8899AA'; ctx.fillText(l1, bx + 14, by + 20);
+      ctx.font = '800 15px Inter, sans-serif'; ctx.fillStyle = '#fff'; ctx.fillText(l2, bx + 14, by + 40);
+    }
+
+    /* record the moment the head passes each point */
+    for (i = 0; i < N; i++) if (!pass[i] && sHead >= i && state !== 'idle') pass[i] = now;
+    if (kpi) kpi.textContent = String(Math.round(state === 'idle' ? 0 : valueAt(sHead)));
+
+    if (state === 'playing' && u >= 1) { state = 'done'; doneAt = now; }
+  }
+
+  function loop(now) {
+    raf = 0;
+    if (!visible) return;
+    draw(now);
+    raf = requestAnimationFrame(loop);
+  }
+  function kick() { if (!raf && visible) raf = requestAnimationFrame(loop); }
+  function play() {
+    pass = {}; hover = -1;
+    if (reduce) { state = 'done'; draw(performance.now()); return; }
+    state = 'playing'; t0 = performance.now(); kick();
+  }
+
+  size();
+  draw(performance.now());
+  if (window.ResizeObserver) new ResizeObserver(function () { size(); draw(performance.now()); }).observe(cv.parentNode);
+  else window.addEventListener('resize', function () { size(); draw(performance.now()); });
+
+  cv.addEventListener('pointermove', function (e) {
+    if (state === 'idle') return;
+    var r = cv.getBoundingClientRect(), x = e.clientX - r.left;
+    var idx = Math.round((x - pad.l) / (W - pad.l - pad.r) * (N - 1));
+    hover = clamp(idx, 0, N - 1);
+    if (reduce) draw(performance.now());
+  }, { passive: true });
+  cv.addEventListener('pointerleave', function () { hover = -1; if (reduce) draw(performance.now()); });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      var e = es[0];
+      visible = e.isIntersecting;
+      if (visible) { if (armed && e.intersectionRatio > .38) { armed = false; play(); } else kick(); }
+      else { if (e.intersectionRatio === 0) armed = true; }
+    }, { threshold: [0, .38, .6] }).observe(cv);
+  } else { visible = true; play(); }
 })();
