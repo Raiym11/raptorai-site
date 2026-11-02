@@ -387,3 +387,14 @@ if (isNewYearPeriod) applyNewYearTheme();
     var c=$('contact'); if(c) c.scrollIntoView({behavior:'smooth',block:'start'});
   };
 })();
+
+/* согласие в чате */
+window.addEventListener('load',function(){
+  var o=window.passChatGate; if(typeof o!=='function') return;
+  window.passChatGate=function(){
+    var c=document.getElementById('chat-gate-consent'), e=document.getElementById('chat-gate-error');
+    if(c && !c.checked){ if(e){ e.textContent='Поставьте галочку согласия на обработку данных, чтобы начать чат.'; e.style.display='block'; } return; }
+    if(e) e.textContent='Пожалуйста, заполните имя и корректный email.';
+    return o.apply(this,arguments);
+  };
+});
