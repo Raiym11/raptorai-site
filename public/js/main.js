@@ -15,6 +15,32 @@ function toggleSubmitState() {
   btn.disabled = !consent.checked;
 }
 
+
+// ===== красивые ошибки формы (вместо alert) =====
+function formFail(msg, ids) {
+  const m = document.getElementById('form-msg');
+  if (m) {
+    m.textContent = msg;
+    m.classList.remove('show'); void m.offsetWidth; m.classList.add('show');
+  }
+  (ids || []).forEach(function (id, i) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const box = el.closest('.form-group') || el.closest('.form-consent') || el;
+    box.classList.remove('err'); void box.offsetWidth; box.classList.add('err');
+    if (i === 0 && el.focus && el.type !== 'checkbox') el.focus();
+  });
+}
+document.addEventListener('input', function (e) {
+  const box = e.target.closest && e.target.closest('.form-group, .form-consent');
+  if (box) box.classList.remove('err');
+  const m = document.getElementById('form-msg'); if (m) m.classList.remove('show');
+});
+document.addEventListener('change', function (e) {
+  const box = e.target.closest && e.target.closest('.form-consent');
+  if (box) box.classList.remove('err');
+});
+
 const CONTACT_FORM_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/contact-form';
 const CONTACT_FORM_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
 
@@ -40,11 +66,11 @@ async function submitForm() {
   const task = lines.join('\n');
   const consent = document.getElementById('f-consent').checked;
   if (!consent) {
-    alert('Пожалуйста, подтвердите согласие на обработку данных.');
+    formFail('Поставьте галочку согласия на обработку данных, чтобы мы могли вам ответить.', ['f-consent']);
     return;
   }
   if (!name || !contact) {
-    alert('Пожалуйста, укажите имя и как с вами связаться.');
+    formFail(!name && !contact ? 'Укажите имя и как с вами связаться.' : (!name ? 'Подскажите, как вас зовут.' : 'Оставьте Телеграм, телефон или почту, чтобы мы могли ответить.'), [!name ? 'f-name' : null, !contact ? 'f-contact' : null].filter(Boolean));
     return;
   }
   // Определяем тип контакта, чтобы заявка попала в нужное поле
@@ -81,7 +107,7 @@ async function submitForm() {
       if (hot) ym(112281876, 'reachGoal', 'form_hot');
     }
   } catch (err) {
-    alert('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.');
+    formFail('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Телеграм @Raptorairu.');
     btn.disabled = false;
     btn.textContent = originalBtnText;
   }
