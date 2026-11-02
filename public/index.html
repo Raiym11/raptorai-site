@@ -729,6 +729,21 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .co-card b{font-size:17px;letter-spacing:-.01em}
 @media(max-width:900px){.co-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.co-grid{grid-template-columns:1fr}}
+
+/* success */
+.form-success{padding:34px 8px}
+.form-success.show,.form-success[style*="block"]{animation:okIn .5s ease both}
+@keyframes okIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ok-ring{width:84px;height:84px;margin:0 auto 20px;border-radius:50%;box-shadow:0 0 0 0 rgba(0,212,255,.5),0 0 50px -8px rgba(0,212,255,.65);animation:okPulse 2.4s ease-out infinite;background:radial-gradient(circle,rgba(0,212,255,.18),rgba(140,123,255,.08))}
+.ok-ring svg{width:100%;height:100%;display:block}
+.ok-ring circle{fill:none;stroke:url(#okg);stroke:#00D4FF;stroke-width:2.5;stroke-dasharray:152;stroke-dashoffset:152;animation:okDraw .8s .1s ease forwards}
+.ok-ring path{fill:none;stroke:#7ee9ff;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;stroke-dashoffset:50;animation:okDraw .5s .7s ease forwards}
+@keyframes okDraw{to{stroke-dashoffset:0}}
+@keyframes okPulse{0%{box-shadow:0 0 0 0 rgba(0,212,255,.45),0 0 50px -8px rgba(0,212,255,.65)}70%,100%{box-shadow:0 0 0 22px rgba(0,212,255,0),0 0 50px -8px rgba(0,212,255,.65)}}
+.form-success h3{font-size:clamp(24px,3vw,30px);font-weight:800;letter-spacing:-.02em;background:linear-gradient(100deg,#fff 10%,#7ee9ff 55%,#9a8cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.form-success p{font-size:16px;line-height:1.6;max-width:380px;margin:0 auto}
+.ok-next{margin:26px auto 0;max-width:420px;padding:18px 20px;border:1px dashed rgba(0,212,255,.35);border-radius:16px;font-size:14px;line-height:1.55;color:rgba(240,244,248,.75);display:flex;flex-direction:column;gap:14px;align-items:center}
+@media(prefers-reduced-motion:reduce){.ok-ring,.ok-ring circle,.ok-ring path{animation:none !important;stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -1199,13 +1214,16 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
             <span>Я даю <a href="/consent.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">согласие на обработку персональных данных</a> и ознакомлен с <a href="/privacy.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Политикой обработки персональных данных</a></span>
           </label>
           <button class="btn-primary form-submit" id="form-submit-btn" onclick="submitForm()" disabled>Получить расчёт и консультацию</button>
-        </div>
         <button type="button" class="quiz-back" data-back>← Назад</button></div>
         </div>
         <div class="form-success" id="form-success">
-          <i class="fa-solid fa-circle-check"></i>
-          <h3>Заявка отправлена!</h3>
-          <p>Мы получили заявку и свяжемся с вами в течение часа в рабочее время.</p>
+          <div class="ok-ring"><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M14 27l8 8 16-17"/></svg></div>
+          <h3>Заявка принята!</h3>
+          <p>Мы уже получили её и свяжемся с вами в течение часа в рабочее время.</p>
+          <div class="ok-next">
+            <span>Пока ждёте - заберите бесплатный чек-лист «7 мест, где бизнес теряет заявки» в нашем Телеграм-канале.</span>
+            <a href="https://t.me/raptorai_official" target="_blank" rel="noopener" class="btn-secondary" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i> Открыть канал</a>
+          </div>
         </div>
       </div>
     </div>
