@@ -341,7 +341,6 @@ nav{background:rgba(8,11,15,.45) !important;-webkit-backdrop-filter:blur(18px) s
 .hero h1{margin-left:0;margin-right:0;max-width:none;font-size:clamp(34px,4.3vw,62px);text-wrap:balance}
 .hero-sub{margin:0 0 40px;max-width:520px}
 .hero-btns{justify-content:flex-start;gap:12px}
-.hero .btn-primary,.hero .btn-secondary{padding:14px 22px;font-size:14.5px}
 .orb-anchor{aspect-ratio:1/1;width:min(100%,560px);justify-self:center;pointer-events:none}
 .hero::before{left:68%;top:-80px}
 
@@ -387,6 +386,36 @@ nav{background:rgba(8,11,15,.45) !important;-webkit-backdrop-filter:blur(18px) s
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
   .hero-badge,.hero h1,.hero-sub,.hero-btns{opacity:1;transform:none}
 }
+
+/* chat launcher: glass, iridescent edge, pulsing */
+html #chat-launcher{width:64px;height:64px;color:#fff;border:1px solid rgba(255,255,255,.38);
+  background:linear-gradient(145deg,rgba(255,255,255,.26),rgba(255,255,255,.06)),rgba(10,16,24,.38);
+  -webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -10px 20px rgba(140,123,255,.28),0 10px 34px -6px rgba(0,212,255,.7);
+  animation:chatPulse 2s ease-in-out infinite;transition:transform .25s}
+html #chat-launcher:hover{transform:scale(1.1);animation-play-state:paused}
+html #chat-launcher::before{content:"";position:absolute;inset:-3px;border-radius:50%;padding:2px;pointer-events:none;
+  background:conic-gradient(#00D4FF,#8C7BFF,#FF7AE0,#5CFFC8,#00D4FF);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:chatSpin 3.5s linear infinite}
+html #chat-launcher i{position:relative;color:#fff;filter:drop-shadow(0 0 8px rgba(0,212,255,.95))}
+.chat-ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,212,255,.65);pointer-events:none;animation:chatRing 2.4s ease-out infinite}
+.chat-ring.r2{border-color:rgba(255,122,224,.6);animation-delay:1.2s}
+html #chat-launcher .unread-dot{z-index:2;animation:chatDot 1.1s ease-in-out infinite}
+@keyframes chatSpin{to{transform:rotate(360deg)}}
+@keyframes chatRing{from{transform:scale(1);opacity:.9}to{transform:scale(2);opacity:0}}
+@keyframes chatPulse{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -10px 20px rgba(140,123,255,.28),0 10px 34px -6px rgba(0,212,255,.55)}
+  50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -10px 20px rgba(255,122,224,.35),0 12px 52px 0 rgba(140,123,255,.95)}}
+@keyframes chatDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.45}}
+
+/* telegram button in chat header */
+.chat-tg{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:8px 13px;border-radius:100px;font-size:12.5px;font-weight:600;text-decoration:none;color:#fff;
+  background:linear-gradient(135deg,rgba(0,212,255,.28),rgba(140,123,255,.28));border:1px solid rgba(160,200,255,.4);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.35);transition:transform .2s,box-shadow .2s}
+.chat-tg i{font-size:15px;color:#7fe3ff}
+.chat-tg:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 20px -6px rgba(0,212,255,.7)}
+@media (max-width:480px){.chat-tg{padding:8px 10px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -436,7 +465,6 @@ nav{background:rgba(8,11,15,.45) !important;-webkit-backdrop-filter:blur(18px) s
     <div class="hero-btns">
       <a href="#services" class="btn-primary">Смотреть услуги</a>
       <a href="#contact" class="btn-secondary">Получить консультацию</a>
-      <a href="https://t.me/Raptorairu" class="btn-secondary" target="_blank" rel="noopener" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i> Написать в Телеграм</a>
     </div>
   </div>
   <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
@@ -895,6 +923,7 @@ body.theme-newyear #chat-panel { border-color: #A8D8FF33; box-shadow: 0 20px 60p
 </style>
 
 <button id="chat-launcher" onclick="toggleChat()" aria-label="Открыть чат">
+  <span class="chat-ring" aria-hidden="true"></span><span class="chat-ring r2" aria-hidden="true"></span>
   <i class="fa-solid fa-comment-dots"></i>
   <span class="unread-dot" id="chat-unread-dot"></span>
 </button>
@@ -906,6 +935,7 @@ body.theme-newyear #chat-panel { border-color: #A8D8FF33; box-shadow: 0 20px 60p
       <div class="name">Дмитрий</div>
       <div class="status">ИИ-ассистент RaptorAI</div>
     </div>
+    <a class="chat-tg" href="https://t.me/Raptorairu" target="_blank" rel="noopener" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i> Написать в Телеграм</a>
     <button class="chat-close" onclick="toggleChat()" aria-label="Закрыть"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
