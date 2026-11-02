@@ -281,8 +281,116 @@ window.loadMetrika = function () {
 try { if (localStorage.getItem('cookie_consent') === 'yes') { window.loadMetrika(); } } catch (e) {}
 </script>
 <!-- /Yandex.Metrika counter -->
+
+<style id="fx-style">
+/* ===== RaptorAI visual layer: iridescent glass ===== */
+:root{
+  --irid-a:#00D4FF; --irid-b:#8C7BFF; --irid-c:#FF7AE0; --irid-d:#5CFFC8;
+  --glass-fill: linear-gradient(150deg, rgba(255,255,255,.085) 0%, rgba(255,255,255,.028) 55%, rgba(255,255,255,.05) 100%);
+  --glass-line: rgba(255,255,255,.14);
+}
+#fx-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block;background:#080B0F}
+html.no-gl body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 50% at 70% 25%,rgba(140,123,255,.20),transparent 70%),
+             radial-gradient(50% 45% at 20% 70%,rgba(0,212,255,.16),transparent 70%),
+             radial-gradient(40% 40% at 85% 80%,rgba(255,122,224,.12),transparent 70%),#080B0F;
+  animation:fxDrift 18s ease-in-out infinite alternate}
+html.no-gl #fx-canvas{display:none}
+@keyframes fxDrift{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(40deg)}}
+
+/* let the backdrop show through every band */
+section, .stats, .form-section{background:transparent !important}
+.stats, .form-section{border-color:rgba(255,255,255,.08)}
+#blog{border-top-color:rgba(255,255,255,.08) !important}
+
+/* nav */
+nav{background:rgba(8,11,15,.45) !important;-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border-bottom:1px solid rgba(255,255,255,.08)}
+
+/* glass cards */
+.service-card,.why-card,.case-card,.step,.testimonial-card,.contact-form,.stat-item{
+  background:
+    radial-gradient(360px circle at var(--mx,50%) var(--my,-20%), rgba(255,255,255,.12), transparent 62%),
+    var(--glass-fill) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(165%);backdrop-filter:blur(20px) saturate(165%);
+  border:1px solid var(--glass-line) !important;
+  border-top-color:rgba(255,255,255,.26) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(255,255,255,.03), 0 28px 60px -30px rgba(0,0,0,.75);
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .3s, box-shadow .3s;
+  will-change:transform;
+}
+.stat-item{padding:22px 34px;border-radius:14px}
+.stats{gap:20px;padding:44px 24px}
+.service-card:hover,.why-card:hover,.case-card:hover,.step:hover,.testimonial-card:hover{
+  --ty:-4px;
+  border-color:rgba(160,190,255,.45) !important;border-top-color:rgba(255,255,255,.5) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 34px 70px -28px rgba(0,0,0,.85), 0 0 46px -14px rgba(140,123,255,.55);
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));
+}
+.contact-form{box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 40px 90px -36px rgba(0,0,0,.85), 0 0 80px -30px rgba(0,212,255,.35)}
+.service-card.featured{box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 0 60px -18px rgba(0,212,255,.45), 0 28px 60px -30px rgba(0,0,0,.75)}
+.form-group input,.form-group textarea{background:rgba(8,11,15,.45);border-color:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.service-icon,.why-icon,.case-tag,.consult-badge,.hero-badge{
+  background:linear-gradient(140deg,rgba(0,212,255,.18),rgba(140,123,255,.14));
+  border-color:rgba(160,200,255,.32);
+}
+
+/* hero layout: copy left, orb right */
+.hero{text-align:left;padding:120px 24px 70px}
+.hero-inner{width:100%;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:center;gap:24px}
+.hero h1{margin-left:0;margin-right:0;max-width:none;font-size:clamp(34px,4.3vw,62px);text-wrap:balance}
+.hero-sub{margin:0 0 40px;max-width:520px}
+.hero-btns{justify-content:flex-start;gap:12px}
+.hero .btn-primary,.hero .btn-secondary{padding:14px 22px;font-size:14.5px}
+.orb-anchor{aspect-ratio:1/1;width:min(100%,560px);justify-self:center;pointer-events:none}
+.hero::before{left:68%;top:-80px}
+
+/* iridescent type for the animated line */
+#typing-text{
+  background:linear-gradient(100deg,var(--irid-a),var(--irid-b),var(--irid-c),var(--irid-d),var(--irid-a));
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent !important;
+  animation:iridShift 9s linear infinite;
+}
+@keyframes iridShift{to{background-position:300% 0}}
+
+/* buttons */
+.btn-primary{
+  background:linear-gradient(110deg,var(--irid-a) 0%,var(--irid-b) 38%,var(--irid-c) 68%,var(--irid-d) 100%);
+  background-size:240% 100%;color:#05070A !important;
+  animation:iridBtn 7s ease-in-out infinite alternate;
+  box-shadow:0 10px 30px -10px rgba(140,123,255,.6), inset 0 1px 0 rgba(255,255,255,.55);
+}
+@keyframes iridBtn{from{background-position:0 0}to{background-position:100% 0}}
+.btn-primary:hover{box-shadow:0 14px 44px -8px rgba(140,123,255,.8), inset 0 1px 0 rgba(255,255,255,.7)}
+.btn-secondary{background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+.btn-secondary:hover{background:rgba(255,255,255,.12)}
+:focus-visible{outline:2px solid var(--irid-d);outline-offset:3px}
+
+/* one orchestrated entrance */
+.hero-badge,.hero h1,.hero-sub,.hero-btns{opacity:0;transform:translateY(18px);animation:heroIn .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero h1{animation-delay:.12s}.hero-sub{animation-delay:.26s}.hero-btns{animation-delay:.4s}
+@keyframes heroIn{to{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:0}
+  .orb-anchor{order:-1;width:min(86vw,360px);margin:-8px auto -28px}
+  .hero{padding:92px 20px 60px;min-height:auto;text-align:center}
+  .hero-sub{margin:0 auto 36px}
+  .hero-btns{justify-content:center}
+  .hero h1{margin-left:auto;margin-right:auto}
+}
+@media (max-width:760px),(hover:none){
+  .service-card,.why-card,.case-card,.step,.testimonial-card,.contact-form,.stat-item{-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);will-change:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .hero-badge,.hero h1,.hero-sub,.hero-btns{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
+<canvas id="fx-canvas" aria-hidden="true"></canvas>
 
 <canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35"></canvas>
 <style id="seasonal-style"></style>
@@ -320,7 +428,8 @@ try { if (localStorage.getItem('cookie_consent') === 'yes') { window.loadMetrika
 
 <!-- HERO -->
 <section class="hero" style="position:relative;z-index:1">
-  <div>
+  <div class="hero-inner">
+  <div class="hero-copy">
     <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> Автоматизация бизнеса с ИИ</div>
     <h1>Ваш бизнес работает.<br><span style="color:var(--cyan)" id="typing-text">ИИ работает за вас.</span><span style="color:var(--cyan);animation:blink 1s infinite">|</span></h1>
     <p class="hero-sub">Создаём умных ИИ-агентов, чат-боты и автоматизации которые экономят часы каждый день — без найма лишних людей.</p>
@@ -329,6 +438,8 @@ try { if (localStorage.getItem('cookie_consent') === 'yes') { window.loadMetrika
       <a href="#contact" class="btn-secondary">Получить консультацию</a>
       <a href="https://t.me/Raptorairu" class="btn-secondary" target="_blank" rel="noopener" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i> Написать в Телеграм</a>
     </div>
+  </div>
+  <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -728,6 +839,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </script>
 
 <script src="/js/main.js?v=20261031" defer></script>
+<script src="/js/fx.js?v=1" defer></script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
