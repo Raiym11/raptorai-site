@@ -744,6 +744,17 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .form-success p{font-size:16px;line-height:1.6;max-width:380px;margin:0 auto}
 .ok-next{margin:26px auto 0;max-width:420px;padding:18px 20px;border:1px dashed rgba(0,212,255,.35);border-radius:16px;font-size:14px;line-height:1.55;color:rgba(240,244,248,.75);display:flex;flex-direction:column;gap:14px;align-items:center}
 @media(prefers-reduced-motion:reduce){.ok-ring,.ok-ring circle,.ok-ring path{animation:none !important;stroke-dashoffset:0}}
+
+/* form errors */
+.form-msg{display:none;margin-bottom:14px;padding:12px 16px 12px 44px;border-radius:14px;font-size:13.5px;line-height:1.5;color:#ffd9e4;background:linear-gradient(135deg,rgba(255,107,154,.14),rgba(140,123,255,.12));border:1px solid rgba(255,107,154,.4);box-shadow:0 10px 30px -14px rgba(255,107,154,.55);position:relative}
+.form-msg::before{content:"!";position:absolute;left:14px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ff6b9a,#8c7bff);color:#fff;font:800 13px/22px 'Inter',sans-serif;text-align:center}
+.form-msg.show{display:block;animation:fmIn .35s cubic-bezier(.2,1.2,.3,1) both}
+@keyframes fmIn{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+.form-group.err input,.form-group.err textarea{border-color:#ff6b9a !important;box-shadow:0 0 0 4px rgba(255,107,154,.16),0 0 24px -6px rgba(255,107,154,.55) !important;animation:fmShake .4s ease}
+.form-group.err label{color:#ff9ab9}
+.form-consent.err{outline:1px solid rgba(255,107,154,.6);outline-offset:6px;border-radius:10px;animation:fmShake .4s ease}
+@keyframes fmShake{20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+@media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
 </head>
 <body>
@@ -1213,6 +1224,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
             <input type="checkbox" id="f-consent" onchange="toggleSubmitState()">
             <span>Я даю <a href="/consent.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">согласие на обработку персональных данных</a> и ознакомлен с <a href="/privacy.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Политикой обработки персональных данных</a></span>
           </label>
+          <div class="form-msg" id="form-msg" role="alert" aria-live="polite"></div>
           <button class="btn-primary form-submit" id="form-submit-btn" onclick="submitForm()" disabled>Получить расчёт и консультацию</button>
         <button type="button" class="quiz-back" data-back>← Назад</button></div>
         </div>
