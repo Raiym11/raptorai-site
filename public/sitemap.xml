@@ -2,14 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.raptorai.ru/</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-11-02</lastmod>
   </url>
   <url>
     <loc>https://www.raptorai.ru/blog.html</loc>
-    <lastmod>2026-10-17</lastmod>
-  </url>
-  <url>
-    <loc>https://www.raptorai.ru/blog/test-statya.html</loc>
     <lastmod>2026-10-17</lastmod>
   </url>
   <url>
@@ -31,5 +27,17 @@
   <url>
     <loc>https://www.raptorai.ru/consent.html</loc>
     <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.raptorai.ru/ai-agent-dlya-biznesa.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.raptorai.ru/telegram-bot-s-ii.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://www.raptorai.ru/avtomatizaciya-n8n.html</loc>
+    <lastmod>2026-11-02</lastmod>
   </url>
 </urlset>

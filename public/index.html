@@ -5,8 +5,8 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru; frame-src 'self' https://mc.yandex.ru https://mc.yandex.md; object-src 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Автоматизация бизнеса с помощью ИИ под ключ: ИИ-агенты на ChatGPT, Claude и Gemini, Telegram-боты, интеграции AmoCRM и Bitrix24 на n8n. Цены от 3 990 ₽, запуск за 3–7 дней.">
-<title>Автоматизация бизнеса с ИИ: ИИ-агенты, чат-боты и n8n под ключ — RaptorAI</title>
+<meta name="description" content="Внедряем ИИ-агентов, Telegram-ботов и автоматизацию на n8n: заявки, CRM, ответы клиентам 24/7. Запуск за 3-7 дней, цену называем сразу. Простые решения от 3 990 ₽, под ключ от 50 000 ₽.">
+<title>ИИ-агенты, чат-боты и автоматизация на n8n под ключ | RaptorAI</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
@@ -244,6 +244,10 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
       "https://kwork.ru/user/raiym3007"
     ]
   }
+  </script>
+
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Сколько это стоит?", "acceptedAnswer": {"@type": "Answer", "text": "Простые решения (один ИИ-агент, Telegram-бот, автоматизация одного процесса) стоят от 3 990 до 4 990 ₽. Комплексные проекты с несколькими системами начинаются от 50 000 ₽. Точную цену называем после короткого разговора, до начала работы и без скрытых платежей."}}, {"@type": "Question", "name": "Как быстро запустите?", "acceptedAnswer": {"@type": "Answer", "text": "Типовые решения запускаем за 3-7 дней. Для сложных проектов срок зависит от числа интеграций, мы фиксируем его в смете до старта, чтобы вы знали дату заранее."}}, {"@type": "Question", "name": "Нужны ли технические знания?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Мы настраиваем всё сами и передаём вам готовую систему с инструкцией. Если нужно, показываем, как ей пользоваться, и остаёмся на связи."}}, {"@type": "Question", "name": "Что если результат не устроит?", "acceptedAnswer": {"@type": "Answer", "text": "Промежуточный результат показываем на ваших реальных данных до сдачи, так что вы видите, как система работает, и можете скорректировать её. Правки по согласованной задаче вносим по ходу работы, а критические ошибки после сдачи исправляем бесплатно."}}, {"@type": "Question", "name": "Где работает система и что с моими данными?", "acceptedAnswer": {"@type": "Answer", "text": "Систему можно развернуть на вашем сервере или на нашем, вы выбираете. Мы запрашиваем только те доступы, которые нужны для задачи, и не передаём ваши данные третьим лицам."}}, {"@type": "Question", "name": "С какими сервисами умеете интегрироваться?", "acceptedAnswer": {"@type": "Answer", "text": "AmoCRM, Bitrix24, 1С, Google Таблицы, Telegram, почта, сайты и интернет-магазины и другие сервисы с API. Связываем их через n8n, а в роли ИИ подключаем ChatGPT, Claude или Gemini под вашу задачу и бюджет."}}, {"@type": "Question", "name": "Чем вы отличаетесь от готовых конструкторов ботов?", "acceptedAnswer": {"@type": "Answer", "text": "Конструктор даёт шаблон, а мы строим систему под ваши процессы. Она принадлежит вам, а не платформе, поэтому вы не зависите от тарифов и ограничений чужого сервиса и платите только за реальное использование."}}]}
   </script>
 
   <!-- Open Graph -->
@@ -597,9 +601,51 @@ body:has(#chat-panel.open) #tg-float{opacity:0;pointer-events:none;transform:sca
 html.lite .service-card,html.lite .why-card,html.lite .case-card,html.lite .step,html.lite .contact-form,html.lite .stats,html.lite .hn-card,html.lite nav{-webkit-backdrop-filter:blur(8px) !important;backdrop-filter:blur(8px) !important}
 html.lite .hv-flow{transform:none !important}
 html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !important}
+
+/* ===== v4: trust, FAQ, premium, after-steps ===== */
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.skip-link{position:fixed;left:12px;top:-60px;z-index:10000;background:var(--cyan);color:#000;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:12px}
+.premium{margin-top:20px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:34px 38px;border-radius:22px;position:relative;overflow:hidden;
+  background:radial-gradient(500px circle at 0% 0%,rgba(140,123,255,.22),transparent 60%),radial-gradient(420px circle at 100% 100%,rgba(0,212,255,.16),transparent 60%),var(--glass-fill);
+  border:1px solid rgba(255,255,255,.16);border-top-color:rgba(255,255,255,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 30px 70px -34px rgba(0,0,0,.8)}
+.premium-tag{display:inline-block;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#d9ccff;background:rgba(140,123,255,.18);border:1px solid rgba(140,123,255,.5);padding:4px 12px;border-radius:99px;margin-bottom:14px}
+.premium h3{font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.premium p{color:rgba(240,244,248,.72);max-width:62ch;line-height:1.7;font-size:15px}
+.premium ul{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin-top:16px}
+.premium li{font-size:13.5px;color:rgba(240,244,248,.86)}
+.premium li i{color:var(--cyan);margin-right:8px}
+.premium-r{display:flex;flex-direction:column;align-items:flex-end;gap:16px;text-align:right}
+.premium .service-price{border:0;padding:0;margin:0;font-size:34px;justify-content:flex-end}
+@media (max-width:820px){.premium{grid-template-columns:1fr;padding:26px 22px}.premium-r{align-items:flex-start;text-align:left}.premium .service-price{justify-content:flex-start}}
+.faq-list{max-width:860px;display:grid;gap:12px}
+.faq-item{border-radius:16px;overflow:hidden;background:var(--glass-fill);border:1px solid var(--glass-line);border-top-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);transition:border-color .3s}
+.faq-item[open]{border-color:rgba(160,190,255,.4)}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 62px 20px 24px;font-weight:600;font-size:16.5px;line-height:1.4;position:relative}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(0,212,255,.12);color:var(--cyan);font-size:20px;font-weight:400;transition:transform .3s}
+.faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq-item p{padding:0 24px 22px;color:rgba(240,244,248,.74);line-height:1.75;font-size:15px;animation:faqIn .35s ease}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.after-title{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin:26px 0 12px}
+.after-steps{display:grid;gap:12px;margin-bottom:6px}
+.after-step{display:flex;gap:14px;align-items:flex-start}
+.after-step b{flex:0 0 30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono',monospace;color:#04131d;background:linear-gradient(135deg,#00D4FF,#8C7BFF)}
+.after-step span{font-size:14.5px;color:rgba(240,244,248,.82);line-height:1.5;padding-top:4px}
+.proof{display:flex;flex-wrap:wrap;gap:10px 14px;margin:28px 0 0}
+.proof span{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(240,244,248,.86);padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.proof i{color:var(--cyan)}
+.page-hero{padding-top:130px}
+.crumbs{font-size:13px;color:var(--gray);margin-bottom:18px}
+.crumbs a{color:var(--gray);text-decoration:none}.crumbs a:hover{color:var(--cyan)}
+.page-hero h1{font-size:clamp(30px,3.5vw,50px) !important;line-height:1.12}
+@media (max-width:600px){html #chat-launcher{width:52px !important;height:52px !important;right:14px !important;bottom:14px !important}html #chat-launcher i{font-size:21px}#tg-float{height:44px;min-width:44px;padding:0 10px;border-radius:22px;right:18px !important;bottom:76px !important}#tg-float i{font-size:23px}}
+@media (max-width:1000px){.orb-anchor{width:min(78vw,330px) !important;margin:-4px auto 18px !important}}
+@media (max-width:760px){.premium .btn-primary{width:100%;text-align:center}.stats{margin-top:8px}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#services">К содержимому</a>
 <canvas id="fx-canvas" aria-hidden="true"></canvas>
 
 <canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35"></canvas>
@@ -630,6 +676,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <li><a href="#cases" onclick="closeMobileNav()">Кейсы</a></li>
     <li><a href="#how" onclick="closeMobileNav()">Процесс</a></li>
     <li><a href="#testimonials" onclick="closeMobileNav()">Отзывы</a></li>
+    <li><a href="#faq" onclick="closeMobileNav()">Вопросы</a></li>
     <li><a href="#blog" onclick="closeMobileNav()">Блог</a></li>
     <li><a href="#contact" onclick="closeMobileNav()">Контакты</a></li>
     <li><a href="#contact" class="nav-cta" onclick="closeMobileNav()">Консультация</a></li>
@@ -646,6 +693,11 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="hero-btns">
       <a href="#services" class="btn-primary">Смотреть услуги</a>
       <a href="#contact" class="btn-secondary">Получить консультацию</a>
+    </div>
+    <div class="proof">
+      <span><i class="fa-solid fa-circle-check"></i> 100+ проектов</span>
+      <span><i class="fa-solid fa-bolt"></i> Запуск за 3-7 дней</span>
+      <span><i class="fa-solid fa-tag"></i> Цена сразу, без скрытых платежей</span>
     </div>
   </div>
   <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
@@ -703,6 +755,23 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="service-name">Telegram-бот с ИИ</div>
         <p class="service-desc">Умный бот в Telegram который консультирует клиентов, принимает заявки и уведомляет вас — всё в одном канале.</p>
         <div class="service-price"><small>от</small><b>4 990 ₽</b> <span>/ проект</span></div>
+      </div>
+    </div>
+    <div class="premium reveal">
+      <div>
+        <span class="premium-tag">Под ключ</span>
+        <h3>Комплексная автоматизация бизнеса</h3>
+        <p>Несколько систем в одной связке: ИИ-агент, CRM, учёт, отчёты и обучение команды. Берём задачу целиком - от разбора процессов до запуска и сопровождения.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i>Интеграции AmoCRM, Bitrix24, 1С</li>
+          <li><i class="fa-solid fa-check"></i>База знаний и RAG-поиск</li>
+          <li><i class="fa-solid fa-check"></i>Несколько каналов: сайт, Telegram, почта</li>
+          <li><i class="fa-solid fa-check"></i>Сопровождение после запуска</li>
+        </ul>
+      </div>
+      <div class="premium-r">
+        <div class="service-price"><small>от</small><b>50 000 ₽</b></div>
+        <a href="#contact" class="btn-primary">Обсудить проект</a>
       </div>
     </div>
     <p style="font-size:14px;color:var(--gray);margin-top:24px;text-align:center">Это не всё — опишите свою задачу, и мы предложим решение под ваш конкретный случай.</p>
@@ -899,6 +968,24 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </section>
 <!--/noindex-->
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-label">Вопросы</div>
+    <h2 class="section-title">Частые <span>вопросы</span></h2>
+    <p class="section-sub">Коротко о том, что обычно спрашивают перед началом работы.</p>
+    <div class="faq-list reveal">
+      <details class="faq-item"><summary>Сколько это стоит?</summary><p>Простые решения (один ИИ-агент, Telegram-бот, автоматизация одного процесса) стоят от 3 990 до 4 990 ₽. Комплексные проекты с несколькими системами начинаются от 50 000 ₽. Точную цену называем после короткого разговора, до начала работы и без скрытых платежей.</p></details>
+      <details class="faq-item"><summary>Как быстро запустите?</summary><p>Типовые решения запускаем за 3-7 дней. Для сложных проектов срок зависит от числа интеграций, мы фиксируем его в смете до старта, чтобы вы знали дату заранее.</p></details>
+      <details class="faq-item"><summary>Нужны ли технические знания?</summary><p>Нет. Мы настраиваем всё сами и передаём вам готовую систему с инструкцией. Если нужно, показываем, как ей пользоваться, и остаёмся на связи.</p></details>
+      <details class="faq-item"><summary>Что если результат не устроит?</summary><p>Промежуточный результат показываем на ваших реальных данных до сдачи, так что вы видите, как система работает, и можете скорректировать её. Правки по согласованной задаче вносим по ходу работы, а критические ошибки после сдачи исправляем бесплатно.</p></details>
+      <details class="faq-item"><summary>Где работает система и что с моими данными?</summary><p>Систему можно развернуть на вашем сервере или на нашем, вы выбираете. Мы запрашиваем только те доступы, которые нужны для задачи, и не передаём ваши данные третьим лицам.</p></details>
+      <details class="faq-item"><summary>С какими сервисами умеете интегрироваться?</summary><p>AmoCRM, Bitrix24, 1С, Google Таблицы, Telegram, почта, сайты и интернет-магазины и другие сервисы с API. Связываем их через n8n, а в роли ИИ подключаем ChatGPT, Claude или Gemini под вашу задачу и бюджет.</p></details>
+      <details class="faq-item"><summary>Чем вы отличаетесь от готовых конструкторов ботов?</summary><p>Конструктор даёт шаблон, а мы строим систему под ваши процессы. Она принадлежит вам, а не платформе, поэтому вы не зависите от тарифов и ограничений чужого сервиса и платите только за реальное использование.</p></details>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT FORM -->
 <section id="contact" class="form-section">
   <div class="container">
@@ -913,6 +1000,12 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           <div class="form-perk"><i class="fa-solid fa-check"></i> Расскажем точную стоимость</div>
           <div class="form-perk"><i class="fa-solid fa-check"></i> Без навязчивых продаж</div>
           <div class="form-perk"><i class="fa-solid fa-check"></i> Работаем по всей России и СНГ</div>
+        </div>
+        <div class="after-title">Что будет после заявки</div>
+        <div class="after-steps">
+          <div class="after-step"><b>1</b><span>Вы оставляете заявку - это занимает минуту</span></div>
+          <div class="after-step"><b>2</b><span>Мы отвечаем в течение рабочего дня и уточняем задачу</span></div>
+          <div class="after-step"><b>3</b><span>Созваниваемся, называем точную цену и срок запуска</span></div>
         </div>
         <div class="contact-links"><a href="https://t.me/raptorai_official" class="tg-link" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Наш Telegram-канал об автоматизации</a><a href="mailto:raptorai.official@gmail.com" class="tg-link"><i class="fa-solid fa-envelope"></i> raptorai.official@gmail.com</a></div>
       </div>
@@ -963,18 +1056,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <!-- BLOG-CARDS-START -->
       <article class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color 0.3s,transform 0.3s;cursor:pointer;position:relative" onmouseover="this.style.borderColor='var(--cyan-mid)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
         <div style="display:inline-flex;align-items:center;gap:6px;background:var(--cyan-dim);border:1px solid var(--cyan-mid);color:var(--cyan);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:16px;font-family:monospace">
-          <i class="fa-solid fa-flask" style="font-size:10px"></i> Тест
-        </div>
-        <h3 style="font-size:17px;font-weight:700;margin-bottom:10px"><a href="/blog/test-statya.html" class="blog-card-link">Тестовая статья: проверка генератора</a></h3>
-        <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px">Проверяем, как генератор собирает страницу статьи с обложкой, подзаголовками, списками и таблицей.</p>
-        <div style="display:flex;gap:16px;font-size:12px;color:var(--gray)">
-          <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>17.10.2026</span>
-          <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>2 мин</span>
-        </div>
-      </article>
-
-      <article class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color 0.3s,transform 0.3s;cursor:pointer;position:relative" onmouseover="this.style.borderColor='var(--cyan-mid)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-        <div style="display:inline-flex;align-items:center;gap:6px;background:var(--cyan-dim);border:1px solid var(--cyan-mid);color:var(--cyan);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:16px;font-family:monospace">
           <i class="fa-solid fa-diagram-project" style="font-size:10px"></i> n8n
         </div>
         <h3 style="font-size:17px;font-weight:700;margin-bottom:10px"><a href="/blog-amocrm-n8n.html" class="blog-card-link">Как автоматизировать AmoCRM с помощью n8n: полный гайд</a></h3>
@@ -1017,6 +1098,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <a href="#cases">Кейсы</a>
       <a href="#how">Процесс</a>
       <a href="#testimonials">Отзывы</a>
+      <a href="#faq">Вопросы</a>
       <a href="#blog">Блог</a>
       <a href="#contact">Контакт</a>
       <a href="/privacy.html">Политика конфиденциальности</a>
@@ -1040,7 +1122,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 #cookie-decline:hover { border-color: #00D4FF; }
 @media (max-width: 480px) { #cookie-note { left: 8px; right: 8px; bottom: 8px; max-width: none; } }
 </style>
-<div id="cookie-note" role="dialog" aria-label="Настройки cookie">Мы используем cookie Яндекс Метрики, чтобы понимать, как посетители пользуются сайтом. Вы можете принять или отказаться - сайт работает в любом случае. Подробнее в <a href="/privacy.html">политике</a>.
+<div id="cookie-note" role="dialog" aria-label="Настройки cookie">Мы используем cookie Яндекс Метрики (в том числе запись действий на странице - Вебвизор), чтобы понимать, как посетители пользуются сайтом. Вы можете принять или отказаться - сайт работает в любом случае. Подробнее в <a href="/privacy.html">политике</a>.
 <div class="cookie-btns"><button type="button" id="cookie-accept">Принять</button><button type="button" id="cookie-decline">Отклонить</button></div></div>
 <script>
 (function(){
@@ -1056,7 +1138,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </script>
 
 <script src="/js/main.js?v=20261102" defer></script>
-<script src="/js/fx.js?v=4" defer></script>
+<script src="/js/fx.js?v=5" defer></script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
