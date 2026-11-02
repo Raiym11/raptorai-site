@@ -108,13 +108,19 @@ if (canvas) {
     draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(0,212,255,${this.a})`; ctx.fill(); }
   }
   const ps = Array.from({length:100},()=>new P());
+  const TAU = Math.PI*2, DOT = [.18,.35,.52];
   const animate = () => {
     ctx.clearRect(0,0,W,H);
-    ps.forEach(p=>{p.update();p.draw();});
+    const dots = [[],[],[]];
+    for (let i=0;i<ps.length;i++){ const p=ps[i]; p.update(); dots[p.a<.27?0:p.a<.44?1:2].push(p); }
+    for (let k=0;k<3;k++){ if(!dots[k].length) continue; ctx.beginPath(); for (const p of dots[k]){ ctx.moveTo(p.x+p.r,p.y); ctx.arc(p.x,p.y,p.r,0,TAU); } ctx.fillStyle='rgba(0,212,255,'+DOT[k]+')'; ctx.fill(); }
+    const lines = [[],[],[],[]];
     for(let i=0;i<ps.length;i++) for(let j=i+1;j<ps.length;j++){
-      const dx=ps[i].x-ps[j].x, dy=ps[i].y-ps[j].y, d=Math.sqrt(dx*dx+dy*dy);
-      if(d<100){ctx.beginPath();ctx.moveTo(ps[i].x,ps[i].y);ctx.lineTo(ps[j].x,ps[j].y);ctx.strokeStyle=`rgba(0,212,255,${.12*(1-d/100)})`;ctx.lineWidth=.5;ctx.stroke();}
+      const dx=ps[i].x-ps[j].x, dy=ps[i].y-ps[j].y, d2=dx*dx+dy*dy;
+      if(d2<10000){ const d=Math.sqrt(d2); lines[Math.min(3,Math.floor((1-d/100)*4))].push(ps[i],ps[j]); }
     }
+    ctx.lineWidth=.5;
+    for (let b=0;b<4;b++){ const L=lines[b]; if(!L.length) continue; ctx.beginPath(); for(let k=0;k<L.length;k+=2){ ctx.moveTo(L[k].x,L[k].y); ctx.lineTo(L[k+1].x,L[k+1].y); } ctx.strokeStyle='rgba(0,212,255,'+(.12*(b+.5)/4)+')'; ctx.stroke(); }
     requestAnimationFrame(animate);
   };
   animate();

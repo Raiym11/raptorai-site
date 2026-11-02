@@ -24,7 +24,7 @@
           var y = (ev.clientY - r.top) / r.height;
           el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
           el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
-          if (tilt) {
+          if (tilt && !root.classList.contains('lite')) {
             el.style.setProperty('--ry', ((x - 0.5) * 7).toFixed(2) + 'deg');
             el.style.setProperty('--rx', ((0.5 - y) * 7).toFixed(2) + 'deg');
           }
@@ -52,7 +52,7 @@
   } catch (e) { gl = null; }
   if (!gl) { root.classList.add('no-gl'); return; }
 
-  var OCT = small ? 3 : 4;
+  var OCT = (small || (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4) ? 3 : 4;
   var vsrc = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   var fsrc = [
     '#ifdef GL_FRAGMENT_PRECISION_HIGH',
@@ -173,7 +173,11 @@
       uOrb = gl.getUniformLocation(prog, 'uOrb'),
       uOrbA = gl.getUniformLocation(prog, 'uOrbA');
 
-  var scale = small ? 0.5 : Math.min(0.8, Math.max(0.55, 1.1 / Math.max(1, window.devicePixelRatio || 1)));
+  var scaleBase = small ? 0.5 : Math.min(0.8, Math.max(0.55, 1.1 / Math.max(1, window.devicePixelRatio || 1)));
+  var qmul = 1, qlevel = 0, capMs = small ? 33 : 0, prevRaf = 0, ema = 16.7, nFrames = 0, grace = 0;
+  var scale = scaleBase;
+  function wantScale() { var orbMode = window.__fxHero && window.__fxHero.mode === 'orb'; return (orbMode ? scaleBase : Math.min(scaleBase, 0.5)) * qmul; }
+  scale = wantScale();
   var W = 0, H = 0;
   function resize() {
     var w = Math.max(1, Math.floor(window.innerWidth * scale));
@@ -198,7 +202,24 @@
   function frame(now) {
     if (!running) return;
     if (!reduce) requestAnimationFrame(frame);
-    if (small && now - last < 33) return; /* ~30fps on phones */
+    /* adaptive quality: measure real frame cadence, step down only when the device struggles */
+    if (prevRaf) {
+      var dtr = now - prevRaf;
+      if (dtr < 250) ema = ema * 0.94 + dtr * 0.06;
+      if (now - t0 > 3500 && ++nFrames >= 90 && now > grace && qlevel < 3) {
+        nFrames = 0;
+        if (ema > 24) {
+          qlevel++;
+          if (qlevel <= 2) qmul = Math.max(0.35 / 0.5, qmul * 0.8); else capMs = 33;
+          if (qlevel >= 2) root.classList.add('lite');
+          grace = now + 2500; ema = 16.7;
+        }
+      }
+    }
+    prevRaf = now;
+    var ws = wantScale();
+    if (ws !== scale) { scale = ws; resize(); }
+    if (capMs && now - last < capMs) return;
     last = now;
     var el = (now - t0) / 1000;
     var tt = reduce ? 6.5 : el;
@@ -698,4 +719,26 @@
     });
     document.body.appendChild(bar);
   }
+})();
+
+
+/* ---------- performance gating: work only for what is on screen ---------- */
+(function () {
+  'use strict';
+  if (!('IntersectionObserver' in window)) return;
+  var glass = document.querySelectorAll('.service-card,.why-card,.case-card,.step,.contact-form,.stats');
+  var ioG = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { e.target.classList.toggle('fx-off', !e.isIntersecting); });
+  }, { rootMargin: '220px 0px' });
+  Array.prototype.forEach.call(glass, function (el) { ioG.observe(el); });
+  var secs = document.querySelectorAll('.hero,section,footer');
+  var ioS = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { e.target.classList.toggle('fx-paused', !e.isIntersecting); });
+  }, { rootMargin: '120px 0px' });
+  Array.prototype.forEach.call(secs, function (el) { ioS.observe(el); });
+  var host = document.getElementById('orb-anchor');
+  if (host) new IntersectionObserver(function (es) {
+    var svg = host.querySelector('svg'); if (!svg || !svg.pauseAnimations) return;
+    if (es[0].isIntersecting) svg.unpauseAnimations(); else svg.pauseAnimations();
+  }, { rootMargin: '80px 0px' }).observe(host);
 })();
