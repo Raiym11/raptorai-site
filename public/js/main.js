@@ -27,7 +27,17 @@ async function submitForm() {
   }
   const name = document.getElementById('f-name').value.trim();
   const contact = document.getElementById('f-contact').value.trim();
-  const task = document.getElementById('f-task').value.trim();
+  const userTask = document.getElementById('f-task').value.trim();
+  const qz = (window.__quiz && window.__quiz.get()) || {};
+  const hot = !!qz.hot;
+  const lines = [];
+  if (hot) lines.push('🔥 КРУПНАЯ ЗАЯВКА');
+  if (qz.budget) lines.push('Бюджет: ' + qz.budget);
+  if (qz.biz) lines.push('Бизнес: ' + qz.biz);
+  if (qz.goal) lines.push('Цель: ' + qz.goal);
+  if (qz.calc_loss) lines.push('Расчёт на сайте: теряет ~' + qz.calc_loss.toLocaleString('ru-RU') + ' ₽/мес');
+  if (userTask) lines.push('Задача: ' + userTask);
+  const task = lines.join('\n');
   const consent = document.getElementById('f-consent').checked;
   if (!consent) {
     alert('Пожалуйста, подтвердите согласие на обработку данных.');
@@ -61,13 +71,14 @@ async function submitForm() {
         'Content-Type': 'application/json',
         'X-Webhook-Secret': CONTACT_FORM_WEBHOOK_SECRET
       },
-      body: JSON.stringify({ name, email, phone, telegram, contact, task, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
+      body: JSON.stringify({ name, email, phone, telegram, contact, task, biz: qz.biz || '', goal: qz.goal || '', budget: qz.budget || '', hot: hot, calc_loss: qz.calc_loss || 0, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
     document.getElementById('form-body').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
     if (typeof ym !== 'undefined') {
       ym(112281876, 'reachGoal', 'form_submit');
+      if (hot) ym(112281876, 'reachGoal', 'form_hot');
     }
   } catch (err) {
     alert('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам напрямую.');
@@ -281,3 +292,72 @@ const day = now.getDate();
 const isNewYearPeriod = (month === 12 && day >= 24) || (month === 1 && day <= 5);
 if (isNewYearPeriod) applyNewYearTheme();
 
+
+
+// ===== FUNNEL: calculator + quiz =====
+(function(){
+  function goal(n){ try{ if(typeof ym!=='undefined') ym(112281876,'reachGoal',n); }catch(e){} }
+  var fmt=function(n){ return Math.round(n).toLocaleString('ru-RU'); };
+  var $=function(id){ return document.getElementById(id); };
+  var calcLoss=0, calcUsed=false;
+
+  // calculator
+  var ids=['leads','check','lost','hours','rate'];
+  function calc(){
+    var v={}; ids.forEach(function(k){
+      var el=$('c-'+k); if(!el) return; v[k]=+el.value;
+      var p=(el.value-el.min)/(el.max-el.min)*100; el.style.setProperty('--p',p+'%');
+    });
+    if(!$('c-leads')) return;
+    $('o-leads').textContent=fmt(v.leads);
+    $('o-check').textContent=fmt(v.check)+' ₽';
+    $('o-lost').textContent=v.lost+'%';
+    $('o-hours').textContent=v.hours+' ч';
+    $('o-rate').textContent=fmt(v.rate)+' ₽';
+    var rev=v.leads*v.check*v.lost/100, man=v.hours*4.3*v.rate, total=rev+man;
+    calcLoss=Math.round(total/1000)*1000;
+    $('r-rev').textContent=fmt(rev); $('r-man').textContent=fmt(man);
+    $('r-total').textContent=fmt(total);
+    var back=total/2; $('r-back').textContent=fmt(back)+' ₽';
+    var days=back>0?Math.ceil(50000/back*30):0;
+    $('r-pay').textContent= back<=0?'' : days<=30 ? 'может окупиться меньше чем за месяц' : 'может окупиться примерно за ' + Math.ceil(days/30) + ' мес.';
+  }
+  ids.forEach(function(k){ var el=$('c-'+k); if(el) el.addEventListener('input',function(){ if(!calcUsed){calcUsed=true; goal('calc_use');} calc(); }); });
+  calc();
+
+  // quiz
+  var st={biz:'',goal:'',budget:'',hot:false}, step=1, form=$('form-body');
+  function show(n){
+    step=n;
+    var steps=form.querySelectorAll('.quiz-step');
+    steps.forEach(function(s){ s.classList.toggle('active', +s.getAttribute('data-step')===n); });
+    $('quiz-bar').style.width=(n*25)+'%';
+    $('quiz-count').textContent='Шаг '+n+' из 4';
+  }
+  if(form && $('quiz-bar')){
+    show(1);
+    var started=false;
+    form.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      if(b.hasAttribute('data-back')){ show(Math.max(1,step-1)); return; }
+      var wrap=b.closest('.quiz-opts'); if(!wrap) return;
+      if(!started){started=true; goal('quiz_start');}
+      wrap.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');});
+      b.classList.add('sel');
+      var key=wrap.getAttribute('data-key'); st[key]=b.getAttribute('data-v');
+      if(key==='budget'){
+        st.hot=/50 000 – 150|От 150/.test(st.budget) || (/Нужен расчёт/.test(st.budget) && calcLoss>=300000);
+        goal('quiz_budget');
+      }
+      setTimeout(function(){ show(step+1); },180);
+    });
+  }
+  window.__quiz={ get:function(){ return {biz:st.biz,goal:st.goal,budget:st.budget,hot:st.hot,calc_loss:calcUsed?calcLoss:0}; } };
+
+  window.calcToQuiz=function(){
+    goal('calc_cta');
+    var q=$('quiz-calc');
+    if(q){ q.innerHTML='Ваш расчёт: недополучаете около <b>'+fmt(calcLoss)+' ₽/мес</b>. Передадим его менеджеру.'; q.style.display='block'; }
+    var c=$('contact'); if(c) c.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+})();
