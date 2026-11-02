@@ -1418,7 +1418,8 @@ html .chat-header-info .status::before{background:#3DF2A6;box-shadow:0 0 10px #3
 html .chat-close{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;padding:0;transition:background .2s,transform .25s}
 html .chat-close:hover{background:rgba(255,255,255,.1);transform:rotate(90deg)}
 html .chat-body{padding:20px 18px;gap:14px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(0,212,255,.35) transparent}
-html .chat-msg{font-size:14px;line-height:1.55;padding:11px 15px;border-radius:19px;max-width:85%;position:relative}
+html .chat-body>*{flex-shrink:0}
+html .chat-msg{flex-shrink:0;min-height:min-content;font-size:14px;line-height:1.55;padding:11px 15px;border-radius:19px;max-width:85%;position:relative}
 html .chat-msg.bot{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.11);color:#EAF2FA;border-bottom-left-radius:6px;overflow:hidden;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);transform-origin:left bottom;animation:msgInBot .55s cubic-bezier(.2,1.15,.3,1) both}
 html .chat-msg.bot::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.16) 50%,transparent 70%);transform:translateX(-130%);animation:msgSheen 1.2s .2s ease-out 1 both}
 html .chat-msg.user{background:linear-gradient(135deg,#00D4FF 0%,#4D8DFF 55%,#8C7BFF 100%);color:#04121c;font-weight:600;border-bottom-right-radius:6px;box-shadow:0 12px 30px -10px rgba(0,212,255,.7),inset 0 1px 0 rgba(255,255,255,.35);transform-origin:right bottom;animation:msgInUser .5s cubic-bezier(.2,1.15,.3,1) both}
