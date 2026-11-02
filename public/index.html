@@ -643,6 +643,66 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @media (max-width:1000px){.orb-anchor{width:min(78vw,330px) !important;margin:-4px auto 18px !important}}
 @media (max-width:760px){.premium .btn-primary{width:100%;text-align:center}.stats{margin-top:8px}}
 </style>
+<style id="fx-funnel">
+/* ===== v5 funnel ===== */
+.fn-sec{padding:96px 24px;position:relative;z-index:1}
+.fn-head{max-width:760px;margin:0 auto 44px;text-align:center}
+.fn-head .section-sub{margin:0 auto}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.pain-card{background:linear-gradient(160deg,rgba(15,25,35,.92),rgba(13,17,23,.92));border:1px solid var(--border);border-radius:16px;padding:24px 20px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.pain-card:hover{transform:translateY(-4px);border-color:rgba(255,120,90,.45);box-shadow:0 14px 34px -18px rgba(255,100,70,.45)}
+.pain-card i{font-size:20px;color:#ff8a6b;margin-bottom:14px;display:block}
+.pain-card b{display:block;font-size:15.5px;line-height:1.35;margin-bottom:8px;color:var(--white)}
+.pain-card span{font-size:13.5px;line-height:1.55;color:var(--gray)}
+.fn-cta{text-align:center;margin-top:36px}
+.fn-cta p{color:var(--gray);font-size:14px;margin-top:12px}
+/* calculator */
+.calc{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:stretch}
+.calc-in,.calc-out{background:linear-gradient(160deg,rgba(15,25,35,.95),rgba(13,17,23,.95));border:1px solid var(--border);border-radius:20px;padding:28px}
+.calc-row{margin-bottom:22px}
+.calc-row:last-child{margin-bottom:0}
+.calc-row label{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;font-weight:600;color:var(--gray);margin-bottom:10px}
+.calc-row output{color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:14px;white-space:nowrap}
+.calc input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--cyan) var(--p,30%),#1b2733 var(--p,30%));outline:none;cursor:pointer}
+.calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--cyan);box-shadow:0 0 0 5px rgba(0,212,255,.15)}
+.calc input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--cyan)}
+.calc-out{display:flex;flex-direction:column;justify-content:space-between;border-color:rgba(0,212,255,.35);box-shadow:0 0 60px -30px rgba(0,212,255,.5)}
+.calc-lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);font-family:'JetBrains Mono',monospace}
+.calc-big{font-size:clamp(34px,5vw,50px);font-weight:800;letter-spacing:-.02em;color:#ff9b80;line-height:1.1;margin:8px 0 4px}
+.calc-big small{font-size:.45em;font-weight:600;color:var(--gray)}
+.calc-split{font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:18px}
+.calc-split b{color:var(--white);font-weight:600}
+.calc-fix{border-top:1px solid var(--border);padding-top:16px;margin-bottom:18px;font-size:14px;line-height:1.6;color:var(--white)}
+.calc-fix em{font-style:normal;color:var(--cyan);font-weight:700}
+.calc-note{font-size:11.5px;color:#667788;line-height:1.5;margin-top:12px}
+/* companies */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.co-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.co-card i{color:var(--cyan);font-size:18px;margin-bottom:12px;display:block}
+.co-card b{display:block;margin-bottom:8px;font-size:15.5px}
+.co-card span{font-size:13.5px;line-height:1.6;color:var(--gray)}
+.co-bar{max-width:1100px;margin:22px auto 0;display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:center;align-items:center;padding:20px 24px;border:1px dashed rgba(0,212,255,.35);border-radius:16px;font-size:14px;color:var(--white)}
+.co-bar a{color:var(--cyan);font-weight:700;text-decoration:none}
+/* quiz */
+.quiz-top{margin-bottom:18px}
+.quiz-progress{height:5px;border-radius:5px;background:#1b2733;overflow:hidden}
+.quiz-progress i{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--cyan),#6ee7ff);border-radius:5px;transition:width .35s ease}
+.quiz-count{font-size:12px;color:var(--gray);margin-top:8px;font-family:'JetBrains Mono',monospace;display:flex;justify-content:space-between}
+.quiz-step{display:none;animation:qin .3s ease}
+.quiz-step.active{display:block}
+@keyframes qin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.quiz-q{font-size:19px;font-weight:700;margin-bottom:16px;line-height:1.3}
+.quiz-opts{display:grid;gap:10px}
+.quiz-opts button{text-align:left;background:var(--bg3);border:1px solid var(--border);color:var(--white);border-radius:12px;padding:14px 16px;font:500 14.5px/1.35 'Inter',sans-serif;cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+.quiz-opts button:hover{border-color:var(--cyan);background:rgba(0,212,255,.07)}
+.quiz-opts button:active{transform:scale(.99)}
+.quiz-opts button.sel{border-color:var(--cyan);background:rgba(0,212,255,.12)}
+.quiz-back{background:none;border:0;color:var(--gray);font:500 13px 'Inter',sans-serif;cursor:pointer;margin-top:14px;padding:4px 0}
+.quiz-back:hover{color:var(--cyan)}
+.quiz-calc{font-size:13px;color:var(--gray);background:rgba(255,138,107,.08);border:1px solid rgba(255,138,107,.25);border-radius:10px;padding:10px 12px;margin-bottom:16px;display:none}
+.quiz-calc b{color:#ff9b80}
+@media(max-width:860px){.calc{grid-template-columns:1fr}.fn-sec{padding:70px 18px}.calc-in,.calc-out{padding:22px 18px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#services">К содержимому</a>
@@ -711,6 +771,23 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <div class="stat-item"><span class="stat-num" data-roll="1000+">1000+</span><div class="stat-label">Часов сэкономлено автоматизацией</div></div>
   <div class="stat-item"><span class="stat-num" data-roll="24/7">24/7</span><div class="stat-label">Работают ваши агенты</div></div>
 </div>
+
+<!-- PAIN -->
+<section id="pain" class="fn-sec">
+  <div class="fn-head reveal">
+    <div class="section-label">Знакомо?</div>
+    <h2 class="section-title">Узнаёте <span>себя?</span></h2>
+    <p class="section-sub">Если совпало хотя бы два пункта - бизнес уже недополучает деньги. Каждый день.</p>
+  </div>
+  <div class="pain-grid reveal">
+    <div class="pain-card"><i class="fa-solid fa-moon"></i><b>Заявка пришла ночью, ответили утром</b><span>К этому времени клиент уже договорился с тем, кто ответил сразу.</span></div>
+    <div class="pain-card"><i class="fa-solid fa-comments"></i><b>Менеджеры отвечают на одни и те же вопросы</b><span>Цена, сроки, наличие - по кругу, вместо того чтобы продавать.</span></div>
+    <div class="pain-card"><i class="fa-solid fa-shuffle"></i><b>Заявки теряются между чатами и CRM</b><span>Часть лидов просто не доходит до человека, который может их закрыть.</span></div>
+    <div class="pain-card"><i class="fa-solid fa-table"></i><b>Отчёты собирают руками</b><span>Каждую неделю часы на таблицы, которые могут собираться сами.</span></div>
+    <div class="pain-card"><i class="fa-solid fa-user-clock"></i><b>Клиент написал и о нём забыли</b><span>Никто не вернулся, не напомнил, не дожал - а он был тёплым.</span></div>
+  </div>
+  <div class="fn-cta reveal"><a href="#calc" class="btn-primary">Посчитать, сколько это стоит</a><p>Минута, без регистрации. Считаем по вашим цифрам.</p></div>
+</section>
 
 <!-- SERVICES -->
 <section id="services" style="background: var(--bg2);">
@@ -822,6 +899,36 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
+<!-- CALC -->
+<section id="calc" class="fn-sec" style="background:var(--bg2)">
+  <div class="fn-head reveal">
+    <div class="section-label">Калькулятор</div>
+    <h2 class="section-title">Сколько вы <span>теряете</span> в месяц</h2>
+    <p class="section-sub">Подвигайте ползунки под свой бизнес - и увидите цену бездействия.</p>
+  </div>
+  <div class="calc reveal">
+    <div class="calc-in">
+      <div class="calc-row"><label for="c-leads">Заявок и обращений в месяц <output id="o-leads"></output></label><input type="range" id="c-leads" min="10" max="1000" step="10" value="60"></div>
+      <div class="calc-row"><label for="c-check">Средний чек <output id="o-check"></output></label><input type="range" id="c-check" min="1000" max="300000" step="1000" value="15000"></div>
+      <div class="calc-row"><label for="c-lost">Какая доля заявок теряется <output id="o-lost"></output></label><input type="range" id="c-lost" min="5" max="60" step="5" value="20"></div>
+      <div class="calc-row"><label for="c-hours">Часов рутины в неделю <output id="o-hours"></output></label><input type="range" id="c-hours" min="0" max="80" step="1" value="15"></div>
+      <div class="calc-row"><label for="c-rate">Стоимость часа сотрудника <output id="o-rate"></output></label><input type="range" id="c-rate" min="200" max="3000" step="100" value="600"></div>
+    </div>
+    <div class="calc-out">
+      <div>
+        <div class="calc-lbl">Вы недополучаете</div>
+        <div class="calc-big"><span id="r-total">0</span> <small>₽ / мес</small></div>
+        <div class="calc-split">Упущенная выручка из-за потерянных заявок: <b id="r-rev">0</b> ₽<br>Стоимость ручной рутины: <b id="r-man">0</b> ₽</div>
+        <div class="calc-fix">Если вернуть хотя бы половину - это <em id="r-back">0 ₽</em> в месяц. Комплексная автоматизация от 50 000 ₽ <em id="r-pay"></em></div>
+      </div>
+      <div>
+        <button class="btn-primary" style="width:100%" onclick="calcToQuiz()">Получить точный расчёт под мой бизнес</button>
+        <div class="calc-note">Это оценка по введённым вами цифрам, а не гарантия результата. Точный расчёт делаем бесплатно на консультации.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CASES -->
 <section id="cases" style="background: var(--bg2);">
   <div class="container">
@@ -844,6 +951,24 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="case-result"><i class="fa-solid fa-arrow-trend-up"></i><span>Рост более чем в 6 раз за 8 месяцев после запуска ИИ-агента</span></div>
     </div>
   </div>
+</section>
+
+<!-- COMPANIES -->
+<section id="companies" class="fn-sec">
+  <div class="fn-head reveal">
+    <div class="section-label">Для компаний</div>
+    <h2 class="section-title">Крупная задача - <span>понятный процесс</span></h2>
+    <p class="section-sub">Когда на кону серьёзный бюджет, важны не обещания, а порядок. Вот как мы работаем.</p>
+  </div>
+  <div class="co-grid reveal">
+    <div class="co-card"><i class="fa-solid fa-file-signature"></i><b>Цена и срок - до старта</b><span>Письменно фиксируем задачу, точную стоимость и срок запуска до начала работ. Без скрытых платежей и доплат по ходу.</span></div>
+    <div class="co-card"><i class="fa-solid fa-flask"></i><b>Промежуточный результат</b><span>Тестируем на ваших реальных данных и показываем, что получается, пока проект не закончен.</span></div>
+    <div class="co-card"><i class="fa-solid fa-server"></i><b>Система - ваша</b><span>Разворачиваем на вашем сервере или нашем, передаём управление и обучаем команду.</span></div>
+    <div class="co-card"><i class="fa-solid fa-user-shield"></i><b>NDA по запросу</b><span>Подпишем соглашение о неразглашении до того, как вы расскажете о процессах и покажете данные.</span></div>
+    <div class="co-card"><i class="fa-solid fa-list-check"></i><b>Оплата по этапам</b><span>Крупные проекты делим на этапы: старт и сдача. Вы платите по мере результата, а не всё сразу.</span></div>
+    <div class="co-card"><i class="fa-solid fa-life-ring"></i><b>Остаёмся на связи</b><span>Критические ошибки после сдачи исправляем бесплатно.</span></div>
+  </div>
+  <div class="co-bar reveal"><span>Задача на крупную сумму? Разберём её лично и предложим решение под ваш бюджет.</span><a href="#contact">Обсудить проект <i class="fa-solid fa-arrow-right"></i></a></div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -986,6 +1111,14 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
+<!-- SUBSCRIBE -->
+<section id="checklist" class="fn-sec" style="padding-top:40px;padding-bottom:40px">
+  <div class="co-bar reveal" style="margin:0 auto;max-width:900px;border-style:solid;background:linear-gradient(160deg,rgba(15,25,35,.9),rgba(13,17,23,.9))">
+    <span><b>Пока не готовы оставить заявку?</b> Заберите бесплатный чек-лист «7 мест, где бизнес теряет заявки» в нашем Телеграм-канале.</span>
+    <a href="https://t.me/raptorai_official" target="_blank" rel="noopener" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i> Забрать чек-лист</a>
+  </div>
+</section>
+
 <!-- CONTACT FORM -->
 <section id="contact" class="form-section">
   <div class="container">
@@ -996,7 +1129,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <p>Напишите нам — разберём вашу задачу, объясним что реально автоматизировать и предложим решение под ваш бюджет. Или просто возьмите консультацию.</p>
         <div class="consult-badge"><i class="fa-solid fa-headset"></i> Консультация</div>
                <div class="form-perks">
-          <div class="form-perk"><i class="fa-solid fa-check"></i> Ответим в ближайшее время</div>
+          <div class="form-perk"><i class="fa-solid fa-check"></i> Свяжемся в течение часа в рабочее время</div>
           <div class="form-perk"><i class="fa-solid fa-check"></i> Расскажем точную стоимость</div>
           <div class="form-perk"><i class="fa-solid fa-check"></i> Без навязчивых продаж</div>
           <div class="form-perk"><i class="fa-solid fa-check"></i> Работаем по всей России и СНГ</div>
@@ -1004,13 +1137,19 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="after-title">Что будет после заявки</div>
         <div class="after-steps">
           <div class="after-step"><b>1</b><span>Вы оставляете заявку - это занимает минуту</span></div>
-          <div class="after-step"><b>2</b><span>Мы отвечаем в течение рабочего дня и уточняем задачу</span></div>
+          <div class="after-step"><b>2</b><span>Мы связываемся в течение часа в рабочее время и уточняем задачу</span></div>
           <div class="after-step"><b>3</b><span>Созваниваемся, называем точную цену и срок запуска</span></div>
         </div>
         <div class="contact-links"><a href="https://t.me/raptorai_official" class="tg-link" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Наш Telegram-канал об автоматизации</a><a href="mailto:raptorai.official@gmail.com" class="tg-link"><i class="fa-solid fa-envelope"></i> raptorai.official@gmail.com</a></div>
       </div>
       <div class="contact-form reveal">
         <div id="form-body">
+          <div class="quiz-top"><div class="quiz-progress"><i id="quiz-bar"></i></div><div class="quiz-count"><span id="quiz-count">Шаг 1 из 4</span><span>~1 минута</span></div></div>
+          <div class="quiz-calc" id="quiz-calc"></div>
+          <div class="quiz-step active" data-step="1"><div class="quiz-q">Чем занимается ваш бизнес?</div><div class="quiz-opts" data-key="biz"><button type="button" data-v="Интернет-магазин / онлайн-продажи">Интернет-магазин / онлайн-продажи</button><button type="button" data-v="Услуги и сервис">Услуги и сервис</button><button type="button" data-v="Производство, опт, B2B">Производство, опт, B2B</button><button type="button" data-v="Агентство, школа, консалтинг">Агентство, школа, консалтинг</button><button type="button" data-v="Другое">Другое</button></div></div>
+          <div class="quiz-step" data-step="2"><div class="quiz-q">Что хотите улучшить в первую очередь?</div><div class="quiz-opts" data-key="goal"><button type="button" data-v="Быстрее отвечать клиентам, не терять заявки">Быстрее отвечать клиентам, не терять заявки</button><button type="button" data-v="Убрать рутину и ручные отчёты">Убрать рутину и ручные отчёты</button><button type="button" data-v="ИИ-агент для продаж и квалификации лидов">ИИ-агент для продаж и квалификации лидов</button><button type="button" data-v="Комплексно: всё сразу">Комплексно: всё сразу</button><button type="button" data-v="Пока не знаю, нужен совет">Пока не знаю, нужен совет</button></div><button type="button" class="quiz-back" data-back>← Назад</button></div>
+          <div class="quiz-step" data-step="3"><div class="quiz-q">На какой бюджет вы ориентируетесь?</div><div class="quiz-opts" data-key="budget"><button type="button" data-v="До 20 000 ₽">До 20 000 ₽</button><button type="button" data-v="20 000 – 50 000 ₽">20 000 – 50 000 ₽</button><button type="button" data-v="50 000 – 150 000 ₽">50 000 – 150 000 ₽</button><button type="button" data-v="От 150 000 ₽">От 150 000 ₽</button><button type="button" data-v="Нужен расчёт, ориентира нет">Нужен расчёт, ориентира нет</button></div><button type="button" class="quiz-back" data-back>← Назад</button></div>
+          <div class="quiz-step" data-step="4"><div class="quiz-q">Куда отправить расчёт?</div>
           <div class="form-group">
             <label>Имя *</label>
             <input type="text" id="f-name" placeholder="Иван">
@@ -1032,12 +1171,14 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
             <input type="checkbox" id="f-consent" onchange="toggleSubmitState()">
             <span>Я даю <a href="/consent.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">согласие на обработку персональных данных</a> и ознакомлен с <a href="/privacy.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Политикой обработки персональных данных</a></span>
           </label>
-          <button class="btn-primary form-submit" id="form-submit-btn" onclick="submitForm()" disabled>Отправить заявку</button>
+          <button class="btn-primary form-submit" id="form-submit-btn" onclick="submitForm()" disabled>Получить расчёт и консультацию</button>
+        </div>
+        <button type="button" class="quiz-back" data-back>← Назад</button></div>
         </div>
         <div class="form-success" id="form-success">
           <i class="fa-solid fa-circle-check"></i>
           <h3>Заявка отправлена!</h3>
-          <p>Мы получили ваше сообщение и свяжемся с вами в ближайшее время.</p>
+          <p>Мы получили заявку и свяжемся с вами в течение часа в рабочее время.</p>
         </div>
       </div>
     </div>
@@ -1137,7 +1278,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 })();
 </script>
 
-<script src="/js/main.js?v=20261102" defer></script>
+<script src="/js/main.js?v=20261102b" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
 </div>
 <!-- CHAT WIDGET -->
