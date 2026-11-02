@@ -61,7 +61,7 @@ async function submitForm() {
         'Content-Type': 'application/json',
         'X-Webhook-Secret': CONTACT_FORM_WEBHOOK_SECRET
       },
-      body: JSON.stringify({ name, email, phone, telegram, contact, task })
+      body: JSON.stringify({ name, email, phone, telegram, contact, task, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
     document.getElementById('form-body').style.display = 'none';
