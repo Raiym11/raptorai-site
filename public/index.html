@@ -1004,8 +1004,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="cw-txt">
           <div class="cw-kind">ИИ-агент · интернет-магазин оборудования</div>
           <h3>Агент знает весь каталог и подбирает товар сам</h3>
-          <p>Покупатель пишет своими словами, какая задача, а не ищет по фильтрам. Агент держит в памяти 13&#8201;379 товаров в 237 категориях, подбирает подходящие позиции, сверяет характеристики и доводит до заявки. Сложный вопрос передаёт менеджеру вместе с историей переписки.</p>
-          <div class="cw-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Ответ за 10 секунд в любое время, включая ночь и выходные</span></div>
+          <p>Покупатель пишет своими словами, какая задача, а не ищет по фильтрам. Агент держит в памяти 13&#8201;379 товаров в 237 категориях, подбирает позиции, сверяет характеристики и доводит до заявки. Отвечает за 10 секунд днём и ночью, а сложный вопрос передаёт менеджеру вместе с перепиской.</p>
+          <div class="cw-money"><b>30&#8201;000&nbsp;₽</b><span>экономии в месяц: отдельного консультанта в штат нанимать не пришлось</span></div>
           <div class="cw-stack"><i>n8n</i><i>Pinecone</i><i>RAG</i><i>виджет на сайт</i></div>
         </div>
         <div class="cw-vis" aria-hidden="true">
@@ -1700,6 +1700,11 @@ html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-pan
 @media(max-width:900px){.cw-wide{grid-template-columns:1fr}.cw-vis{padding:4px 24px 26px;min-height:0}.cw-vis::before{inset:0 0 10px 0}.cw-row2{grid-template-columns:1fr}}
 @media(max-width:600px){.cw-txt{padding:24px 20px 22px}.cw-row2 .cw-txt{padding:22px 20px 20px}.cw-mini{margin:0 20px 20px}}
 @media (prefers-reduced-motion:reduce){.cw-dots span{animation:none}}
+
+.cw-money{margin-top:auto;display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(140,123,255,.07));border:1px solid rgba(0,212,255,.26)}
+.cw-money b{flex:0 0 auto;white-space:nowrap;font-weight:900;font-size:clamp(28px,3.4vw,38px);line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,#00D4FF,#8C7BFF,#FF7AE0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cw-money span{font-size:13.4px;line-height:1.5;color:rgba(240,244,248,.82);font-weight:500}
+@media(max-width:600px){.cw-money{gap:12px;padding:14px 15px}}
 </style>
 <script src="/js/chat.js" defer></script>
 
