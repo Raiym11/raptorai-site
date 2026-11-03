@@ -997,6 +997,44 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="case-chart-wrap"><canvas id="caseFx" role="img" aria-label="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: умеренный рост 90-120 клиентов до внедрения ИИ-агента в январе 2026, затем ускоряющийся рост до 753"></canvas></div>
       <div class="case-result"><i class="fa-solid fa-arrow-trend-up"></i><span>Рост более чем в 6 раз за 8 месяцев после запуска ИИ-агента</span></div>
     </div>
+
+    <div class="cs-grid">
+
+      <div class="cs-item reveal">
+        <div class="cs-top">
+          <span class="cs-ic"><i class="fa-solid fa-comments"></i></span>
+          <span class="cs-kind">ИИ-агент · интернет-магазин</span>
+        </div>
+        <h3>ИИ-консультант, который знает весь каталог</h3>
+        <p>Интернет-магазин промышленного оборудования. Агент на сайте отвечает покупателю по реальному каталогу: подбирает позицию, сверяет характеристики и доводит до заявки, вместо того чтобы отправлять человека листать категории.</p>
+        <div class="cs-num"><b>13&#8201;379</b><span>товаров в 237 категориях, по которым агент отвечает</span></div>
+        <div class="cs-stack"><i>n8n</i><i>Pinecone</i><i>RAG</i><i>виджет на сайт</i></div>
+      </div>
+
+      <div class="cs-item reveal">
+        <div class="cs-top">
+          <span class="cs-ic"><i class="fa-solid fa-file-invoice"></i></span>
+          <span class="cs-kind">Автоматизация · опт</span>
+        </div>
+        <h3>Накладные поставщиков в 1С без ручного ввода</h3>
+        <p>Оптовая торговля крепежом. Система читает накладную в PDF, Excel или Word и сопоставляет позиции с номенклатурой 1С: сначала по точному совпадению, затем через ии, а спорные строки подтверждает оператор одним нажатием.</p>
+        <div class="cs-num"><b>50&#8201;000</b><span>позиций в номенклатуре клиента</span></div>
+        <div class="cs-stack"><i>n8n</i><i>PostgreSQL</i><i>pgvector</i><i>GPT</i></div>
+      </div>
+
+      <div class="cs-item reveal">
+        <div class="cs-top">
+          <span class="cs-ic"><i class="fa-brands fa-telegram"></i></span>
+          <span class="cs-kind">Телеграм-бот · контент</span>
+        </div>
+        <h3>Бот, который делает обложки за 10 секунд</h3>
+        <p>Производство контента для соцсетей. Раньше обложки для роликов собирали вручную в редакторе. Теперь команда присылает фото и текст в Телеграм, выбирает размер и положение, и бот отдаёт готовую картинку в фирменном стиле.</p>
+        <div class="cs-num"><b>10 сек</b><span>вместо ручной вёрстки каждой обложки</span></div>
+        <div class="cs-stack"><i>Python</i><i>Telegram Bot API</i><i>Pillow</i></div>
+      </div>
+
+    </div>
+
   </div>
 </section>
 
@@ -1573,6 +1611,24 @@ html.lite #chat-panel,html.fx-off #chat-panel{-webkit-backdrop-filter:blur(12px)
 html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-panel::before,html.fx-off #chat-panel::after,html.lite .chat-avatar,html.fx-off .chat-avatar{animation:none}
 @media(max-width:480px){html #chat-panel{width:calc(100vw - 20px);right:10px;height:calc(100dvh - 120px);border-radius:22px}}
 @media(prefers-reduced-motion:reduce){html #chat-panel,html #chat-panel::before,html #chat-panel::after,html .chat-msg,html .chat-avatar,html .chat-typing,html .chat-typing span{animation:none !important}}
+
+/* --- case grid v9 --- */
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px}
+.cs-item{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:26px 24px 24px;display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,transform .3s}
+.cs-item::before{content:"";position:absolute;inset:0;border-radius:18px;background:radial-gradient(420px 170px at 100% 0%,rgba(0,212,255,.14),transparent 65%);opacity:0;transition:opacity .35s;pointer-events:none}
+.cs-item:hover{border-color:rgba(0,212,255,.42);transform:translateY(-4px)}
+.cs-item:hover::before{opacity:1}
+.cs-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.cs-ic{flex:0 0 38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(140deg,rgba(0,212,255,.2),rgba(140,123,255,.16));border:1px solid rgba(0,212,255,.3);color:#00D4FF;font-size:15px}
+.cs-kind{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(240,244,248,.56)}
+.cs-item h3{font-size:16.5px;font-weight:700;line-height:1.35;margin-bottom:9px}
+.cs-item p{font-size:13.6px;line-height:1.68;color:var(--gray);margin-bottom:18px}
+.cs-num{margin-top:auto;display:flex;align-items:baseline;gap:10px;flex-wrap:nowrap;padding-top:15px;border-top:1px solid rgba(255,255,255,.1)}
+.cs-num b{flex:0 0 auto;white-space:nowrap;font-weight:900;font-size:26px;line-height:1;letter-spacing:-.035em;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,#00D4FF,#8C7BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cs-num span{font-size:12.5px;color:rgba(240,244,248,.68);font-weight:500}
+.cs-stack{margin-top:13px;display:flex;flex-wrap:wrap;gap:6px}
+.cs-stack i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:5px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);color:rgba(240,244,248,.6)}
+@media(max-width:600px){.cs-item{padding:22px 20px}}
 </style>
 <script src="/js/chat.js" defer></script>
 
