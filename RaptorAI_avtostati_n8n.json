@@ -1,0 +1,228 @@
+{
+ "name": "RaptorAI — автостатьи в блог",
+ "nodes": [
+  {
+   "id": "Пн и чт в 10:00",
+   "name": "Пн и чт в 10:00",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    0
+   ],
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "0 10 * * 1,4"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "Прочитать темы",
+   "name": "Прочитать темы",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    220,
+    0
+   ],
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "value": "ВСТАВЬТЕ_ID_ТАБЛИЦЫ",
+     "mode": "id"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "Статьи",
+     "mode": "name"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "Выбрать тему",
+   "name": "Выбрать тему",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    440,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// Берёт первую тему со статусом \"новая\"\nconst rows = $input.all().map(i => i.json);\nconst row = rows.find(r => String(r['статус']||'').trim().toLowerCase() === 'новая');\nif (!row) return [];\nreturn [{ json: row }];"
+   }
+  },
+  {
+   "id": "Написать статью (Claude)",
+   "name": "Написать статью (Claude)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    660,
+    0
+   ],
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.proxyapi.ru/anthropic/v1/messages",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "ВСТАВЬТЕ_PROXYAPI_KEY"
+      },
+      {
+       "name": "anthropic-version",
+       "value": "2023-06-01"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'claude-sonnet-4-5', max_tokens: 8000, system: \"Ты редактор блога студии RaptorAI (raptorai.ru): автоматизация бизнеса с ии, ии-агенты, телеграм-боты, n8n, amoCRM, интеграции. Пишешь статьи для владельцев и руководителей малого и среднего бизнеса в России.\\n\\nТОН: пиши живо, как практик, который сам делает такие проекты, от лица «мы». Простые слова, прямые советы, короткие абзацы, можно с лёгкой иронией, без канцелярита и учебниковых определений. Давай конкретику: что именно проверить, на что смотреть, как посчитать. Не выдумывай кейсы и цифры. ПРАВИЛА:\\n- Русский язык, живо и по делу, без воды и штампов (\\\"в современном мире\\\", \\\"не секрет что\\\").\\n- Короткие тире (-), не длинные. Бренды по-русски: Телеграм, Инстаграм. Пиши \\\"ии\\\", а не \\\"AI\\\".\\n- Только то, что точно верно. Никаких выдуманных кейсов, клиентов, цифр, цен, отзывов и исследований. Если нужна цифра, говори словами или давай формулу расчёта для читателя. Единственный допустимый факт о нас: \\\"100+ проектов\\\".\\n- Не упоминай Kwork и фриланс-биржи. Цену не называй цифрой, говори, что называем точную цену и срок до начала работы.\\n- Структура: короткое вступление с ответом на запрос в первых 2-3 предложениях, 4-6 разделов с <h2>, где уместно список <ul>, в конце раздел \\\"Что делать дальше\\\" и 3-4 вопроса с ответами (<h2>Частые вопросы</h2> и <p><strong>Вопрос?</strong> Ответ.</p>).\\n- Объём 1200-1800 слов. Заголовок содержит основной запрос, не длиннее 70 символов.\\n- В тексте 1-2 раза ненавязчиво упомяни RaptorAI как исполнителя и добавь 2-3 внутренние ссылки в виде <a href=\\\"...\\\">: /ai-agent-dlya-biznesa.html, /telegram-bot-s-ii.html, /avtomatizaciya-n8n.html, /blog.html.\\n- Разрешённый HTML в body: p, h2, ul, li, strong, a. Больше ничего.\\n\\nВЕРНИ ТОЛЬКО JSON без пояснений и без markdown-ограждений: {\\\"title\\\":\\\"...\\\",\\\"desc\\\":\\\"мета-описание 140-160 символов\\\",\\\"body\\\":\\\"<p>...</p>...\\\",\\\"card\\\":\\\"описание для карточки блога 100-130 символов\\\"}\", messages: [{ role: 'user', content: 'Тема статьи (основной поисковый запрос): ' + $json['запрос'] + '. Тег рубрики: ' + $json['тег'] + '.' }] }) }}",
+    "options": {
+     "timeout": 180000
+    }
+   }
+  },
+  {
+   "id": "Опубликовать в GitHub",
+   "name": "Опубликовать в GitHub",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    880,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// Собирает страницу статьи и коммитит в GitHub: статья + карточка в blog.html + sitemap.xml\nconst GH_TOKEN = 'ВСТАВЬТЕ_GITHUB_TOKEN';      // fine-grained, Contents: read/write на репозиторий\nconst REPO = 'Raiym11/raptorai-site';\nconst BRANCH = 'master';\nconst PUB_DIR = 'public/';                      // где лежат html сайта\nconst TPL_PATH = 'tools/blog_tpl.html';         // шаблон статьи (вне public)\n\nconst row = $('Выбрать тему').first().json;\nconst resp = $input.first().json;\nlet txt = (resp.content && resp.content[0] && resp.content[0].text) || '';\ntxt = txt.replace(/^```(?:json)?/,'').replace(/```$/,'').trim();\nconst art = JSON.parse(txt);\n\nconst gh = async (method, path, body) => this.helpers.httpRequest({\n  method, url: `https://api.github.com/repos/${REPO}/contents/${path}` + (method==='GET' ? `?ref=${BRANCH}` : ''),\n  headers: { Authorization: 'Bearer ' + GH_TOKEN, Accept: 'application/vnd.github+json', 'User-Agent': 'raptorai-n8n' },\n  body, json: true });\nconst getFile = async p => { const r = await gh('GET', p); return { sha: r.sha, text: Buffer.from(r.content, 'base64').toString('utf8') }; };\nconst putFile = (p, text, msg, sha) => gh('PUT', p, { message: msg, branch: BRANCH, content: Buffer.from(text,'utf8').toString('base64'), ...(sha?{sha}:{}) });\n\n// дата по Москве\nconst d = new Date(Date.now() + 3*3600*1000);\nconst iso = d.toISOString().slice(0,10);\nconst dpub = iso.split('-').reverse().join('.');\nconst words = art.body.replace(/<[^>]+>/g,' ').split(/\\s+/).filter(Boolean).length;\nconst mins = Math.max(3, Math.round(words/180)) + ' мин';\nconst fn = 'blog-' + row.slug + '.html';\nconst esc = s => s.replace(/&/g,'&amp;').replace(/\"/g,'&quot;').replace(/</g,'&lt;');\n\nlet html = (await getFile(TPL_PATH)).text;\nconst ld1 = JSON.stringify({\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",headline:art.title,description:art.desc,datePublished:iso,dateModified:iso,image:\"https://www.raptorai.ru/assets/logo.png\",author:{\"@type\":\"Organization\",name:\"RaptorAI\"},publisher:{\"@type\":\"Organization\",name:\"RaptorAI\"},mainEntityOfPage:`https://www.raptorai.ru/${fn}`});\nconst ld2 = JSON.stringify({\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",itemListElement:[{\"@type\":\"ListItem\",position:1,name:\"Главная\",item:\"https://www.raptorai.ru/\"},{\"@type\":\"ListItem\",position:2,name:\"Блог\",item:\"https://www.raptorai.ru/blog.html\"},{\"@type\":\"ListItem\",position:3,name:art.title,item:`https://www.raptorai.ru/${fn}`}]});\nconst rep = {TITLE:esc(art.title),DESC:esc(art.desc),PUB:iso,FN:fn,LD1:ld1,LD2:ld2,DPUB:dpub,MINS:mins,ICON:row['иконка'],TAG:row['тег'],BODY:art.body};\nfor (const k in rep) html = html.split('{{'+k+'}}').join(rep[k]);\nawait putFile(PUB_DIR+fn, html, 'blog: '+art.title);\n\n// карточка в blog.html\nconst bl = await getFile(PUB_DIR+'blog.html');\nconst card = `    <a class=\"post-card\" href=\"/${fn}\"><div class=\"article-tag\"><i class=\"fa-solid ${row['иконка']}\" style=\"font-size:10px\"></i> ${row['тег']}</div><h2>${esc(art.title)}</h2><p>${esc(art.card)}</p><div class=\"article-meta\"><span><i class=\"fa-regular fa-calendar\" style=\"margin-right:6px\"></i>${dpub}</span><span><i class=\"fa-regular fa-clock\" style=\"margin-right:6px\"></i>${mins}</span></div></a>\\n`;\nconst marker = '<div class=\"post-list\">';\nif (!bl.text.includes(marker)) throw new Error('В blog.html не найден post-list');\nawait putFile(PUB_DIR+'blog.html', bl.text.replace(marker, marker+'\\n'+card), 'blog: карточка', bl.sha);\n\n// sitemap\nconst sm = await getFile(PUB_DIR+'sitemap.xml');\nconst url = `  <url><loc>https://www.raptorai.ru/${fn}</loc><lastmod>${iso}</lastmod></url>\\n`;\nawait putFile(PUB_DIR+'sitemap.xml', sm.text.replace('</urlset>', url+'</urlset>'), 'sitemap', sm.sha);\n\nreturn [{ json: { id: row.id, title: art.title, url: `https://www.raptorai.ru/${fn}`, words } }];"
+   }
+  },
+  {
+   "id": "Отметить опубликовано",
+   "name": "Отметить опубликовано",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    1100,
+    0
+   ],
+   "parameters": {
+    "operation": "update",
+    "documentId": {
+     "__rl": true,
+     "value": "ВСТАВЬТЕ_ID_ТАБЛИЦЫ",
+     "mode": "id"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "Статьи",
+     "mode": "name"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.id }}",
+      "статус": "опубликована"
+     },
+     "matchingColumns": [
+      "id"
+     ]
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "Уведомить меня",
+   "name": "Уведомить меня",
+   "type": "n8n-nodes-base.telegram",
+   "typeVersion": 1.2,
+   "position": [
+    1320,
+    0
+   ],
+   "parameters": {
+    "chatId": "1459995217",
+    "text": "=Статья вышла: {{ $('Опубликовать в GitHub').item.json.title }}\n{{ $('Опубликовать в GitHub').item.json.url }}\n(~{{ $('Опубликовать в GitHub').item.json.words }} слов, сайт обновится после деплоя)",
+    "additionalFields": {}
+   }
+  }
+ ],
+ "connections": {
+  "Пн и чт в 10:00": {
+   "main": [
+    [
+     {
+      "node": "Прочитать темы",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Прочитать темы": {
+   "main": [
+    [
+     {
+      "node": "Выбрать тему",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Выбрать тему": {
+   "main": [
+    [
+     {
+      "node": "Написать статью (Claude)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Написать статью (Claude)": {
+   "main": [
+    [
+     {
+      "node": "Опубликовать в GitHub",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Опубликовать в GitHub": {
+   "main": [
+    [
+     {
+      "node": "Отметить опубликовано",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Отметить опубликовано": {
+   "main": [
+    [
+     {
+      "node": "Уведомить меня",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "timezone": "Europe/Moscow"
+ }
+}
