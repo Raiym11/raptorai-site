@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru; frame-src 'self' https://mc.yandex.ru https://mc.yandex.md; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Что такое RAG и зачем он бизнесу: как ии отвечает по вашим документам, не выдумывая. Простое объяснение без терминов, пример, ограничения и порядок внедрения.">
+<title>RAG простыми словами: как ии отвечает по вашим документам — RaptorAI</title>
+<link rel="canonical" href="https://www.raptorai.ru/blog-rag-chto-eto-prostymi-slovami.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RAG простыми словами: как ии отвечает по вашим документам">
+<meta property="og:description" content="Что такое RAG и зачем он бизнесу: как ии отвечает по вашим документам, не выдумывая. Простое объяснение без терминов, пример, ограничения и порядок внедрения.">
+<meta property="og:url" content="https://www.raptorai.ru/blog-rag-chto-eto-prostymi-slovami.html">
+<meta property="og:site_name" content="RaptorAI">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://www.raptorai.ru/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-12-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.raptorai.ru/assets/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "RAG простыми словами: как ии отвечает по вашим документам", "description": "Что такое RAG и зачем он бизнесу: как ии отвечает по вашим документам, не выдумывая. Простое объяснение без терминов, пример, ограничения и порядок внедрения.", "datePublished": "2026-12-08", "dateModified": "2026-12-08", "image": "https://www.raptorai.ru/assets/og-image.png", "author": {"@type": "Organization", "name": "RaptorAI"}, "publisher": {"@type": "Organization", "name": "RaptorAI"}, "mainEntityOfPage": "https://www.raptorai.ru/blog-rag-chto-eto-prostymi-slovami.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.raptorai.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://www.raptorai.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "RAG простыми словами: как ии отвечает по вашим документам", "item": "https://www.raptorai.ru/blog-rag-chto-eto-prostymi-slovami.html"}]}</script>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080B0F; --bg2: #0D1117; --bg3: #111820;
+  --cyan: #00D4FF; --cyan-dim: #00D4FF18; --cyan-mid: #00D4FF44;
+  --white: #F0F4F8; --gray: #8899AA; --border: #1E2A36; --card: #0F1923;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(8,11,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-logo img { height: 48px; display: block; }
+.nav-back { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.nav-back:hover { color: var(--cyan); }
+main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
+.article-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--cyan-dim); border: 1px solid var(--cyan-mid); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+.article-meta { display: flex; gap: 16px; font-size: 13px; color: var(--gray); margin-bottom: 40px; }
+.article-body p { font-size: 16px; color: var(--gray); line-height: 1.9; margin-bottom: 20px; }
+.article-body strong { color: var(--white); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan-mid); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 48px 24px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+footer img { height: 44px; opacity: 0.85; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--gray); font-size: 13px; text-decoration: none; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { color: var(--gray); font-size: 13px; }
+@media (max-width: 768px) { nav { padding: 0 16px; } main { padding: 120px 20px 70px; } .footer-inner { flex-direction: column; text-align: center; } }
+.tg-cta { margin: 40px 0 0; padding: 18px 22px; border: 1px solid var(--border); border-radius: 10px; color: var(--gray); font-size: 15px; }
+.tg-cta i { color: var(--cyan); margin-right: 6px; }
+.tg-cta a { color: var(--cyan); }
+.post-cta { margin: 36px 0 0; padding: 26px 26px 24px; border-radius: 18px; border: 1px solid rgba(140,123,255,.4); background: linear-gradient(135deg, rgba(0,212,255,.1), rgba(140,123,255,.14)); }
+.post-cta b { display: block; font-size: 20px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+.post-cta span { display: block; color: var(--gray); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+.post-cta a { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #00D4FF, #8C7BFF); color: #04121c; font-weight: 800; font-size: 15px; padding: 13px 22px; border-radius: 12px; text-decoration: none; }
+.article-body h2 { font-size: 24px; font-weight: 800; color: var(--white); letter-spacing: -.01em; line-height: 1.3; margin: 40px 0 16px; }
+.article-body ul, .article-body ol { margin: 0 0 20px 22px; color: var(--gray); font-size: 16px; line-height: 1.9; }
+.article-body li { margin-bottom: 6px; }
+.article-body a { color: var(--cyan); }
+.article-body figure { margin: 32px 0; }
+.article-body figure img, .article-body figure svg { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); background: var(--card); }
+.article-body figcaption { color: var(--gray); font-size: 13px; margin-top: 10px; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="/assets/logo.png" alt="RaptorAI"></a>
+  <a href="/#blog" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Все статьи</a>
+</nav>
+
+<main>
+  <div class="article-tag"><i class="fa-solid fa-brain" style="font-size:10px"></i> Гайд</div>
+  <h1>RAG простыми словами: как ии отвечает по вашим документам</h1>
+  <div class="article-meta">
+    <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>08.12.2026</span>
+    <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>5 мин</span>
+  </div>
+  <div class="article-body">
+<p>Если вы читали про ии-агентов для бизнеса, вы наверняка натыкались на странное слово RAG. Звучит как что-то сложное, но идея за ним простая, и понимать её полезно любому владельцу бизнеса: от этого зависит, будет ли ваш ии-помощник отвечать по делу или фантазировать.</p>
+<p>Объясним без терминов: что это такое, зачем нужно, как работает на примере и где у этого подхода слабые места.</p>
+<figure><svg viewBox="0 0 900 330" role="img" aria-label="Схема работы RAG: документы, нарезка, база, поиск, ответ" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif"><rect width="900" height="330" rx="14" fill="#0F1923"/><text x="450" y="46" text-anchor="middle" fill="#F0F4F8" font-size="22" font-weight="700">Как работает RAG</text><rect x="30" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="108" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">1</text><text x="108" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Документы</text><text x="108" y="190" text-anchor="middle" fill="#8899AA" font-size="13">прайс, каталог,</text><text x="108" y="210" text-anchor="middle" fill="#8899AA" font-size="13">инструкции</text><rect x="201" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="279" y="126" text-anchor="middle" fill="#8C7BFF" font-size="30" font-weight="800">2</text><text x="279" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Нарезка</text><text x="279" y="190" text-anchor="middle" fill="#8899AA" font-size="13">на небольшие</text><text x="279" y="210" text-anchor="middle" fill="#8899AA" font-size="13">смысловые части</text><rect x="372" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="450" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">3</text><text x="450" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">База</text><text x="450" y="190" text-anchor="middle" fill="#8899AA" font-size="13">хранится поиск</text><text x="450" y="210" text-anchor="middle" fill="#8899AA" font-size="13">по смыслу</text><rect x="542" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="621" y="126" text-anchor="middle" fill="#8C7BFF" font-size="30" font-weight="800">4</text><text x="621" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Вопрос</text><text x="621" y="190" text-anchor="middle" fill="#8899AA" font-size="13">находятся самые</text><text x="621" y="210" text-anchor="middle" fill="#8899AA" font-size="13">близкие фрагменты</text><rect x="713" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="792" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">5</text><text x="792" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Ответ</text><text x="792" y="190" text-anchor="middle" fill="#8899AA" font-size="13">модель отвечает</text><text x="792" y="210" text-anchor="middle" fill="#8899AA" font-size="13">только по ним</text></svg><figcaption>Сначала поиск по вашим данным, потом ответ</figcaption></figure>
+<h2>Проблема, которую решает RAG</h2>
+<p>Языковые модели вроде тех, что стоят за популярными чат-ботами, знают очень много общих вещей. Но они ничего не знают о вашей компании: ни о вашем прайсе, ни об условиях договора, ни о ваших инструкциях. Если спросить такую модель о вашей гарантии, она может дать правдоподобный ответ, который окажется неверным. Специалисты называют это галлюцинациями: модель не врёт намеренно, она просто достраивает то, чего не знает, так, как это звучало бы убедительно.</p>
+<p>Для бизнеса это опасно. Клиент получает неверную цену или условия, потом приходит с претензией и ссылкой на переписку. Поэтому просто «подключить ии к сайту» мало: нужно, чтобы он отвечал по вашим данным.</p>
+<h2>Идея RAG в одном абзаце</h2>
+<p>RAG расшифровывается как «генерация, дополненная поиском». Смысл такой: прежде чем ответить, система сначала ищет в ваших документах нужные фрагменты, а потом просит языковую модель составить ответ только на основе найденного. Представьте сотрудника, которому задали вопрос по условиям. Хороший сотрудник не отвечает по памяти: он открывает регламент, находит нужный пункт и пересказывает его клиенту. RAG делает то же самое, только мгновенно.</p>
+<h2>Как это работает по шагам</h2>
+<ol>
+<li><strong>Подготовка материалов.</strong> Берутся ваши документы: прайс, каталог, инструкции, статьи, переписки с типовыми ответами.</li>
+<li><strong>Нарезка.</strong> Длинные тексты делятся на небольшие смысловые части, чтобы можно было находить именно нужное.</li>
+<li><strong>Превращение в «смысловой отпечаток».</strong> Каждый фрагмент преобразуется в набор чисел, который отражает его смысл. Похожие по смыслу тексты получают похожие отпечатки.</li>
+<li><strong>Хранение.</strong> Отпечатки складываются в специальную базу, которую называют векторной.</li>
+<li><strong>Поиск при вопросе.</strong> Вопрос клиента тоже превращается в отпечаток, и система находит в базе самые близкие по смыслу фрагменты.</li>
+<li><strong>Ответ.</strong> Найденные фрагменты передаются языковой модели с инструкцией: ответь, опираясь только на них. Если ответа нет, скажи об этом.</li>
+</ol>
+<p>Ключевая идея: поиск идёт по смыслу, а не по словам. Если клиент спрашивает «Можно ли вернуть товар после использования?», система найдёт раздел про возврат, даже если в нём слово «использование» не встречается.</p>
+<h2>Пример</h2>
+<p>Представим магазин с большим каталогом. Покупатель спрашивает: «Подойдёт ли эта прокладка к моему двигателю?» Без RAG модель может ответить наугад. С RAG система находит карточку товара и таблицу совместимости, а модель отвечает по ним: «Эта прокладка подходит к таким-то моделям, ваша в списке». Если модели в списке нет, агент так и скажет и предложит связаться с менеджером. Мы разбирали такой проект на каталоге в 13 000 позиций: <a href="/blog-rag-agent.html">кейс про RAG-агента для магазина</a>.</p>
+<h2>Для каких задач RAG подходит</h2>
+<ul>
+<li>Консультант на сайте, который отвечает по материалам компании (<a href="/blog-ii-konsultant-na-sajt.html">подробнее</a>).</li>
+<li>Внутренний помощник для сотрудников: найти пункт регламента, инструкцию, условия.</li>
+<li>Поддержка клиентов по большой базе знаний.</li>
+<li>Подбор товаров и услуг по каталогу.</li>
+<li>Поиск по договорам и документам.</li>
+</ul>
+<h2>Слабые места</h2>
+<p>RAG не волшебная палочка, и у него есть ограничения. Если в ваших документах путаница или противоречия, система будет находить противоречивые фрагменты и отвечать так же. Если нужной информации нет, лучшая реакция честное «не знаю», но плохо настроенная система может попытаться ответить всё равно. Если документы сильно устарели, ответы устареют вместе с ними. Если вопрос требует рассуждений на стыке многих документов, простая схема может не справиться, и нужны более продвинутые приёмы.</p>
+<p>Всё это решаемо, но требует работы: чистки данных, настройки поиска, проверки на реальных вопросах. Поэтому мы никогда не обещаем, что RAG «просто заработает». Он работает, когда за ним следят.</p>
+<h2>Что нужно подготовить</h2>
+<ul>
+<li><strong>Собрать документы в одном месте.</strong> Лучше в текстовом виде, чем в отсканированных картинках.</li>
+<li><strong>Убрать дубли и устаревшее.</strong> Одна актуальная версия лучше трёх разных.</li>
+<li><strong>Назначить владельца.</strong> Кто-то должен обновлять материалы, когда меняются цены и условия.</li>
+<li><strong>Подготовить примеры вопросов.</strong> Они нужны, чтобы проверить качество перед запуском.</li>
+<li><strong>Решить, что ни при каких условиях нельзя обещать.</strong> Эти границы закладываются в инструкцию.</li>
+</ul>
+<h2>Как проверить качество</h2>
+<p>Составьте список из двадцати-тридцати реальных вопросов клиентов и прогоните их через систему. Для каждого ответьте на три вопроса: нашёлся ли нужный фрагмент, ответ верный ли, не добавил ли помощник лишнего. Там, где что-то не так, правят либо материалы, либо настройки поиска. Эту проверку повторяют после каждого серьёзного изменения базы. Так качество растёт, а не случайно падает.</p>
+<h2>Нужно ли вам это знать</h2>
+<p>Вникать в технические детали не обязательно, но понимать идею стоит. Тогда вы сможете задавать исполнителю правильные вопросы: из каких материалов собирается база, как она обновляется, что происходит, если ответа нет, как проверяется качество. Если на эти вопросы вам отвечают конкретно, система собрана с умом.</p>
+<h2>Как мы работаем</h2>
+<p>У нас 100+ проектов, и мы привыкли начинать с малого: сначала разбираем задачу, потом называем точную цену и срок до начала работы, запускаем минимальную версию и развиваем по результатам. Если вам хватит простого решения, так и скажем, чтобы вы не переплачивали. Общее описание подхода смотрите на странице про <a href="/ai-agent-dlya-biznesa.html">ии-агента для бизнеса</a>, а ориентиры по бюджету в статье <a href="/blog-skolko-stoit-ai-agent.html">сколько стоит ии-агент</a>.</p>
+<h2>Частые вопросы</h2>
+<p><strong>Чем RAG отличается от обучения модели на моих данных?</strong> При обучении модель меняется, это дорого и сложно обновлять. RAG ничего не меняет в модели, а просто подкладывает ей нужные материалы перед ответом, поэтому данные можно обновлять в любой момент.</p>
+<p><strong>Утекут ли мои документы?</strong> Это зависит от того, как собрана система и где хранятся данные. Мы обсуждаем это заранее и выбираем схему под ваши требования к безопасности.</p>
+<p><strong>Сколько документов нужно?</strong> Хватает и нескольких страниц для небольшого консультанта, и огромных каталогов для магазинов. Важно качество, а не объём.</p>
+<p><strong>Можно ли обновлять базу самому?</strong> Да, обновление материалов обычно делается без программиста: добавили документ, система его подхватила.</p>
+</div>
+  <div class="post-cta"><b>Хотите так же у себя?</b><span>Расскажите о задаче, и мы назовём точную цену и срок до начала работы. Свяжемся в течение часа в рабочее время.</span><a href="/#contact">Получить расчёт <i class="fa-solid fa-arrow-right"></i></a></div>
+  <p class="tg-cta"><i class="fa-brands fa-telegram"></i> Больше разборов и кейсов — в нашем <a href="https://t.me/raptorai_official" target="_blank" rel="noopener">Telegram-канале</a>.</p>
+  <a href="/#blog" class="back-link"><i class="fa-solid fa-arrow-left"></i>Все статьи</a>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <img src="/assets/logo.png" alt="RaptorAI">
+    <div class="footer-links">
+      <a href="/#services">Услуги</a>
+      <a href="/#cases">Кейсы</a>
+      <a href="/#contact">Контакт</a>
+      <a href="https://t.me/raptorai_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Telegram</a>
+      <a href="/privacy.html">Политика конфиденциальности</a>
+      <a href="#" id="cookie-settings-link">Настройки cookie</a>
+    </div>
+    <p class="footer-copy">© 2026 RaptorAI. Автоматизация с ИИ. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="/js/blog-common.js?v=1" defer></script>
+</body>
+</html>

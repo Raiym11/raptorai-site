@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru; frame-src 'self' https://mc.yandex.ru https://mc.yandex.md; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Как ии помогает в подборе персонала: разбор откликов, ответы кандидатам, назначение собеседований, первичные вопросы. Границы, риски предвзятости и порядок запуска.">
+<title>ИИ-агент для подбора персонала: что можно автоматизировать в HR — RaptorAI</title>
+<link rel="canonical" href="https://www.raptorai.ru/blog-ai-agent-dlya-hr-podbor-personala.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ИИ-агент для подбора персонала: что можно автоматизировать в HR">
+<meta property="og:description" content="Как ии помогает в подборе персонала: разбор откликов, ответы кандидатам, назначение собеседований, первичные вопросы. Границы, риски предвзятости и порядок запуска.">
+<meta property="og:url" content="https://www.raptorai.ru/blog-ai-agent-dlya-hr-podbor-personala.html">
+<meta property="og:site_name" content="RaptorAI">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://www.raptorai.ru/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-12-15">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.raptorai.ru/assets/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ИИ-агент для подбора персонала: что можно автоматизировать в HR", "description": "Как ии помогает в подборе персонала: разбор откликов, ответы кандидатам, назначение собеседований, первичные вопросы. Границы, риски предвзятости и порядок запуска.", "datePublished": "2026-12-15", "dateModified": "2026-12-15", "image": "https://www.raptorai.ru/assets/og-image.png", "author": {"@type": "Organization", "name": "RaptorAI"}, "publisher": {"@type": "Organization", "name": "RaptorAI"}, "mainEntityOfPage": "https://www.raptorai.ru/blog-ai-agent-dlya-hr-podbor-personala.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.raptorai.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://www.raptorai.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "ИИ-агент для подбора персонала: что можно автоматизировать в HR", "item": "https://www.raptorai.ru/blog-ai-agent-dlya-hr-podbor-personala.html"}]}</script>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080B0F; --bg2: #0D1117; --bg3: #111820;
+  --cyan: #00D4FF; --cyan-dim: #00D4FF18; --cyan-mid: #00D4FF44;
+  --white: #F0F4F8; --gray: #8899AA; --border: #1E2A36; --card: #0F1923;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(8,11,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-logo img { height: 48px; display: block; }
+.nav-back { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.nav-back:hover { color: var(--cyan); }
+main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
+.article-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--cyan-dim); border: 1px solid var(--cyan-mid); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+.article-meta { display: flex; gap: 16px; font-size: 13px; color: var(--gray); margin-bottom: 40px; }
+.article-body p { font-size: 16px; color: var(--gray); line-height: 1.9; margin-bottom: 20px; }
+.article-body strong { color: var(--white); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan-mid); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 48px 24px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+footer img { height: 44px; opacity: 0.85; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--gray); font-size: 13px; text-decoration: none; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { color: var(--gray); font-size: 13px; }
+@media (max-width: 768px) { nav { padding: 0 16px; } main { padding: 120px 20px 70px; } .footer-inner { flex-direction: column; text-align: center; } }
+.tg-cta { margin: 40px 0 0; padding: 18px 22px; border: 1px solid var(--border); border-radius: 10px; color: var(--gray); font-size: 15px; }
+.tg-cta i { color: var(--cyan); margin-right: 6px; }
+.tg-cta a { color: var(--cyan); }
+.post-cta { margin: 36px 0 0; padding: 26px 26px 24px; border-radius: 18px; border: 1px solid rgba(140,123,255,.4); background: linear-gradient(135deg, rgba(0,212,255,.1), rgba(140,123,255,.14)); }
+.post-cta b { display: block; font-size: 20px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+.post-cta span { display: block; color: var(--gray); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+.post-cta a { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #00D4FF, #8C7BFF); color: #04121c; font-weight: 800; font-size: 15px; padding: 13px 22px; border-radius: 12px; text-decoration: none; }
+.article-body h2 { font-size: 24px; font-weight: 800; color: var(--white); letter-spacing: -.01em; line-height: 1.3; margin: 40px 0 16px; }
+.article-body ul, .article-body ol { margin: 0 0 20px 22px; color: var(--gray); font-size: 16px; line-height: 1.9; }
+.article-body li { margin-bottom: 6px; }
+.article-body a { color: var(--cyan); }
+.article-body figure { margin: 32px 0; }
+.article-body figure img, .article-body figure svg { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); background: var(--card); }
+.article-body figcaption { color: var(--gray); font-size: 13px; margin-top: 10px; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="/assets/logo.png" alt="RaptorAI"></a>
+  <a href="/#blog" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Все статьи</a>
+</nav>
+
+<main>
+  <div class="article-tag"><i class="fa-solid fa-users" style="font-size:10px"></i> ИИ-агент</div>
+  <h1>ИИ-агент для подбора персонала: что можно автоматизировать в HR</h1>
+  <div class="article-meta">
+    <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>15.12.2026</span>
+    <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>5 мин</span>
+  </div>
+  <div class="article-body">
+<p>Рекрутер открывает вакансию и получает сотню откликов. Половина не подходит по очевидным причинам, часть пишет одно и то же, десять человек спрашивают про зарплату и график, трое не отвечают на сообщения, а ещё нужно назначить собеседования и не забыть никому перезвонить. Рутины в подборе много, и она съедает время, которое можно было бы потратить на разговоры с людьми.</p>
+<p>Ии-агент забирает значительную часть этой рутины. Но в найме у ии есть особые границы, потому что речь идёт о людях и их судьбах. Разберём, что ему можно доверить, где нужна осторожность и как строится запуск.</p>
+<figure><svg viewBox="0 0 900 340" role="img" aria-label="Разделение ролей между ии-агентом и рекрутером" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif"><rect width="900" height="340" rx="14" fill="#0F1923"/><text x="450" y="44" text-anchor="middle" fill="#F0F4F8" font-size="22" font-weight="700">Кто что делает в подборе</text><rect x="30" y="76" width="405" height="236" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="54" y="112" fill="#00D4FF" font-size="18" font-weight="800">Делает ии-агент</text><text x="54" y="148" fill="#C7D2DE" font-size="14">• Отвечает на частые вопросы</text><text x="54" y="182" fill="#C7D2DE" font-size="14">• Собирает и структурирует отклики</text><text x="54" y="216" fill="#C7D2DE" font-size="14">• Подсвечивает совпадение с критериями</text><text x="54" y="250" fill="#C7D2DE" font-size="14">• Назначает собеседования и напоминает</text><text x="54" y="284" fill="#C7D2DE" font-size="14">• Сообщает кандидатам о статусе</text><rect x="465" y="76" width="405" height="236" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="489" y="112" fill="#8C7BFF" font-size="18" font-weight="800">Решает человек</text><text x="489" y="148" fill="#C7D2DE" font-size="14">• Оценивает кандидата</text><text x="489" y="182" fill="#C7D2DE" font-size="14">• Приглашает или отказывает</text><text x="489" y="216" fill="#C7D2DE" font-size="14">• Проводит интервью</text><text x="489" y="250" fill="#C7D2DE" font-size="14">• Задаёт критерии отбора</text><text x="489" y="284" fill="#C7D2DE" font-size="14">• Отвечает за итоговое решение</text></svg><figcaption>Ии ускоряет процесс, а решение остаётся за человеком</figcaption></figure>
+<h2>Что агент может делать</h2>
+<ul>
+<li><strong>Отвечать на частые вопросы кандидатов.</strong> Условия, график, формат работы, этапы отбора, адрес офиса. На эти вопросы отвечают сотни раз, и все ответы одинаковые.</li>
+<li><strong>Принимать и структурировать отклики.</strong> Резюме и сообщения превращаются в единую карточку с ключевыми фактами: опыт, навыки, зарплатные ожидания.</li>
+<li><strong>Задавать первичные вопросы.</strong> Готов ли кандидат к графику, живёт ли рядом, какие у него ожидания. Ответы попадают в карточку.</li>
+<li><strong>Помогать со сверкой по критериям.</strong> Агент подсвечивает, какие обязательные требования вакансии выполнены, а какие нет. Решение остаётся за рекрутером.</li>
+<li><strong>Назначать собеседования.</strong> Предложить время, согласовать, поставить в календарь, напомнить кандидату и интервьюеру.</li>
+<li><strong>Держать в курсе.</strong> Сообщить кандидату о статусе, поблагодарить, вежливо сообщить об отказе. Многие компании этим пренебрегают, а репутация работодателя страдает.</li>
+</ul>
+<h2>Что агент делать не должен</h2>
+<p>Самое важное в этой теме: нельзя перекладывать на ии решения о людях. Отбор по резюме, оценка личности, отказ или приглашение без участия человека создают серьёзные риски. Языковые модели могут усваивать предвзятость из данных, на которых обучены, и незаметно отсеивать людей по признакам, которые не имеют отношения к работе. Это и этическая проблема, и юридическая.</p>
+<ul>
+<li>Агент не принимает решение об отказе или приглашении, он готовит информацию для рекрутера.</li>
+<li>Он не оценивает кандидата по внешним, демографическим или личным признакам.</li>
+<li>Он не делает выводов о характере человека по тексту резюме.</li>
+<li>Критерии отбора задают люди, они записаны, понятны и проверяемы.</li>
+</ul>
+<p>Хорошая формула: ии ускоряет и упорядочивает, человек решает.</p>
+<h2>Персональные данные кандидатов</h2>
+<p>Резюме содержит персональные данные, и закон требует обращаться с ними аккуратно. Кандидат должен знать, что его данные обрабатываются, и согласиться на это. Данные должны храниться защищённо, а после закрытия вакансии нужно решить, сколько хранить резюме и когда удалять. В сценарий агента встраивается согласие на обработку, а правила хранения согласуются с вами. Если вы работаете с данными особых категорий, об этом нужно сказать сразу.</p>
+<h2>Как это выглядит на практике</h2>
+<p>Обобщённый пример, а не конкретная компания. Вы публикуете вакансию и ставите ссылку на бота. Кандидат пишет в мессенджер, агент здоровается, рассказывает про вакансию и задаёт несколько вопросов: город, опыт, ожидания, готовность к графику. Ответы попадают в таблицу или в систему подбора. Рекрутер утром открывает список, видит кандидатов, у которых совпали обязательные критерии, и тех, у кого нет. Сам решает, кого приглашать. Агент предлагает приглашённым время собеседования, согласует и ставит в календарь. После встречи он собирает обратную связь и напоминает о следующих шагах.</p>
+<p>Рекрутер сэкономил часы на переписке и сортировке и потратил их на то, что действительно требует человека: разговор, оценка мотивации, переговоры.</p>
+<h2>Где это особенно полезно</h2>
+<ul>
+<li>Массовый подбор: продавцы, курьеры, операторы, где откликов много и вопросы повторяются.</li>
+<li>Компании с небольшим HR-отделом, где один человек делает всё.</li>
+<li>Сезонный найм, когда нужно быстро собрать много людей.</li>
+<li>Ответы на вопросы кандидатов вне рабочего времени.</li>
+</ul>
+<p>Для редких и сложных позиций, где ключевую роль играет личный разговор, польза меньше, но агент всё равно помогает с организацией процесса.</p>
+<h2>Как запускают</h2>
+<ol>
+<li><strong>Описываем процесс.</strong> Как сейчас проходит отбор, на каких этапах теряется время.</li>
+<li><strong>Определяем критерии.</strong> Что обязательно, что желательно, всё записывается.</li>
+<li><strong>Готовим материалы.</strong> Описания вакансий, условия, ответы на частые вопросы.</li>
+<li><strong>Настраиваем агента и интеграции.</strong> Таблица или система подбора, календарь, уведомления.</li>
+<li><strong>Тестируем на реальных диалогах.</strong> Проверяем тон, границы, обработку данных.</li>
+<li><strong>Запускаем и наблюдаем.</strong> Смотрим на отклики кандидатов и корректируем.</li>
+</ol>
+<h2>Ошибки, которых стоит избегать</h2>
+<ul>
+<li><strong>Автоматический отказ по оценке ии.</strong> Любой отказ должен проходить через человека.</li>
+<li><strong>Нечёткие критерии.</strong> Если рекрутеры сами не договорились, что нужно, агент не поможет.</li>
+<li><strong>Холодный тон.</strong> Кандидаты замечают бездушную переписку. Тон нужно настраивать как у хорошего рекрутера.</li>
+<li><strong>Нет обратной связи.</strong> Молчание после собеседования вредит репутации. Автоматизация легко решает эту проблему.</li>
+<li><strong>Игнорирование данных.</strong> Без правил хранения и согласий вы рискуете получить проблемы с законом.</li>
+</ul>
+<h2>Как измерить пользу</h2>
+<p>Зафиксируйте до внедрения: время от отклика до первого ответа, число откликов на одного рекрутера, долю кандидатов, не вышедших на собеседование, срок закрытия вакансии. Через пару месяцев сравните. Если рекрутеры меньше заняты перепиской, кандидаты быстрее получают ответы, а неявки на собеседования снизились, автоматизация работает.</p>
+<h2>Как мы работаем</h2>
+<p>У нас 100+ проектов, и мы привыкли начинать с малого: сначала разбираем задачу, потом называем точную цену и срок до начала работы, запускаем минимальную версию и развиваем по результатам. Если вам хватит простого решения, так и скажем, чтобы вы не переплачивали. Общее описание подхода смотрите на странице про <a href="/ai-agent-dlya-biznesa.html">ии-агента для бизнеса</a>, а ориентиры по бюджету в статье <a href="/blog-skolko-stoit-ai-agent.html">сколько стоит ии-агент</a>.</p>
+<h2>Частые вопросы</h2>
+<p><strong>Ии будет сам отбирать кандидатов?</strong> Нет, и мы не советуем так делать. Он упорядочивает информацию, а решения принимают люди.</p>
+<p><strong>Не оттолкнёт ли кандидатов общение с ботом?</strong> Если бот отвечает быстро и по делу, а живой человек подключается на нужных этапах, чаще всего кандидаты довольны. Главное, не скрывать, что это бот.</p>
+<p><strong>Работает ли с нашими площадками для поиска?</strong> Зависит от площадки и её возможностей по подключению. Мы смотрим на конкретную ситуацию и предлагаем рабочую схему.</p>
+<p><strong>Можно ли начать с малого?</strong> Да. Обычно начинают с ответов на вопросы кандидатов и назначения собеседований, потом добавляют остальное.</p>
+</div>
+  <div class="post-cta"><b>Хотите так же у себя?</b><span>Расскажите о задаче, и мы назовём точную цену и срок до начала работы. Свяжемся в течение часа в рабочее время.</span><a href="/#contact">Получить расчёт <i class="fa-solid fa-arrow-right"></i></a></div>
+  <p class="tg-cta"><i class="fa-brands fa-telegram"></i> Больше разборов и кейсов — в нашем <a href="https://t.me/raptorai_official" target="_blank" rel="noopener">Telegram-канале</a>.</p>
+  <a href="/#blog" class="back-link"><i class="fa-solid fa-arrow-left"></i>Все статьи</a>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <img src="/assets/logo.png" alt="RaptorAI">
+    <div class="footer-links">
+      <a href="/#services">Услуги</a>
+      <a href="/#cases">Кейсы</a>
+      <a href="/#contact">Контакт</a>
+      <a href="https://t.me/raptorai_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Telegram</a>
+      <a href="/privacy.html">Политика конфиденциальности</a>
+      <a href="#" id="cookie-settings-link">Настройки cookie</a>
+    </div>
+    <p class="footer-copy">© 2026 RaptorAI. Автоматизация с ИИ. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="/js/blog-common.js?v=1" defer></script>
+</body>
+</html>

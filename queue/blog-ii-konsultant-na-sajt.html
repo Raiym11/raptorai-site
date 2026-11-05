@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru; frame-src 'self' https://mc.yandex.ru https://mc.yandex.md; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Как работает ии-консультант на сайте: ответы по вашим материалам, сбор заявок, передача менеджеру. Что подготовить, как не допустить ошибок и как оценить пользу.">
+<title>ИИ-консультант на сайт: как работает, что умеет и сколько приносит — RaptorAI</title>
+<link rel="canonical" href="https://www.raptorai.ru/blog-ii-konsultant-na-sajt.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ИИ-консультант на сайт: как работает, что умеет и сколько приносит">
+<meta property="og:description" content="Как работает ии-консультант на сайте: ответы по вашим материалам, сбор заявок, передача менеджеру. Что подготовить, как не допустить ошибок и как оценить пользу.">
+<meta property="og:url" content="https://www.raptorai.ru/blog-ii-konsultant-na-sajt.html">
+<meta property="og:site_name" content="RaptorAI">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://www.raptorai.ru/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-12-04">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.raptorai.ru/assets/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ИИ-консультант на сайт: как работает, что умеет и сколько приносит", "description": "Как работает ии-консультант на сайте: ответы по вашим материалам, сбор заявок, передача менеджеру. Что подготовить, как не допустить ошибок и как оценить пользу.", "datePublished": "2026-12-04", "dateModified": "2026-12-04", "image": "https://www.raptorai.ru/assets/og-image.png", "author": {"@type": "Organization", "name": "RaptorAI"}, "publisher": {"@type": "Organization", "name": "RaptorAI"}, "mainEntityOfPage": "https://www.raptorai.ru/blog-ii-konsultant-na-sajt.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.raptorai.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://www.raptorai.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "ИИ-консультант на сайт: как работает, что умеет и сколько приносит", "item": "https://www.raptorai.ru/blog-ii-konsultant-na-sajt.html"}]}</script>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080B0F; --bg2: #0D1117; --bg3: #111820;
+  --cyan: #00D4FF; --cyan-dim: #00D4FF18; --cyan-mid: #00D4FF44;
+  --white: #F0F4F8; --gray: #8899AA; --border: #1E2A36; --card: #0F1923;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(8,11,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-logo img { height: 48px; display: block; }
+.nav-back { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.nav-back:hover { color: var(--cyan); }
+main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
+.article-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--cyan-dim); border: 1px solid var(--cyan-mid); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+.article-meta { display: flex; gap: 16px; font-size: 13px; color: var(--gray); margin-bottom: 40px; }
+.article-body p { font-size: 16px; color: var(--gray); line-height: 1.9; margin-bottom: 20px; }
+.article-body strong { color: var(--white); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan-mid); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 48px 24px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+footer img { height: 44px; opacity: 0.85; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--gray); font-size: 13px; text-decoration: none; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { color: var(--gray); font-size: 13px; }
+@media (max-width: 768px) { nav { padding: 0 16px; } main { padding: 120px 20px 70px; } .footer-inner { flex-direction: column; text-align: center; } }
+.tg-cta { margin: 40px 0 0; padding: 18px 22px; border: 1px solid var(--border); border-radius: 10px; color: var(--gray); font-size: 15px; }
+.tg-cta i { color: var(--cyan); margin-right: 6px; }
+.tg-cta a { color: var(--cyan); }
+.post-cta { margin: 36px 0 0; padding: 26px 26px 24px; border-radius: 18px; border: 1px solid rgba(140,123,255,.4); background: linear-gradient(135deg, rgba(0,212,255,.1), rgba(140,123,255,.14)); }
+.post-cta b { display: block; font-size: 20px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+.post-cta span { display: block; color: var(--gray); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+.post-cta a { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #00D4FF, #8C7BFF); color: #04121c; font-weight: 800; font-size: 15px; padding: 13px 22px; border-radius: 12px; text-decoration: none; }
+.article-body h2 { font-size: 24px; font-weight: 800; color: var(--white); letter-spacing: -.01em; line-height: 1.3; margin: 40px 0 16px; }
+.article-body ul, .article-body ol { margin: 0 0 20px 22px; color: var(--gray); font-size: 16px; line-height: 1.9; }
+.article-body li { margin-bottom: 6px; }
+.article-body a { color: var(--cyan); }
+.article-body figure { margin: 32px 0; }
+.article-body figure img, .article-body figure svg { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); background: var(--card); }
+.article-body figcaption { color: var(--gray); font-size: 13px; margin-top: 10px; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="/assets/logo.png" alt="RaptorAI"></a>
+  <a href="/#blog" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Все статьи</a>
+</nav>
+
+<main>
+  <div class="article-tag"><i class="fa-solid fa-message" style="font-size:10px"></i> ИИ-агент</div>
+  <h1>ИИ-консультант на сайт: как работает, что умеет и сколько приносит</h1>
+  <div class="article-meta">
+    <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>04.12.2026</span>
+    <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>5 мин</span>
+  </div>
+  <div class="article-body">
+<p>Посетитель заходит на сайт, ищет ответ на простой вопрос, не находит его за тридцать секунд и уходит. Он не станет искать форму обратной связи, заполнять её и ждать звонка. Просто закроет вкладку и откроет следующий сайт. Эта история повторяется ежедневно на тысячах сайтов, и компании теряют заявки, которые стоили им рекламного бюджета.</p>
+<p>Ии-консультант на сайте решает именно эту проблему: посетитель задаёт вопрос обычными словами и сразу получает ответ. Расскажем, как это устроено, что нужно для запуска и где возникают проблемы.</p>
+<figure><svg viewBox="0 0 900 330" role="img" aria-label="Схема работы ии-консультанта на сайте" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif"><rect width="900" height="330" rx="14" fill="#0F1923"/><text x="450" y="46" text-anchor="middle" fill="#F0F4F8" font-size="22" font-weight="700">Как консультант отвечает посетителю</text><rect x="30" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="108" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">1</text><text x="108" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Вопрос</text><text x="108" y="190" text-anchor="middle" fill="#8899AA" font-size="13">человек пишет</text><text x="108" y="210" text-anchor="middle" fill="#8899AA" font-size="13">в окне чата</text><rect x="201" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="279" y="126" text-anchor="middle" fill="#8C7BFF" font-size="30" font-weight="800">2</text><text x="279" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Поиск</text><text x="279" y="190" text-anchor="middle" fill="#8899AA" font-size="13">находит нужные</text><text x="279" y="210" text-anchor="middle" fill="#8899AA" font-size="13">материалы в базе</text><rect x="372" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="450" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">3</text><text x="450" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Ответ</text><text x="450" y="190" text-anchor="middle" fill="#8899AA" font-size="13">формулирует понятно,</text><text x="450" y="210" text-anchor="middle" fill="#8899AA" font-size="13">по вашим данным</text><rect x="542" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="621" y="126" text-anchor="middle" fill="#8C7BFF" font-size="30" font-weight="800">4</text><text x="621" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Заявка</text><text x="621" y="190" text-anchor="middle" fill="#8899AA" font-size="13">собирает имя</text><text x="621" y="210" text-anchor="middle" fill="#8899AA" font-size="13">и контакт</text><rect x="713" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="792" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">5</text><text x="792" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Передача</text><text x="792" y="190" text-anchor="middle" fill="#8899AA" font-size="13">менеджер получает</text><text x="792" y="210" text-anchor="middle" fill="#8899AA" font-size="13">диалог целиком</text></svg><figcaption>Консультант отвечает только по тому, что вы ему дали</figcaption></figure>
+<h2>Как выглядит работа консультанта</h2>
+<p>Это небольшое окно чата в углу сайта. Посетитель пишет: «Сколько стоит доставка в Казань?» или «Чем ваш тариф отличается от соседнего?». Консультант находит ответ в материалах, которые вы ему дали, и отвечает человеческим языком, а не цитатой из договора. Если нужной информации нет, он честно об этом говорит и предлагает связаться с менеджером. Если человек готов оставить заявку, консультант аккуратно собирает имя и контакт и передаёт всё в вашу систему.</p>
+<p>Главное отличие от старых «чат-ботов с кнопками» в том, что он понимает вопрос, а не ищет совпадение слов. Человек может написать с опечатками, неполной фразой, разговорным языком, и консультант поймёт, о чём речь.</p>
+<h2>Откуда он берёт ответы</h2>
+<p>Консультант не знает ничего о вашем бизнесе, пока вы ему не расскажете. Для этого собирают базу знаний: страницы сайта, прайс, условия доставки и оплаты, ответы на частые вопросы, описания услуг, инструкции. Эти материалы разбивают на смысловые части и сохраняют в специальном хранилище. Когда приходит вопрос, система находит самые подходящие части и просит языковую модель сформулировать ответ только на их основе. Этот подход называют RAG, о нём мы писали отдельно: <a href="/blog-rag-chto-eto-prostymi-slovami.html">RAG простыми словами</a>.</p>
+<p>Такая схема защищает от выдумок: консультант отвечает по вашим материалам, а не по общим знаниям языковой модели. Если ответа в базе нет, он не изобретает его.</p>
+<h2>Чем он полезен бизнесу</h2>
+<p>Польза складывается из нескольких вещей, и каждую можно проверить на своих цифрах. Во-первых, скорость: ответ приходит за секунды, а не через час. Во-вторых, круглосуточность: ночью и в выходные консультант работает так же, как днём. В-третьих, сбор заявок: посетитель, который иначе ушёл бы, оставляет контакт в процессе разговора. В-четвёртых, разгрузка людей: простые вопросы закрываются без сотрудников, а менеджеры получают уже тёплые обращения с описанием задачи.</p>
+<p>Есть и скрытая польза, о которой часто не думают: переписки консультанта показывают, о чём на самом деле спрашивают посетители. Если десятки людей спрашивают про одно и то же, а на сайте ответа нет, это сигнал, что страницу нужно дополнить.</p>
+<h2>Что нужно подготовить</h2>
+<p>Качество консультанта почти целиком определяется качеством материалов, которые вы ему даёте. Поэтому подготовка важнее самой разработки.</p>
+<ul>
+<li><strong>Актуальные данные.</strong> Прайс, сроки, условия должны быть в одной версии и без противоречий.</li>
+<li><strong>Живые формулировки.</strong> Если материал написан канцеляритом, ответы будут такими же. Хорошо, если часть текстов написана просто.</li>
+<li><strong>Правила поведения.</strong> Что консультант обещает, а что нет, о чём не говорит, когда зовёт человека.</li>
+<li><strong>Тон общения.</strong> Формально или по-дружески, на «вы» или иначе. Это настраивается и должно совпадать с вашим брендом.</li>
+<li><strong>Каналы передачи.</strong> Куда уходят заявки, кто получает уведомления, как быстро отвечает человек.</li>
+</ul>
+<h2>Где консультант может подвести</h2>
+<p>У любой технологии есть слабые места, и честно о них лучше знать заранее. Консультант может ответить уверенно, но неточно, если в базе знаний есть устаревшие данные. Он может не понять очень сложный или многоходовой вопрос. Он может слишком настойчиво собирать контакты и раздражать, если плохо настроен тон. Всё это решается настройкой и контролем, но требует внимания в первые недели.</p>
+<p>Поэтому мы всегда советуем: запускать на части трафика, читать реальные диалоги, исправлять базу знаний по найденным пробелам и только потом открывать для всех. Человек должен оставаться рядом: консультант помогает, но не заменяет живых сотрудников там, где нужны решения.</p>
+<h2>Как измерить пользу</h2>
+<p>Определите показатели до запуска. Доля посетителей, которые начали диалог. Доля диалогов, которые закончились заявкой. Число обращений, которые консультант закрыл самостоятельно. Время до первого ответа. Оценки диалогов, если вы их собираете. Сравните с периодом до консультанта: если заявок стало больше, а нагрузка на сотрудников снизилась, он работает.</p>
+<p>Для интернет-магазинов у нас есть отдельный разбор с примерами: <a href="/blog-ai-agent-dlya-internet-magazina.html">ии-агент для интернет-магазина</a>.</p>
+<h2>Как запускают</h2>
+<ol>
+<li><strong>Собираем материалы.</strong> Страницы сайта, прайс, условия, частые вопросы.</li>
+<li><strong>Настраиваем консультанта.</strong> Тон, правила, границы, передачу заявок.</li>
+<li><strong>Подключаем к сайту.</strong> Обычно это небольшой фрагмент кода, менять сайт не нужно.</li>
+<li><strong>Тестируем.</strong> Задаём вопросы так, как задают клиенты, и пытаемся сломать.</li>
+<li><strong>Запускаем на части трафика.</strong> Смотрим диалоги, дорабатываем.</li>
+<li><strong>Открываем для всех.</strong> И продолжаем наблюдать и улучшать.</li>
+</ol>
+<h2>Сколько времени это занимает</h2>
+<p>Если материалы собраны, базовый консультант запускается за одну-две недели. Если приходится приводить информацию в порядок, подключать CRM и настраивать сложные сценарии, срок растёт. Точный срок мы называем после первого разговора, когда видно, в каком состоянии ваши данные.</p>
+<h2>Как мы работаем</h2>
+<p>У нас 100+ проектов, и мы привыкли начинать с малого: сначала разбираем задачу, потом называем точную цену и срок до начала работы, запускаем минимальную версию и развиваем по результатам. Если вам хватит простого решения, так и скажем, чтобы вы не переплачивали. Общее описание подхода смотрите на странице про <a href="/ai-agent-dlya-biznesa.html">ии-агента для бизнеса</a>, а ориентиры по бюджету в статье <a href="/blog-skolko-stoit-ai-agent.html">сколько стоит ии-агент</a>.</p>
+<h2>Частые вопросы</h2>
+<p><strong>Нужно ли переделывать сайт?</strong> Обычно нет. Консультант подключается как небольшой виджет и работает поверх существующего сайта.</p>
+<p><strong>Что будет, если он не знает ответа?</strong> Он честно сообщает об этом и предлагает связаться с менеджером. Выдумывать ответы ему запрещено.</p>
+<p><strong>Можно ли ограничить темы?</strong> Да, и это стоит сделать. Консультант отвечает только по вашей тематике и вежливо возвращает разговор в нужное русло.</p>
+<p><strong>Увидят ли клиенты, что это не человек?</strong> Лучше сказать об этом прямо. Мы советуем честно обозначать консультанта и давать возможность вызвать сотрудника.</p>
+<p><strong>Подходит ли для небольшого сайта?</strong> Подходит, если у вас есть повторяющиеся вопросы. Для сайта-визитки из трёх страниц эффект может быть небольшим, и мы скажем об этом честно.</p>
+</div>
+  <div class="post-cta"><b>Хотите так же у себя?</b><span>Расскажите о задаче, и мы назовём точную цену и срок до начала работы. Свяжемся в течение часа в рабочее время.</span><a href="/#contact">Получить расчёт <i class="fa-solid fa-arrow-right"></i></a></div>
+  <p class="tg-cta"><i class="fa-brands fa-telegram"></i> Больше разборов и кейсов — в нашем <a href="https://t.me/raptorai_official" target="_blank" rel="noopener">Telegram-канале</a>.</p>
+  <a href="/#blog" class="back-link"><i class="fa-solid fa-arrow-left"></i>Все статьи</a>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <img src="/assets/logo.png" alt="RaptorAI">
+    <div class="footer-links">
+      <a href="/#services">Услуги</a>
+      <a href="/#cases">Кейсы</a>
+      <a href="/#contact">Контакт</a>
+      <a href="https://t.me/raptorai_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Telegram</a>
+      <a href="/privacy.html">Политика конфиденциальности</a>
+      <a href="#" id="cookie-settings-link">Настройки cookie</a>
+    </div>
+    <p class="footer-copy">© 2026 RaptorAI. Автоматизация с ИИ. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="/js/blog-common.js?v=1" defer></script>
+</body>
+</html>

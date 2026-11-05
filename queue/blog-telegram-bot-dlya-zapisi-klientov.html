@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru; frame-src 'self' https://mc.yandex.ru https://mc.yandex.md; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Как устроен телеграм-бот для записи клиентов: выбор услуги и времени, напоминания, перенос, оплата и ии для вопросов. Для каких бизнесов подходит.">
+<title>Телеграм-бот для записи клиентов: как работает и что умеет — RaptorAI</title>
+<link rel="canonical" href="https://www.raptorai.ru/blog-telegram-bot-dlya-zapisi-klientov.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Телеграм-бот для записи клиентов: как работает и что умеет">
+<meta property="og:description" content="Как устроен телеграм-бот для записи клиентов: выбор услуги и времени, напоминания, перенос, оплата и ии для вопросов. Для каких бизнесов подходит.">
+<meta property="og:url" content="https://www.raptorai.ru/blog-telegram-bot-dlya-zapisi-klientov.html">
+<meta property="og:site_name" content="RaptorAI">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://www.raptorai.ru/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-11-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.raptorai.ru/assets/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Телеграм-бот для записи клиентов: как работает и что умеет", "description": "Как устроен телеграм-бот для записи клиентов: выбор услуги и времени, напоминания, перенос, оплата и ии для вопросов. Для каких бизнесов подходит.", "datePublished": "2026-11-17", "dateModified": "2026-11-17", "image": "https://www.raptorai.ru/assets/og-image.png", "author": {"@type": "Organization", "name": "RaptorAI"}, "publisher": {"@type": "Organization", "name": "RaptorAI"}, "mainEntityOfPage": "https://www.raptorai.ru/blog-telegram-bot-dlya-zapisi-klientov.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://www.raptorai.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://www.raptorai.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Телеграм-бот для записи клиентов: как работает и что умеет", "item": "https://www.raptorai.ru/blog-telegram-bot-dlya-zapisi-klientov.html"}]}</script>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080B0F; --bg2: #0D1117; --bg3: #111820;
+  --cyan: #00D4FF; --cyan-dim: #00D4FF18; --cyan-mid: #00D4FF44;
+  --white: #F0F4F8; --gray: #8899AA; --border: #1E2A36; --card: #0F1923;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(8,11,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-logo img { height: 48px; display: block; }
+.nav-back { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.nav-back:hover { color: var(--cyan); }
+main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
+.article-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--cyan-dim); border: 1px solid var(--cyan-mid); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+.article-meta { display: flex; gap: 16px; font-size: 13px; color: var(--gray); margin-bottom: 40px; }
+.article-body p { font-size: 16px; color: var(--gray); line-height: 1.9; margin-bottom: 20px; }
+.article-body strong { color: var(--white); }
+.back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 48px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan-mid); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; }
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 48px 24px 32px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+footer img { height: 44px; opacity: 0.85; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: var(--gray); font-size: 13px; text-decoration: none; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { color: var(--gray); font-size: 13px; }
+@media (max-width: 768px) { nav { padding: 0 16px; } main { padding: 120px 20px 70px; } .footer-inner { flex-direction: column; text-align: center; } }
+.tg-cta { margin: 40px 0 0; padding: 18px 22px; border: 1px solid var(--border); border-radius: 10px; color: var(--gray); font-size: 15px; }
+.tg-cta i { color: var(--cyan); margin-right: 6px; }
+.tg-cta a { color: var(--cyan); }
+.post-cta { margin: 36px 0 0; padding: 26px 26px 24px; border-radius: 18px; border: 1px solid rgba(140,123,255,.4); background: linear-gradient(135deg, rgba(0,212,255,.1), rgba(140,123,255,.14)); }
+.post-cta b { display: block; font-size: 20px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+.post-cta span { display: block; color: var(--gray); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+.post-cta a { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #00D4FF, #8C7BFF); color: #04121c; font-weight: 800; font-size: 15px; padding: 13px 22px; border-radius: 12px; text-decoration: none; }
+.article-body h2 { font-size: 24px; font-weight: 800; color: var(--white); letter-spacing: -.01em; line-height: 1.3; margin: 40px 0 16px; }
+.article-body ul, .article-body ol { margin: 0 0 20px 22px; color: var(--gray); font-size: 16px; line-height: 1.9; }
+.article-body li { margin-bottom: 6px; }
+.article-body a { color: var(--cyan); }
+.article-body figure { margin: 32px 0; }
+.article-body figure img, .article-body figure svg { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--border); background: var(--card); }
+.article-body figcaption { color: var(--gray); font-size: 13px; margin-top: 10px; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="/assets/logo.png" alt="RaptorAI"></a>
+  <a href="/#blog" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Все статьи</a>
+</nav>
+
+<main>
+  <div class="article-tag"><i class="fa-solid fa-paper-plane" style="font-size:10px"></i> Телеграм</div>
+  <h1>Телеграм-бот для записи клиентов: как работает и что умеет</h1>
+  <div class="article-meta">
+    <span><i class="fa-regular fa-calendar" style="margin-right:6px"></i>17.11.2026</span>
+    <span><i class="fa-regular fa-clock" style="margin-right:6px"></i>6 мин</span>
+  </div>
+  <div class="article-body">
+<p>Запись клиентов по телефону и в личных сообщениях выглядит так: администратор отвечает в мессенджере, параллельно листает журнал, переписывается про время и всё равно кто-то приходит не в то время или не приходит вовсе. Телеграм-бот для записи убирает почти всю эту возню: клиент выбирает время сам, администратор получает готовую запись, а напоминание уходит без чьего-либо участия.</p>
+<p>Разберём, как это устроено, что умеет бот и какие бизнесы получают от него больше всего.</p>
+<figure><svg viewBox="0 0 900 330" role="img" aria-label="Схема записи клиента через телеграм-бота" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Arial, sans-serif"><rect width="900" height="330" rx="14" fill="#0F1923"/><text x="450" y="46" text-anchor="middle" fill="#F0F4F8" font-size="22" font-weight="700">Путь клиента в боте записи</text><rect x="30" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="108" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">1</text><text x="108" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Услуга</text><text x="108" y="190" text-anchor="middle" fill="#8899AA" font-size="13">выбирает что нужно</text><text x="108" y="210" text-anchor="middle" fill="#8899AA" font-size="13">и к кому</text><rect x="201" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="279" y="126" text-anchor="middle" fill="#8C7BFF" font-size="30" font-weight="800">2</text><text x="279" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Время</text><text x="279" y="190" text-anchor="middle" fill="#8899AA" font-size="13">видит только</text><text x="279" y="210" text-anchor="middle" fill="#8899AA" font-size="13">свободные окна</text><rect x="372" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="450" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">3</text><text x="450" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Подтверждение</text><text x="450" y="190" text-anchor="middle" fill="#8899AA" font-size="13">получает сообщение</text><text x="450" y="210" text-anchor="middle" fill="#8899AA" font-size="13">и запись в календаре</text><rect x="542" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#8C7BFF"/><text x="621" y="126" text-anchor="middle" fill="#8C7BFF" font-size="30" font-weight="800">4</text><text x="621" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Напоминание</text><text x="621" y="190" text-anchor="middle" fill="#8899AA" font-size="13">за день и</text><text x="621" y="210" text-anchor="middle" fill="#8899AA" font-size="13">за пару часов</text><rect x="713" y="84" width="157" height="190" rx="12" fill="#12202c" stroke="#00D4FF"/><text x="792" y="126" text-anchor="middle" fill="#00D4FF" font-size="30" font-weight="800">5</text><text x="792" y="162" text-anchor="middle" fill="#F0F4F8" font-size="15" font-weight="700">Визит</text><text x="792" y="190" text-anchor="middle" fill="#8899AA" font-size="13">или перенос</text><text x="792" y="210" text-anchor="middle" fill="#8899AA" font-size="13">в одно нажатие</text></svg><figcaption>Клиент записывается сам, без звонков и ожидания</figcaption></figure>
+<h2>Как выглядит запись для клиента</h2>
+<p>Человек открывает бота по ссылке или кнопке в вашем профиле и за несколько нажатий проходит весь путь. Выбирает услугу, специалиста, свободное время, оставляет имя и телефон, получает подтверждение. Никаких звонков, ожидания ответа и «перезвоните позже».</p>
+<p>Для вас это важно ещё и потому, что клиенты часто пишут вечером или в выходные, когда записывает никто. Бот работает всегда, и запись происходит в тот момент, когда человек готов её сделать.</p>
+<h2>Что умеет бот</h2>
+<ul>
+<li><strong>Показывает только свободное время.</strong> Бот берёт расписание из календаря или вашей системы и не допускает двойных записей.</li>
+<li><strong>Напоминает.</strong> За день и за пару часов клиенту приходит сообщение с кнопками «Приду» и «Перенести». Неявок становится заметно меньше.</li>
+<li><strong>Переносит и отменяет.</strong> Клиент сам меняет время, а освободившееся окно снова становится доступным.</li>
+<li><strong>Принимает оплату или предоплату.</strong> Если нужно закрепить запись деньгами, бот отправляет ссылку на оплату.</li>
+<li><strong>Уведомляет сотрудников.</strong> Мастер или администратор получает сообщение о новой записи, переносе или отмене.</li>
+<li><strong>Собирает отзывы.</strong> После визита бот спрашивает, как всё прошло, а довольным клиентам предлагает оставить отзыв на карте.</li>
+</ul>
+<h2>Где здесь нужен ии</h2>
+<p>Базовая запись работает по кнопкам и ии не требует. Но люди любят писать как живые: «А есть ли окно на субботу после обеда?», «Сколько длится процедура?», «Можно ли с ребёнком?». Здесь ии-агент отвечает как администратор, опираясь на ваши описания услуг и правила, и сам предлагает подходящее время. Если вопрос нестандартный, он зовёт человека.</p>
+<p>Это именно та связка, которую мы чаще всего собираем: кнопочная запись для скорости и ии для живых вопросов. Подробнее о возможностях смотрите на странице про <a href="/telegram-bot-s-ii.html">телеграм-бота с ии</a>.</p>
+<h2>Кому подходит</h2>
+<ul>
+<li>Салоны красоты, барбершопы, студии маникюра.</li>
+<li>Клиники и частные врачи, стоматологии.</li>
+<li>Тренеры, студии йоги, репетиторы, школы.</li>
+<li>Мастерские, автосервисы, детейлинг.</li>
+<li>Консультанты и юристы, которые принимают по записи.</li>
+</ul>
+<p>Общий признак один: у вас есть расписание и клиенты, которые записываются на время.</p>
+<h2>С чем интегрируется</h2>
+<p>Расписание может жить в Google Календаре, в вашей CRM, в специализированной системе записи или в простой таблице. Бот подключается к тому, что у вас уже есть, и вам не приходится переучивать сотрудников. Заявки и клиентов можно сразу отправлять в CRM, например, в <a href="/blog-amocrm-n8n.html">amoCRM</a>.</p>
+<h2>Ошибки, которых стоит избегать</h2>
+<ul>
+<li><strong>Слишком длинная анкета.</strong> Чем больше полей, тем меньше доходит до записи. Спрашивайте только необходимое.</li>
+<li><strong>Нет живого контакта.</strong> Всегда оставляйте клиенту возможность написать человеку, это снимает тревогу.</li>
+<li><strong>Устаревшее расписание.</strong> Если бот показывает время, которое уже занято, доверие исчезает. Расписание должно синхронизироваться автоматически.</li>
+<li><strong>Нет напоминаний.</strong> Это самая простая и самая прибыльная часть, не пропускайте её.</li>
+</ul>
+<h2>Как запускают</h2>
+<ol>
+<li>Описываете услуги, специалистов и правила записи.</li>
+<li>Подключаем расписание и уведомления сотрудникам.</li>
+<li>Настраиваем напоминания, переносы и, при необходимости, оплату.</li>
+<li>Тестируем на нескольких клиентах и сотрудниках.</li>
+<li>Запускаем и первые недели смотрим на реальные записи, дорабатываем.</li>
+</ol>
+
+<h2>Чем отличаются сценарии у разных бизнесов</h2>
+<p>Базовая логика одинакова, но детали сильно зависят от сферы.</p>
+<ul>
+<li><strong>Салон красоты.</strong> Важны выбор мастера, длительность разных услуг и возможность записаться сразу на несколько процедур подряд.</li>
+<li><strong>Клиника.</strong> Нужны специальности, врачи, первичный и повторный приём, а для некоторых услуг подготовка к визиту, о которой бот напоминает заранее.</li>
+<li><strong>Тренер или студия.</strong> Часто запись идёт на группы с ограниченным числом мест и абонементы. Бот считает остаток занятий и предлагает продлить.</li>
+<li><strong>Автосервис.</strong> Запись зависит от типа работ и загрузки постов, а клиент хочет знать, сколько это займёт.</li>
+</ul>
+<p>Поэтому мы всегда начинаем с описания вашего процесса, а не с готового шаблона. Шаблон экономит время, но подгонять его под реальную работу всё равно приходится.</p>
+<h2>Как справляется с нестандартным</h2>
+<p>Клиенты не всегда следуют сценарию. Кто-то хочет записаться сразу двоих, кто-то спрашивает про сложную услугу, кто-то вообще пишет голосовым сообщением. Для таких случаев в бота добавляют ии-помощника: он понимает свободный текст, уточняет недостающее и подсказывает варианты. Если ситуация выходит за рамки, диалог передаётся администратору вместе с краткой сводкой, чтобы клиенту не пришлось объяснять всё заново.</p>
+<h2>Как снизить число неявок</h2>
+<p>Неявки это прямые потери: время специалиста занято, а выручки нет. Бот помогает сразу несколькими способами.</p>
+<ul>
+<li><strong>Два напоминания.</strong> За сутки и за пару часов. Первое даёт время перенести, второе напоминает о визите.</li>
+<li><strong>Простой перенос.</strong> Если перенести можно одним нажатием, люди переносят, а не пропадают.</li>
+<li><strong>Предоплата для дорогих услуг.</strong> Она дисциплинирует и закрывает риск.</li>
+<li><strong>Лист ожидания.</strong> Освободившееся окно можно сразу предложить тем, кто ждал.</li>
+</ul>
+<p>Какой эффект получится у вас, зависит от бизнеса, но на практике именно напоминания окупают бота быстрее всего.</p>
+<h2>Персональные данные</h2>
+<p>Бот собирает имя и телефон, а это персональные данные. Закон требует, чтобы человек знал, зачем их собирают, и согласился на обработку. Поэтому в сценарий включают короткое согласие и ссылку на политику конфиденциальности, а данные хранятся в защищённом виде. Это не усложняет клиенту путь, но снимает юридические риски с вас. Если у вас особые требования, например, медицинские данные, скажите об этом сразу, и мы учтём это при проектировании.</p>
+<h2>Какие показатели смотреть</h2>
+<ul>
+<li><strong>Доля записей через бота.</strong> Показывает, насколько клиентам удобен этот канал.</li>
+<li><strong>Доля неявок до и после.</strong> Главная метрика пользы напоминаний.</li>
+<li><strong>Время администратора на запись.</strong> Сколько часов в неделю освободилось.</li>
+<li><strong>Записи вне рабочего времени.</strong> Это клиенты, которых раньше вы теряли.</li>
+<li><strong>Повторные визиты.</strong> Если бот напоминает о повторной записи, их становится больше.</li>
+</ul>
+<h2>Как мы работаем</h2>
+<p>У нас 100+ проектов, и боты для записи и заявок среди самых частых. Мы называем точную цену и срок до начала работы и запускаем по шагам. Если вам хватит простого решения, так и скажем, чтобы вы не переплачивали. Если хотите понять общий порядок цифр, прочитайте разбор <a href="/blog-skolko-stoit-ai-agent.html">из чего складывается цена ии-агента</a>.</p>
+<h2>Частые вопросы</h2>
+<p><strong>Клиенты не любят ботов, не оттолкнёт ли это?</strong> Бот, который помогает записаться за минуту, обычно нравится больше, чем ожидание ответа. А живой контакт всегда остаётся рядом.</p>
+<p><strong>Что если клиент не пользуется Телеграмом?</strong> Оставьте запись и по телефону. Бот не заменяет прежние каналы, а добавляет удобный.</p>
+<p><strong>Можно ли принимать оплату?</strong> Да, через платёжную систему, которой вы уже пользуетесь.</p>
+<p><strong>Сколько времени занимает запуск?</strong> Базовая запись с напоминаниями делается за дни, с ии и интеграциями за пару недель.</p>
+</div>
+  <div class="post-cta"><b>Хотите так же у себя?</b><span>Расскажите о задаче, и мы назовём точную цену и срок до начала работы. Свяжемся в течение часа в рабочее время.</span><a href="/#contact">Получить расчёт <i class="fa-solid fa-arrow-right"></i></a></div>
+  <p class="tg-cta"><i class="fa-brands fa-telegram"></i> Больше разборов и кейсов — в нашем <a href="https://t.me/raptorai_official" target="_blank" rel="noopener">Telegram-канале</a>.</p>
+  <a href="/#blog" class="back-link"><i class="fa-solid fa-arrow-left"></i>Все статьи</a>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <img src="/assets/logo.png" alt="RaptorAI">
+    <div class="footer-links">
+      <a href="/#services">Услуги</a>
+      <a href="/#cases">Кейсы</a>
+      <a href="/#contact">Контакт</a>
+      <a href="https://t.me/raptorai_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Telegram</a>
+      <a href="/privacy.html">Политика конфиденциальности</a>
+      <a href="#" id="cookie-settings-link">Настройки cookie</a>
+    </div>
+    <p class="footer-copy">© 2026 RaptorAI. Автоматизация с ИИ. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="/js/blog-common.js?v=1" defer></script>
+</body>
+</html>
