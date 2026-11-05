@@ -1,0 +1,27 @@
+name: Публикация статей по расписанию
+on:
+  schedule:
+    - cron: '0 6 * * *'      # каждый день в 09:00 по Москве
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Опубликовать статьи, чья дата наступила
+        run: python3 tools/publish.py
+      - name: Закоммитить и запустить деплой
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "raptorai-bot"
+            git config user.email "bot@raptorai.ru"
+            git add -A
+            git commit -m "blog: публикация по расписанию"
+            git push
+            gh workflow run "deploy-yandex.yml"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
