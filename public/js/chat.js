@@ -1,4 +1,4 @@
-// ===== CHAT WIDGET (Дмитрий, n8n) =====
+// ===== CHAT WIDGET (ИИ-ассистент RaptorAI, n8n) =====
 // TODO: замените на реальный webhook-адрес вашего workflow в n8n
 const CHAT_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/raptorai-chat';
 const CHAT_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
@@ -48,26 +48,29 @@ function toggleChat() {
   if (chatOpened) document.getElementById('chat-unread-dot').style.display = 'none';
 }
 
-function passChatGate() {
-  const name = document.getElementById('chat-gate-name').value.trim();
-  const email = document.getElementById('chat-gate-email').value.trim();
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!name || !emailOk) {
-    document.getElementById('chat-gate-error').style.display = 'block';
-    return;
-  }
-  chatUserName = name;
-  chatUserEmail = email;
+function chatSessionId() {
+  try {
+    let id = localStorage.getItem('raptorai_chat_sid');
+    if (!id) { id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); localStorage.setItem('raptorai_chat_sid', id); }
+    return id;
+  } catch (e) { return 'tmp' + Math.random().toString(36).slice(2, 10); }
+}
+const CHAT_SESSION_ID = chatSessionId();
+
+// Чат открывается сразу, без имени и email. Контакт агент спрашивает сам по ходу диалога.
+function openChatWithoutGate() {
   chatGatePassed = true;
+  if (!chatUserName) chatUserName = 'Гость';
+  if (!chatUserEmail) chatUserEmail = 'guest-' + CHAT_SESSION_ID + '@chat.raptorai.ru';
   document.getElementById('chat-gate').style.display = 'none';
   document.getElementById('chat-body').style.display = 'flex';
   document.getElementById('chat-input-row').style.display = 'flex';
-  const greeting = (typeof isNewYearPeriod !== 'undefined' && isNewYearPeriod)
-    ? `🎄 С наступающим, ${name}! Я Дмитрий, ИИ-ассистент RaptorAI. Даже под ёлкой продолжаю помогать с автоматизацией — пишите, что нужно, можно прислать и фото или скриншот.`
-    : `Привет, ${name}! Я Дмитрий, ИИ-ассистент RaptorAI. Расскажите, что хотите автоматизировать — можно прислать и скриншот или фото, если так понятнее.`;
-  appendChatMessage('bot', greeting);
-  document.getElementById('chat-text-input').focus();
+  const legal = document.getElementById('chat-legal'); if (legal) legal.style.display = 'block';
+  if (!chatHistoryMessages.length) {
+    appendChatMessage('bot', 'Здравствуйте! Я ИИ-ассистент RaptorAI. Спросите про цены, сроки или примеры работ. Когда захотите точный расчёт, передам вашу задачу менеджеру.');
+  }
 }
+function passChatGate() { openChatWithoutGate(); }
 
 function onChatInputChange() {
   const ta = document.getElementById('chat-text-input');
@@ -129,7 +132,7 @@ function appendChatMessage(role, text, imageUrl, savedTime, showConsultCta) {
     const cta = document.createElement('a');
     cta.href = '#contact';
     cta.className = 'chat-cta-btn';
-    cta.textContent = 'Консультация';
+    cta.textContent = 'Получить расчёт';
     cta.onclick = function () {
       toggleChat();
       setTimeout(function () {
@@ -186,6 +189,7 @@ async function sendChatMessage() {
       body: JSON.stringify({
         name: chatUserName,
         email: chatUserEmail,
+        session_id: CHAT_SESSION_ID,
         message: text,
         image: image || null,
         source: 'raptorai.ru'
@@ -204,4 +208,6 @@ async function sendChatMessage() {
 }
 
 restoreChatHistory();
+if (!chatGatePassed) openChatWithoutGate();
+else { const lg = document.getElementById('chat-legal'); if (lg) lg.style.display = 'block'; }
 
