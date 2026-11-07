@@ -908,10 +908,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <!-- STATS -->
 <div class="stats" style="position:relative;z-index:1">
-  <div class="stat-item"><span class="stat-num" data-roll="3-7">3-7</span><div class="stat-label">дней от задачи до запуска</div></div>
-  <div class="stat-item"><span class="stat-num" data-roll="10 сек">10 сек</span><div class="stat-label">ответ клиенту днём и ночью</div></div>
-  <div class="stat-item"><span class="stat-num" data-roll="6×">6×</span><div class="stat-label">больше клиентов у ТехноСтроя за 8 месяцев</div></div>
-  <div class="stat-item"><span class="stat-num" data-roll="30 дней">30 дней</span><div class="stat-label">гарантии после сдачи</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="+100">+100</span><div class="stat-label">выполненных проектов</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="+10 млн ₽">+10 млн ₽</span><div class="stat-label">сэкономлено нашим клиентам</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="+1000 ч">+1000 ч</span><div class="stat-label">сэкономлено нашим клиентам</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="×1.5">×1.5</span><div class="stat-label">зарабатывают клиенты, внедрившие ИИ-агента</div></div>
 </div>
 
 <!-- PAIN -->
@@ -969,7 +969,14 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="service-price"><small>от</small><b>50 000 ₽</b></div>
       </a>
     </div>
-    <p style="font-size:14px;color:var(--gray);margin-top:20px;text-align:center">Строим на: ChatGPT · Claude · Gemini · n8n · Telegram</p>
+    <p style="font-size:13px;color:var(--gray);margin-top:24px;text-align:center;text-transform:uppercase;letter-spacing:.06em">Строим на</p>
+    <div class="tech-badges reveal">
+      <span class="tech-badge"><i class="fa-solid fa-comment-dots"></i>ChatGPT</span>
+      <span class="tech-badge"><i class="fa-solid fa-wand-magic-sparkles"></i>Claude</span>
+      <span class="tech-badge"><i class="fa-brands fa-google"></i>Gemini</span>
+      <span class="tech-badge"><i class="fa-solid fa-diagram-project"></i>n8n</span>
+      <span class="tech-badge"><i class="fa-brands fa-telegram"></i>Telegram</span>
+    </div>
     <div class="premium reveal">
       <div>
         <span class="premium-tag">Под ключ</span>
@@ -1297,7 +1304,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="cmp-wrap reveal">
     <table class="cmp-table">
       <thead>
-        <tr><th></th><th class="cmp-us">RaptorAI</th><th>Конструктор ботов</th><th>Агентство / фрилансер</th></tr>
+        <tr><th></th><th class="cmp-us"><img src="assets/logo.png" alt="RaptorAI" class="cmp-logo">RaptorAI</th><th>Конструктор ботов</th><th>Агентство / фрилансер</th></tr>
       </thead>
       <tbody>
         <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">частично</span></td><td><span class="cmp-no">&#10007;</span> часто плывёт</td></tr>
@@ -1306,6 +1313,9 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">сильно ограничено</span></td><td><span class="cmp-mid">возможно, дороже</span></td></tr>
         <tr><td>Гарантия после сдачи</td><td class="cmp-us">30 дней бесплатно</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-mid">редко</span></td></tr>
         <tr><td>Оплата после запуска</td><td class="cmp-us">только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td>фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-mid">зависит от студии</span></td></tr>
+        <tr><td>Сдано проектов</td><td class="cmp-us"><b class="cmp-hero-num">100+</b></td><td><span class="cmp-mid">не раскрывают</span></td><td><span class="cmp-mid">не раскрывают</span></td></tr>
+        <tr><td>Доказанный результат с цифрами</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> например, 6× клиентов за 8&nbsp;мес.</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-mid">иногда</span></td></tr>
+        <tr><td>Клиенты зарабатывают больше после внедрения</td><td class="cmp-us"><b class="cmp-hero-num">×1.5</b></td><td><span class="cmp-mid">—</span></td><td><span class="cmp-mid">—</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -1845,6 +1855,18 @@ html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-pan
 .cw-money b{flex:0 0 auto;white-space:nowrap;font-weight:900;font-size:clamp(28px,3.4vw,38px);line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,#00D4FF,#8C7BFF,#FF7AE0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .cw-money span{font-size:13.4px;line-height:1.5;color:rgba(240,244,248,.82);font-weight:500}
 @media(max-width:600px){.cw-money{gap:12px;padding:14px 15px}}
+
+.tech-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px}
+.tech-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:14px;font-weight:600;color:rgba(240,244,248,.85)}
+.tech-badge i{color:var(--cyan);font-size:14px}
+
+.cmp-logo{width:20px;height:20px;object-fit:contain;vertical-align:-4px;margin-right:6px}
+.cmp-hero-num{color:var(--cyan);font-size:16px;font-weight:800}
+.cmp-table td.cmp-us{position:relative;box-shadow:inset 0 0 0 1px rgba(0,212,255,.18)}
+.cmp-table thead th.cmp-us{position:relative}
+.cmp-table tbody tr{transition:background .25s}
+.cmp-table tbody tr:hover{background:rgba(255,255,255,.025)}
+.cmp-table tbody tr:hover td.cmp-us{background:rgba(0,212,255,.1)}
 </style>
 <script src="/js/chat.v2.js" defer></script>
 
