@@ -781,6 +781,24 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .chat-legal{font-size:11px;color:rgba(240,244,248,.5);padding:0 16px 10px;position:relative;z-index:1}
 .chat-legal a{color:rgba(240,244,248,.7)}
 </style>
+
+<style id="raptor-compare">
+#compare{padding:80px 0}
+.cmp-wrap{overflow-x:auto;margin-top:36px;-webkit-overflow-scrolling:touch}
+.cmp-table{width:100%;min-width:640px;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.cmp-table th,.cmp-table td{padding:16px 18px;text-align:left;font-size:14px;border-bottom:1px solid var(--border)}
+.cmp-table th{font-size:13px;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.cmp-table thead th:first-child{background:transparent}
+.cmp-table thead th.cmp-us{color:var(--cyan);font-size:15px;text-transform:none;letter-spacing:0}
+.cmp-table tbody tr:last-child td{border-bottom:none}
+.cmp-table td:first-child{color:#fff;font-weight:500}
+.cmp-table td.cmp-us{background:rgba(0,212,255,.06);font-weight:600;color:#fff}
+.cmp-yes{color:#3ddc84}
+.cmp-no{color:#ff5a6e}
+.cmp-mid{color:var(--gray)}
+.cmp-note{margin-top:18px;font-size:14px;color:var(--gray)}
+@media(max-width:640px){.cmp-table th,.cmp-table td{padding:12px 14px;font-size:13px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#services">К содержимому</a>
@@ -831,7 +849,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
       <a href="#cases" class="btn-secondary">Смотреть кейсы</a>
     </div>
-    <p class="hero-micro">от 4 990 ₽ · цена и срок до старта · 30 дней гарантии</p>
     <p class="hero-aud">Для интернет-магазинов, опта и сервисных компаний</p>
   </div>
   <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
@@ -840,10 +857,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <!-- STATS -->
 <div class="stats" style="position:relative;z-index:1">
-  <div class="stat-item"><span class="stat-num" data-roll="3-7">3-7</span><div class="stat-label">дней от задачи до запуска</div></div>
-  <div class="stat-item"><span class="stat-num" data-roll="10 сек">10 сек</span><div class="stat-label">ответ клиенту днём и ночью</div></div>
-  <div class="stat-item"><span class="stat-num" data-roll="13 379">13 379</span><div class="stat-label">товаров в базе одного из наших агентов</div></div>
-  <div class="stat-item"><span class="stat-num" data-roll="30 дней">30 дней</span><div class="stat-label">гарантии после сдачи</div></div>
+  <div class="stat-item"><span class="stat-num" data-target="100" data-suffix="+">0+</span><div class="stat-label">успешных проектов</div></div>
+  <div class="stat-item"><span class="stat-num" data-target="1000" data-suffix="+">0+</span><div class="stat-label">часов сэкономлено нашим клиентам</div></div>
+  <div class="stat-item"><span class="stat-num" data-target="10" data-suffix=" млн ₽">0 млн ₽</span><div class="stat-label">сэкономлено клиентам</div></div>
+  <div class="stat-item"><span class="stat-num">x1,5</span><div class="stat-label">больше зарабатывают клиенты с автоматизацией</div></div>
 </div>
 
 <!-- PAIN -->
@@ -862,7 +879,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
   <div class="fn-cta reveal"><a href="#calc" class="btn-primary">Посчитать, сколько это стоит</a><p>Минута, без регистрации. Считаем по вашим цифрам.</p></div>
 </section>
-
 <!-- SERVICES -->
 <section id="services" style="background: var(--bg2);">
   <div class="container">
@@ -929,133 +945,36 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     
   </div>
 </section>
-
-<!-- PACKAGES -->
-<section id="packages">
+<!-- HOW IT WORKS -->
+<section id="how">
   <div class="container">
-    <div class="section-label">Пакеты</div>
-    <h2 class="section-title">Сколько <span>стоит</span></h2>
-    <p class="section-sub">Ориентир по цене. Точную стоимость называем после консультации и фиксируем до старта.</p>
-    <div class="pk-grid reveal">
-      <div class="pk-card">
-        <div class="pk-name">Старт</div>
-        <div class="pk-price"><small>от</small> 4 990 ₽</div>
-        <div class="pk-for">одна задача, один канал</div>
-        <ul>
-          <li><i class="fa-solid fa-check"></i>ИИ-агент или Telegram-бот на одном канале</li>
-          <li><i class="fa-solid fa-check"></i>Отвечает по вашим вопросам и материалам</li>
-          <li><i class="fa-solid fa-check"></i>Заявки приходят вам в Telegram</li>
-        </ul>
-        <div class="pk-term">Срок: 3-5 дней</div>
-        <a href="#contact" class="btn-secondary">Получить расчёт</a>
+    <div class="section-label">Процесс</div>
+    <h2 class="section-title">Как мы <span>работаем</span></h2>
+    <p class="section-sub">Без лишней бюрократии — от задачи до готового решения за 3–7 дней.</p>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Консультация</div>
+        <p class="step-desc">Разбираемся в вашей задаче, предлагаем решение и называем точную цену. Без скрытых платежей.</p>
       </div>
-      <div class="pk-card pk-hot">
-        <div class="pk-badge">Чаще выбирают</div>
-        <div class="pk-name">Бизнес</div>
-        <div class="pk-price"><small>от</small> 25 000 ₽</div>
-        <div class="pk-for">агент + интеграция с CRM</div>
-        <ul>
-          <li><i class="fa-solid fa-check"></i>ИИ-агент сразу на сайте и в Telegram</li>
-          <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам, ценам и материалам</li>
-          <li><i class="fa-solid fa-check"></i>Сам уточняет задачу и бюджет клиента</li>
-          <li><i class="fa-solid fa-check"></i>Передаёт заявки в AmoCRM, Bitrix24 или Google Таблицу</li>
-          <li><i class="fa-solid fa-check"></i>Уведомляет менеджера о каждой заявке</li>
-        </ul>
-        <div class="pk-term">Срок: 5-7 дней</div>
-        <a href="#contact" class="btn-primary">Получить расчёт</a>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Разработка</div>
+        <p class="step-desc">Строим систему, тестируем на реальных данных и показываем промежуточный результат.</p>
       </div>
-      <div class="pk-card">
-        <div class="pk-name">Под ключ</div>
-        <div class="pk-price"><small>от</small> 50 000 ₽</div>
-        <div class="pk-for">несколько систем в связке</div>
-        <ul>
-          <li><i class="fa-solid fa-check"></i>ИИ-агент, CRM, 1С и каталог товаров (RAG)</li>
-          <li><i class="fa-solid fa-check"></i>Отчёты и автоматизация процессов</li>
-          <li><i class="fa-solid fa-check"></i>Обучение команды</li>
-          <li><i class="fa-solid fa-check"></i>NDA и оплата по этапам</li>
-        </ul>
-        <div class="pk-term">Срок: по смете</div>
-        <a href="#contact" class="btn-secondary">Получить расчёт</a>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Запуск</div>
+        <p class="step-desc">Деплоим на ваш сервер или наш, передаём управление и обучаем как пользоваться.</p>
       </div>
-    </div>
-    <p class="pk-note">Во всех пакетах: цена и срок фиксируются до старта, 30 дней гарантии, система остаётся вашей. После запуска вы платите только за ИИ-модель и хостинг, обычно до 3 000 ₽ в месяц.</p>
-  </div>
-</section>
-<section id="why">
-  <div class="container">
-    <div class="section-label">Преимущества</div>
-    <h2 class="section-title">Почему выбирают <span>RaptorAI</span></h2>
-    <p class="section-sub">Мы не просто настраиваем инструменты — мы строим системы которые реально работают.</p>
-    <div class="why-grid">
-      <div class="why-card s3 has-big">
-        <div class="why-icon"><i class="fa-solid fa-rocket"></i></div>
-        <div class="why-big"><b>3&#8201;–&#8201;7</b><span>дней от задачи до решения</span></div>
-        <div class="why-title">Быстрый запуск</div><p class="why-desc">От задачи до готового решения за 3–7 дней. Никаких затяжных согласований и бесконечных правок.</p>
-      </div>
-      <div class="why-card s3 has-big">
-        <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <div class="why-big"><b>100%</b><span>успешных сдач за 3 года</span></div>
-        <div class="why-title">Гарантия результата</div><p class="why-desc">100% успешных сдач за 3 года. После запуска даём гарантию 30 дней: ошибки исправляем бесплатно.</p>
-      </div>
-      <div class="why-card s4">
-        <div class="why-icon"><i class="fa-solid fa-code-branch"></i></div>
-        <div class="why-title">Живая система, не конструктор</div><p class="why-desc">Система принадлежит вам, а не платформе. Вы платите только за реальное использование API и хостинг — без наценки посредников и скрытых подписок.</p>
-      </div>
-      <div class="why-card s2">
-        <div class="why-icon"><i class="fa-solid fa-chart-line"></i></div>
-        <div class="why-title">Измеримый результат</div><p class="why-desc">Экономия часов, снижение ошибок, рост конверсии — даём конкретные цифры до и после.</p>
-      </div>
-      <div class="why-card s3">
-        <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
-        <div class="why-title">Всегда на связи</div><p class="why-desc">Отвечаем быстро, объясняем понятно. Вы всегда знаете на каком этапе находится ваш проект.</p>
-      </div>
-      <div class="why-card s3">
-        <div class="why-icon"><i class="fa-solid fa-sliders"></i></div>
-        <div class="why-title">Индивидуальный подход</div><p class="why-desc">Не продаём коробочные решения. Каждый проект строим под конкретную задачу и бюджет клиента.</p>
-      </div>
-      <div class="why-card s3">
-        <div class="why-icon"><i class="fa-solid fa-lock"></i></div>
-        <div class="why-title">Безопасность данных</div><p class="why-desc">Работаем с вашими данными аккуратно — доступы, ключи и конфиденциальная информация под контролем.</p>
-      </div>
-      <div class="why-card s3">
-        <div class="why-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
-        <div class="why-title">Поддержка после запуска</div><p class="why-desc">Не бросаем проект после сдачи — донастраиваем и дорабатываем систему по мере роста бизнеса.</p>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Поддержка</div>
+        <p class="step-desc">Остаёмся на связи: гарантия 30 дней, ошибки исправляем бесплатно.</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- CALC -->
-<section id="calc" class="fn-sec" style="background:var(--bg2)">
-  <div class="fn-head reveal">
-    <div class="section-label">Калькулятор</div>
-    <h2 class="section-title">Сколько вы <span>теряете</span> в месяц</h2>
-    <p class="section-sub">Подвигайте ползунки под свой бизнес - и увидите цену бездействия.</p>
-  </div>
-  <div class="calc reveal">
-    <div class="calc-in">
-      <p class="calc-note">Это пример. Подвигайте ползунки под свой бизнес.</p>
-      <div class="calc-row"><label for="c-leads">Заявок и обращений в месяц <output id="o-leads"></output></label><input type="range" id="c-leads" min="10" max="1000" step="10" value="200"></div>
-      <div class="calc-row"><label for="c-check">Средний чек <output id="o-check"></output></label><input type="range" id="c-check" min="1000" max="300000" step="1000" value="15000"></div>
-      <div class="calc-row"><label for="c-lost">Какая доля заявок теряется <output id="o-lost"></output></label><input type="range" id="c-lost" min="5" max="60" step="5" value="15"></div>
-      <div class="calc-row"><label for="c-hours">Часов рутины в неделю <output id="o-hours"></output></label><input type="range" id="c-hours" min="0" max="80" step="1" value="10"></div>
-      <div class="calc-row"><label for="c-rate">Стоимость часа сотрудника <output id="o-rate"></output></label><input type="range" id="c-rate" min="200" max="3000" step="100" value="500"></div>
-    </div>
-    <div class="calc-out">
-      <div>
-        <div class="calc-lbl">Вы недополучаете</div>
-        <div class="calc-big"><span id="r-total">0</span> <small>₽ / мес</small></div>
-        <div class="calc-split">Упущенная выручка из-за потерянных заявок: <b id="r-rev">0</b> ₽<br>Стоимость ручной рутины: <b id="r-man">0</b> ₽</div>
-        <div class="calc-fix">Если вернуть хотя бы половину - это <em id="r-back">0 ₽</em> в месяц. Комплексная автоматизация от 50 000 ₽ <em id="r-pay"></em></div>
-      </div>
-      <div>
-        <button class="btn-primary" style="width:100%" onclick="calcToQuiz()">Получить точный расчёт под мой бизнес</button>
-        <div class="calc-note">Это оценка по введённым вами цифрам, а не гарантия результата.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CASES -->
 <section id="cases" style="background: var(--bg2);">
   <div class="container">
@@ -1145,7 +1064,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
   </div>
 </section>
-
 <!-- COMPANIES -->
 <section id="companies" class="fn-sec">
   <div class="fn-head reveal">
@@ -1175,38 +1093,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
   <div class="co-bar reveal"><span>Задача на крупную сумму? Разберём её лично и предложим решение под ваш бюджет.</span><a href="#contact">Получить расчёт за 1 минуту <i class="fa-solid fa-arrow-right"></i></a></div>
 </section>
-
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="container">
-    <div class="section-label">Процесс</div>
-    <h2 class="section-title">Как мы <span>работаем</span></h2>
-    <p class="section-sub">Без лишней бюрократии — от задачи до готового решения за 3–7 дней.</p>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Консультация</div>
-        <p class="step-desc">Разбираемся в вашей задаче, предлагаем решение и называем точную цену. Без скрытых платежей.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Разработка</div>
-        <p class="step-desc">Строим систему, тестируем на реальных данных и показываем промежуточный результат.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Запуск</div>
-        <p class="step-desc">Деплоим на ваш сервер или наш, передаём управление и обучаем как пользоваться.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-title">Поддержка</div>
-        <p class="step-desc">Остаёмся на связи: гарантия 30 дней, ошибки исправляем бесплатно.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- TESTIMONIALS -->
 <!--noindex-->
 <section id="testimonials" data-nosnippet style="background: var(--bg2);">
@@ -1296,6 +1182,153 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     @media (prefers-reduced-motion: reduce) { .testimonials-carousel { animation: none; width: auto; flex-wrap: wrap; } .testimonial-card[aria-hidden="true"] { display: none; } }
   </style>
 </section>
+<section id="compare">
+  <div class="container">
+    <div class="section-label">Почему мы</div>
+    <h2 class="section-title">Чем мы лучше <span>альтернатив</span></h2>
+    <p class="section-sub">Сравните сами - условия выгоднее не на словах, а по факту.</p>
+    <div class="cmp-wrap reveal">
+    <table class="cmp-table">
+      <thead>
+        <tr><th></th><th class="cmp-us">RaptorAI</th><th>Конструктор ботов (SaleBot, ManyChat и т.п.)</th><th>Агентство / фрилансер</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">частично</span></td><td><span class="cmp-no">&#10007;</span> часто плывёт</td></tr>
+        <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-no">&#10007;</span> аренда платформы</td><td><span class="cmp-mid">зависит</span></td></tr>
+        <tr><td>Запуск</td><td class="cmp-us">3-7 дней</td><td>1-2 дня, но шаблон</td><td>2-4 недели</td></tr>
+        <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">сильно ограничено</span></td><td><span class="cmp-mid">возможно, дороже</span></td></tr>
+        <tr><td>Гарантия после сдачи</td><td class="cmp-us">30 дней бесплатно</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-mid">редко</span></td></tr>
+        <tr><td>Оплата после запуска</td><td class="cmp-us">только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td>фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-mid">зависит от студии</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="cmp-note">Конструктор выгоден, если хватает шаблона и вы готовы вечно платить за подписку. Если нужна система, которая решает именно вашу задачу и остаётся вашей - это к нам.</p>
+  </div>
+</section>
+<section id="why">
+  <div class="container">
+    <div class="section-label">Преимущества</div>
+    <h2 class="section-title">Почему выбирают <span>RaptorAI</span></h2>
+    <p class="section-sub">Мы не просто настраиваем инструменты — мы строим системы которые реально работают.</p>
+    <div class="why-grid">
+      <div class="why-card s3 has-big">
+        <div class="why-icon"><i class="fa-solid fa-rocket"></i></div>
+        <div class="why-big"><b>3&#8201;–&#8201;7</b><span>дней от задачи до решения</span></div>
+        <div class="why-title">Быстрый запуск</div><p class="why-desc">От задачи до готового решения за 3–7 дней. Никаких затяжных согласований и бесконечных правок.</p>
+      </div>
+      <div class="why-card s3 has-big">
+        <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="why-big"><b>100%</b><span>успешных сдач за 3 года</span></div>
+        <div class="why-title">Гарантия результата</div><p class="why-desc">100% успешных сдач за 3 года. После запуска даём гарантию 30 дней: ошибки исправляем бесплатно.</p>
+      </div>
+      <div class="why-card s4">
+        <div class="why-icon"><i class="fa-solid fa-code-branch"></i></div>
+        <div class="why-title">Живая система, не конструктор</div><p class="why-desc">Система принадлежит вам, а не платформе. Вы платите только за реальное использование API и хостинг — без наценки посредников и скрытых подписок.</p>
+      </div>
+      <div class="why-card s2">
+        <div class="why-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="why-title">Измеримый результат</div><p class="why-desc">Экономия часов, снижение ошибок, рост конверсии — даём конкретные цифры до и после.</p>
+      </div>
+      <div class="why-card s3">
+        <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
+        <div class="why-title">Всегда на связи</div><p class="why-desc">Отвечаем быстро, объясняем понятно. Вы всегда знаете на каком этапе находится ваш проект.</p>
+      </div>
+      <div class="why-card s3">
+        <div class="why-icon"><i class="fa-solid fa-sliders"></i></div>
+        <div class="why-title">Индивидуальный подход</div><p class="why-desc">Не продаём коробочные решения. Каждый проект строим под конкретную задачу и бюджет клиента.</p>
+      </div>
+      <div class="why-card s3">
+        <div class="why-icon"><i class="fa-solid fa-lock"></i></div>
+        <div class="why-title">Безопасность данных</div><p class="why-desc">Работаем с вашими данными аккуратно — доступы, ключи и конфиденциальная информация под контролем.</p>
+      </div>
+      <div class="why-card s3">
+        <div class="why-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+        <div class="why-title">Поддержка после запуска</div><p class="why-desc">Не бросаем проект после сдачи — донастраиваем и дорабатываем систему по мере роста бизнеса.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="container">
+    <div class="section-label">Пакеты</div>
+    <h2 class="section-title">Сколько <span>стоит</span></h2>
+    <p class="section-sub">Ориентир по цене. Точную стоимость называем после консультации и фиксируем до старта.</p>
+    <div class="pk-grid reveal">
+      <div class="pk-card">
+        <div class="pk-name">Старт</div>
+        <div class="pk-price"><small>от</small> 4 990 ₽</div>
+        <div class="pk-for">подходит, если: один канал (сайт ИЛИ Telegram), без интеграций с CRM/1С</div>
+        <ul>
+          <li><i class="fa-solid fa-check"></i>ИИ-агент или Telegram-бот на одном канале</li>
+          <li><i class="fa-solid fa-check"></i>Отвечает по вашим вопросам и материалам</li>
+          <li><i class="fa-solid fa-check"></i>Заявки приходят вам в Telegram</li>
+        </ul>
+        <div class="pk-term">Срок: 3-5 дней</div>
+        <a href="#contact" class="btn-secondary">Получить расчёт</a>
+      </div>
+      <div class="pk-card pk-hot">
+        <div class="pk-badge">Чаще выбирают</div>
+        <div class="pk-name">Бизнес</div>
+        <div class="pk-price"><small>от</small> 25 000 ₽</div>
+        <div class="pk-for">подходит, если: нужны оба канала (сайт + Telegram) и передача заявок в CRM/1С/таблицу</div>
+        <ul>
+          <li><i class="fa-solid fa-check"></i>ИИ-агент сразу на сайте и в Telegram</li>
+          <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам, ценам и материалам</li>
+          <li><i class="fa-solid fa-check"></i>Сам уточняет задачу и бюджет клиента</li>
+          <li><i class="fa-solid fa-check"></i>Передаёт заявки в AmoCRM, Bitrix24 или Google Таблицу</li>
+          <li><i class="fa-solid fa-check"></i>Уведомляет менеджера о каждой заявке</li>
+        </ul>
+        <div class="pk-term">Срок: 5-7 дней</div>
+        <a href="#contact" class="btn-primary">Получить расчёт</a>
+      </div>
+      <div class="pk-card">
+        <div class="pk-name">Под ключ</div>
+        <div class="pk-price"><small>от</small> 50 000 ₽</div>
+        <div class="pk-for">подходит, если: нужно несколько систем вместе (CRM + 1С + каталог товаров RAG)</div>
+        <ul>
+          <li><i class="fa-solid fa-check"></i>ИИ-агент, CRM, 1С и каталог товаров (RAG)</li>
+          <li><i class="fa-solid fa-check"></i>Отчёты и автоматизация процессов</li>
+          <li><i class="fa-solid fa-check"></i>Обучение команды</li>
+          <li><i class="fa-solid fa-check"></i>NDA и оплата по этапам</li>
+        </ul>
+        <div class="pk-term">Срок: по смете</div>
+        <a href="#contact" class="btn-secondary">Получить расчёт</a>
+      </div>
+    </div>
+    <p class="pk-note">Во всех пакетах: цена и срок фиксируются до старта, 30 дней гарантии, система остаётся вашей. После запуска вы платите только за ИИ-модель и хостинг, обычно до 3 000 ₽ в месяц.</p>
+  </div>
+</section>
+<!-- CALC -->
+<section id="calc" class="fn-sec" style="background:var(--bg2)">
+  <div class="fn-head reveal">
+    <div class="section-label">Калькулятор</div>
+    <h2 class="section-title">Сколько вы <span>теряете</span> в месяц</h2>
+    <p class="section-sub">Подвигайте ползунки под свой бизнес - и увидите цену бездействия.</p>
+  </div>
+  <div class="calc reveal">
+    <div class="calc-in">
+      <p class="calc-note">Это пример. Подвигайте ползунки под свой бизнес.</p>
+      <div class="calc-row"><label for="c-leads">Заявок и обращений в месяц <output id="o-leads"></output></label><input type="range" id="c-leads" min="10" max="1000" step="10" value="200"></div>
+      <div class="calc-row"><label for="c-check">Средний чек <output id="o-check"></output></label><input type="range" id="c-check" min="1000" max="300000" step="1000" value="15000"></div>
+      <div class="calc-row"><label for="c-lost">Какая доля заявок теряется <output id="o-lost"></output></label><input type="range" id="c-lost" min="5" max="60" step="5" value="15"></div>
+      <div class="calc-row"><label for="c-hours">Часов рутины в неделю <output id="o-hours"></output></label><input type="range" id="c-hours" min="0" max="80" step="1" value="10"></div>
+      <div class="calc-row"><label for="c-rate">Стоимость часа сотрудника <output id="o-rate"></output></label><input type="range" id="c-rate" min="200" max="3000" step="100" value="500"></div>
+    </div>
+    <div class="calc-out">
+      <div>
+        <div class="calc-lbl">Вы недополучаете</div>
+        <div class="calc-big"><span id="r-total">0</span> <small>₽ / мес</small></div>
+        <div class="calc-split">Упущенная выручка из-за потерянных заявок: <b id="r-rev">0</b> ₽<br>Стоимость ручной рутины: <b id="r-man">0</b> ₽</div>
+        <div class="calc-fix">Если вернуть хотя бы половину - это <em id="r-back">0 ₽</em> в месяц. Комплексная автоматизация от 50 000 ₽ <em id="r-pay"></em></div>
+      </div>
+      <div>
+        <button class="btn-primary" style="width:100%" onclick="calcToQuiz()">Получить точный расчёт под мой бизнес</button>
+        <div class="calc-note">Это оценка по введённым вами цифрам, а не гарантия результата.</div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--/noindex-->
 
 <!-- FAQ -->
@@ -1315,6 +1348,17 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <details class="faq-item"><summary>Чем вы отличаетесь от готовых конструкторов ботов?</summary><p>Конструктор даёт шаблон, а мы строим систему под ваши процессы. Она принадлежит вам, а не платформе, поэтому вы не зависите от тарифов и ограничений чужого сервиса и платите только за реальное использование.</p></details>
       <details class="faq-item"><summary>Сколько я буду платить после запуска?</summary><p>Подписки у нас нет, система остаётся вашей. После запуска вы платите только за использование ИИ-модели (по факту обработанных сообщений) и за хостинг, если система работает на сервере. Обычно это до 3 000 ₽ в месяц, точную сумму назовём на консультации. Сопровождение по желанию, от 3 000 ₽ в месяц.</p></details>
       <details class="faq-item"><summary>Что входит в цену от 4 990 ₽?</summary><p>ИИ-агент или Telegram-бот на одном канале, ответы по вашим материалам и передача заявок вам в Telegram. Интеграции с CRM, 1С и каталогом считаются отдельно, их цену назовём до старта.</p></details>
+    </div>
+  </div>
+</section>
+<!-- FINAL CTA -->
+<section id="final-cta" style="padding:90px 24px;text-align:center;position:relative;z-index:1;background:linear-gradient(180deg,transparent,rgba(0,212,255,.04))">
+  <div class="container" style="max-width:720px">
+    <h2 class="section-title">Готовы перестать <span>терять заявки</span>?</h2>
+    <p class="section-sub" style="margin:0 auto 32px">Цена и срок — до старта. Систему вы получаете в собственность. Если за 30 дней что-то сломается — чиним бесплатно.</p>
+    <div class="hero-btns" style="justify-content:center">
+      <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
+      <a href="#faq" class="btn-secondary">Остались вопросы?</a>
     </div>
   </div>
 </section>
@@ -1382,8 +1426,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     </div>
   </div>
 </section>
-
-
 <!-- SUBSCRIBE -->
 <section id="checklist" class="fn-sec" style="padding-top:40px;padding-bottom:40px">
   <div class="container">
@@ -1407,7 +1449,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     </div>
   </div>
 </section>
-
 <!-- BLOG -->
 <section id="blog" style="background:var(--bg2);border-top:1px solid var(--border);padding:100px 24px;position:relative;z-index:1">
   <div class="container">
