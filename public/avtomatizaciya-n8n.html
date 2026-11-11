@@ -782,6 +782,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> Автоматизация на n8n</div>
     <h1>Автоматизация бизнеса на n8n: <span class="irid-text">заявки, CRM и отчёты без ручной работы</span></h1>
     <p class="hero-sub">Связываем ваши сервисы в единую систему: заявки сами попадают в CRM, менеджеры получают уведомления, а отчёты собираются без вашего участия.</p>
+    <p style="margin-top:10px;font-size:15px;color:var(--gray)">Для компаний, где заявки, таблицы и отчёты до сих пор переносят руками.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
       <a href="#details" class="btn-secondary">Что входит</a>
@@ -813,11 +814,12 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="section-label">Пример</div>
     <h2 class="section-title">Как это <span>работает на практике</span></h2>
     <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> n8n / CRM</span><h3 class="case-brand">AmoCRM</h3></div>
-      <div class="case-title">Как автоматизировать AmoCRM с помощью n8n</div>
-      <p class="case-desc">Пошаговый разбор: от подключения API до умного агента, который квалифицирует лиды и заводит их в CRM.</p>
-      <p style="margin-top:6px"><a href="/blog-amocrm-n8n.html" class="tg-link" style="margin-top:0">Читать руководство</a></p>
+      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> n8n / 1С</span><h3 class="case-brand">Накладные</h3></div>
+      <div class="case-title">Накладные поставщиков попадают в 1С без ручного ввода</div>
+      <p class="case-desc">Система читает накладную, сама находит товары в каталоге из 50 000 позиций и заносит их в 1С. Человек подтверждает только спорные строки, в один клик.</p>
+      <p style="margin-top:18px"><a href="/case-nakladnye-1c.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
     </div>
+    <p style="margin-top:18px"><a href="/blog-amocrm-n8n.html" class="tg-link">Пошаговый разбор: как автоматизировать AmoCRM на n8n →</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="/blog-avtomatizaciya-amocrm.html" class="tg-link">Что в amoCRM можно передать роботу →</a></p>
   </div>
 </section>
 
@@ -873,13 +875,13 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="pk-badge">Чаще выбирают</div>
         <div class="pk-name">Бизнес</div>
         <div class="pk-price"><small>от</small> 25 000 ₽</div>
-        <div class="pk-for">подходит, если: нужны оба канала (сайт + Telegram) и передача заявок в CRM/1С/таблицу</div>
+        <div class="pk-for">подходит, если: несколько процессов, CRM, таблицы, почта и мессенджеры</div>
         <ul>
-          <li><i class="fa-solid fa-check"></i>ИИ-агент сразу на сайте и в Telegram</li>
-          <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам, ценам и материалам</li>
-          <li><i class="fa-solid fa-check"></i>Сам уточняет задачу и бюджет клиента</li>
-          <li><i class="fa-solid fa-check"></i>Передаёт заявки в AmoCRM, Bitrix24 или Google Таблицу</li>
-          <li><i class="fa-solid fa-check"></i>Уведомляет менеджера о каждой заявке</li>
+          <li><i class="fa-solid fa-check"></i>До 5 связанных процессов</li>
+          <li><i class="fa-solid fa-check"></i>Подключение CRM, таблиц, почты и Telegram</li>
+          <li><i class="fa-solid fa-check"></i>Заявки с сайта, Telegram и почты сразу в CRM</li>
+          <li><i class="fa-solid fa-check"></i>Ежедневные отчёты по расписанию</li>
+          <li><i class="fa-solid fa-check"></i>Уведомления менеджерам о новых заявках и сделках</li>
         </ul>
         <div class="pk-term">Срок: 5-7 дней</div>
         <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
@@ -916,6 +918,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <details class="faq-item"><summary>Какие процессы стоит автоматизировать в первую очередь?</summary><p>Те, что повторяются каждый день и съедают время: приём заявок, ответы на типовые вопросы, перенос данных между сервисами, отчёты. На консультации находим самые выгодные.</p></details>
       <details class="faq-item"><summary>Что если у сервиса нет готовой интеграции?</summary><p>Подключаемся через API или вебхуки. Если API нет, ищем обходной путь и честно говорим, что возможно, до начала работы.</p></details>
       <details class="faq-item"><summary>Можно ли добавить ИИ в сценарий?</summary><p>Да. ИИ подключается как шаг: разбирает текст, отвечает клиентам, классифицирует заявки или извлекает данные из документов.</p></details>
+      <details class="faq-item"><summary>Что будет, если n8n или какой-то сервис упадёт?</summary><p>Сценарий сообщит об ошибке в Telegram, а заявка не потеряется: её можно обработать повторно. На сопровождении мы чиним сами.</p></details>
+      <details class="faq-item"><summary>Где работает n8n?</summary><p>На вашем сервере или на нашем, на выбор. Сценарии и данные остаются вашими.</p></details>
     </div>
     <p style="margin-top:36px;color:var(--gray);font-size:15px">Другие услуги: <a href="/ai-agent-dlya-biznesa.html" style="color:var(--cyan)">ИИ-агент для бизнеса</a> · <a href="/telegram-bot-s-ii.html" style="color:var(--cyan)">Telegram-бот с ИИ</a> · <a href="/#services" style="color:var(--cyan)">все услуги</a></p>
   </div>

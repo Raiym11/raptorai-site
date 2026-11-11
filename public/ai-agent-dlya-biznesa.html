@@ -782,6 +782,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> ИИ-агент для бизнеса</div>
     <h1>ИИ-агент для бизнеса: <span class="irid-text">отвечает клиентам и обрабатывает заявки 24/7</span></h1>
     <p class="hero-sub">ИИ-агент общается с клиентами на сайте и в мессенджерах, отсеивает нецелевые обращения и передаёт менеджеру только тех, кто готов покупать.</p>
+    <p style="margin-top:10px;font-size:15px;color:var(--gray)">Для компаний, где клиенты пишут на сайт, в Telegram и WhatsApp, а менеджеры не успевают отвечать.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
       <a href="#details" class="btn-secondary">Что входит</a>
@@ -808,6 +809,20 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
+<section id="models">
+  <div class="container">
+    <div class="section-label">Модели</div>
+    <h2 class="section-title">На какой модели <span>строим</span></h2>
+    <p class="section-sub">Подбираем под задачу. Если задача изменится, модель можно заменить без переделки агента.</p>
+    <div class="services-grid reveal" style="grid-template-columns:repeat(3,1fr)">
+      <div class="service-card" id="chatgpt"><div class="service-icon"><i class="fa-solid fa-comments"></i></div><div class="service-name">ChatGPT</div><p class="service-desc" style="margin-bottom:0">Быстрые ответы клиентам, продажи, квалификация заявок. Подходит большинству бизнесов, с него обычно и начинаем.</p></div>
+      <div class="service-card" id="gemini"><div class="service-icon"><i class="fa-solid fa-database"></i></div><div class="service-name">Gemini</div><p class="service-desc" style="margin-bottom:0">Большие каталоги, длинные документы, таблицы. Хорош, когда агенту нужно держать в голове много данных сразу.</p></div>
+      <div class="service-card" id="claude"><div class="service-icon"><i class="fa-solid fa-file-pen"></i></div><div class="service-name">Claude</div><p class="service-desc" style="margin-bottom:0">Договоры, отчёты, сложные письма. Выбираем, когда важна точность формулировок.</p></div>
+    </div>
+    <p style="margin-top:20px;font-size:15px;color:var(--gray);text-align:center">Модель подбираем под задачу на консультации. Если задача изменится, модель можно заменить без переделки агента.</p>
+  </div>
+</section>
+
 <section id="case">
   <div class="container">
     <div class="section-label">Пример</div>
@@ -817,7 +832,14 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="case-title">Квалификация входящих лидов для оптового бизнеса</div>
       <p class="case-desc">До внедрения был умеренный органический рост. Агент запущен в январе: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p>
       <div class="case-kpis"><div class="case-kpi"><b>753</b><span>клиентов в августе 2026</span></div><div class="case-kpi"><b>6×</b><span>рост после запуска ИИ-агента</span></div></div>
-      <p style="margin-top:18px"><a href="/#cases" class="tg-link" style="margin-top:0">Смотреть график роста</a></p>
+      <p style="margin-top:18px"><a href="/case-tehnostroy.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
+    </div>
+    <div class="case-card case-hero reveal" style="margin-top:28px">
+      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Каталог</span><h3 class="case-brand">Интернет-магазин</h3></div>
+      <div class="case-title">Интернет-магазин: агент знает весь каталог</div>
+      <p class="case-desc">ИИ-консультант отвечает покупателям по каталогу, днём и ночью, без участия менеджера.</p>
+      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на ответ</span></div><div class="case-kpi"><b>30 000 ₽</b><span>в месяц экономии на консультанте</span></div></div>
+      <p style="margin-top:18px"><a href="/case-katalog.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
     </div>
   </div>
 </section>
@@ -917,6 +939,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <details class="faq-item"><summary>Может ли агент ошибиться?</summary><p>Мы ограничиваем его вашей базой знаний и задаём правила: чего он не обещает и когда зовёт человека. На сдаче проверяем его на реальных вопросах ваших клиентов.</p></details>
       <details class="faq-item"><summary>Куда приходят заявки?</summary><p>В Telegram, таблицу, CRM (AmoCRM, Bitrix24) или на почту, как вам удобнее. Менеджер получает уведомление сразу.</p></details>
       <details class="faq-item"><summary>Сколько времени занимает запуск?</summary><p>Типовое решение запускаем за 3-7 дней. Для проектов с несколькими интеграциями срок фиксируем в смете до старта.</p></details>
+      <details class="faq-item"><summary>Что агент делает, если не знает ответа?</summary><p>Не придумывает. Говорит клиенту, что уточнит, и передаёт диалог менеджеру вместе с историей переписки.</p></details>
+      <details class="faq-item"><summary>Можно начать с малого?</summary><p>Да. Пакет «Старт» от 4 990 ₽: агент на одном канале с вашей базой знаний. Когда увидите результат, добавим CRM и другие каналы.</p></details>
     </div>
     <p style="margin-top:36px;color:var(--gray);font-size:15px">Другие услуги: <a href="/telegram-bot-s-ii.html" style="color:var(--cyan)">Telegram-бот с ИИ</a> · <a href="/avtomatizaciya-n8n.html" style="color:var(--cyan)">Автоматизация на n8n</a> · <a href="/#services" style="color:var(--cyan)">все услуги</a></p>
   </div>

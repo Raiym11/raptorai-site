@@ -782,6 +782,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> Telegram-бот с ИИ</div>
     <h1>Telegram-бот с ИИ: <span class="irid-text">консультирует клиентов и принимает заявки</span></h1>
     <p class="hero-sub">Бот отвечает на вопросы о ваших товарах и услугах, собирает заявки и записи и сразу сообщает вам, когда появился горячий клиент.</p>
+    <p style="margin-top:10px;font-size:15px;color:var(--gray)">Для бизнеса, где клиенты уже пишут в Telegram: магазины, услуги, запись, доставка.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
       <a href="#details" class="btn-secondary">Что входит</a>
@@ -813,11 +814,19 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="section-label">Пример</div>
     <h2 class="section-title">Как это <span>работает на практике</span></h2>
     <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-консультант</span><h3 class="case-brand">Интернет-магазин</h3></div>
-      <div class="case-title">ИИ-консультант для интернет-магазина на 13 000 товаров</div>
-      <p class="case-desc">Агент на базе Pinecone и GPT-4o-mini отвечает покупателям 24/7 по каталогу магазина. В статье разобрали, как мы проиндексировали товары и собрали систему.</p>
-      <p style="margin-top:6px"><a href="/blog-rag-agent.html" class="tg-link" style="margin-top:0">Читать разбор кейса</a></p>
+      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> Telegram-бот</span><h3 class="case-brand">Обложки</h3></div>
+      <div class="case-title">Обложки для роликов собираются в Telegram</div>
+      <p class="case-desc">Команда отправляет боту фото и текст, выбирает размер, и через 10 секунд получает готовую обложку в фирменном стиле. Раньше каждую верстали вручную.</p>
+      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на обложку</span></div></div>
     </div>
+    <div class="case-card case-hero reveal" style="margin-top:28px">
+      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-консультант</span><h3 class="case-brand">Интернет-магазин</h3></div>
+      <div class="case-title">ИИ-консультант для интернет-магазина</div>
+      <p class="case-desc">Отвечает покупателям по каталогу больше чем из 13 тысяч товаров, днём и ночью.</p>
+      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на ответ</span></div><div class="case-kpi"><b>30 000 ₽</b><span>в месяц экономии</span></div></div>
+      <p style="margin-top:18px"><a href="/case-katalog.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
+    </div>
+    <p style="margin-top:18px"><a href="/blog-rag-agent.html" class="tg-link">Как мы это сделали: техническая статья →</a></p>
   </div>
 </section>
 
@@ -875,11 +884,11 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="pk-price"><small>от</small> 25 000 ₽</div>
         <div class="pk-for">подходит, если: нужны оба канала (сайт + Telegram) и передача заявок в CRM/1С/таблицу</div>
         <ul>
-          <li><i class="fa-solid fa-check"></i>ИИ-агент сразу на сайте и в Telegram</li>
-          <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам, ценам и материалам</li>
-          <li><i class="fa-solid fa-check"></i>Сам уточняет задачу и бюджет клиента</li>
+          <li><i class="fa-solid fa-check"></i>Бот в Telegram и агент на сайте с одной базой знаний</li>
+          <li><i class="fa-solid fa-check"></i>Понимает голосовые сообщения</li>
+          <li><i class="fa-solid fa-check"></i>Принимает заявки и записи без длинных форм</li>
           <li><i class="fa-solid fa-check"></i>Передаёт заявки в AmoCRM, Bitrix24 или Google Таблицу</li>
-          <li><i class="fa-solid fa-check"></i>Уведомляет менеджера о каждой заявке</li>
+          <li><i class="fa-solid fa-check"></i>Уведомляет менеджера в Telegram о каждой заявке</li>
         </ul>
         <div class="pk-term">Срок: 5-7 дней</div>
         <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
@@ -916,6 +925,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <details class="faq-item"><summary>Бот работает только в Telegram?</summary><p>Основной канал Telegram, но тот же ИИ можно подключить к сайту и другим каналам, если нужно.</p></details>
       <details class="faq-item"><summary>Как бот узнаёт про мои товары и услуги?</summary><p>Мы собираем базу знаний из вашего каталога, прайса и документов. Бот отвечает только на её основе и не выдумывает условия.</p></details>
       <details class="faq-item"><summary>Что если клиент хочет поговорить с человеком?</summary><p>Бот передаёт диалог менеджеру вместе с историей, так что клиенту не нужно ничего повторять.</p></details>
+      <details class="faq-item"><summary>Бот может писать клиентам первым?</summary><p>Telegram разрешает боту писать только тем, кто сам его запустил. Таким клиентам бот может напоминать о записи или заказе.</p></details>
+      <details class="faq-item"><summary>Можно подключить бота к группе или каналу?</summary><p>Да, бот может отвечать в комментариях и группе по той же базе знаний.</p></details>
     </div>
     <p style="margin-top:36px;color:var(--gray);font-size:15px">Другие услуги: <a href="/ai-agent-dlya-biznesa.html" style="color:var(--cyan)">ИИ-агент для бизнеса</a> · <a href="/avtomatizaciya-n8n.html" style="color:var(--cyan)">Автоматизация на n8n</a> · <a href="/#services" style="color:var(--cyan)">все услуги</a></p>
   </div>
