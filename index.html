@@ -806,7 +806,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .cmp-yes{color:#3ddc84;margin-right:4px;vertical-align:middle}
 .cmp-no{color:#ff5a6e}
 .cmp-mid{color:var(--gray)}
-.cmp-note{margin-top:18px;font-size:14px;color:var(--gray)}
+.cmp-note{margin-top:18px;font-size:13px;color:var(--gray);text-align:center;white-space:nowrap}
 @media(max-width:640px){.cmp-table th,.cmp-table td{padding:12px 14px;font-size:13px}}
 
 /* таблица сравнения: живая */
@@ -823,6 +823,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .cmp-yes,.cmp-no{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:800;margin-right:6px;vertical-align:middle}
 .cmp-yes{background:rgba(61,220,132,.16);box-shadow:0 0 0 1px rgba(61,220,132,.45),0 0 14px rgba(61,220,132,.35)}
 .cmp-no{background:rgba(255,90,110,.12);box-shadow:0 0 0 1px rgba(255,90,110,.35)}
+.cmp-warn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:800;margin-right:6px;vertical-align:middle;color:#f5c542;background:rgba(245,197,66,.14);box-shadow:0 0 0 1px rgba(245,197,66,.4)}
 /* появление строк при прокрутке */
 .cmp-table.cmp-anim tbody tr{opacity:0;transform:translateX(-18px)}
 .cmp-table.cmp-anim.in tbody tr{animation:cmpRow .65s cubic-bezier(.2,.8,.2,1) forwards}
@@ -917,7 +918,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <!-- PAIN -->
 <section id="pain" class="fn-sec">
   <div class="fn-head reveal">
-    <div class="section-label">Знакомо?</div>
+    <div class="section-label"></div>
     <h2 class="section-title">Узнаёте <span>себя?</span></h2>
     <p class="section-sub">Если совпало хотя бы два пункта - бизнес уже недополучает деньги. Каждый день.</p>
   </div>
@@ -1053,7 +1054,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="case-title">Квалификация входящих лидов для оптового бизнеса</div>
       <p class="case-desc">До внедрения — умеренный органический рост. Агент запущен в январе: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке. До запуска было 90-120 клиентов в месяц.</p>
       <div class="case-kpis">
-        <div class="case-kpi"><b><span class="kpi-from">90-120 → </span><span id="caseKpiValue">753</span></b><span>клиентов в месяц: до запуска и в августе 2026</span></div>
+        <div class="case-kpi"><b><span class="kpi-from">90-120 → </span><span id="caseKpiValue">+753</span></b><span>клиентов в месяц: до запуска и в августе 2026</span></div>
         <div class="case-kpi"><b class="kpi-x">6×</b><span>рост за 8 месяцев после запуска ИИ-агента</span></div>
       </div>
       <div class="case-chart-wrap"><canvas id="caseFx" role="img" aria-label="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: умеренный рост 90-120 клиентов до внедрения ИИ-агента в январе 2026, затем ускоряющийся рост до 753"></canvas></div>
@@ -1261,10 +1262,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <tbody>
         <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">частично</span></td><td><span class="cmp-no">&#10007;</span> часто&nbsp;плывёт</td></tr>
         <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-no">&#10007;</span> аренда платформы</td><td><span class="cmp-mid">зависит</span></td></tr>
-        <tr><td>Запуск</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> от 3-7 дней</td><td>1-2 дня, но шаблон</td><td>2-4 недели</td></tr>
+        <tr><td>Запуск</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> от 3-7 дней</td><td><span class="cmp-warn">?</span> 1-2 дня, но шаблон</td><td><span class="cmp-warn">?</span> 2-4 недели</td></tr>
         <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">сильно ограничено</span></td><td><span class="cmp-mid">возможно, дороже</span></td></tr>
         <tr><td>Гарантия после сдачи</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> 30 дней бесплатно</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-mid">редко</span></td></tr>
-        <tr><td>Оплата после запуска</td><td class="cmp-us">только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td>фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-mid">зависит от студии</span></td></tr>
+        <tr><td>Оплата после запуска</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td><span class="cmp-no">&#10007;</span> фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-warn">?</span> зависит от студии</td></tr>
       </tbody>
     </table>
     </div>
