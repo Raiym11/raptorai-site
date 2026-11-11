@@ -30,6 +30,12 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
 
+      - name: Redirect raptorai.ru → www.raptorai.ru
+        run: bash scripts/setup-bare-redirect.sh
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+
       # Сообщаем Яндексу и Bing об обновлённых страницах (IndexNow).
       # Ключ — файл public/<ключ>.txt на сайте.
       - name: Notify search engines (IndexNow)
