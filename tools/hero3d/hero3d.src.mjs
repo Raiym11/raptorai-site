@@ -81,20 +81,43 @@ function rrect(w, r) {
   sh.quadraticCurveTo(-h, h, -h, h - r); sh.lineTo(-h, -h + r); sh.quadraticCurveTo(-h, -h, -h + r, -h);
   return sh;
 }
-function medal(S, name, color, w, bodyGlow) {
-  const g = new Group(), d = w * 0.2, bev = w * 0.045;
+function medal(S, name, color, w, o) {
+  o = o || {};
+  const g = new Group(), d = w * 0.2, bev = w * 0.045, fc = o.face == null ? color : o.face;
   const body = new ExtrudeGeometry(rrect(w - bev * 2, w * 0.2), { depth: d, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 5, curveSegments: 10 });
   body.translate(0, 0, -d / 2);
-  g.add(new Mesh(body, glass(color, { rough: 0.22, opacity: 1, glow: bodyGlow == null ? 0.22 : bodyGlow, env: 0.7 })));
-  const fw = w - bev * 2.2, face = new ShapeGeometry(rrect(fw, w * 0.19), 10), pos = face.attributes.position, uv = face.attributes.uv;
+  g.add(new Mesh(body, glass(color, { rough: 0.22, opacity: 1, glow: o.glow == null ? 0.22 : o.glow, env: 0.7 })));
+  const fw = w - bev * 2.2, geo = new ShapeGeometry(rrect(fw, w * 0.19), 10), pos = geo.attributes.position, uv = geo.attributes.uv;
   for (let i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / fw + 0.5, pos.getY(i) / fw + 0.5);
-  const tex = new TextureLoader().load('/hero3d/logo-' + name + '.webp', () => { if (S.redraw) S.redraw(); });
+  const z0 = d / 2 + bev + 0.002;
+  /* лицевая сторона: глянцевая подложка в цвете модели */
+  const face = new Mesh(geo, new MeshBasicMaterial({ color: fc, toneMapped: false }));
+  face.position.z = z0; g.add(face);
+  /* знак парит над подложкой и отбрасывает тень: при наклоне видна глубина */
+  const tex = new TextureLoader().load('/hero3d/logo-' + name + '.webp?v=3', () => { if (S.redraw) S.redraw(); });
   tex.colorSpace = SRGBColorSpace; tex.anisotropy = 8;
-  const fm = new MeshBasicMaterial({ map: tex, color: 0xf4f4f4, toneMapped: false });
-  const f = new Mesh(face, fm); f.position.z = d / 2 + bev + 0.002; g.add(f);
+  const ls = o.ls || 1;
+  const shadow = new Mesh(geo, new MeshBasicMaterial({ map: tex, color: 0x000000, transparent: true, opacity: 0.2, depthWrite: false }));
+  shadow.position.set(w * 0.02, -w * 0.03, z0 + 0.004); shadow.scale.setScalar(ls); shadow.renderOrder = 1; g.add(shadow);
+  /* блик, который время от времени пробегает по плашке */
+  const c = document.createElement('canvas'); c.width = 256; c.height = 4;
+  const x = c.getContext('2d'), gr = x.createLinearGradient(0, 0, 256, 0);
+  gr.addColorStop(0.36, 'rgba(255,255,255,0)'); gr.addColorStop(0.5, 'rgba(255,255,255,1)'); gr.addColorStop(0.64, 'rgba(255,255,255,0)');
+  x.fillStyle = gr; x.fillRect(0, 0, 256, 4);
+  const st = new CanvasTexture(c); st.center.set(0.5, 0.5); st.rotation = 0.5;
+  const sheen = new Mesh(geo, new MeshBasicMaterial({ map: st, transparent: true, opacity: o.sheen == null ? 0.42 : o.sheen, blending: AdditiveBlending, depthWrite: false }));
+  sheen.position.z = z0 + 0.008; sheen.renderOrder = 2; g.add(sheen);
+  const logo = new Mesh(geo, new MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, toneMapped: false }));
+  logo.position.z = z0 + w * 0.075; logo.scale.setScalar(ls); logo.renderOrder = 3; g.add(logo);
+  const ph = Math.random() * 3;
+  S.ticks.push((t) => {
+    const k = ((t + ph) % 4.6) / 1.15;
+    st.offset.x = k < 1 ? lerp(0.75, -0.75, k) : 0.75;
+    logo.position.z = z0 + w * (0.075 + Math.sin(t * 1.4 + ph) * 0.012);
+  });
   return g;
 }
-function fallbackImg(S, x, y, name, k) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb fbi h3d-fl" style="--k:' + (k || 1) + ';background-image:url(/hero3d/logo-' + name + '.webp)"></div>')); }
+function fallbackImg(S, x, y, name, k, bg) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb fbi h3d-fl" style="--k:' + (k || 1) + ';background-color:' + (bg || 'var(--acc)') + ';background-image:url(/hero3d/logo-' + name + '.webp?v=3)"></div>')); }
 function fallback(S, x, y, icon, k) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb h3d-fl" style="--k:' + (k || 1) + '"><i class="' + icon + '"></i></div>')); }
 
 /* ---------- 1. ИИ-агент: живой робот ---------- */
@@ -168,7 +191,7 @@ function chatgpt(S) {
   let grp = null, ring, bars = [];
   const N = 19;
   if (S.gl) {
-    grp = medal(S, 'chatgpt', 0x74AA9C, 1.5);
+    grp = medal(S, 'chatgpt', 0x10A37F, 1.5, { face: 0x10A37F });
     ring = new Mesh(new TorusGeometry(1.42, 0.022, 10, 90), new MeshBasicMaterial({ color: 0x5CFFC8, transparent: true, opacity: 0.75 }));
     ring.rotation.x = 1.2;
     const holder = new Group(); holder.add(grp, ring, glow(0x10A37F, 4.2, 0.35));
@@ -236,11 +259,11 @@ function gemini(S) {
   let hov = -1, th = 0, flash = 0, pulse = 0, auto = -1;
   let cry = null, halo, spin = 0, spinV = 0;
   if (S.gl) {
-    cry = medal(S, 'gemini', 0xC9D6FF, 1.42, 0.04);
+    cry = medal(S, 'gemini', 0xC9D6FF, 1.42, { glow: 0.04, face: 0xf6f7fb, sheen: 0.3 });
     halo = glow(0x6f8cff, 4.6, 0.34);
     const holder = new Group(); holder.add(halo, cry); holder.position.set(0, 0.13, 0);
     S.gl.scene.add(holder);
-  } else fallbackImg(S, 50, 47, 'gemini', 0.85);
+  } else fallbackImg(S, 50, 47, 'gemini', 0.85, '#fff');
 
   return {
     update(dt, t) {
@@ -443,7 +466,7 @@ function n8n(S) {
   let total = 47, near = -1, hub = null, r1, r2, bump = 0, gem, spin = 0, spinV = 0;
   if (S.gl) {
     hub = new Group();
-    gem = medal(S, 'n8n', 0xEA4B71, 1.1);
+    gem = medal(S, 'n8n', 0xEA4B71, 1.1, { ls: 1.12 });
     r1 = new Mesh(new TorusGeometry(0.98, 0.026, 10, 80), new MeshBasicMaterial({ color: 0xff9db4, transparent: true, opacity: 0.85 }));
     r2 = new Mesh(new TorusGeometry(1.14, 0.015, 10, 80), new MeshBasicMaterial({ color: 0xEA4B71, transparent: true, opacity: 0.7 }));
     r1.rotation.x = 1.3; r2.rotation.x = 1.05; r2.rotation.y = 0.7;
@@ -487,7 +510,7 @@ function boot(host) {
   const stage = el('<div class="h3d-stage"></div>');
   const hint = el('<div class="h3d-hint"><i class="fa-solid fa-hand-pointer"></i>Нажмите, чтобы увидеть в деле</div>');
   host.append(stage, hint);
-  const S = { host, stage, gl: null, px: 0, py: 0, tx: 0, ty: 0, lx: 0.5, ly: 0.5, inside: false, playing: false, timers: [], lastUser: 0, clicked: false };
+  const S = { host, stage, gl: null, px: 0, py: 0, tx: 0, ty: 0, lx: 0.5, ly: 0.5, inside: false, playing: false, timers: [], ticks: [], lastUser: 0, clicked: false };
   S.after = (ms, fn) => { S.timers.push(setTimeout(fn, reduce ? 0 : ms)); };
   S.clear = () => { S.timers.forEach(clearTimeout); S.timers = []; };
   if (!weak) { try { S.gl = makeGL(S, def[1], def[2]); } catch (e) { S.gl = null; } }
@@ -501,6 +524,7 @@ function boot(host) {
     t += dt;
     const k = 1 - Math.exp(-dt * 5.5); S.px += (S.tx - S.px) * k; S.py += (S.ty - S.py) * k;
     host.style.setProperty('--px', S.px.toFixed(3)); host.style.setProperty('--py', S.py.toFixed(3));
+    for (let i = 0; i < S.ticks.length; i++) S.ticks[i](t);
     sc.update(dt, t);
     if (S.gl) S.gl.renderer.render(S.gl.scene, S.gl.camera);
   }
