@@ -26,14 +26,27 @@ mapfile -t PAGES < <(find . -name '*.html' ! -path './index.html' ! -path './404
   | sed -e 's|^\./||' -e 's|\.html$||' | sort)
 KEEP=()
 for p in "${PAGES[@]}"; do KEEP+=(--exclude "$p"); done
+# Скрипт и стили 3D-сцен выкладываются отдельно, сжатыми (см. ниже).
+H3D=(--exclude 'hero3d/*.js' --exclude 'hero3d/*.css')
 
 echo "→ Статика Next.js (с хешами в именах — кешируется навсегда)"
 s3 sync . "$DEST" --exclude '*' --include '_next/static/*' \
   --cache-control 'public, max-age=31536000, immutable'
 
 echo "→ Остальные файлы: шрифты, скрипты, картинки"
-s3 sync . "$DEST" --exclude '_next/static/*' --exclude '*.html' "${KEEP[@]}" \
+s3 sync . "$DEST" --exclude '_next/static/*' --exclude '*.html' "${H3D[@]}" "${KEEP[@]}" \
   --cache-control 'public, max-age=86400'
+
+echo "→ 3D-сцены страниц услуг: сжатые gzip, кеш на год (версия в адресе: ?v=N)"
+GZ="$(mktemp -d)"
+for f in hero3d/*.js hero3d/*.css; do
+  [ -f "$f" ] || continue
+  case "$f" in *.js) ct='application/javascript; charset=utf-8' ;; *) ct='text/css; charset=utf-8' ;; esac
+  gzip -9 -c "$f" > "$GZ/body"
+  s3 cp "$GZ/body" "$DEST/$f" --content-type "$ct" --content-encoding gzip \
+    --cache-control 'public, max-age=31536000, immutable' --only-show-errors
+done
+rm -rf "$GZ"
 
 echo "→ HTML-страницы (без кеша, чтобы обновления были видны сразу)"
 s3 sync . "$DEST" --exclude '*' --include '*.html' \
@@ -45,6 +58,6 @@ for p in "${PAGES[@]}"; do
 done
 
 echo "→ Удаление файлов, которых больше нет в сборке"
-s3 sync . "$DEST" --delete "${KEEP[@]}"
+s3 sync . "$DEST" --delete "${H3D[@]}" "${KEEP[@]}"
 
 echo "Готово: https://${YC_BUCKET}/"

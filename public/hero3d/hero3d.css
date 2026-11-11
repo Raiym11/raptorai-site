@@ -63,6 +63,8 @@
 /* запасной объект без WebGL */
 .h3d-fb .fb{width:calc(var(--u)*30*var(--k,1));height:calc(var(--u)*30*var(--k,1));border-radius:32%;display:grid;place-items:center;font-size:calc(var(--u)*12*var(--k,1));color:#fff;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),transparent 42%),linear-gradient(145deg,var(--acc),var(--acc2));box-shadow:inset 0 2px 0 rgba(255,255,255,.5),inset 0 -14px 30px rgba(0,0,0,.25),0 0 60px -8px var(--acc),0 30px 60px -24px rgba(0,0,0,.9)}
 
+.h3d-fb .fbi{background-size:cover;background-position:center;border-radius:24%;box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 0 60px -8px var(--acc),0 30px 60px -24px rgba(0,0,0,.9)}
+
 /* ---------- ChatGPT ---------- */
 .h3d-chatgpt .it-wave{width:70%;height:22%}
 .h3d-chatgpt .it-cap .g{padding:calc(var(--u)*1.4) calc(var(--u)*2.4);border-radius:calc(var(--u)*2);min-height:2.2em;font-family:'JetBrains Mono',monospace;font-size:max(10px,calc(var(--u)*2.2))}

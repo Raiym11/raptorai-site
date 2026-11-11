@@ -3,12 +3,11 @@
    Центральный объект рисует Three.js (WebGL), карточки и подписи - обычная вёрстка в 3D-пространстве CSS. */
 import {
   WebGLRenderer, Scene, PerspectiveCamera, PMREMGenerator, ACESFilmicToneMapping,
-  DirectionalLight, PointLight, AmbientLight, Group, Mesh, Points, Sprite,
-  MeshPhysicalMaterial, MeshBasicMaterial, PointsMaterial, SpriteMaterial,
-  SphereGeometry, ConeGeometry, CylinderGeometry, TorusGeometry, BoxGeometry,
-  OctahedronGeometry, IcosahedronGeometry, CapsuleGeometry, BufferGeometry,
-  BufferAttribute, Float32BufferAttribute, CanvasTexture, Color, Vector3,
-  AdditiveBlending, DoubleSide, BackSide
+  DirectionalLight, PointLight, AmbientLight, Group, Mesh, Sprite,
+  MeshPhysicalMaterial, MeshBasicMaterial, SpriteMaterial,
+  SphereGeometry, CylinderGeometry, TorusGeometry, BoxGeometry, CapsuleGeometry,
+  BufferGeometry, BufferAttribute, CanvasTexture, Vector3, Shape, ShapeGeometry, ExtrudeGeometry,
+  TextureLoader, SRGBColorSpace, AdditiveBlending, DoubleSide
 } from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
@@ -74,6 +73,28 @@ function glow(color, size, opacity) {
   s.position.z = -0.9; s.renderOrder = -1;
   return s;
 }
+/* объёмная плашка-аватар: стеклянный корпус, на лицевой стороне картинка из /hero3d/logo-*.webp */
+function rrect(w, r) {
+  const h = w / 2, sh = new Shape();
+  sh.moveTo(-h + r, -h); sh.lineTo(h - r, -h); sh.quadraticCurveTo(h, -h, h, -h + r);
+  sh.lineTo(h, h - r); sh.quadraticCurveTo(h, h, h - r, h); sh.lineTo(-h + r, h);
+  sh.quadraticCurveTo(-h, h, -h, h - r); sh.lineTo(-h, -h + r); sh.quadraticCurveTo(-h, -h, -h + r, -h);
+  return sh;
+}
+function medal(S, name, color, w, bodyGlow) {
+  const g = new Group(), d = w * 0.2, bev = w * 0.045;
+  const body = new ExtrudeGeometry(rrect(w - bev * 2, w * 0.2), { depth: d, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 5, curveSegments: 10 });
+  body.translate(0, 0, -d / 2);
+  g.add(new Mesh(body, glass(color, { rough: 0.22, opacity: 1, glow: bodyGlow == null ? 0.22 : bodyGlow, env: 0.7 })));
+  const fw = w - bev * 2.2, face = new ShapeGeometry(rrect(fw, w * 0.19), 10), pos = face.attributes.position, uv = face.attributes.uv;
+  for (let i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / fw + 0.5, pos.getY(i) / fw + 0.5);
+  const tex = new TextureLoader().load('/hero3d/logo-' + name + '.webp', () => { if (S.redraw) S.redraw(); });
+  tex.colorSpace = SRGBColorSpace; tex.anisotropy = 8;
+  const fm = new MeshBasicMaterial({ map: tex, color: 0xf4f4f4, toneMapped: false });
+  const f = new Mesh(face, fm); f.position.z = d / 2 + bev + 0.002; g.add(f);
+  return g;
+}
+function fallbackImg(S, x, y, name, k) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb fbi h3d-fl" style="--k:' + (k || 1) + ';background-image:url(/hero3d/logo-' + name + '.webp)"></div>')); }
 function fallback(S, x, y, icon, k) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb h3d-fl" style="--k:' + (k || 1) + '"><i class="' + icon + '"></i></div>')); }
 
 /* ---------- 1. ИИ-агент: живой робот ---------- */
@@ -147,13 +168,7 @@ function chatgpt(S) {
   let grp = null, ring, bars = [];
   const N = 19;
   if (S.gl) {
-    grp = new Group();
-    const g = glass(0x10A37F, { rough: 0.12, opacity: 0.94, glow: 0.22, env: 0.6 });
-    const ball = new Mesh(new SphereGeometry(0.92, 48, 36), g); ball.scale.set(1.1, 0.9, 0.86);
-    const tail = new Mesh(new ConeGeometry(0.3, 0.6, 24), g); tail.position.set(-0.58, -0.78, 0); tail.rotation.z = -2.5;
-    grp.add(ball, tail);
-    const dm = new MeshBasicMaterial({ color: 0xeafff6 });
-    [-0.36, 0, 0.36].forEach((x, i) => { const d = new Mesh(new SphereGeometry(0.1, 16, 12), dm); d.position.set(x, 0, 0.78 - Math.abs(x) * 0.12); d.userData.i = i; grp.add(d); bars.push(d); });
+    grp = medal(S, 'chatgpt', 0x74AA9C, 1.5);
     ring = new Mesh(new TorusGeometry(1.42, 0.022, 10, 90), new MeshBasicMaterial({ color: 0x5CFFC8, transparent: true, opacity: 0.75 }));
     ring.rotation.x = 1.2;
     const holder = new Group(); holder.add(grp, ring, glow(0x10A37F, 4.2, 0.35));
@@ -165,10 +180,9 @@ function chatgpt(S) {
       const b = new Mesh(geo, bm);
       const u = i / (N - 1) - 0.5;
       b.position.set(u * 2.9, -1.26, 0.5 - Math.abs(u) * 0.9);
-      b.userData.u = u;
       S.gl.scene.add(b); bars.push(b);
     }
-  } else fallback(S, 50, 40, 'fa-solid fa-comment-dots');
+  } else fallbackImg(S, 50, 40, 'chatgpt', 0.9);
 
   function setCap(n) { if (n !== typed) { typed = n; capTxt.textContent = Q.slice(0, n); cap.classList.toggle('hid', !n); } }
   cap.classList.add('hid');
@@ -180,14 +194,13 @@ function chatgpt(S) {
       boost = Math.max(0, boost - dt);
       if (!grp) return;
       spinV *= 0.94; spin += spinV * dt;
-      grp.rotation.y = Math.sin(t * 0.45) * 0.38 + S.px * 0.45 + spin;
-      grp.rotation.x = S.py * 0.3;
+      grp.rotation.y = Math.sin(t * 0.6) * 0.3 + S.px * 0.55 + spin;
+      grp.rotation.x = S.py * 0.35 + Math.sin(t * 0.8) * 0.06;
       grp.position.y = Math.sin(t * 1.1) * 0.05;
       ring.rotation.z = t * 0.5; ring.rotation.x = 1.2 + S.py * 0.3;
       const wx = (S.lx - 0.5) * 100 / K;
       for (let i = 0; i < bars.length; i++) {
         const b = bars[i];
-        if (b.userData.u == null) { b.position.y = Math.max(0, Math.sin(t * 5 - b.userData.i * 0.8)) * (playing ? 0.12 : 0.04); continue; }
         const near = S.inside ? Math.exp(-Math.pow((b.position.x - wx) * 1.5, 2)) * (0.35 + (1 - clamp(Math.abs(S.ly - 0.8) * 2.2, 0, 1)) * 0.75) : 0;
         const base = 0.14 + (Math.sin(t * 2.2 + i * 0.7) * 0.5 + 0.5) * 0.14;
         const live = playing ? (Math.sin(t * 13 + i * 1.9) * 0.5 + 0.5) * 0.55 * (0.5 + Math.sin(i * 0.33 + t * 3) * 0.5) + 0.12 : 0;
@@ -197,7 +210,7 @@ function chatgpt(S) {
     play(done) {
       cloud.classList.add('hid');
       boost = 2.2; typeT = 0;
-      S.after(1500, () => { spinV = 15.2; });
+      S.after(1500, () => { spinV = 15.5; });
       S.after(2300, () => { cloud.classList.remove('hid'); restart(cloud.firstChild, 'pop'); });
       S.after(6200, () => { cloud.firstChild.classList.remove('pop'); if (!reduce) cloud.classList.add('hid'); done(); });
     }
@@ -221,27 +234,13 @@ function gemini(S) {
     return { o, ln, a: i * Math.PI / 2 + 0.5, on: false };
   });
   let hov = -1, th = 0, flash = 0, pulse = 0, auto = -1;
-  let cry = null, sparks, halo;
+  let cry = null, halo, spin = 0, spinV = 0;
   if (S.gl) {
-    const geo = new OctahedronGeometry(1, 0).toNonIndexed();
-    const pos = geo.attributes.position, col = new Float32Array(pos.count * 3);
-    const c1 = new Color(0x2f6bff), c2 = new Color(0x8a4fd8), c = new Color();
-    for (let i = 0; i < pos.count; i++) { c.lerpColors(c2, c1, (pos.getY(i) + 1) / 2 * 0.8 + (pos.getX(i) + 1) * 0.1).multiplyScalar(0.85); col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b; }
-    geo.setAttribute('color', new BufferAttribute(col, 3));
-    geo.computeVertexNormals();
-    cry = new Group();
-    const inner = new Mesh(geo, glass(0xffffff, { vc: true, flat: true, rough: 0.1, opacity: 0.35, glow: 0.25, emissive: 0x3a4fd8, env: 0.4, side: BackSide }));
-    const outer = new Mesh(geo, glass(0xffffff, { vc: true, flat: true, rough: 0.08, opacity: 0.84, glow: 0.42, emissive: 0x3a4fd8, env: 0.28, irid: 0.4 }));
-    cry.add(inner, outer);
-    cry.scale.set(0.84, 1.08, 0.84);
-    const n = 46, sp = new Float32Array(n * 3);
-    for (let i = 0; i < n; i++) { const y = Math.random() * 2 - 1, r = (1 - Math.abs(y)) * 0.6 * Math.random(), a = Math.random() * 6.28; sp[i * 3] = Math.cos(a) * r * 0.84; sp[i * 3 + 1] = y * 0.9 * 1.08; sp[i * 3 + 2] = Math.sin(a) * r * 0.84; }
-    const sg = new BufferGeometry(); sg.setAttribute('position', new Float32BufferAttribute(sp, 3));
-    sparks = new Points(sg, new PointsMaterial({ color: 0xdfe8ff, size: 0.09, map: (glow(0xffffff, 1), glowTex), transparent: true, blending: AdditiveBlending, depthTest: false, depthWrite: false }));
-    halo = glow(0x6f8cff, 4.6, 0.3);
-    const holder = new Group(); holder.add(halo, cry, sparks); holder.position.set(0, 0.13, 0);
+    cry = medal(S, 'gemini', 0xC9D6FF, 1.42, 0.04);
+    halo = glow(0x6f8cff, 4.6, 0.34);
+    const holder = new Group(); holder.add(halo, cry); holder.position.set(0, 0.13, 0);
     S.gl.scene.add(holder);
-  } else fallback(S, 50, 47, 'fa-solid fa-gem', 0.85);
+  } else fallbackImg(S, 50, 47, 'gemini', 0.85);
 
   return {
     update(dt, t) {
@@ -263,18 +262,17 @@ function gemini(S) {
         if (lit !== b.lit) { b.lit = lit; b.ln.classList.toggle('on', lit); }
       });
       if (!cry) return;
-      cry.rotation.y = t * 0.5 + S.px * 0.6; cry.rotation.x = S.py * 0.3; cry.rotation.z = Math.sin(t * 0.7) * 0.06;
-      sparks.rotation.y = cry.rotation.y; sparks.material.size = 0.085 + (Math.sin(t * 6) * 0.5 + 0.5) * 0.05 + pulse * 0.1;
-      const k = 1 + pulse * 0.22 + Math.sin(t * 1.6) * 0.015;
-      cry.scale.set(0.84 * k, 1.08 * k, 0.84 * k);
+      spinV *= 0.94; spin += spinV * dt;
+      cry.rotation.y = Math.sin(t * 0.6) * 0.3 + S.px * 0.6 + spin; cry.rotation.x = S.py * 0.35; cry.rotation.z = Math.sin(t * 0.7) * 0.04;
+      cry.scale.setScalar(1 + pulse * 0.16 + Math.sin(t * 1.6) * 0.012);
       cry.position.y = Math.sin(t * 1.1) * 0.05;
-      halo.material.opacity = 0.3 + pulse * 0.5;
+      halo.material.opacity = 0.34 + pulse * 0.5;
     },
     play(done) {
       card.classList.add('hid');
       auto = 0;
       S.after(900, () => { auto = 2; });
-      S.after(1800, () => { auto = -1; flash = 1.6; pulse = 1; });
+      S.after(1800, () => { auto = -1; flash = 1.6; pulse = 1; spinV = 15.5; });
       S.after(2100, () => { pulse = 1; });
       S.after(2400, () => { card.classList.remove('hid'); restart(card.firstChild, 'pop'); });
       S.after(6400, () => { card.firstChild.classList.remove('pop'); if (!reduce) card.classList.add('hid'); done(); });
@@ -293,7 +291,7 @@ function claude(S) {
   });
   const sheet = it('it-sheet', 60, 53, 30, '<div class="h3d-fl" style="--d:-2s"><div class="sheet"><div class="sh-f"><div class="sh-h">ДОГОВОР ПОСТАВКИ № 47</div>' + lines + '<div class="scan"></div></div><div class="sh-b"><small>Итог разбора</small><b>3 риска · 2 вопроса к поставщику</b><ul><li>п. 4.2: штраф 0,5% в день</li><li>п. 7.1: оплата через 60 дней</li></ul></div></div></div>');
   const notes = [
-    it('it-note hid', 30, 44, 170, '<div class="g"><i class="fa-solid fa-triangle-exclamation"></i>п. 4.2 - штраф 0,5% в день: риск</div>'),
+    it('it-note hid', 30, 47, 170, '<div class="g"><i class="fa-solid fa-triangle-exclamation"></i>п. 4.2 - штраф 0,5% в день: риск</div>'),
     it('it-note hid', 33, 68, 170, '<div class="g"><i class="fa-solid fa-clock"></i>п. 7.1 - оплата 60 дней</div>')
   ];
   S.stage.append(sheet, notes[0], notes[1]);
@@ -303,7 +301,7 @@ function claude(S) {
     k.addEventListener('pointerenter', () => mark(i, true));
     k.addEventListener('pointerleave', () => mark(i, false));
   });
-  let lens = null, tx = -1.15, ty = -0.62, zoom = 0, zx = 0, zy = 0;
+  let lens = null, av = null, tx = -1.15, ty = -0.62, zoom = 0, zx = 0, zy = 0, spin = 0, spinV = 0;
   if (S.gl) {
     lens = new Group();
     const g = glass(0xD97757, { rough: 0.16, opacity: 0.95, glow: 0.3 });
@@ -315,7 +313,10 @@ function claude(S) {
     lens.scale.setScalar(0.6);
     S.gl.scene.add(lens);
     S.gl.canvas.style.setProperty('--glz', '100px');
-  } else fallback(S, 20, 72, 'fa-solid fa-magnifying-glass', 0.6);
+    av = medal(S, 'claude', 0xD97757, 1.02);
+    av.position.set(-1.18, 1.0, 0); av.add(glow(0xD97757, 2.6, 0.3));
+    S.gl.scene.add(av);
+  } else fallbackImg(S, 21, 26, 'claude', 0.62);
 
   return {
     update(dt, t) {
@@ -324,17 +325,20 @@ function claude(S) {
       const hx = -1.15, hy = -0.62;
       const over = S.inside && !S.host.classList.contains('flip');
       const pull = over ? 1 : 0;
-      const gx = zoom ? zx : hx + (wx - hx) * pull, gy = zoom ? zy : hy + (wy - hy) * pull;
+      const gx = zoom ? zx : clamp(hx + (wx - hx) * pull, -1.55, 1.55), gy = zoom ? zy : clamp(hy + (wy - hy) * pull, -1.3, 1.5);
       const k = 1 - Math.exp(-dt * 7); tx = lerp(tx, gx, k); ty = lerp(ty, gy, k);
       lens.position.set(tx, ty + Math.sin(t * 1.2) * 0.05, 0.3);
       lens.rotation.y = S.px * 0.5 + Math.sin(t * 0.6) * 0.12;
       lens.rotation.x = -S.py * 0.4;
       lens.rotation.z = Math.sin(t * 0.8) * 0.06;
+      spinV *= 0.94; spin += spinV * dt;
+      av.rotation.y = Math.sin(t * 0.55) * 0.28 + S.px * 0.6 + spin; av.rotation.x = S.py * 0.4;
+      av.position.y = 1.0 + Math.sin(t * 1.0 + 1) * 0.05;
     },
     click() { if (S.host.classList.contains('flip')) { S.clear(); S.host.classList.remove('flip', 'run'); S.playing = false; return true; } return false; },
     play(done, user) {
       if (user) {
-        mark(0, false); mark(1, false); S.host.classList.add('flip');
+        mark(0, false); mark(1, false); S.host.classList.add('flip'); spinV = 15.5;
         if (reduce) { done(); return; }
         S.after(6000, () => { S.host.classList.remove('flip'); done(); });
         return;
@@ -342,7 +346,7 @@ function claude(S) {
       zoom = 1; zx = 0.3; zy = 0.42;
       S.after(500, () => mark(0, true));
       S.after(1500, () => { mark(1, true); zy = -0.2; });
-      S.after(2900, () => { mark(0, false); mark(1, false); zoom = 0; S.host.classList.add('flip'); });
+      S.after(2900, () => { mark(0, false); mark(1, false); zoom = 0; spinV = 15.5; S.host.classList.add('flip'); });
       S.after(6600, () => { if (!reduce) S.host.classList.remove('flip'); done(); });
     }
   };
@@ -436,16 +440,16 @@ function n8n(S) {
   const count = it('it-count', 50, 10, 110, '<div class="g chip">Обработано заявок сегодня: <b>47</b></div>');
   S.stage.append(hit, count);
   const num = count.querySelector('b');
-  let total = 47, near = -1, hub = null, r1, r2, bump = 0, gem;
+  let total = 47, near = -1, hub = null, r1, r2, bump = 0, gem, spin = 0, spinV = 0;
   if (S.gl) {
     hub = new Group();
-    gem = new Mesh(new IcosahedronGeometry(0.52, 1), glass(0xE23A63, { rough: 0.16, opacity: 0.96, glow: 0.2, flat: true, env: 0.3 }));
-    r1 = new Mesh(new TorusGeometry(0.82, 0.028, 10, 80), new MeshBasicMaterial({ color: 0xff9db4, transparent: true, opacity: 0.85 }));
-    r2 = new Mesh(new TorusGeometry(0.98, 0.016, 10, 80), new MeshBasicMaterial({ color: 0xEA4B71, transparent: true, opacity: 0.7 }));
-    r1.rotation.x = 1.25; r2.rotation.x = 1.0; r2.rotation.y = 0.7;
+    gem = medal(S, 'n8n', 0xEA4B71, 1.1);
+    r1 = new Mesh(new TorusGeometry(0.98, 0.026, 10, 80), new MeshBasicMaterial({ color: 0xff9db4, transparent: true, opacity: 0.85 }));
+    r2 = new Mesh(new TorusGeometry(1.14, 0.015, 10, 80), new MeshBasicMaterial({ color: 0xEA4B71, transparent: true, opacity: 0.7 }));
+    r1.rotation.x = 1.3; r2.rotation.x = 1.05; r2.rotation.y = 0.7;
     hub.add(glow(0xEA4B71, 3.2, 0.34), gem, r1, r2);
     S.gl.scene.add(hub);
-  } else fallback(S, 50, 50, 'fa-solid fa-diagram-project', 0.75);
+  } else fallbackImg(S, 50, 50, 'n8n', 0.7);
 
   return {
     update(dt, t) {
@@ -454,14 +458,14 @@ function n8n(S) {
       if (best !== near) { if (near >= 0) tubes[near].classList.remove('near'); if (best >= 0) tubes[best].classList.add('near'); near = best; }
       if (!hub) return;
       bump *= 0.93;
-      gem.rotation.y = t * 0.6 + S.px * 0.8; gem.rotation.x = t * 0.35 + S.py * 0.4;
+      spinV *= 0.94; spin += spinV * dt;
+      gem.rotation.y = Math.sin(t * 0.6) * 0.3 + S.px * 0.6 + spin; gem.rotation.x = S.py * 0.35;
       r1.rotation.z = t * (0.7 + bump * 6); r2.rotation.z = -t * (0.5 + bump * 5);
       hub.scale.setScalar(1 + bump * 0.3 + Math.sin(t * 2) * 0.02);
-      hub.rotation.x = -S.py * 0.25; hub.rotation.y = S.px * 0.25;
     },
     play(done) {
       nodes.forEach((n) => n.classList.remove('ok'));
-      bump = 1; S.host.classList.add('wave');
+      bump = 1; spinV = 15.5; S.host.classList.add('wave');
       nodes.forEach((n, i) => S.after(350 + i * 260, () => { n.classList.add('ok'); n.classList.add('on'); S.after(700, () => n.classList.remove('on')); }));
       S.after(1900, () => { total += 1; num.textContent = total; restart(count, 'bump'); bump = 0.6; S.host.classList.remove('wave'); });
       S.after(4600, () => { if (!reduce) nodes.forEach((n) => n.classList.remove('ok')); done(); });
@@ -508,6 +512,7 @@ function boot(host) {
     raf = requestAnimationFrame(frame);
   }
   function once() { requestAnimationFrame(() => tick(0.016)); }
+  S.redraw = () => { if (reduce || !raf) once(); };
   function setVis(v) {
     v = v && !document.hidden;
     if (v === vis) return;
