@@ -558,10 +558,10 @@
     void band.offsetHeight;
     if (band) band.classList.add('fire');
     rows.forEach(function (r) {
-      var delay = r.idx * 140, longest = 0;
+      var delay = r.idx * 180, longest = 0;
       r.strips.forEach(function (s) {
-        var dur = 1700 + s.k * 420, dl = delay + s.k * 90;
-        s.st.style.transition = 'transform ' + dur + 'ms cubic-bezier(.3,.55,.25,1) ' + dl + 'ms';
+        var dur = 2200 + s.k * 350, dl = delay + s.k * 70;
+        s.st.style.transition = 'transform ' + dur + 'ms cubic-bezier(.22,.61,.36,1) ' + dl + 'ms';
         s.st.style.transform = 'translateY(-' + (s.n * 1.1) + 'em)';
         longest = Math.max(longest, dur + dl);
       });
