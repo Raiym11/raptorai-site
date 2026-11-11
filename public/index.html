@@ -543,6 +543,7 @@ body:has(#chat-panel.open) #tg-float{opacity:0;pointer-events:none;transform:sca
 .stat-num .dgi i{display:block;height:1.1em;line-height:1.1em;font-style:normal}
 .stat-num .sx{display:inline-block;line-height:1.1em;color:#7fe3ff;-webkit-text-fill-color:#7fe3ff}
 .stat-label{margin-top:10px;font-size:14.5px}
+.stat-num{white-space:nowrap}
 .stats.roll .stat-label{opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .stats.roll .stat-item.go .stat-label{opacity:1;transform:none}
 .stat-item.hit .stat-num{animation:numHit .95s cubic-bezier(.2,.8,.2,1)}
@@ -857,10 +858,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <!-- STATS -->
 <div class="stats" style="position:relative;z-index:1">
-  <div class="stat-item">+<span class="stat-num" data-target="300" data-suffix="">0</span><div class="stat-label">успешных проектов</div></div>
-  <div class="stat-item"><span class="stat-num" data-target="1000" data-suffix="+">0+</span><div class="stat-label">часов сэкономлено нашим клиентам</div></div>
-  <div class="stat-item">+<span class="stat-num" data-target="10" data-suffix=" млн рублей">0 млн рублей</span><div class="stat-label">сэкономлено клиентам</div></div>
-  <div class="stat-item"><span class="stat-num">x1,5</span><div class="stat-label">больше зарабатывают клиенты с автоматизацией</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="+300">+300</span><div class="stat-label">успешных проектов</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="1000+">1000+</span><div class="stat-label">часов сэкономлено нашим клиентам</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="+10 млн">+10 млн</span><div class="stat-label">рублей сэкономлено клиентам</div></div>
+  <div class="stat-item"><span class="stat-num" data-roll="x1,5">x1,5</span><div class="stat-label">больше зарабатывают клиенты с автоматизацией</div></div>
 </div>
 
 <!-- PAIN -->
