@@ -1,0 +1,11 @@
+{
+  "name": "raptorai-hero3d",
+  "private": true,
+  "scripts": {
+    "build": "esbuild hero3d.src.mjs --bundle --minify --format=iife --target=es2019 --legal-comments=none --outfile=../../public/hero3d/hero3d.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "three": "0.187.0"
+  }
+}

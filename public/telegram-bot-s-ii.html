@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/hero3d/hero3d.css?v=1">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -775,21 +776,25 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </div>
 
 <!-- HERO -->
-<section class="hero page-hero" style="position:relative;z-index:1">
+<section class="hero page-hero hx" style="position:relative;z-index:1;--acc:#2AABEE;--acc2:#7FD4FF">
 <div class="hero-inner">
   <div class="hero-copy">
     <div class="crumbs"><a href="/">RaptorAI</a> / Telegram-бот с ИИ</div>
     <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> Telegram-бот с ИИ</div>
-    <h1>Telegram-бот с ИИ: <span class="irid-text">консультирует клиентов и принимает заявки</span></h1>
-    <p class="hero-sub">Бот отвечает на вопросы о ваших товарах и услугах, собирает заявки и записи и сразу сообщает вам, когда появился горячий клиент.</p>
-    <p style="margin-top:10px;font-size:15px;color:var(--gray)">Для бизнеса, где клиенты уже пишут в Telegram: магазины, услуги, запись, доставка.</p>
+    <h1>Telegram-бот с ИИ: <span class="irid-text">консультирует, записывает и присылает вам горячих клиентов</span></h1>
+    <p class="hero-sub">Ваши клиенты уже в Telegram. Бот отвечает по вашим товарам и услугам, принимает заявки и записи без длинных форм.</p>
+    <ul class="hx-benefits">
+      <li><i class="fa-solid fa-check"></i><span>Отвечает по вашему каталогу и прайсу 24/7</span></li>
+      <li><i class="fa-solid fa-check"></i><span>Понимает голосовые сообщения</span></li>
+      <li><i class="fa-solid fa-check"></i><span>Сразу присылает вам заявку с контактами</span></li>
+    </ul>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
-      <a href="#details" class="btn-secondary">Что входит</a>
+      <a href="https://t.me/Raptorairu" target="_blank" rel="noopener" class="btn-secondary" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i>Написать в Telegram</a>
     </div>
-    <div class="proof"><span><i class="fa-solid fa-circle-check"></i> 100+ проектов</span><span><i class="fa-solid fa-bolt"></i> Запуск за 3-7 дней</span><span><i class="fa-solid fa-tag"></i> Цена от 4 990 ₽</span></div>
+    <p class="hx-line">от 4 990 ₽ · запуск за 3-7 дней · 30 дней гарантии</p>
   </div>
-  <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
+  <div class="h3d" data-scene="telegram" aria-hidden="true"></div>
 </div>
 </section>
 
@@ -1121,6 +1126,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
+<script>window.addEventListener("load",function(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=1";s.async=true;document.body.appendChild(s)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/hero3d/hero3d.css?v=1">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -775,21 +776,25 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </div>
 
 <!-- HERO -->
-<section class="hero page-hero" style="position:relative;z-index:1">
+<section class="hero page-hero hx" style="position:relative;z-index:1;--acc:#00D4FF;--acc2:#8C7BFF">
 <div class="hero-inner">
   <div class="hero-copy">
     <div class="crumbs"><a href="/">RaptorAI</a> / ИИ-агент для бизнеса</div>
-    <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> ИИ-агент для бизнеса</div>
-    <h1>ИИ-агент для бизнеса: <span class="irid-text">отвечает клиентам и обрабатывает заявки 24/7</span></h1>
-    <p class="hero-sub">ИИ-агент общается с клиентами на сайте и в мессенджерах, отсеивает нецелевые обращения и передаёт менеджеру только тех, кто готов покупать.</p>
-    <p style="margin-top:10px;font-size:15px;color:var(--gray)">Для компаний, где клиенты пишут на сайт, в Telegram и WhatsApp, а менеджеры не успевают отвечать.</p>
+    <div class="hero-badge"><i class="fa-solid fa-bolt" style="font-size:11px"></i> ИИ-агент · хит</div>
+    <h1>ИИ-агент, который <span class="irid-text">отвечает клиентам за 10 секунд и приводит готовые заявки</span></h1>
+    <p class="hero-sub">Работает на сайте и в мессенджерах днём и ночью. Отсеивает случайные обращения и передаёт менеджеру тех, кто готов покупать.</p>
+    <ul class="hx-benefits">
+      <li><i class="fa-solid fa-check"></i><span>Ответ за 10 секунд, даже в 3 часа ночи</span></li>
+      <li><i class="fa-solid fa-check"></i><span>Заявки сразу в AmoCRM, Bitrix24 или таблицу</span></li>
+      <li><i class="fa-solid fa-check"></i><span>Знает ваши цены, услуги и условия</span></li>
+    </ul>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
-      <a href="#details" class="btn-secondary">Что входит</a>
+      <a href="https://t.me/Raptorairu" target="_blank" rel="noopener" class="btn-secondary" onclick="try{ym(112281876,'reachGoal','tg_click')}catch(e){}"><i class="fa-brands fa-telegram"></i>Написать в Telegram</a>
     </div>
-    <div class="proof"><span><i class="fa-solid fa-circle-check"></i> 100+ проектов</span><span><i class="fa-solid fa-bolt"></i> Запуск за 3-7 дней</span><span><i class="fa-solid fa-tag"></i> Цена от 4 990 ₽</span></div>
+    <p class="hx-line">от 4 990 ₽ · запуск за 3-7 дней · 30 дней гарантии</p>
   </div>
-  <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
+  <div class="h3d" data-scene="agent" aria-hidden="true"></div>
 </div>
 </section>
 
@@ -1135,6 +1140,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
+<script>window.addEventListener("load",function(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=1";s.async=true;document.body.appendChild(s)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

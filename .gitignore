@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# сборка 3D-сцен
+/tools/hero3d/node_modules
+/tools/hero3d/package-lock.json
