@@ -317,7 +317,12 @@ function claude(S) {
     it('it-note hid', 30, 47, 170, '<div class="g"><i class="fa-solid fa-triangle-exclamation"></i>п. 4.2 - штраф 0,5% в день: риск</div>'),
     it('it-note hid', 33, 68, 170, '<div class="g"><i class="fa-solid fa-clock"></i>п. 7.1 - оплата 60 дней</div>')
   ];
-  S.stage.append(sheet, notes[0], notes[1]);
+  /* талисман: картинка владельца сайта как есть, оживает за счёт движения */
+  const pet = it('it-pet', 52, 93, 150, '<div class="pet-w"><div class="pet-j"><img class="pet" src="/hero3d/mascot-claude.webp?v=4" alt="" draggable="false"></div></div>');
+  const petJ = pet.querySelector('.pet-j');
+  const hop = () => restart(petJ, 'hop');
+  pet.addEventListener('pointerenter', hop);
+  S.stage.append(sheet, notes[0], notes[1], pet);
   const ks = sheet.querySelectorAll('.ln.k');
   function mark(i, on) { ks[i].classList.toggle('on', on); notes[i].classList.toggle('hid', !on); }
   ks.forEach((k, i) => {
@@ -358,10 +363,10 @@ function claude(S) {
       av.rotation.y = Math.sin(t * 0.55) * 0.28 + S.px * 0.6 + spin; av.rotation.x = S.py * 0.4;
       av.position.y = 1.0 + Math.sin(t * 1.0 + 1) * 0.05;
     },
-    click() { if (S.host.classList.contains('flip')) { S.clear(); S.host.classList.remove('flip', 'run'); S.playing = false; return true; } return false; },
+    click() { if (S.host.classList.contains('flip')) { hop(); S.clear(); S.host.classList.remove('flip', 'run'); S.playing = false; return true; } return false; },
     play(done, user) {
       if (user) {
-        mark(0, false); mark(1, false); S.host.classList.add('flip'); spinV = 15.5;
+        mark(0, false); mark(1, false); S.host.classList.add('flip'); spinV = 15.5; hop();
         if (reduce) { done(); return; }
         S.after(6000, () => { S.host.classList.remove('flip'); done(); });
         return;
@@ -369,7 +374,7 @@ function claude(S) {
       zoom = 1; zx = 0.3; zy = 0.42;
       S.after(500, () => mark(0, true));
       S.after(1500, () => { mark(1, true); zy = -0.2; });
-      S.after(2900, () => { mark(0, false); mark(1, false); zoom = 0; spinV = 15.5; S.host.classList.add('flip'); });
+      S.after(2900, () => { mark(0, false); mark(1, false); zoom = 0; spinV = 15.5; hop(); S.host.classList.add('flip'); });
       S.after(6600, () => { if (!reduce) S.host.classList.remove('flip'); done(); });
     }
   };
