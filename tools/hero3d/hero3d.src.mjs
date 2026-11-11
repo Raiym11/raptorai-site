@@ -337,13 +337,14 @@ function claude(S) {
     const gl = new Mesh(new CylinderGeometry(0.72, 0.72, 0.02, 64), new MeshBasicMaterial({ color: 0xffe3d6, transparent: true, opacity: 0.1, depthWrite: false }));
     gl.rotation.x = Math.PI / 2; lens.add(gl);
     const handle = new Mesh(new CapsuleGeometry(0.1, 0.72, 8, 20), g); handle.position.set(-0.86, -0.86, 0); handle.rotation.z = -Math.PI / 4; lens.add(handle);
-        lens.add(glow(0xD97757, 3.0, 0.28));
+        lens.add(glow(0xD97757, 1.5, 0.3));
     lens.scale.setScalar(0.6);
     S.gl.scene.add(lens);
     S.gl.canvas.style.setProperty('--glz', '100px');
     av = medal(S, 'claude', 0xD97757, 1.02);
-    av.position.set(-1.18, 1.0, 0); av.add(glow(0xD97757, 2.6, 0.3));
-    S.gl.scene.add(av);
+    av.position.set(-1.18, 1.0, 0);
+    const ag = glow(0xD97757, 1.8, 0.3); ag.position.set(-1.18, 1.0, -0.9);
+    S.gl.scene.add(ag, av);
   } else fallbackImg(S, 21, 26, 'claude', 0.62);
 
   return {
@@ -353,7 +354,7 @@ function claude(S) {
       const hx = -1.15, hy = -0.62;
       const over = S.inside && !S.host.classList.contains('flip');
       const pull = over ? 1 : 0;
-      const gx = zoom ? zx : clamp(hx + (wx - hx) * pull, -1.55, 1.55), gy = zoom ? zy : clamp(hy + (wy - hy) * pull, -1.3, 1.5);
+      const gx = zoom ? zx : clamp(hx + (wx - hx) * pull, -1.5, 1.5), gy = zoom ? zy : clamp(hy + (wy - hy) * pull, -1.3, 1.5);
       const k = 1 - Math.exp(-dt * 7); tx = lerp(tx, gx, k); ty = lerp(ty, gy, k);
       lens.position.set(tx, ty + Math.sin(t * 1.2) * 0.05, 0.3);
       lens.rotation.y = S.px * 0.5 + Math.sin(t * 0.6) * 0.12;

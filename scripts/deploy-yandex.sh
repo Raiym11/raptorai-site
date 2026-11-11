@@ -26,38 +26,48 @@ mapfile -t PAGES < <(find . -name '*.html' ! -path './index.html' ! -path './404
   | sed -e 's|^\./||' -e 's|\.html$||' | sort)
 KEEP=()
 for p in "${PAGES[@]}"; do KEEP+=(--exclude "$p"); done
-# Скрипт и стили 3D-сцен выкладываются отдельно, сжатыми (см. ниже).
-H3D=(--exclude 'hero3d/*.js' --exclude 'hero3d/*.css')
+
+# Сжатие: Object Storage сам ничего не сжимает, поэтому HTML, JS и CSS кладём уже сжатыми gzip
+# с заголовком Content-Encoding: gzip. Имена файлов не меняются, страницы весят в 3-4 раза меньше.
+# Работаем во временной копии сборки; файлы Next.js (_next/) не трогаем.
+STAGE="$(mktemp -d)"
+trap 'rm -rf "$STAGE"' EXIT
+cp -a . "$STAGE/"
+cd "$STAGE"
+# Файлы подтверждения прав для Яндекса и Google оставляем как есть, без сжатия.
+find . -type f \( -name '*.html' -o -name '*.js' -o -name '*.css' \) ! -path './_next/*' \
+  ! -name 'google*.html' ! -name 'yandex_*.html' -print0 \
+  | while IFS= read -r -d '' f; do gzip -9 -n -c "$f" > "$f.gztmp"; mv "$f.gztmp" "$f"; done
 
 echo "→ Статика Next.js (с хешами в именах — кешируется навсегда)"
 s3 sync . "$DEST" --exclude '*' --include '_next/static/*' \
   --cache-control 'public, max-age=31536000, immutable'
 
-echo "→ Остальные файлы: шрифты, скрипты, картинки"
-s3 sync . "$DEST" --exclude '_next/static/*' --exclude '*.html' "${H3D[@]}" "${KEEP[@]}" \
+echo "→ Шрифты, картинки и прочие файлы"
+s3 sync . "$DEST" --exclude '_next/static/*' --exclude '*.html' --exclude '*.js' --exclude '*.css' "${KEEP[@]}" \
   --cache-control 'public, max-age=86400'
 
-echo "→ 3D-сцены страниц услуг: сжатые gzip, кеш на год (версия в адресе: ?v=N)"
-GZ="$(mktemp -d)"
-for f in hero3d/*.js hero3d/*.css; do
-  [ -f "$f" ] || continue
-  case "$f" in *.js) ct='application/javascript; charset=utf-8' ;; *) ct='text/css; charset=utf-8' ;; esac
-  gzip -9 -c "$f" > "$GZ/body"
-  s3 cp "$GZ/body" "$DEST/$f" --content-type "$ct" --content-encoding gzip \
-    --cache-control 'public, max-age=31536000, immutable' --only-show-errors
-done
-rm -rf "$GZ"
+echo "→ Скрипты и стили (gzip)"
+s3 sync . "$DEST" --exclude '*' --include '*.js' --include '*.css' --exclude '_next/*' --exclude 'hero3d/*' \
+  --content-encoding gzip --cache-control 'public, max-age=86400'
 
-echo "→ HTML-страницы (без кеша, чтобы обновления были видны сразу)"
-s3 sync . "$DEST" --exclude '*' --include '*.html' \
+echo "→ 3D-сцены страниц услуг (gzip, кеш на год: версия в адресе ?v=N)"
+s3 sync . "$DEST" --exclude '*' --include 'hero3d/*.js' --include 'hero3d/*.css' \
+  --content-encoding gzip --cache-control 'public, max-age=31536000, immutable'
+
+echo "→ HTML-страницы (gzip, без кеша, чтобы обновления были видны сразу)"
+s3 sync . "$DEST" --exclude '*' --include '*.html' --exclude 'google*.html' --exclude 'yandex_*.html' \
+  --content-type "$HTML_TYPE" --content-encoding gzip --cache-control 'no-cache'
+s3 sync . "$DEST" --exclude '*' --include 'google*.html' --include 'yandex_*.html' \
   --content-type "$HTML_TYPE" --cache-control 'no-cache'
 
 echo "→ Адреса без .html"
 for p in "${PAGES[@]}"; do
-  s3 cp "$p.html" "$DEST/$p" --content-type "$HTML_TYPE" --cache-control 'no-cache' --only-show-errors
+  case "$p" in google*|yandex_*) ENC=() ;; *) ENC=(--content-encoding gzip) ;; esac
+  s3 cp "$p.html" "$DEST/$p" --content-type "$HTML_TYPE" "${ENC[@]}" --cache-control 'no-cache' --only-show-errors
 done
 
 echo "→ Удаление файлов, которых больше нет в сборке"
-s3 sync . "$DEST" --delete "${H3D[@]}" "${KEEP[@]}"
+s3 sync . "$DEST" --delete "${KEEP[@]}"
 
 echo "Готово: https://${YC_BUCKET}/"
