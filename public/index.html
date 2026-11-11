@@ -796,6 +796,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .cmp-wrap{overflow-x:auto;margin-top:36px;-webkit-overflow-scrolling:touch}
 .cmp-table{width:100%;min-width:640px;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
 .cmp-table th,.cmp-table td{padding:16px 18px;text-align:left;font-size:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.cmp-table th:last-child,.cmp-table td:last-child{min-width:130px;white-space:nowrap}
 .cmp-table th{font-size:13px;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
 .cmp-table thead th:first-child{background:transparent}
 .cmp-table thead th.cmp-us{color:var(--cyan);font-size:15px;text-transform:none;letter-spacing:0}
@@ -845,7 +846,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 /* кейс: крупные цифры «90–120 → 753» */
 .case-kpi{flex:1 1 300px;max-width:none}
-.case-kpi b{font-size:clamp(48px,6.5vw,80px) !important;font-weight:900 !important;line-height:1;white-space:nowrap}
+.case-kpi b{font-size:clamp(48px,6.5vw,80px) !important;font-weight:900 !important;line-height:1;white-space:nowrap;background:linear-gradient(135deg,#00d4ff 0%,#a855f7 50%,#ff6bcb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .case-kpi b span{display:inline !important;margin:0 !important;font-size:inherit;color:inherit;font-weight:inherit}
 .case-kpi b .kpi-from{font-size:.42em !important;letter-spacing:-.01em;margin-right:.15em !important;vertical-align:.55em;-webkit-text-fill-color:rgba(240,244,248,.6);opacity:1}
 .case-kpi > span{font-size:15px;margin-top:12px}
@@ -900,7 +901,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
       <a href="#cases" class="btn-secondary">Смотреть кейсы</a>
     </div>
-    <p class="hero-aud">Для интернет-магазинов, опта и сервисных компаний</p>
   </div>
   <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
   </div>
@@ -982,7 +982,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="service-card">
         <div class="service-icon" style="background:transparent;border:none;padding:2px"><img decoding="async" alt="Логотип Telegram" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAMxklEQVR4nLWae4xc1X3HP79z7p2ZnVnbu36BwdhgG6d0CaSiKZTQrJ2Y8AgBWjTTNEBpA1XUSE0Utf2nqjpeVVWUCoWWWqkQqqIGkbQzaTHhkbRps3ZLHioUA7ExMTV+YmDxep/zuvee8+sfd/b98GLMuTra3XvPPb/X9/c6d+F8jHLZ9Pb3B739GlCp2LOtKVYqFlU5L7TPfagUK2pRNbOfCFDer5nebx7J3dd/JKfzrAHo7e8PyuX5ny11nJMWihW11ZK4ib/v3juw7p2x5Ncj1eu8ao/3fr0qXU7VikAgpiHCgEEOB0ZezFv58R/fsm7fdpEEgIra8gG0r0/8BypAWdX0CQqilcr+zKPLVt3RdNzjnO+VXH6FGos6h7oEvJt6UQxiLWIDRARt1hD1B0Njd3fhH9t920UH51PMeRWgt9wf7O3bnhjgxu+/9Xt1J3/igmyPR/HNOuqdQ1EEEUVm76ygKNr+05pMTmy2A22Mt0Jrvt2V1L/2vTs3/QJUKO8U+vqWZI0lCTChmdufPfIrw5r7myTs+LiLWvio4QBEMYi8RziqV8WLSGA7VyCtei0vfPWHzz/yVenr80u1xuJEVYVq1VAquR1PHvvDmsl+3dsw5+pjiQgG5H054CQVVSfGBOGyLmxzvP+iZPC+f/7ND59YihALM9BmXkolt2338YfqHd3fSOIo5+pjTkSC88Q8gIhIgPcaDQ8mUdCx/WSw5id3Pv1/11RL4nrL/cGiLy90v1hR892SuG1Pnni0me96IBoZTETVIuYDi98ioN4nkssHAX54ldY/9fTtm59fzBILxWdbLYnr/Zcjf93Mdz0QjwzGAmkIQfmgpqqCSOCbNZd4us6Qf6b45OtbqiVxC+WLOdqckHbHE2/cO55b+a24NhKjGi5Vi+djtC3hTH65DaPaK9deKNc9dPJnEcWiR0Snr50hVbmsplrE//azxzaPk/n7qD7m8W5RDL5vZgErMzWpCoixrjaauHz3VS+cSh6kVHLF6lzEzLyxE0RET9TdLhd2FIgjVURUU/Oer4kqhnTG3jPScsTew+x1IkE0eiaJMvkv3vy9N2+olsQVK2rnFaBYUdsn4j/x5PGbk+zym5PxEYcxlhkGe3/DAFYEpzASeYZanpVZy471BVbnAuL5Upf3kmAYbkYPqqpUDzA/hKoHUFWV8VZcdt4ppKbUiZ/nONE2EYXx2HOmmRAa2HFxga9/bC3Vmy5m18cv4I5LC4zHHoPMfF/Eutq4cx2d1964++gt9ImfboVgQvvVkribPnL0ehd2XOca414Qq3pu6hdgIti2nFJPlI5A+MjqLDddUuCTlxS4pHMqLniFgYZDUFQ9c8kq3quOx/7LwLPV4pQVAoCBA3sEYDzR+zSXVW02PLJIkluUcSHxyljsQeHS5SGfXF/glo0Frl6dm7He6ZSwh0ciApEFECsmadTA2O2ffvrYpmdE3qCshj7xAajs7ZPkb589lH1sxN/smnUBzFK1P8G0Ao3E03TKyqzlpksK3HZpJ79xUZ5COFMX462E0BqyQXp/NPKcHI8JBbzX+YQQ9ZpQ6AqHm8O3Art6t2H29uGDYqVqqiXcUzXzYW/DDT5qqcjiZYK2tTah7dHIYQSu6M5y68ZObtnYycblUxBJvBK0MXViqEE9SrhsVQGv6T4nxmIGG47QyjzwmRreOaKEHcCuve+mcgYDa4oC0FBzDdk8GkcOZcHYnzIOzUSpJ47urOXTGzv5rS3LuWFdxySjXkFVMUYIjFBrJRw+XSNjDVsv6MSI4FIv5dBwi3qsdBvTvjev2oyLWojXqx95QcMv/KrEoDLJaOx8zwTR+SokK2lUGI89iYfNK0Juu6yLOzYt47Llmcl1TtNmQNoW8qq8OdzkxFCdC5bn2LS6MGfvg2daeFUmrvn5VyGJ8MpFT506tQ44ThkJJkzhlQ3qHSgyewtDilNrhI+u7aB4+XI+taFzEtteZ8JqQv6RRszxM3VGmwmXrspzcVfHrH3Tla+diQgM7QS2gAEQwXnVTDZTT5oXAseLPVUJaCeGRLXbuzRyME0LIkLLebavL/D5ni6uX5efo+3Z9WnsPCeHGgyMtVBg69pO1izLkgKmrdCUJcZjz5HRiIxJrbVY4lTwmMDGUasbYODAGjHsRNuRJKfez6kRUSX2ypeuXjnJvNfUMSegMp3m6fGIA2+N8vZoE2uED10wl/n2tgAcG414t5EQCHh/lnq1/XxMg8kgM+kD3mtEIKkPTCPlgdAIX+w/xe2XLePGDZ1ctSY36awToxk7jg81GK5HqEI2sGxZW2B5LpzDfKrNtgMPRdQiz8pcQMJZLQAKuWkFTkAVo+CAEUWYDUIFLDBQT3j4pUEe3T/E1q4Mvevz7NiwjCtXZxmqRZwcbrStArnQcvnaTvIZOy/zkxsL7B9spthH59Ce+4436mICcWMAa3u2adC7BtkLGJE3RQwO0TleTGqF7lyAV+W1oYhXTjd5+KUhPrelk3u35El8WqhlQ8vWtZ1kA7Mw84BpW/DgYIvASJrAFuVfFbHiWy2Xz8s7kNZvZvzQ/wqAEQ6my6bC2fTLq5J4j6qSs0J3ztIRCD9+u0HDQdCu6XvWLSMbGPz80Xi68hltOd4YmXLgRS9VMAGCDvSsz74JwE7UbOq+xgME6vdp3ATULOZJquBViZ0SGnin4Xh9JCIfGs6Mt3jutQGixGMEnJ9fpROaPjwSMVBP2iF0YZopXfEEGYzw6kPXb2hQVoNI2oEBbO5mH83GICY0qjrRdyw6RdOMvO90RGAE55UjA+P84JVTjNRaWCOTOWKmAOmdA6ebNGKPzCqh55+qYgNCa/cA9G5Li02DiFKp2Mdv3ToaWOmXTE5VcWcx6CSsQgMvD7aoxR7vlSAw+Djh0Z+d5PEDQ5g2tGYYo42tl95tMNHMn+0CtdoY086Mexpg77ZU8Qag98AaASiE5jFRRFVl8YCcTq+QMcLRMcexsQT1St4Kb9Q83zyW8JW9b/Gne07RmAUpK6llXj3dImNMu81chJbHkSlgNHlxT3Hry5TLBpEpAfb2bXeoyo1XbfmBNMZeJ8wZVfVLgZEBarFn37tNVmXg58MJjxyJaCqs6bD846vD3LX7KIfOpIkt9opT5dR4zNHRiIxtJ7BFaHjvMUEoHdZ8Q0S0l22TiWziF+3ducf2XSlRR8jXbCYnXtUvBUZOlYyF/zhZ55+ONHjsZEyiEKBEXlndYXn5dJM7dx/lyddHCI1gRXhtsMmZRpJaY9Ho471kckbqw0d61offRlX29m2bPOSaHumEssojn8E+/MovXmzZ3JW0Gg5h/i8usyCdKLTaEBJmOq4VIfJKI3b8wVUrufbCPH+3b5BXz7ToCIQFglWqWdUk6OwKVrixz/3PvR/6zuxTuhmhulip2Gqp5HofP3zD2878d9xqJaLezl43rxACQrsgm/d5Ktho5NqlhpC1hgU7v/R0K5H8iqCjNf5v++//pZu1UrGUSjOOGGd0XtVSyRUravfevfm5QtL4q6CzK1A0ORvzMJUfFn6eRq0VGUNX1pK1sjDzAN55tRkbxo3TG9bm71dV4UBxzgtzWsdqCU+5P3jp/p4/zzSHnzL57tCrxu/naGX6THxayS7uuOq9CQiMoStwn33mMxveLFarhnk+Qc3TOoqyU53nL8xdq5Z99l+Hav9eL3R9zI8Nx2Lkgz8jVe9VrASZrKzwzXt+eu8V/9lb7g+qpe3zImH+5l1Ey+yk7/aL69vW6K25uP5Ds6w79KqJeqfn+6hxYnrvEw2yJggzvsvX7nn+9694fOLT1kLyLu6c7bOX/v7+4MvH1++qS+4LSbMOLk5EsKmnnY+hXhU1hRU2dNHJlbZx309/98ofnY35swsAoNpuckU/+q1Dd4/E5sEkzF3o6qOI+qT9peZcvtYoql4ByXbYwAZkNf7u1uXRl56465ffotwfcBbmlyZASkuoYCiJu7Wy/8IT9dyf1WP/ec3mC75VR+OWFxFPu8uctu9UC5zW0Ap4VRURYyVXwIgQ+njfspC/fOHeLU8oU+F8KZy9NwhU1NJOItu/c2zz6Vb0QCN2JbXhJrUZvEsgiVGftBvYduUvAsYgNkSCMM0JrVozDOyeguEfXrjv8idExFFWw0509keM8ycApJCqptYA+MpPjnc8dzi6vpb4TySJ/zXn/RbvdS1oByaQtiCJCCPGmJPWmJ9nrPmv1bnMj/b8zsbDE5yey0fucxNgYpTLBraZ2Tj9o0OaPfjC8VVD6pcbjXI+8q4jm6+tWMHQ92/bODQjkJfVFHuQakk8i7bzH+RQlWKlYin3ByzlHzcqanuXunYJ4/x/MlUVdu4U2Ak91an0/x6xvdTx/9nLgPKOR3BDAAAAAElFTkSuQmCC" width="44" height="44" style="border-radius:10px;display:block"></div>
         <div class="service-name">Telegram-бот с ИИ</div>
-        <p class="service-desc">Умный бот в Telegram который консультирует клиентов, принимает заявки и уведомляет вас — всё в одном канале.</p>
+        <p class="service-desc">Умный бот в Telegram: консультирует клиентов, принимает заявки и уведомляет вас.</p>
         <div class="service-price"><small>от</small><b>4 990 ₽</b> <span>/ проект</span></div>
       </div>
       </a>
@@ -1259,7 +1259,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <tr><th></th><th class="cmp-us"><img src="/assets/logo.png" alt="RaptorAI" class="cmp-logo"></th><th>Конструктор ботов</th><th>Фрилансер</th></tr>
       </thead>
       <tbody>
-        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">частично</span></td><td><span class="cmp-no">&#10007;</span> часто плывёт</td></tr>
+        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">частично</span></td><td><span class="cmp-no">&#10007;</span> часто&nbsp;плывёт</td></tr>
         <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-no">&#10007;</span> аренда платформы</td><td><span class="cmp-mid">зависит</span></td></tr>
         <tr><td>Запуск</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> от 3-7 дней</td><td>1-2 дня, но шаблон</td><td>2-4 недели</td></tr>
         <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">сильно ограничено</span></td><td><span class="cmp-mid">возможно, дороже</span></td></tr>
@@ -1865,6 +1865,7 @@ html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-pan
 /* two-up row */
 .cw-row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .cw-row2 .cw{display:flex;flex-direction:column}
+.cw-row2 .case-more{margin-top:auto;padding:0 24px 24px}
 .cw-row2 .cw-txt{flex:1 1 auto}
 .cw-row2 .cw-txt{padding:26px 24px 24px}
 .cw-mini{margin:0 24px 24px;border-radius:14px;border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.22);padding:14px}
