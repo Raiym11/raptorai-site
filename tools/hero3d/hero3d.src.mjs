@@ -322,7 +322,10 @@ function claude(S) {
   const petJ = pet.querySelector('.pet-j');
   const hop = () => restart(petJ, 'hop');
   pet.addEventListener('pointerenter', hop);
-  S.stage.append(sheet, notes[0], notes[1], pet);
+  /* сложные и технические задачи: фрагмент кода и мини-график рядом с договором */
+  const code = it('it-mini lift', 90, 31, 110, '<div class="h3d-fl" style="--d:-1.2s"><div class="g mini"><b>{ }</b><s style="--w:86%"></s><s style="--w:58%"></s><s style="--w:72%"></s></div></div>');
+  const chart = it('it-mini lift', 91, 71, 130, '<div class="h3d-fl" style="--d:-3.4s"><div class="g mini"><svg viewBox="0 0 60 36" aria-hidden="true"><g fill="rgba(240,244,248,.22)"><rect x="2" y="22" width="8" height="14" rx="2"/><rect x="14" y="16" width="8" height="20" rx="2"/><rect x="26" y="20" width="8" height="16" rx="2"/><rect x="38" y="10" width="8" height="26" rx="2"/><rect x="50" y="4" width="8" height="32" rx="2"/></g><path d="M6 20 L18 13 L30 17 L42 7 L54 2" fill="none" stroke="#E8A27C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="54" cy="2" r="2.6" fill="#FFD3B6"/></svg></div></div>');
+  S.stage.append(sheet, notes[0], notes[1], pet, code, chart);
   const ks = sheet.querySelectorAll('.ln.k');
   function mark(i, on) { ks[i].classList.toggle('on', on); notes[i].classList.toggle('hid', !on); }
   ks.forEach((k, i) => {
