@@ -543,7 +543,9 @@
         var st = document.createElement('span'); st.className = 'dgi'; st.innerHTML = html;
         dg.appendChild(st); el.appendChild(dg); strips.push({ st: st, n: n, k: k }); k++;
       } else {
-        var sx = document.createElement('span'); sx.className = 'sx'; sx.setAttribute('aria-hidden', 'true'); sx.textContent = ch; el.appendChild(sx);
+        // «млн ₽» и пробел перед ними — меньшим кеглем, чтобы «+10 млн ₽» помещалось в колонку
+        var sx = document.createElement('span'); sx.className = /[\sA-Za-zА-Яа-яЁё₽]/.test(ch) ? 'sx u' : 'sx';
+        sx.setAttribute('aria-hidden', 'true'); sx.textContent = ch; el.appendChild(sx);
       }
     }
     rows.push({ item: el.closest('.stat-item'), strips: strips, idx: idx });
@@ -742,4 +744,17 @@
     var svg = host.querySelector('svg'); if (!svg || !svg.pauseAnimations) return;
     if (es[0].isIntersecting) svg.unpauseAnimations(); else svg.pauseAnimations();
   }, { rootMargin: '80px 0px' }).observe(host);
+})();
+
+
+/* ---------- таблица сравнения: строки появляются при прокрутке ---------- */
+(function () {
+  'use strict';
+  var t = document.querySelector('.cmp-table');
+  if (!t || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  t.classList.add('cmp-anim');
+  new IntersectionObserver(function (es, ob) {
+    es.forEach(function (e) { if (e.isIntersecting) { t.classList.add('in'); ob.disconnect(); } });
+  }, { threshold: 0.25 }).observe(t);
 })();
