@@ -428,7 +428,7 @@ html #chat-launcher .unread-dot{z-index:2;animation:chatDot 1.1s ease-in-out inf
 .stats .stat-item{background:none !important;-webkit-backdrop-filter:none;backdrop-filter:none;border:0 !important;box-shadow:none;transform:none !important;border-radius:0;padding:40px 22px 38px;text-align:left;will-change:auto}
 .stats .stat-item+.stat-item{border-left:1px solid rgba(255,255,255,.1) !important}
 .stat-num{font-family:'Inter',sans-serif !important;font-weight:900;font-size:clamp(52px,6.5vw,92px);line-height:.95;letter-spacing:-.05em;font-variant-numeric:tabular-nums;
-  background:linear-gradient(100deg,#fff 0%,#a8ecff 30%,#b9a8ff 62%,#ffa6ec 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent !important;animation:statSheen 7s ease-in-out infinite alternate;filter:drop-shadow(0 6px 28px rgba(140,123,255,.45))}
+  background:none !important;-webkit-background-clip:unset;background-clip:unset;-webkit-text-fill-color:#fff;color:#fff !important;animation:none;filter:drop-shadow(0 6px 28px rgba(140,123,255,.45))}
 @keyframes statSheen{to{background-position:100% 0}}
 .stat-label{font-size:16px;line-height:1.35;font-weight:500;color:rgba(240,244,248,.74);margin-top:16px;max-width:19ch}
 @media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));width:calc(100% - 32px)}.stats .stat-item{padding:28px 16px 26px}.stats .stat-item:nth-child(3){border-left:0 !important}.stats .stat-item:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}}
@@ -1240,9 +1240,9 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <tbody>
         <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">частично</span></td><td><span class="cmp-no">&#10007;</span> часто плывёт</td></tr>
         <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-no">&#10007;</span> аренда платформы</td><td><span class="cmp-mid">зависит</span></td></tr>
-        <tr><td>Запуск</td><td class="cmp-us">3-7 дней</td><td>1-2 дня, но шаблон</td><td>2-4 недели</td></tr>
+        <tr><td>Запуск</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> 3-7 дней</td><td>1-2 дня, но шаблон</td><td>2-4 недели</td></tr>
         <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-mid">сильно ограничено</span></td><td><span class="cmp-mid">возможно, дороже</span></td></tr>
-        <tr><td>Гарантия после сдачи</td><td class="cmp-us">30 дней бесплатно</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-mid">редко</span></td></tr>
+        <tr><td>Гарантия после сдачи</td><td class="cmp-us">30 дней бесплатно + Raptor Guard</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-mid">редко</span></td></tr>
         <tr><td>Оплата после запуска</td><td class="cmp-us">только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td>фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-mid">зависит от студии</span></td></tr>
       </tbody>
     </table>
