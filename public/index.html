@@ -544,6 +544,8 @@ body:has(#chat-panel.open) #tg-float{opacity:0;pointer-events:none;transform:sca
 .stat-num .sx{display:inline-block;line-height:1.1em;color:#7fe3ff;-webkit-text-fill-color:#7fe3ff}
 .stat-label{margin-top:10px;font-size:14.5px}
 .stat-num{white-space:nowrap}
+.stat-num .dg,.stat-num .sx{-webkit-user-select:none;user-select:none}
+.stat-num .sr-real{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;-webkit-text-fill-color:transparent}
 .stats.roll .stat-label{opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .stats.roll .stat-item.go .stat-label{opacity:1;transform:none}
 .stat-item.hit .stat-num{animation:numHit .95s cubic-bezier(.2,.8,.2,1)}
@@ -1614,7 +1616,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 .gate-consent a{color:#00D4FF}
 </style>
 <script src="/js/main.js?v=20261106" defer></script>
-<script src="/js/fx.js?v=5" defer></script>
+<script src="/js/fx.js?v=6" defer></script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
