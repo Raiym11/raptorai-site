@@ -67,7 +67,7 @@ function openChatWithoutGate() {
   document.getElementById('chat-input-row').style.display = 'flex';
   const legal = document.getElementById('chat-legal'); if (legal) legal.style.display = 'block';
   if (!chatHistoryMessages.length) {
-    appendChatMessage('bot', 'Здравствуйте! Я ИИ-ассистент RaptorAI. Спросите про цены, сроки или примеры работ. Когда захотите точный расчёт, передам вашу задачу менеджеру.');
+    appendChatMessage('bot', 'Здравствуйте! Я Дмитрий, ИИ-ассистент RaptorAI. Спросите про цены, сроки или примеры работ. Когда захотите точный расчёт, передам вашу задачу менеджеру.');
   }
 }
 function passChatGate() { openChatWithoutGate(); }
