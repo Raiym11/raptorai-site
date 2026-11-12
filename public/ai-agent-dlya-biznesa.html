@@ -10,8 +10,8 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=3">
+<link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -822,17 +822,25 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
-<section id="models">
+<section id="compare">
   <div class="container">
-    <div class="section-label">Модели</div>
-    <h2 class="section-title">На какой модели <span>строим</span></h2>
-    <p class="section-sub">Подбираем под задачу. Если задача изменится, модель можно заменить без переделки агента.</p>
-    <div class="services-grid reveal" style="grid-template-columns:repeat(3,1fr)">
-      <div class="service-card" id="chatgpt"><div class="service-icon"><i class="fa-solid fa-comments"></i></div><div class="service-name">ChatGPT</div><p class="service-desc" style="margin-bottom:0">Быстрые ответы клиентам, продажи, квалификация заявок. Подходит большинству бизнесов, с него обычно и начинаем.</p></div>
-      <div class="service-card" id="gemini"><div class="service-icon"><i class="fa-solid fa-database"></i></div><div class="service-name">Gemini</div><p class="service-desc" style="margin-bottom:0">Большие каталоги, длинные документы, таблицы. Хорош, когда агенту нужно держать в голове много данных сразу.</p></div>
-      <div class="service-card" id="claude"><div class="service-icon"><i class="fa-solid fa-file-pen"></i></div><div class="service-name">Claude</div><p class="service-desc" style="margin-bottom:0">Договоры, отчёты, сложные письма. Выбираем, когда важна точность формулировок.</p></div>
+    <div class="section-label">Сравните</div>
+    <h2 class="section-title">Один клиент: <span>без агента и с агентом</span></h2>
+    <p class="bk-sub" style="margin-bottom:30px">Переключите и посмотрите разницу.</p>
+    <div class="ba reveal" data-bk="ba" data-state="0">
+      <div class="ba-glow" aria-hidden="true"></div>
+      <div class="ba-sw" role="tablist" tabindex="0"><i class="ba-knob"></i><button type="button" role="tab" class="on">Без агента</button><button type="button" role="tab">С агентом</button></div>
+      <div class="ba-grid">
+        <div class="ba-rows">
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Клиент написал ночью, ответа нет до утра</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Ответ за 10 секунд в любое время суток</span></div></div>
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Менеджер переспрашивает одно и то же</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Агент сам уточняет детали заказа</span></div></div>
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Заявка теряется в переписке</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Заявка с контактами сразу в CRM</span></div></div>
+          <div class="ba-metric"><div class="f0"><b>7 часов</b><span>до первого ответа</span></div><div class="f1"><b>10 секунд</b><span>до первого ответа</span></div></div>
+        </div>
+        <div class="ba-vis" aria-hidden="true"><div class="ba-chat" data-s0="s:02:14, ночь|u:Здравствуйте, сколько стоит доставка?|s:Прочитано в 09:40|u:Уже не нужно, заказал в другом месте" data-s1="s:02:14, ночь|u:Здравствуйте, сколько стоит доставка?|b:Доставка 300 ₽, от 5 000 ₽ бесплатно. Оформить заказ?|u:Да, оформляйте|c:fa-solid fa-address-card:Заявка в CRM"></div></div>
+      </div>
     </div>
-    <p style="margin-top:20px;font-size:15px;color:var(--gray);text-align:center">Модель подбираем под задачу на консультации. Если задача изменится, модель можно заменить без переделки агента.</p>
+    <p class="ba-more">Строим агента на той модели, которая подходит задаче: <a href="/ii-agent-chatgpt.html">ChatGPT</a> · <a href="/ii-agent-gemini.html">Gemini</a> · <a href="/ii-agent-claude.html">Claude</a></p>
   </div>
 </section>
 
@@ -1197,7 +1205,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=3" defer></script>
+<script src="/hero3d/blocks.js?v=4" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->

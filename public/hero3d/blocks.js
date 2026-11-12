@@ -31,6 +31,18 @@
     })(t0);
   }
 
+  /* элементы «живого экрана»: реплики, плашки, файл, узел схемы, форма, кнопки меню, стопка страниц */
+  function node(step) {
+    var k = step.charAt(0), rest = step.slice(2), el = document.createElement('div'), p;
+    if (k === 'u' || k === 'b') { el.className = 'mm ' + k; el.textContent = rest; }
+    else if (k === 's') { el.className = 'ss'; el.textContent = rest; }
+    else if (k === 'k' || k === 'F') { el.className = k === 'k' ? 'sk' : 'sF'; rest.split(';').forEach(function (x) { var c = document.createElement('span'); c.textContent = x; el.appendChild(c); }); }
+    else if (k === 'P') { el.className = 'sP'; el.innerHTML = '<i></i><i></i><i></i><i></i><b></b>'; el.lastChild.textContent = rest; }
+    else if (k === 'v') { el.className = 'sv'; var bars = ''; for (var i = 0; i < 16; i++) bars += '<s style="--k:' + ((i * 7) % 11) + '"></s>'; el.innerHTML = '<i class="fa-solid fa-play"></i><span>' + bars + '</span>' + rest; }
+    else { p = rest.indexOf(':'); el.className = k === 'c' ? 'sc' : k === 'f' ? 'sf' : k === 'm' ? 'sn sm' : 'sn'; var ic = document.createElement('i'); ic.className = rest.slice(0, p); el.appendChild(ic); el.appendChild(document.createTextNode(rest.slice(p + 1))); }
+    return el;
+  }
+
   var INIT = {};
 
   /* ---------- цены ---------- */
@@ -177,13 +189,6 @@
     var items = $$('.shw-i', box), chat = $('.shw-chat', box), stage = $('.shw-stage', box), desc = $('.shw-desc', box), bud = $('.bk-buddy', box);
     var timers = [], cur = 0, seen = true, flow = box.getAttribute('data-mode') === 'flow', tile = bud && $('b', bud);
     if (bud) paintBuddy(bud);
-    function node(step) {
-      var k = step.charAt(0), rest = step.slice(2), el = document.createElement('div'), p;
-      if (k === 'u' || k === 'b') { el.className = 'mm ' + k; el.textContent = rest; }
-      else if (k === 'v') { el.className = 'sv'; var bars = ''; for (var i = 0; i < 16; i++) bars += '<s style="--k:' + ((i * 7) % 11) + '"></s>'; el.innerHTML = '<i class="fa-solid fa-play"></i><span>' + bars + '</span>' + rest; }
-      else { p = rest.indexOf(':'); el.className = k === 'c' ? 'sc' : k === 'f' ? 'sf' : 'sn'; var ic = document.createElement('i'); ic.className = rest.slice(0, p); el.appendChild(ic); el.appendChild(document.createTextNode(rest.slice(p + 1))); }
-      return el;
-    }
     function play(i) {
       timers.forEach(clearTimeout); timers = []; cur = i;
       items.forEach(function (b, k) { b.classList.toggle('on', k === i); });
@@ -241,6 +246,30 @@
       bud.style.setProperty('--par', ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1));
     }, { passive: true });
     play(0);
+  };
+
+  /* ---------- второй блок: «без / с» с переключателем ---------- */
+  INIT.ba = function (box) {
+    var btns = $$('.ba-sw button', box), chat = $('.ba-chat', box), timers = [], touched = false;
+    function set(v, user) {
+      if (user) touched = true;
+      timers.forEach(clearTimeout); timers = [];
+      box.setAttribute('data-state', v);
+      btns.forEach(function (b, i) { b.classList.toggle('on', i === v); b.setAttribute('aria-selected', i === v); });
+      chat.innerHTML = '';
+      var t = 450;
+      chat.getAttribute('data-s' + v).split('|').forEach(function (st) {
+        var el = node(st); chat.appendChild(el);
+        if (reduce) { el.classList.add('in'); return; }
+        if (st.charAt(0) === 'b') { timers.push(setTimeout(function () { el.classList.add('wait'); }, t)); t += 750; }
+        timers.push(setTimeout(function () { el.classList.remove('wait'); el.classList.add('in'); }, t));
+        t += 700;
+      });
+      if (!v && !touched && !reduce) timers.push(setTimeout(function () { if (!touched) set(1); }, t + 2200));
+    }
+    btns.forEach(function (b, i) { b.addEventListener('click', function () { set(i, true); }); });
+    $('.ba-knob', box).parentNode.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') set(1, true); if (e.key === 'ArrowLeft') set(0, true); });
+    set(0);
   };
 
   /* запуск по мере прокрутки */

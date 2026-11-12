@@ -10,8 +10,8 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=3">
+<link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -822,6 +822,28 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
+<section id="compare">
+  <div class="container">
+    <div class="section-label">Сравните</div>
+    <h2 class="section-title">Одна заявка: <span>руками и на автомате</span></h2>
+    <p class="bk-sub" style="margin-bottom:30px">Переключите и посмотрите разницу.</p>
+    <div class="ba reveal" data-bk="ba" data-state="0">
+      <div class="ba-glow" aria-hidden="true"></div>
+      <div class="ba-sw" role="tablist" tabindex="0"><i class="ba-knob"></i><button type="button" role="tab" class="on">Руками</button><button type="button" role="tab">На n8n</button></div>
+      <div class="ba-grid">
+        <div class="ba-rows">
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Четыре действия на каждую заявку</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Ни одного ручного действия</span></div></div>
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Ошибки при копировании данных</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Данные переносятся без ошибок</span></div></div>
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>В выходные заявки ждут понедельника</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Работает ночью и в выходные</span></div></div>
+          <div class="ba-metric"><div class="f0"><b>4 действия</b><span>на каждую заявку</span></div><div class="f1"><b>0 действий</b><span>всё делает система</span></div></div>
+        </div>
+        <div class="ba-vis" aria-hidden="true"><div class="ba-chat" data-s0="m:fa-solid fa-hand:Открыть почту и найти заявку|m:fa-solid fa-hand:Скопировать данные в CRM|m:fa-solid fa-hand:Внести строку в таблицу|m:fa-solid fa-hand:Написать менеджеру" data-s1="n:fa-solid fa-envelope:Заявка пришла на почту|n:fa-solid fa-address-card:Карточка в CRM создана|n:fa-solid fa-table:Строка в таблице добавлена|n:fa-solid fa-paper-plane:Менеджер получил уведомление"></div></div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
 <section id="case">
   <div class="container">
     <div class="section-label">Пример</div>
@@ -1106,7 +1128,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=3" defer></script>
+<script src="/hero3d/blocks.js?v=4" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->

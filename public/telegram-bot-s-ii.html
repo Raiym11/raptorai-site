@@ -10,8 +10,8 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=3">
+<link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -822,6 +822,28 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
+<section id="compare">
+  <div class="container">
+    <div class="section-label">Сравните</div>
+    <h2 class="section-title">Запись клиента: <span>форма на сайте и бот в Telegram</span></h2>
+    <p class="bk-sub" style="margin-bottom:30px">Переключите и посмотрите разницу.</p>
+    <div class="ba reveal" data-bk="ba" data-state="0">
+      <div class="ba-glow" aria-hidden="true"></div>
+      <div class="ba-sw" role="tablist" tabindex="0"><i class="ba-knob"></i><button type="button" role="tab" class="on">Форма на сайте</button><button type="button" role="tab">Бот в Telegram</button></div>
+      <div class="ba-grid">
+        <div class="ba-rows">
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Длинная форма, половина полей лишние</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Два сообщения вместо формы</span></div></div>
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Нужно ждать звонка менеджера</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Запись подтверждается сразу</span></div></div>
+          <div class="ba-row"><div class="f0"><i class="fa-solid fa-xmark"></i><span>Клиент бросает на середине</span></div><div class="f1"><i class="fa-solid fa-check"></i><span>Заявка тут же приходит вам</span></div></div>
+          <div class="ba-metric"><div class="f0"><b>6 полей</b><span>нужно заполнить</span></div><div class="f1"><b>2 сообщения</b><span>и клиент записан</span></div></div>
+        </div>
+        <div class="ba-vis" aria-hidden="true"><div class="ba-chat" data-s0="F:Имя;Телефон;Email;Услуга;Дата;Комментарий|s:Клиент закрыл страницу" data-s1="u:Можно записаться на субботу?|b:Свободно 11:00 и 14:00. Какое время удобно?|u:14:00|c:fa-solid fa-calendar-check:Запись: суббота, 14:00"></div></div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
 <section id="case">
   <div class="container">
     <div class="section-label">Пример</div>
@@ -1113,7 +1135,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=3" defer></script>
+<script src="/hero3d/blocks.js?v=4" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
