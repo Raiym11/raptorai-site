@@ -172,6 +172,55 @@
     $$('.need-i', box).forEach(function (el, i) { later(350 + i * 420, function () { el.classList.add('ok'); }); });
   };
 
+  /* ---------- первый блок: возможности в деле ---------- */
+  INIT.shw = function (box) {
+    var items = $$('.shw-i', box), chat = $('.shw-chat', box), stage = $('.shw-stage', box), desc = $('.shw-desc', box), bud = $('.bk-buddy', box);
+    var timers = [], cur = 0, seen = true;
+    if (bud) paintBuddy(bud);
+    function node(step) {
+      var k = step.charAt(0), rest = step.slice(2), el = document.createElement('div'), p;
+      if (k === 'u' || k === 'b') { el.className = 'mm ' + k; el.textContent = rest; }
+      else if (k === 'v') { el.className = 'sv'; var bars = ''; for (var i = 0; i < 16; i++) bars += '<s style="--k:' + ((i * 7) % 11) + '"></s>'; el.innerHTML = '<i class="fa-solid fa-play"></i><span>' + bars + '</span>' + rest; }
+      else { p = rest.indexOf(':'); el.className = k === 'c' ? 'sc' : k === 'f' ? 'sf' : 'sn'; var ic = document.createElement('i'); ic.className = rest.slice(0, p); el.appendChild(ic); el.appendChild(document.createTextNode(rest.slice(p + 1))); }
+      return el;
+    }
+    function play(i) {
+      timers.forEach(clearTimeout); timers = []; cur = i;
+      items.forEach(function (b, k) { b.classList.toggle('on', k === i); });
+      if (desc) desc.textContent = $('span', items[i]).textContent;
+      if (items[i].scrollIntoView && items[i].parentNode.scrollWidth > items[i].parentNode.clientWidth) items[i].parentNode.scrollTo({ left: items[i].offsetLeft - 24, behavior: reduce ? 'auto' : 'smooth' });
+      chat.innerHTML = '';
+      var steps = items[i].getAttribute('data-s').split('|'), t = 350;
+      steps.forEach(function (st) {
+        var el = node(st); chat.appendChild(el);
+        if (reduce) { el.classList.add('in'); return; }
+        if (st.charAt(0) === 'b') { timers.push(setTimeout(function () { el.classList.add('wait'); }, t)); t += 800; }
+        timers.push(setTimeout(function () { el.classList.remove('wait'); el.classList.add('in'); }, t));
+        t += st.charAt(0) === 'n' ? 700 : 850;
+      });
+      if (reduce) return;
+      var dur = t + 2600;
+      items[i].style.setProperty('--dur', dur + 'ms');
+      var u = $('u', items[i]); u.style.animation = 'none'; void u.offsetWidth; u.style.animation = '';
+      timers.push(setTimeout(function tick() { if (seen && !document.hidden) play((cur + 1) % items.length); else timers.push(setTimeout(tick, 800)); }, dur));
+    }
+    items.forEach(function (b, i) { b.addEventListener('click', function () { play(i); }); });
+    new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: 0.15 }).observe(box);
+    if (!reduce && mq('(hover: hover) and (pointer: fine)')) {
+      stage.addEventListener('pointermove', function (e) {
+        var r = stage.getBoundingClientRect();
+        stage.style.setProperty('--ry', (((e.clientX - r.left) / r.width - 0.5) * 16).toFixed(2));
+        stage.style.setProperty('--rx', ((0.5 - (e.clientY - r.top) / r.height) * 12).toFixed(2));
+      });
+      stage.addEventListener('pointerleave', function () { stage.style.setProperty('--ry', 0); stage.style.setProperty('--rx', 0); });
+    }
+    if (bud && !reduce) window.addEventListener('scroll', function () {
+      var r = stage.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      bud.style.setProperty('--par', ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1));
+    }, { passive: true });
+    play(0);
+  };
+
   /* запуск по мере прокрутки */
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) {

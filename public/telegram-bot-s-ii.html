@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=1">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=2">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -737,7 +737,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
 </head>
-<body class="svc" style="--pacc:#2AABEE;--pacc2:#7FD4FF">
+<body class="svc svc-brand" style="--pacc:#2AABEE;--pacc2:#7FD4FF;--pbt:#fff">
 <a class="skip-link" href="/#services">К содержимому</a>
 <canvas id="fx-canvas" aria-hidden="true"></canvas>
 
@@ -794,19 +794,30 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </div>
 </section>
 
-<section id="features" style="background:var(--bg2);">
+<section id="features">
   <div class="container">
     <div class="section-label">Возможности</div>
     <h2 class="section-title">Что умеет <span>Telegram-бот</span></h2>
-    <p class="section-sub">Клиенты уже сидят в Telegram. Бот встречает их там и не даёт заявке потеряться.</p>
+    <p class="bk-sub" style="margin-bottom:26px">Клиенты уже сидят в Telegram. Бот встречает их там и не даёт заявке потеряться. Нажмите на любую возможность и посмотрите её в деле.</p>
     <ul class="hx-benefits hx-row" style="--acc:#2AABEE;--acc2:#7FD4FF"><li><i class="fa-solid fa-check"></i><span>Отвечает по вашему каталогу и прайсу 24/7</span></li><li><i class="fa-solid fa-check"></i><span>Понимает голосовые сообщения</span></li><li><i class="fa-solid fa-check"></i><span>Сразу присылает вам заявку с контактами</span></li></ul>
-    <div class="services-grid reveal">
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-comments"></i></div><div class="service-name">Консультирует</div><p class="service-desc" style="margin-bottom:0">Отвечает на вопросы о товарах, ценах и условиях по вашей базе знаний.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-clipboard-list"></i></div><div class="service-name">Принимает заявки и записи</div><p class="service-desc" style="margin-bottom:0">Собирает контакты и детали заказа, не заставляя клиента заполнять длинные формы.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-paper-plane"></i></div><div class="service-name">Уведомляет вас</div><p class="service-desc" style="margin-bottom:0">Новая заявка приходит вам в Telegram сразу, с контактами и историей диалога.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-microphone"></i></div><div class="service-name">Понимает голосовые</div><p class="service-desc" style="margin-bottom:0">Клиент может написать или наговорить голосовое, бот разберёт и ответит.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-table"></i></div><div class="service-name">Записывает в таблицу или CRM</div><p class="service-desc" style="margin-bottom:0">Все обращения попадают в Google Таблицу, AmoCRM или Bitrix24 автоматически.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-user-check"></i></div><div class="service-name">Передаёт менеджеру</div><p class="service-desc" style="margin-bottom:0">В сложных случаях бот зовёт человека и передаёт ему всю переписку.</p></div>
+    <div class="shw reveal" data-bk="shw">
+      <div class="shw-list">
+        <button type="button" class="shw-i on" data-s="u:Сколько стоит маникюр с покрытием?|b:Маникюр с покрытием 2 200 ₽, длится 1,5 часа.|c:fa-solid fa-book-open:Ответ из вашего прайса"><em>01</em><i class="fa-solid fa-comments"></i><b>Консультирует</b><span>Отвечает на вопросы о товарах, ценах и условиях по вашей базе знаний.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Можно записаться на субботу?|b:В субботу свободно 11:00 и 14:00. Какое время удобно?|u:14:00|c:fa-solid fa-calendar-check:Запись: суббота, 14:00"><em>02</em><i class="fa-solid fa-clipboard-list"></i><b>Принимает заявки и записи</b><span>Собирает контакты и детали заказа, не заставляя клиента заполнять длинные формы.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="c:fa-solid fa-fire:Новая заявка|b:Анна, +7 900 ···-··-12. Хочет маникюр в субботу, 14:00.|c:fa-solid fa-paper-plane:Пришло вам в Telegram"><em>03</em><i class="fa-solid fa-paper-plane"></i><b>Уведомляет вас</b><span>Новая заявка приходит вам в Telegram сразу, с контактами и историей диалога.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="v:0:09|c:fa-solid fa-wave-square:Распознано: «Вы работаете в воскресенье?»|b:Да, в воскресенье с 10 до 20."><em>04</em><i class="fa-solid fa-microphone"></i><b>Понимает голосовые</b><span>Клиент может написать или наговорить голосовое, бот разберёт и ответит.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Оформляйте|b:Готово, ждём вас!|c:fa-solid fa-table:Строка добавлена в Google Таблицу|c:fa-solid fa-address-card:Карточка создана в AmoCRM"><em>05</em><i class="fa-solid fa-table"></i><b>Записывает в таблицу или CRM</b><span>Все обращения попадают в Google Таблицу, AmoCRM или Bitrix24 автоматически.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Хочу вернуть деньги за заказ|b:Этот вопрос решит менеджер. Передаю ему наш диалог.|c:fa-solid fa-user-check:Менеджер подключился к диалогу"><em>06</em><i class="fa-solid fa-user-check"></i><b>Передаёт менеджеру</b><span>В сложных случаях бот зовёт человека и передаёт ему всю переписку.</span><u></u></button>
+      </div>
+      <div class="shw-stage" aria-hidden="true">
+        <div class="shw-halo"></div><div class="shw-orb"><i></i><i></i><i></i></div>
+        <div class="shw-dev">
+          <div class="shw-top"><span class="shw-av"><i class="fa-solid fa-robot"></i></span><div><b>Бот в Telegram</b><small>в работе</small></div><span class="shw-dots"><i></i><i></i><i></i></span></div>
+          <div class="shw-chat"></div>
+        </div>
+        <div class="bk-buddy"><i class="fa-solid fa-paper-plane"></i></div>
+      </div>
+      <p class="shw-desc"></p>
     </div>
   </div>
 </section>
@@ -1102,8 +1113,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=1" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=7";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=2" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

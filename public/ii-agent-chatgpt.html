@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=1">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=2">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -737,7 +737,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
 </head>
-<body class="svc" style="--pacc:#10A37F;--pacc2:#5CFFC8">
+<body class="svc svc-brand" style="--pacc:#10A37F;--pacc2:#5CFFC8;--pbt:#04130e">
 <a class="skip-link" href="/#services">К содержимому</a>
 <canvas id="fx-canvas" aria-hidden="true"></canvas>
 
@@ -794,19 +794,30 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </div>
 </section>
 
-<section id="features" style="background:var(--bg2);">
+<section id="features">
   <div class="container">
     <div class="section-label">Возможности</div>
-    <h2 class="section-title">Что делает <span>ИИ-агент</span></h2>
-    <p class="section-sub">Не шаблонный бот с кнопками, а помощник, который понимает вопросы своими словами и ведёт клиента до заявки.</p>
+    <h2 class="section-title">Где ChatGPT <span>сильнее всего</span></h2>
+    <p class="bk-sub" style="margin-bottom:26px">Продажи, поддержка и живой разговор. Нажмите на любую возможность и посмотрите её в деле.</p>
     <ul class="hx-benefits hx-row" style="--acc:#10A37F;--acc2:#5CFFC8"><li><i class="fa-solid fa-check"></i><span>Живой естественный диалог, а не кнопки и шаблоны</span></li><li><i class="fa-solid fa-check"></i><span>Понимает голосовые сообщения</span></li><li><i class="fa-solid fa-check"></i><span>Сам записывает заявку в CRM и зовёт менеджера</span></li></ul>
-    <div class="services-grid reveal">
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-bolt"></i></div><div class="service-name">Отвечает мгновенно</div><p class="service-desc" style="margin-bottom:0">Клиент получает ответ сразу, днём и ночью, и не ждёт, пока освободится менеджер.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-filter"></i></div><div class="service-name">Квалифицирует заявки</div><p class="service-desc" style="margin-bottom:0">Задаёт нужные вопросы, выясняет задачу и срочность, отсеивает нецелевые обращения.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-book-open"></i></div><div class="service-name">Знает ваш бизнес</div><p class="service-desc" style="margin-bottom:0">Отвечает по вашим ценам, условиям и каталогу из базы знаний, а не выдумывает ответы.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-address-card"></i></div><div class="service-name">Передаёт в CRM</div><p class="service-desc" style="margin-bottom:0">Создаёт карточку в AmoCRM, Bitrix24 или таблице и сразу уведомляет менеджера в Telegram.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-microchip"></i></div><div class="service-name">Модель под задачу</div><p class="service-desc" style="margin-bottom:0">Подбираем ChatGPT, Claude или Gemini под тип задач и ваш бюджет.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-user-check"></i></div><div class="service-name">Зовёт человека</div><p class="service-desc" style="margin-bottom:0">Если вопрос сложный или клиент просит менеджера, диалог переходит к человеку вместе с историей.</p></div>
+    <div class="shw reveal" data-bk="shw">
+      <div class="shw-list">
+        <button type="button" class="shw-i on" data-s="u:а если мне завтра надо, успеете?|b:Успеем: при заказе до 18:00 привезём завтра до обеда.|c:fa-solid fa-comments:Понял вопрос без кнопок и шаблонов"><em>01</em><i class="fa-solid fa-comments"></i><b>Живой диалог</b><span>Понимает вопросы своими словами, без кнопок и шаблонов.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="v:0:07|c:fa-solid fa-wave-square:Распознано: «Есть ли скидка для опта?»|b:Да, для опта цены ниже. Посчитать под ваш объём?"><em>02</em><i class="fa-solid fa-microphone"></i><b>Понимает голосовые</b><span>Клиент наговаривает вопрос, агент отвечает текстом.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Мне нужна доставка в Казань|u:И сколько это будет стоить?|b:Доставка в Казань 450 ₽, привезём за 2-3 дня.|c:fa-solid fa-brain:Помнит город из прошлого сообщения"><em>03</em><i class="fa-solid fa-brain"></i><b>Помнит весь диалог</b><span>Не переспрашивает то, что клиент уже сказал.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Спасибо, я подумаю|b:Конечно. Могу оформить предварительный заказ, оставите телефон?|u:Давайте, +7 900 ···-··-12|c:fa-solid fa-bullseye:Заявка получена"><em>04</em><i class="fa-solid fa-bullseye"></i><b>Ведёт к заявке</b><span>Не просто отвечает, а доводит разговор до заказа.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Оформляйте|b:Готово! Менеджер свяжется с вами в течение 15 минут.|c:fa-solid fa-address-card:Карточка создана в Bitrix24|c:fa-solid fa-bell:Менеджер получил уведомление"><em>05</em><i class="fa-solid fa-address-card"></i><b>Записывает в CRM</b><span>Сам создаёт карточку клиента и уведомляет менеджера.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="c:fa-solid fa-moon:03:12, ночь|u:Как отследить мой заказ?|b:Заказ № 1042 в пути, доставка завтра до 14:00.|c:fa-solid fa-headset:Вопрос закрыт без менеджера"><em>06</em><i class="fa-solid fa-headset"></i><b>Поддержка 24/7</b><span>Отвечает на типовые вопросы ночью и в выходные, сложные передаёт человеку.</span><u></u></button>
+      </div>
+      <div class="shw-stage" aria-hidden="true">
+        <div class="shw-halo"></div><div class="shw-orb"><i></i><i></i><i></i></div>
+        <div class="shw-dev">
+          <div class="shw-top"><span class="shw-av"><i class="fa-solid fa-robot"></i></span><div><b>Агент на ChatGPT</b><small>в работе</small></div><span class="shw-dots"><i></i><i></i><i></i></span></div>
+          <div class="shw-chat"></div>
+        </div>
+        <div class="bk-buddy"><i class="fa-solid fa-robot"></i></div>
+      </div>
+      <p class="shw-desc"></p>
     </div>
   </div>
 </section>
@@ -1116,8 +1127,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=1" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=7";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=2" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

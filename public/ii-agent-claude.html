@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=1">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=2">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -737,7 +737,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
 </head>
-<body class="svc" style="--pacc:#D97757;--pacc2:#F2B39B">
+<body class="svc svc-brand" style="--pacc:#D97757;--pacc2:#F2B39B;--pbt:#1a0d07">
 <a class="skip-link" href="/#services">К содержимому</a>
 <canvas id="fx-canvas" aria-hidden="true"></canvas>
 
@@ -794,19 +794,30 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </div>
 </section>
 
-<section id="features" style="background:var(--bg2);">
+<section id="features">
   <div class="container">
     <div class="section-label">Возможности</div>
-    <h2 class="section-title">Что делает <span>ИИ-агент</span></h2>
-    <p class="section-sub">Не шаблонный бот с кнопками, а помощник, который понимает вопросы своими словами и ведёт клиента до заявки.</p>
+    <h2 class="section-title">Задачи, где <span>важна точность</span></h2>
+    <p class="bk-sub" style="margin-bottom:26px">Длинные документы, данные и код. Нажмите на любую задачу и посмотрите, как агент с ней работает.</p>
     <ul class="hx-benefits hx-row" style="--acc:#D97757;--acc2:#F2B39B"><li><i class="fa-solid fa-check"></i><span>Читает договоры и отчёты на сотни страниц</span></li><li><i class="fa-solid fa-check"></i><span>Выделяет главное и находит рискованные пункты</span></li><li><i class="fa-solid fa-check"></i><span>Пишет точно и вежливо, без «роботского» тона</span></li></ul>
-    <div class="services-grid reveal">
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-bolt"></i></div><div class="service-name">Отвечает мгновенно</div><p class="service-desc" style="margin-bottom:0">Клиент получает ответ сразу, днём и ночью, и не ждёт, пока освободится менеджер.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-filter"></i></div><div class="service-name">Квалифицирует заявки</div><p class="service-desc" style="margin-bottom:0">Задаёт нужные вопросы, выясняет задачу и срочность, отсеивает нецелевые обращения.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-book-open"></i></div><div class="service-name">Знает ваш бизнес</div><p class="service-desc" style="margin-bottom:0">Отвечает по вашим ценам, условиям и каталогу из базы знаний, а не выдумывает ответы.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-address-card"></i></div><div class="service-name">Передаёт в CRM</div><p class="service-desc" style="margin-bottom:0">Создаёт карточку в AmoCRM, Bitrix24 или таблице и сразу уведомляет менеджера в Telegram.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-microchip"></i></div><div class="service-name">Модель под задачу</div><p class="service-desc" style="margin-bottom:0">Подбираем ChatGPT, Claude или Gemini под тип задач и ваш бюджет.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-user-check"></i></div><div class="service-name">Зовёт человека</div><p class="service-desc" style="margin-bottom:0">Если вопрос сложный или клиент просит менеджера, диалог переходит к человеку вместе с историей.</p></div>
+    <div class="shw reveal" data-bk="shw">
+      <div class="shw-list">
+        <button type="button" class="shw-i on" data-s="f:fa-solid fa-file-contract:Договор поставки · 40 страниц|c:fa-solid fa-triangle-exclamation:п. 4.2: штраф 0,5% в день|c:fa-solid fa-clock:п. 7.1: оплата через 60 дней|b:Итог: 3 риска и 2 вопроса к поставщику."><em>01</em><i class="fa-solid fa-file-contract"></i><b>Договоры</b><span>Читает договор целиком и находит рискованные пункты.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Как сбросить контроллер до заводских настроек?|c:fa-solid fa-book:Раздел 6.2 инструкции|b:Удерживайте кнопку Reset 10 секунд при включении питания."><em>02</em><i class="fa-solid fa-book"></i><b>Техническая документация</b><span>Отвечает по регламентам и инструкциям со ссылкой на раздел.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Почему скрипт выгрузки падает?|c:fa-solid fa-bug:Строка 42: пустая дата|b:Добавил проверку на пустое значение, выгрузка проходит."><em>03</em><i class="fa-solid fa-code"></i><b>Код и скрипты</b><span>Пишет и объясняет скрипты, находит ошибки.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="f:fa-solid fa-file-csv:Продажи за октябрь|c:fa-solid fa-chart-line:Выручка +18% к сентябрю|b:Рост дали две категории, у третьей спад. Показать разбор?"><em>04</em><i class="fa-solid fa-chart-line"></i><b>Анализ данных</b><span>Находит закономерности в выгрузках и объясняет их простыми словами.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="f:fa-solid fa-file-lines:Отчёты отделов · 60 страниц|b:Сводка на 1 страницу готова: 5 выводов и 3 решения.|c:fa-solid fa-check:Отправлено руководителю"><em>05</em><i class="fa-solid fa-file-lines"></i><b>Отчёты</b><span>Собирает длинные данные в короткий отчёт для руководителя.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="u:Почему задержали поставку?|b:Приносим извинения: партия задержалась на 2 дня. Новая дата доставки - пятница.|c:fa-solid fa-pen-nib:Вежливо и по фактам"><em>06</em><i class="fa-solid fa-pen-nib"></i><b>Точные ответы</b><span>Пишет клиентам и партнёрам аккуратно и по делу, без «роботского» тона.</span><u></u></button>
+      </div>
+      <div class="shw-stage" aria-hidden="true">
+        <div class="shw-halo"></div><div class="shw-orb"><i></i><i></i><i></i></div>
+        <div class="shw-dev">
+          <div class="shw-top"><span class="shw-av"><i class="fa-solid fa-robot"></i></span><div><b>Агент на Claude</b><small>в работе</small></div><span class="shw-dots"><i></i><i></i><i></i></span></div>
+          <div class="shw-chat"></div>
+        </div>
+        <div class="bk-buddy"><i class="fa-solid fa-robot"></i></div>
+      </div>
+      <p class="shw-desc"></p>
     </div>
   </div>
 </section>
@@ -1116,8 +1127,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=1" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=7";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=2" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

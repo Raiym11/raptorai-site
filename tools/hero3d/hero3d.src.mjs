@@ -601,8 +601,8 @@ function boot(host) {
   fit();
   requestAnimationFrame(() => { host.classList.add('ready'); if (reduce) once(); });
   /* снимок главного объекта: его маленькая копия сопровождает человека по блокам ниже */
-  const crop = { agent: [0.22, 0.14, 0.56, 0.72], chatgpt: [0.3, 0.2, 0.4, 0.4], gemini: [0.3, 0.27, 0.4, 0.4], claude: [0.1, 0.14, 0.25, 0.25], n8n: [0.36, 0.36, 0.28, 0.28] }[host.dataset.scene];
-  if (S.gl && crop) setTimeout(() => {
+  const crop = { agent: [0.22, 0.14, 0.56, 0.72], chatgpt: [0.3, 0.2, 0.4, 0.4], gemini: [0.3, 0.27, 0.4, 0.4], claude: [0.07, 0.11, 0.31, 0.31], n8n: [0.36, 0.36, 0.28, 0.28] }[host.dataset.scene];
+  if (S.gl && crop) [2600, 6500].forEach((ms) => setTimeout(() => {
     try {
       S.gl.renderer.render(S.gl.scene, S.gl.camera);
       const cv = S.gl.canvas, o = document.createElement('canvas');
@@ -611,7 +611,7 @@ function boot(host) {
       window.__h3dSnap = o.toDataURL('image/png');
       document.dispatchEvent(new CustomEvent('h3d:snap', { detail: { scene: host.dataset.scene, url: window.__h3dSnap } }));
     } catch (e) { /* без копии: в блоках останется значок */ }
-  }, 1600);
+  }, ms));
   if (!reduce && !/[?&]h3d=manual/.test(location.search)) {
     setTimeout(() => { if (vis && !S.clicked) play(false); }, 3000);
     setInterval(() => { if (vis && !S.playing && !S.inside && performance.now() - S.lastUser > 9000) play(false); }, 12000);
