@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=5">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -846,22 +846,20 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <section id="case">
   <div class="container">
-    <div class="section-label">Пример</div>
+    <div class="section-label">Кейсы</div>
     <h2 class="section-title">Как это <span>работает на практике</span></h2>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Продажи</span><h3 class="case-brand">ТехноСтрой</h3></div>
-      <div class="case-title">Квалификация входящих лидов для оптового бизнеса</div>
-      <p class="case-desc">До внедрения был умеренный органический рост. Агент запущен в январе: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p>
-      <div class="case-kpis"><div class="case-kpi"><b>753</b><span>клиентов в августе 2026</span></div><div class="case-kpi"><b>6×</b><span>рост после запуска ИИ-агента</span></div></div>
-      <p style="margin-top:18px"><a href="/case-tehnostroy.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
+    <div class="cz reveal" data-bk="cz" style="margin-top:30px">
+      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-store"></i><span><b>Интернет-магазин</b><small>ИИ-агент · каталог</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-chart-line"></i><span><b>ТехноСтрой</b><small>ИИ-агент · продажи</small></span></button></div>
+      <div class="cz-pane on" data-v="scan">
+        <div class="cz-info"><h3>Агент знает весь каталог магазина</h3><p>Покупатель описывает задачу своими словами, агент подбирает подходящие позиции из каталога и доводит до заявки. Днём и ночью, без отдельного консультанта в штате.</p><div class="cz-kpis"><div><b><span data-count="13379">13 379</span></b><span>товаров в каталоге</span></div><div><b><span data-count="10">10</span> сек</b><span>на ответ покупателю</span></div><div><b><span data-count="30000">30 000</span> ₽</b><span>в месяц экономии</span></div></div><a href="/case-katalog.html" class="btn-secondary">Подробнее о проекте</a></div>
+        <div class="cz-vis"><div class="scan"><div class="scan-bar"><i class="fa-solid fa-magnifying-glass"></i><span>Что ищет покупатель:</span><button type="button" class="on">Подешевле</button><button type="button">Помощнее</button><button type="button">В наличии</button></div><div class="scan-grid"><i class="scan-beam"></i></div><div class="scan-res"><i class="fa-solid fa-bolt"></i><span>Подобрал <b>3 варианта</b> из 13 379 товаров</span></div></div></div>
+      </div>
+      <div class="cz-pane" data-v="chart">
+        <div class="cz-info"><h3>Квалификация входящих лидов для оптового бизнеса</h3><p>До внедрения был умеренный рост: 90-120 новых клиентов в месяц. Агент запущен в январе 2026: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p><div class="cz-kpis"><div><b><span data-count="753">753</span></b><span>клиентов в августе 2026</span></div><div><b><span data-count="6">6</span>×</b><span>рост после запуска ИИ-агента</span></div></div><a href="/case-tehnostroy.html" class="btn-secondary">Подробнее о проекте</a></div>
+        <div class="cz-vis"><div class="chart" data-launch="5" data-points="90,110,105,106,120,155,145,207,192,290,335,515,753" data-labels="Авг '25|Сен '25|Окт '25|Ноя '25|Дек '25|Янв '26|Фев '26|Мар '26|Апр '26|Май '26|Июн '26|Июл '26|Авг '26" data-alt="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: 90-120 клиентов до запуска ИИ-агента в январе 2026, затем рост до 753"><div class="chart-box"><div class="chart-tip"></div></div></div></div>
+      </div>
     </div>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Каталог</span><h3 class="case-brand">Интернет-магазин</h3></div>
-      <div class="case-title">Интернет-магазин: агент знает весь каталог</div>
-      <p class="case-desc">ИИ-консультант отвечает покупателям по каталогу, днём и ночью, без участия менеджера.</p>
-      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на ответ</span></div><div class="case-kpi"><b>30 000 ₽</b><span>в месяц экономии на консультанте</span></div></div>
-      <p style="margin-top:18px"><a href="/case-katalog.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
-    </div>
+    
   </div>
 </section>
 
@@ -1135,8 +1133,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=4" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=5" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=9";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

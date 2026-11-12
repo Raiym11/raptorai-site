@@ -601,7 +601,7 @@ function boot(host) {
   fit();
   requestAnimationFrame(() => { host.classList.add('ready'); if (reduce) once(); });
   /* снимок главного объекта: его маленькая копия сопровождает человека по блокам ниже */
-  const crop = { agent: [0.22, 0.14, 0.56, 0.72], chatgpt: [0.3, 0.2, 0.4, 0.4], gemini: [0.3, 0.27, 0.4, 0.4], claude: [0.07, 0.11, 0.31, 0.31], n8n: [0.36, 0.36, 0.28, 0.28] }[host.dataset.scene];
+  const crop = { agent: [0.22, 0.14, 0.56, 0.72] }[host.dataset.scene];
   if (S.gl && crop) [2600, 6500].forEach((ms) => setTimeout(() => {
     try {
       S.gl.renderer.render(S.gl.scene, S.gl.camera);

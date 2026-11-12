@@ -346,3 +346,81 @@
 .ba-more a{color:var(--pacc);font-weight:600;text-decoration:none}.ba-more a:hover{text-decoration:underline}
 @media(max-width:860px){.ba{padding:20px 16px}.ba-grid{grid-template-columns:1fr;gap:20px}.ba-sw{display:grid;width:100%}.ba-sw button{padding:11px 8px;font-size:13.5px;white-space:normal}.ba-row>div{font-size:15px;padding:13px 14px}.ba-chat{height:300px}}
 @media (prefers-reduced-motion:reduce){.ba-row>div,.ba-metric>div,.ba-knob,.ba-glow,.ba-chat>*{transition:none}}
+
+/* ---------- третий блок: кейсы с живой витриной ---------- */
+.cz{position:relative;border-radius:28px;padding:26px;border:1px solid color-mix(in srgb,var(--pacc) 26%,rgba(255,255,255,.08));background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015) 60%),rgba(9,14,21,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 40px 100px -60px var(--pacc);overflow:hidden}
+.cz-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.cz-tabs.one{display:none}
+.cz-t{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 18px 12px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:inherit;font:inherit;cursor:pointer;transition:border-color .3s,background .3s,transform .3s}
+.cz-t>i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.07);color:rgba(240,244,248,.7);transition:background .3s,color .3s,box-shadow .3s}
+.cz-t b{display:block;font-size:15.5px;color:rgba(240,244,248,.8)}.cz-t small{font-size:12px;color:var(--gray);font-family:'JetBrains Mono',monospace}
+.cz-t:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--pacc) 40%,transparent)}
+.cz-t.on{border-color:color-mix(in srgb,var(--pacc) 60%,transparent);background:color-mix(in srgb,var(--pacc) 10%,transparent)}
+.cz-t.on>i{background:linear-gradient(135deg,var(--pacc),var(--pacc2));color:#04121a;box-shadow:0 0 22px -4px var(--pacc)}
+.cz-t.on b{color:#fff}
+.cz-pane{display:none;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:34px;align-items:center}
+.cz-pane.on{display:grid;animation:czIn .55s cubic-bezier(.2,.7,.2,1)}
+@keyframes czIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.cz-info h3{font-size:clamp(20px,2.2vw,26px);line-height:1.25;margin:0 0 12px;letter-spacing:-.01em}
+.cz-info p{font-size:15.5px;line-height:1.7;color:rgba(240,244,248,.72);margin:0 0 22px}
+.cz-kpis{display:flex;flex-wrap:wrap;gap:20px 30px;margin-bottom:24px}
+.cz-kpis b{display:block;font:900 clamp(34px,4vw,50px)/1 'Inter',sans-serif;letter-spacing:-.04em;white-space:nowrap;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,var(--pacc),var(--pacc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cz-kpis div>span{display:block;margin-top:8px;font-size:13.5px;color:var(--gray);max-width:170px;line-height:1.4}
+.cz-vis{position:relative;min-width:0;border-radius:22px;padding:20px;background:linear-gradient(165deg,#101925,#0a1018);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.cz .chart{display:block;padding:0}
+/* каталог: поиск по сетке товаров */
+.scan-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:var(--gray);margin-bottom:14px}
+.scan-bar>i{color:var(--pacc)}
+.scan-bar button,.cov-sz button{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:rgba(240,244,248,.8);font:600 13px 'Inter',sans-serif;padding:7px 13px;border-radius:99px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.scan-bar button.on,.cov-sz button.on{background:var(--pacc);border-color:transparent;color:var(--pbt,#04121a)}
+.scan-grid{position:relative;display:grid;grid-template-columns:repeat(16,1fr);gap:5px;padding:4px 0;overflow:hidden}
+.scan-grid s{aspect-ratio:1;border-radius:22%;background:rgba(255,255,255,.07);text-decoration:none;transition:background .35s,box-shadow .35s,transform .45s cubic-bezier(.3,1.6,.4,1)}
+.scan-grid s.hit{background:color-mix(in srgb,var(--pacc) 55%,transparent)}
+.scan-grid s.win{background:linear-gradient(135deg,var(--pacc),var(--pacc2));box-shadow:0 0 16px var(--pacc);transform:scale(1.35);z-index:1;position:relative}
+.scan-beam{position:absolute;top:0;bottom:0;left:0;width:16%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--pacc) 30%,transparent) 80%,var(--pacc));border-right:2px solid var(--pacc);transform:translateX(-110%);pointer-events:none;z-index:2}
+.scan.go .scan-beam{animation:scanBeam 1.5s cubic-bezier(.4,0,.5,1) forwards}
+@keyframes scanBeam{to{transform:translateX(640%)}}
+.scan-res{margin-top:14px;display:inline-flex;align-items:center;gap:10px;padding:9px 15px;border-radius:99px;font-size:14px;background:color-mix(in srgb,var(--pacc) 12%,transparent);border:1px solid color-mix(in srgb,var(--pacc) 45%,transparent);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.scan-res i,.scan-res b{color:var(--pacc)}
+.scan.done .scan-res{opacity:1;transform:none}
+/* обложки: сборка из фото, текста и размера */
+.cov{display:grid;gap:16px;justify-items:center}
+.cov-in{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.cov-in span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;font-size:13.5px;font-weight:600;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.cov-in span i{color:var(--pacc)}
+.cov.go .cov-in span{animation:covDrop .9s cubic-bezier(.5,0,.6,1) both}
+.cov.go .cov-in span:nth-child(2){animation-delay:.15s}.cov.go .cov-in span:nth-child(3){animation-delay:.3s}
+@keyframes covDrop{0%{transform:none;opacity:1}60%{transform:translateY(46px) scale(.6);opacity:0}61%{transform:none;opacity:0}100%{opacity:1}}
+.cov-stage{position:relative;height:250px;width:100%;display:grid;place-items:center}
+.cov-card{position:relative;height:210px;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#0c121b;box-shadow:0 30px 50px -26px rgba(0,0,0,.9),0 0 50px -18px var(--pacc);transition:aspect-ratio .6s cubic-bezier(.3,1.1,.4,1),height .6s cubic-bezier(.3,1.1,.4,1)}
+.cov-card[data-r="2"]{aspect-ratio:9/16;height:240px}.cov-card[data-r="3"]{aspect-ratio:16/9;height:170px}
+.cov-ph{position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,color-mix(in srgb,var(--pacc2) 80%,#fff),transparent 46%),linear-gradient(140deg,color-mix(in srgb,var(--pacc) 70%,#0b1220),#0b1220 75%);opacity:0;transition:opacity .5s}
+.cov-card b{position:absolute;left:9%;bottom:20%;font:900 clamp(18px,2.2vw,26px)/1.02 'Inter',sans-serif;letter-spacing:-.02em;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .45s,transform .45s}
+.cov-card u{position:absolute;left:9%;bottom:9%;text-decoration:none;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);opacity:0;transition:opacity .45s}
+.cov-card em{position:absolute;right:8px;top:8px;padding:5px 10px;border-radius:99px;font:700 11px 'Inter',sans-serif;font-style:normal;background:#5CFFC8;color:#04121a;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.6,.4,1)}
+.cov.s1 .cov-ph{opacity:1}.cov.s2 .cov-card b{opacity:1;transform:none}.cov.s3 .cov-card u{opacity:1}.cov.s4 .cov-card em{transform:scale(1)}
+.cov-ring{position:absolute;right:6%;bottom:4px;width:54px;height:54px;transform:rotate(-90deg)}
+.cov-ring circle{fill:none;stroke:rgba(255,255,255,.12);stroke-width:4}
+.cov-ring .p{stroke:var(--pacc);stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.cov.go .cov-ring .p{animation:covRing 2.6s linear forwards}
+@keyframes covRing{to{stroke-dashoffset:0}}
+.cov-sz{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--gray)}
+/* накладные: сопоставление строк с 1С */
+.mt{position:relative;display:grid;grid-template-columns:1fr 54px 1.25fr;gap:0;align-items:start}
+.mt-col{display:grid;gap:8px;min-width:0}
+.mt-h{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;margin-bottom:4px}
+.mt-h i{color:var(--pacc)}.mt-h small{margin-left:auto;font:600 11px 'JetBrains Mono',monospace;color:var(--gray)}
+.mt-r{position:relative;height:40px;display:flex;align-items:center;gap:8px;padding:0 12px;border-radius:10px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);transition:border-color .35s,background .35s,color .35s}
+.mt-b .mt-r{color:rgba(240,244,248,.45)}
+.mt-r.ok{border-color:color-mix(in srgb,var(--pacc) 55%,transparent);background:color-mix(in srgb,var(--pacc) 10%,transparent);color:#fff}
+.mt-r.wait{border-color:#f5c542;background:rgba(245,197,66,.1);color:#fff;animation:mtPulse 1.2s ease-in-out infinite}
+@keyframes mtPulse{50%{box-shadow:0 0 0 4px rgba(245,197,66,.16)}}
+.mt-r button{margin-left:auto;border:0;border-radius:8px;padding:5px 10px;font:700 11.5px 'Inter',sans-serif;background:#f5c542;color:#1a1400;cursor:pointer;display:none;flex:none}
+.mt-r.wait button{display:block;position:absolute;right:6px;top:50%;transform:translateY(-50%);box-shadow:-10px 0 10px 2px #1b1a12}
+.mt-b .mt-r.wait{padding-right:104px}
+.mt-svg{width:100%;height:100%;overflow:visible;align-self:stretch}
+.mt-svg path{fill:none;stroke:var(--pacc);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s ease}
+.mt-svg path.in{stroke-dashoffset:0}.mt-svg path.q{stroke:#f5c542;stroke-dasharray:.08 .06;stroke-dashoffset:0;opacity:0;transition:opacity .3s}.mt-svg path.q.in{opacity:1}
+.mt-st{grid-column:1/-1;margin-top:14px;font-size:14px;color:var(--gray)}.mt-st b{color:var(--pacc);font-size:16px}
+@media(max-width:900px){.cz{padding:18px 14px}.cz-pane{grid-template-columns:1fr;gap:22px}.cz-t{flex:1;min-width:0;padding:10px}.cz-t small{display:none}.cz-vis{padding:14px}.scan-grid{grid-template-columns:repeat(12,1fr)}.mt{grid-template-columns:1fr 26px 1.2fr}.mt-r{font-size:11.5px;padding:0 8px}.mt-r button{padding:4px 6px;font-size:10px}}
+@media (prefers-reduced-motion:reduce){.cz-pane.on,.scan.go .scan-beam,.cov.go .cov-in span,.cov.go .cov-ring .p,.mt-r.wait{animation:none}.cov-ring .p{stroke-dashoffset:0}}

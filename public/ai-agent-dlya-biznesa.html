@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=5">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -844,76 +844,22 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
-<section id="day">
-  <div class="container">
-    <div class="section-label">Один день агента</div>
-    <h2 class="section-title">Работает, пока вы <span>заняты другим</span></h2>
-    <p class="bk-sub">Четыре момента из обычных суток. Потяните ленту вбок или нажмите на время.</p>
-    <div class="day reveal" data-bk="day" data-phase="n">
-      <div class="day-sky" aria-hidden="true"><i class="n"></i><i class="m"></i><i class="d"></i><i class="e"></i></div>
-      <div class="day-hint"><i class="fa-solid fa-arrows-left-right"></i> Потяните ленту</div>
-      <div class="day-nav"><button type="button" data-d="-1" aria-label="Раньше"><i class="fa-solid fa-arrow-left"></i></button><button type="button" data-d="1" aria-label="Позже"><i class="fa-solid fa-arrow-right"></i></button></div>
-      <div class="day-track">
-        <div class="day-in">
-          <div class="day-rail"></div>
-          <div class="bk-buddy" aria-hidden="true"><i class="fa-solid fa-robot"></i></div>
-          <article class="day-card on" data-phase="n">
-            <time>02:14</time><h3>Ночная заявка</h3>
-            <div class="day-body"><div class="mm u">Здравствуйте, сколько стоит доставка в Казань?</div><div class="mm b">Доставка в Казань 2-3 дня, от 5 000 ₽ бесплатно. Оставьте телефон, менеджер подтвердит заказ утром.</div><div class="day-tag"><i class="fa-solid fa-moon"></i> Заявка принята, пока все спят</div></div>
-          </article>
-          <article class="day-card" data-phase="m">
-            <time>09:00</time><h3>Менеджер получает готовую заявку</h3>
-            <div class="day-body"><div class="mm b">Новая заявка: Алексей, +7 900 ···-··-12. Нужна доставка в Казань, заказ на 14 000 ₽. Переписка приложена.</div><div class="day-tag"><i class="fa-solid fa-address-card"></i> Карточка уже в CRM</div></div>
-          </article>
-          <article class="day-card" data-phase="d">
-            <time>13:30</time><h3>Вопрос про доставку: ответ по прайсу</h3>
-            <div class="day-body"><div class="mm u">А самовывоз есть? И сколько по времени?</div><div class="mm b">Да, самовывоз со склада бесплатно, заказ соберём за 2 часа. Курьером по городу 300 ₽, привезём завтра.</div><div class="day-tag"><i class="fa-solid fa-bolt"></i> Ответ за 10 секунд</div></div>
-          </article>
-          <article class="day-card" data-phase="e">
-            <time>19:45</time><h3>Сложный вопрос уходит человеку</h3>
-            <div class="day-body"><div class="mm u">Нужна отсрочка платежа на 60 дней, это возможно?</div><div class="mm b">Такие условия согласует менеджер. Передаю ему наш диалог, он напишет вам сегодня.</div><div class="day-tag"><i class="fa-solid fa-user-check"></i> Менеджер получил диалог с историей</div></div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="niche">
-  <div class="container">
-    <div class="section-label">Под ваш бизнес</div>
-    <h2 class="section-title">Говорит на языке <span>вашей ниши</span></h2>
-    <p class="bk-sub">Выберите свой тип бизнеса и посмотрите, как агент ведёт диалог.</p>
-    <div class="tabs reveal" data-bk="tabs">
-      <div class="tabs-bar" role="tablist"><i class="tabs-run"></i><button type="button" role="tab" class="on">Интернет-магазин</button><button type="button" role="tab">Опт</button><button type="button" role="tab">Услуги и запись</button></div>
-      <div class="tabs-stage">
-        <div class="tab-pane on">
-          <div class="tabs-chat bk-glass"><div class="mm u">Есть кроссовки 42 размера в чёрном?</div><div class="mm b">Да, в наличии 3 пары. Доставка по Москве завтра, 300 ₽. Оформить?</div><div class="mm u">Да, давайте</div><div class="mm b">Заказ принят. Менеджер подтвердит по телефону в течение 15 минут.</div></div>
-          <div class="tabs-does bk-glass"><h3>Что делает агент в магазине</h3><ul><li><i class="fa-solid fa-check"></i><span>Отвечает по каталогу, размерам и наличию</span></li><li><i class="fa-solid fa-check"></i><span>Считает доставку и помогает оформить заказ</span></li><li><i class="fa-solid fa-check"></i><span>Передаёт заказ менеджеру или в CRM</span></li></ul></div>
-        </div>
-        <div class="tab-pane">
-          <div class="tabs-chat bk-glass"><div class="mm u">Нужно 200 коробок, какая цена?</div><div class="mm b">От 200 штук цена 410 ₽ за коробку. Подскажите город и ИНН, подготовим счёт.</div><div class="mm u">Казань, ИНН пришлю</div><div class="mm b">Передаю заявку менеджеру: 200 коробок, Казань. Он свяжется с вами сегодня.</div></div>
-          <div class="tabs-does bk-glass"><h3>Что делает агент в опте</h3><ul><li><i class="fa-solid fa-check"></i><span>Называет оптовые цены по вашему прайсу</span></li><li><i class="fa-solid fa-check"></i><span>Уточняет объём, город и реквизиты</span></li><li><i class="fa-solid fa-check"></i><span>Отсеивает розницу и отдаёт менеджеру готовую заявку</span></li></ul></div>
-        </div>
-        <div class="tab-pane">
-          <div class="tabs-chat bk-glass"><div class="mm u">Можно записаться на стрижку в субботу?</div><div class="mm b">В субботу свободно 11:00 и 14:00. Какое время удобно?</div><div class="mm u">14:00</div><div class="mm b">Записал вас на субботу, 14:00. Адрес и как добраться пришлю следом.</div></div>
-          <div class="tabs-does bk-glass"><h3>Что делает агент в услугах</h3><ul><li><i class="fa-solid fa-check"></i><span>Показывает свободное время и записывает</span></li><li><i class="fa-solid fa-check"></i><span>Отвечает про цены, мастеров и адрес</span></li><li><i class="fa-solid fa-check"></i><span>Сразу сообщает вам о новой записи</span></li></ul></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="case">
   <div class="container">
-    <div class="section-label">Кейс</div>
-    <h2 class="section-title">ТехноСтрой: с 90-120 до <span>753 клиентов в месяц</span></h2>
-    <p class="bk-sub">Оптовая компания. Агент запущен в январе 2026: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p>
-    <div class="chart bk-glass reveal" data-bk="chart" data-launch="5" data-points="90,110,105,106,120,155,145,207,192,290,335,515,753" data-labels="Авг '25|Сен '25|Окт '25|Ноя '25|Дек '25|Янв '26|Фев '26|Мар '26|Апр '26|Май '26|Июн '26|Июл '26|Авг '26" data-alt="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: 90-120 клиентов до запуска ИИ-агента в январе 2026, затем рост до 753">
-      <div class="chart-kpi"><div><b data-count="753">753</b><span>клиентов в августе 2026</span></div><div class="sm"><b>6×</b><span>рост за 8 месяцев после запуска ИИ-агента</span></div></div>
-      <div class="chart-box"><div class="chart-tip"></div></div>
-      <div class="chart-cta"><a href="/case-tehnostroy.html" class="btn-secondary">Подробнее о проекте</a><span>Ещё кейс: <a class="more" href="/case-katalog.html">интернет-магазин, агент знает весь каталог →</a></span></div>
+    <div class="section-label">Кейсы</div>
+    <h2 class="section-title">Как это <span>работает на практике</span></h2>
+    <div class="cz reveal" data-bk="cz" style="margin-top:30px">
+      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-chart-line"></i><span><b>ТехноСтрой</b><small>ИИ-агент · продажи</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-store"></i><span><b>Интернет-магазин</b><small>ИИ-агент · каталог</small></span></button></div>
+      <div class="cz-pane on" data-v="chart">
+        <div class="cz-info"><h3>Квалификация входящих лидов для оптового бизнеса</h3><p>До внедрения был умеренный рост: 90-120 новых клиентов в месяц. Агент запущен в январе 2026: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p><div class="cz-kpis"><div><b><span data-count="753">753</span></b><span>клиентов в августе 2026</span></div><div><b><span data-count="6">6</span>×</b><span>рост после запуска ИИ-агента</span></div></div><a href="/case-tehnostroy.html" class="btn-secondary">Подробнее о проекте</a></div>
+        <div class="cz-vis"><div class="chart" data-launch="5" data-points="90,110,105,106,120,155,145,207,192,290,335,515,753" data-labels="Авг '25|Сен '25|Окт '25|Ноя '25|Дек '25|Янв '26|Фев '26|Мар '26|Апр '26|Май '26|Июн '26|Июл '26|Авг '26" data-alt="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: 90-120 клиентов до запуска ИИ-агента в январе 2026, затем рост до 753"><div class="chart-box"><div class="chart-tip"></div></div></div></div>
+      </div>
+      <div class="cz-pane" data-v="scan">
+        <div class="cz-info"><h3>Агент знает весь каталог магазина</h3><p>Покупатель описывает задачу своими словами, агент подбирает подходящие позиции из каталога и доводит до заявки. Днём и ночью, без отдельного консультанта в штате.</p><div class="cz-kpis"><div><b><span data-count="13379">13 379</span></b><span>товаров в каталоге</span></div><div><b><span data-count="10">10</span> сек</b><span>на ответ покупателю</span></div><div><b><span data-count="30000">30 000</span> ₽</b><span>в месяц экономии</span></div></div><a href="/case-katalog.html" class="btn-secondary">Подробнее о проекте</a></div>
+        <div class="cz-vis"><div class="scan"><div class="scan-bar"><i class="fa-solid fa-magnifying-glass"></i><span>Что ищет покупатель:</span><button type="button" class="on">Подешевле</button><button type="button">Помощнее</button><button type="button">В наличии</button></div><div class="scan-grid"><i class="scan-beam"></i></div><div class="scan-res"><i class="fa-solid fa-bolt"></i><span>Подобрал <b>3 варианта</b> из 13 379 товаров</span></div></div></div>
+      </div>
     </div>
+    
   </div>
 </section>
 
@@ -1205,8 +1151,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=4" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=5" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=9";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

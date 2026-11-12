@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=5">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -846,15 +846,16 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <section id="case">
   <div class="container">
-    <div class="section-label">Пример</div>
+    <div class="section-label">Кейс</div>
     <h2 class="section-title">Как это <span>работает на практике</span></h2>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> n8n / 1С</span><h3 class="case-brand">Накладные</h3></div>
-      <div class="case-title">Накладные поставщиков попадают в 1С без ручного ввода</div>
-      <p class="case-desc">Система читает накладную, сама находит товары в каталоге из 50 000 позиций и заносит их в 1С. Человек подтверждает только спорные строки, в один клик.</p>
-      <p style="margin-top:18px"><a href="/case-nakladnye-1c.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
+    <div class="cz reveal" data-bk="cz" style="margin-top:30px">
+      <div class="cz-tabs one" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-file-invoice"></i><span><b>Накладные в 1С</b><small>n8n · 1С</small></span></button></div>
+      <div class="cz-pane on" data-v="mt">
+        <div class="cz-info"><h3>Накладные поставщиков попадают в 1С без ручного ввода</h3><p>Система читает накладную в PDF, Excel или Word, сама находит товары в каталоге из 50 000 позиций и заносит их в 1С. Человек подтверждает только спорные строки, в один клик.</p><div class="cz-kpis"><div><b><span data-count="50000">50 000</span></b><span>позиций в каталоге</span></div><div><b><span data-count="1">1</span> клик</b><span>на спорную строку</span></div></div><a href="/case-nakladnye-1c.html" class="btn-secondary">Подробнее о проекте</a></div>
+        <div class="cz-vis"><div class="mt"><div class="mt-col mt-a"><div class="mt-h"><i class="fa-solid fa-file-invoice"></i>Накладная<small>PDF</small></div><div class="mt-r">Бумага A4</div><div class="mt-r">Ручки синие</div><div class="mt-r">Папки</div><div class="mt-r q">Скотч</div><div class="mt-r">Маркеры</div></div><svg class="mt-svg" aria-hidden="true"></svg><div class="mt-col mt-b"><div class="mt-h"><i class="fa-solid fa-database"></i>1С<small>50 000 позиций</small></div><div class="mt-r">Бумага офисная A4</div><div class="mt-r">Ручка шариковая синяя</div><div class="mt-r">Папка-регистратор</div><div class="mt-r q">Лента клейкая 48 мм<button type="button">Подтвердить</button></div><div class="mt-r">Маркер перманентный</div></div><div class="mt-st">Занесено в 1С: <b>0</b> из 5</div></div></div>
+      </div>
     </div>
-    <p style="margin-top:18px"><a href="/blog-amocrm-n8n.html" class="tg-link">Пошаговый разбор: как автоматизировать AmoCRM на n8n →</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="/blog-avtomatizaciya-amocrm.html" class="tg-link">Что в amoCRM можно передать роботу →</a></p>
+    <p class="ba-more"><a href="/blog-amocrm-n8n.html">Пошаговый разбор: как автоматизировать AmoCRM на n8n →</a> &nbsp;·&nbsp; <a href="/blog-avtomatizaciya-amocrm.html">Что в amoCRM можно передать роботу →</a></p>
   </div>
 </section>
 
@@ -1128,8 +1129,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=4" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=5" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=9";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

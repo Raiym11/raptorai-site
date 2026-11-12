@@ -22,11 +22,12 @@
 
   /* счёт от нуля */
   function count(el, to, ms) {
-    if (reduce) { el.textContent = to; return; }
+    var f = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+$)/g, ' '); };
+    if (reduce) { el.textContent = f(to); return; }
     var t0 = performance.now();
     (function step(now) {
       var p = Math.min(1, (now - t0) / (ms || 1800)), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(to * e);
+      el.textContent = f(to * e);
       if (p < 1) requestAnimationFrame(step);
     })(t0);
   }
@@ -144,7 +145,7 @@
   };
 
   /* ---------- ИИ-агент: график ---------- */
-  INIT.chart = function (box) {
+  function chartInit(box) {
     var data = box.getAttribute('data-points').split(',').map(Number), labels = box.getAttribute('data-labels').split('|');
     var launch = +box.getAttribute('data-launch'), wrap = $('.chart-box', box), tip = $('.chart-tip', box);
     var W = 640, H = 330, L = 10, R = 18, T = 36, B = 34, N = data.length, max = Math.max.apply(null, data) * 1.06;
@@ -177,7 +178,8 @@
     requestAnimationFrame(function () { box.classList.add('in'); });
     $$('[data-count]', box).forEach(function (el) { count(el, +el.getAttribute('data-count'), 2400); });
     later(2600, function () { show(N - 1); });
-  };
+  }
+  INIT.chart = chartInit;
 
   /* ---------- ИИ-агент: чек-лист ---------- */
   INIT.need = function (box) {
@@ -270,6 +272,80 @@
     btns.forEach(function (b, i) { b.addEventListener('click', function () { set(i, true); }); });
     $('.ba-knob', box).parentNode.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') set(1, true); if (e.key === 'ArrowLeft') set(0, true); });
     set(0);
+  };
+
+  /* ---------- третий блок: кейсы ---------- */
+  var VIS = {
+    chart: function (el) { chartInit($('.chart', el)); },
+    scan: function (el) {
+      var box = $('.scan', el), grid = $('.scan-grid', el), n = mq('(max-width: 900px)') ? 96 : 144, cells = [], timers = [];
+      for (var i = 0; i < n; i++) { var c = document.createElement('s'); grid.appendChild(c); cells.push(c); }
+      function run(seed) {
+        timers.forEach(clearTimeout); timers = [];
+        cells.forEach(function (c) { c.className = ''; }); box.classList.remove('go', 'done'); void box.offsetWidth;
+        var hits = [], x = seed * 37 + 11;
+        while (hits.length < 9) { x = (x * 73 + 29) % n; if (hits.indexOf(x) < 0) hits.push(x); }
+        if (reduce) { hits.forEach(function (h, k) { cells[h].classList.add(k < 3 ? 'win' : 'hit'); }); box.classList.add('done'); return; }
+        box.classList.add('go');
+        var cols = mq('(max-width: 900px)') ? 12 : 16;
+        hits.forEach(function (h) { timers.push(setTimeout(function () { cells[h].classList.add('hit'); }, 150 + (h % cols) / cols * 1100)); });
+        timers.push(setTimeout(function () { hits.slice(0, 3).forEach(function (h) { cells[h].classList.add('win'); }); box.classList.add('done'); }, 1700));
+      }
+      $$('.scan-bar button', el).forEach(function (b, i) { b.addEventListener('click', function () { $$('.scan-bar button', el).forEach(function (o) { o.classList.toggle('on', o === b); }); run(i + 1); }); });
+      run(1);
+      return function () { run(1); };
+    },
+    cov: function (el) {
+      var box = $('.cov', el), card = $('.cov-card', el), timers = [];
+      function run() {
+        timers.forEach(clearTimeout); timers = [];
+        box.classList.remove('go', 's1', 's2', 's3', 's4'); void box.offsetWidth;
+        if (reduce) { box.classList.add('s1', 's2', 's3', 's4'); return; }
+        box.classList.add('go');
+        [['s1', 650], ['s2', 1250], ['s3', 1850], ['s4', 2700]].forEach(function (x) { timers.push(setTimeout(function () { box.classList.add(x[0]); }, x[1])); });
+      }
+      $$('.cov-sz button', el).forEach(function (b) { b.addEventListener('click', function () { $$('.cov-sz button', el).forEach(function (o) { o.classList.toggle('on', o === b); }); card.setAttribute('data-r', b.getAttribute('data-r')); run(); }); });
+      card.addEventListener('click', run);
+      run();
+      return run;
+    },
+    mt: function (el) {
+      var box = $('.mt', el), A = $$('.mt-a .mt-r', el), B = $$('.mt-b .mt-r', el), svg = $('.mt-svg', el), st = $('.mt-st b', el), btn = $('.mt-b button', el), timers = [], done = 0, paths = [];
+      function draw() {
+        var r = svg.getBoundingClientRect(), h = '';
+        A.forEach(function (a, i) { var y1 = a.getBoundingClientRect().top + 20 - r.top, y2 = B[i].getBoundingClientRect().top + 20 - r.top, w = r.width; h += '<path pathLength="1" class="' + (a.classList.contains('q') ? 'q' : '') + '" d="M2 ' + y1 + ' C' + w / 2 + ' ' + y1 + ',' + w / 2 + ' ' + y2 + ',' + (w - 2) + ' ' + y2 + '"/>'; });
+        svg.innerHTML = h; paths = $$('path', svg);
+      }
+      function ok(i) { A[i].classList.remove('wait'); B[i].classList.remove('wait'); A[i].classList.add('ok'); B[i].classList.add('ok'); paths[i].classList.remove('q'); paths[i].classList.add('in'); done++; st.textContent = done; }
+      function run() {
+        timers.forEach(clearTimeout); timers = []; done = 0; st.textContent = 0; draw();
+        A.concat(B).forEach(function (x) { x.classList.remove('ok', 'wait'); });
+        var t = 500;
+        A.forEach(function (a, i) {
+          if (a.classList.contains('q')) { timers.push(setTimeout(function () { A[i].classList.add('wait'); B[i].classList.add('wait'); paths[i].classList.add('in'); }, reduce ? 0 : t)); }
+          else timers.push(setTimeout(function () { ok(i); }, reduce ? 0 : t));
+          t += 620;
+        });
+        if (!reduce) timers.push(setTimeout(function () { if (B[3].classList.contains('wait')) ok(3); }, t + 4200));
+      }
+      btn.addEventListener('click', function (e) { e.stopPropagation(); if (B[3].classList.contains('wait')) ok(3); });
+      window.addEventListener('resize', draw);
+      run();
+      return run;
+    }
+  };
+  INIT.cz = function (box) {
+    var tabs = $$('.cz-t', box), panes = $$('.cz-pane', box), runs = [];
+    function show(i) {
+      tabs.forEach(function (t, k) { t.classList.toggle('on', k === i); });
+      panes.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+      var p = panes[i];
+      if (!p.__v) { p.__v = true; runs[i] = VIS[p.getAttribute('data-v')]($('.cz-vis', p)); }
+      else if (runs[i]) runs[i]();
+      $$('[data-count]', p).forEach(function (el) { count(el, +el.getAttribute('data-count'), 1600); });
+    }
+    tabs.forEach(function (t, i) { t.addEventListener('click', function () { show(i); }); });
+    show(0);
   };
 
   /* запуск по мере прокрутки */

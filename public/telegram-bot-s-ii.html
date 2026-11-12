@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=4">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=5">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -846,22 +846,20 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <section id="case">
   <div class="container">
-    <div class="section-label">Пример</div>
+    <div class="section-label">Кейсы</div>
     <h2 class="section-title">Как это <span>работает на практике</span></h2>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> Telegram-бот</span><h3 class="case-brand">Обложки</h3></div>
-      <div class="case-title">Обложки для роликов собираются в Telegram</div>
-      <p class="case-desc">Команда отправляет боту фото и текст, выбирает размер, и через 10 секунд получает готовую обложку в фирменном стиле. Раньше каждую верстали вручную.</p>
-      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на обложку</span></div></div>
+    <div class="cz reveal" data-bk="cz" style="margin-top:30px">
+      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-image"></i><span><b>Обложки для роликов</b><small>Telegram-бот · дизайн</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-store"></i><span><b>Интернет-магазин</b><small>ИИ-агент · каталог</small></span></button></div>
+      <div class="cz-pane on" data-v="cov">
+        <div class="cz-info"><h3>Обложки для роликов собираются в Telegram</h3><p>Команда отправляет боту фото и текст, выбирает размер и через 10 секунд получает готовую обложку в фирменном стиле. Раньше каждую верстали вручную.</p><div class="cz-kpis"><div><b><span data-count="10">10</span> сек</b><span>на готовую обложку</span></div></div></div>
+        <div class="cz-vis"><div class="cov"><div class="cov-in"><span><i class="fa-solid fa-image"></i>Фото</span><span><i class="fa-solid fa-font"></i>Текст</span><span><i class="fa-solid fa-crop-simple"></i>Размер</span></div><div class="cov-stage"><div class="cov-card" data-r="1"><i class="cov-ph"></i><b>НОВЫЙ<br>ВЫПУСК</b><u>ваш бренд</u><em><i class="fa-solid fa-check"></i> Готово</em></div><svg class="cov-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="p" cx="22" cy="22" r="19" pathLength="1"/></svg></div><div class="cov-sz"><span>Размер:</span><button type="button" data-r="1" class="on">1:1</button><button type="button" data-r="2">9:16</button><button type="button" data-r="3">16:9</button></div></div></div>
+      </div>
+      <div class="cz-pane" data-v="scan">
+        <div class="cz-info"><h3>Агент знает весь каталог магазина</h3><p>Покупатель описывает задачу своими словами, агент подбирает подходящие позиции из каталога и доводит до заявки. Днём и ночью, без отдельного консультанта в штате.</p><div class="cz-kpis"><div><b><span data-count="13379">13 379</span></b><span>товаров в каталоге</span></div><div><b><span data-count="10">10</span> сек</b><span>на ответ покупателю</span></div><div><b><span data-count="30000">30 000</span> ₽</b><span>в месяц экономии</span></div></div><a href="/case-katalog.html" class="btn-secondary">Подробнее о проекте</a></div>
+        <div class="cz-vis"><div class="scan"><div class="scan-bar"><i class="fa-solid fa-magnifying-glass"></i><span>Что ищет покупатель:</span><button type="button" class="on">Подешевле</button><button type="button">Помощнее</button><button type="button">В наличии</button></div><div class="scan-grid"><i class="scan-beam"></i></div><div class="scan-res"><i class="fa-solid fa-bolt"></i><span>Подобрал <b>3 варианта</b> из 13 379 товаров</span></div></div></div>
+      </div>
     </div>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-консультант</span><h3 class="case-brand">Интернет-магазин</h3></div>
-      <div class="case-title">ИИ-консультант для интернет-магазина</div>
-      <p class="case-desc">Отвечает покупателям по каталогу больше чем из 13 тысяч товаров, днём и ночью.</p>
-      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на ответ</span></div><div class="case-kpi"><b>30 000 ₽</b><span>в месяц экономии</span></div></div>
-      <p style="margin-top:18px"><a href="/case-katalog.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
-    </div>
-    <p style="margin-top:18px"><a href="/blog-rag-agent.html" class="tg-link">Как мы это сделали: техническая статья →</a></p>
+    <p class="ba-more"><a href="/blog-rag-agent.html">Как мы это сделали: техническая статья →</a></p>
   </div>
 </section>
 
@@ -1135,8 +1133,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=4" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=5" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=9";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
