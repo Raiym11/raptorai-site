@@ -276,6 +276,21 @@
 
   /* ---------- третий блок: кейсы ---------- */
   var VIS = {
+    /* сценки на CSS: класс go запускает анимацию, s1..sN включаются по таймингам из data-t */
+    anim: function (el) {
+      var box = $('.an', el), ts = (box.getAttribute('data-t') || '').split(',').map(Number), timers = [];
+      function run() {
+        timers.forEach(clearTimeout); timers = [];
+        box.className = box.className.replace(/ (go|s\d)/g, ''); void box.offsetWidth;
+        if (reduce) { box.classList.add('go'); ts.forEach(function (t, i) { box.classList.add('s' + (i + 1)); }); return; }
+        box.classList.add('go');
+        ts.forEach(function (t, i) { timers.push(setTimeout(function () { box.classList.add('s' + (i + 1)); }, t)); });
+        timers.push(setTimeout(function loop() { if (document.hidden || !box.offsetParent) { timers.push(setTimeout(loop, 1500)); return; } run(); }, ts[ts.length - 1] + 4200));
+      }
+      box.addEventListener('click', run);
+      run();
+      return run;
+    },
     chart: function (el) { chartInit($('.chart', el)); },
     scan: function (el) {
       var box = $('.scan', el), grid = $('.scan-grid', el), n = mq('(max-width: 900px)') ? 96 : 144, cells = [], timers = [];
