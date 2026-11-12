@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=1">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -226,7 +227,7 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "RaptorAI", "item": "https://www.raptorai.ru/"}, {"@type": "ListItem", "position": 2, "name": "ИИ-агент для бизнеса", "item": "https://www.raptorai.ru/ai-agent-dlya-biznesa.html"}]}
   </script>
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Чем ИИ-агент отличается от обычного чат-бота?", "acceptedAnswer": {"@type": "Answer", "text": "Обычный бот работает по жёстким сценариям с кнопками. ИИ-агент понимает вопросы своими словами, отвечает по вашей базе знаний и ведёт диалог до заявки."}}, {"@type": "Question", "name": "Может ли агент ошибиться?", "acceptedAnswer": {"@type": "Answer", "text": "Мы ограничиваем его вашей базой знаний и задаём правила: чего он не обещает и когда зовёт человека. На сдаче проверяем его на реальных вопросах ваших клиентов."}}, {"@type": "Question", "name": "Куда приходят заявки?", "acceptedAnswer": {"@type": "Answer", "text": "В Telegram, таблицу, CRM (AmoCRM, Bitrix24) или на почту, как вам удобнее. Менеджер получает уведомление сразу."}}, {"@type": "Question", "name": "Сколько времени занимает запуск?", "acceptedAnswer": {"@type": "Answer", "text": "Типовое решение запускаем за 3-7 дней. Для проектов с несколькими интеграциями срок фиксируем в смете до старта."}}]}
+  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Агент заменит менеджера?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, он снимает с менеджера рутину: первые ответы, типовые вопросы, сбор контактов. Менеджер получает готовую заявку с историей переписки и занимается продажей."}}, {"@type": "Question", "name": "Как агент понимает, что клиент готов купить?", "acceptedAnswer": {"@type": "Answer", "text": "Задаёт уточняющие вопросы, которые мы заранее согласуем с вами: что нужно, в каком объёме, когда. Если клиент ответил и оставил контакт, заявка уходит менеджеру как целевая."}}, {"@type": "Question", "name": "Можно ли самому менять ответы агента?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Агент отвечает по базе знаний: обновили прайс или условия - он отвечает по-новому. Как это делать, показываем при сдаче проекта."}}, {"@type": "Question", "name": "Чем ИИ-агент отличается от обычного чат-бота?", "acceptedAnswer": {"@type": "Answer", "text": "Обычный бот работает по жёстким сценариям с кнопками. ИИ-агент понимает вопросы своими словами, отвечает по вашей базе знаний и ведёт диалог до заявки."}}, {"@type": "Question", "name": "Может ли агент ошибиться?", "acceptedAnswer": {"@type": "Answer", "text": "Мы ограничиваем его вашей базой знаний и задаём правила: чего он не обещает и когда зовёт человека. На сдаче проверяем его на реальных вопросах ваших клиентов."}}, {"@type": "Question", "name": "Куда приходят заявки?", "acceptedAnswer": {"@type": "Answer", "text": "В Telegram, таблицу, CRM (AmoCRM, Bitrix24) или на почту, как вам удобнее. Менеджер получает уведомление сразу."}}, {"@type": "Question", "name": "Сколько времени занимает запуск?", "acceptedAnswer": {"@type": "Answer", "text": "Типовое решение запускаем за 3-7 дней. Для проектов с несколькими интеграциями срок фиксируем в смете до старта."}}]}
   </script>
 
   <!-- Open Graph -->
@@ -736,7 +737,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
 </head>
-<body>
+<body class="svc" style="--pacc:#00D4FF;--pacc2:#8C7BFF">
 <a class="skip-link" href="/#services">К содержимому</a>
 <canvas id="fx-canvas" aria-hidden="true"></canvas>
 
@@ -752,7 +753,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <ul class="nav-links">
     <li><a href="/#services">Услуги</a></li>
     <li><a href="/#cases">Кейсы</a></li>
-    <li><a href="#how">Процесс</a></li>
+    <li><a href="/#how">Процесс</a></li>
     <li><a href="/#testimonials">Отзывы</a></li>
     <li><a href="/#blog">Блог</a></li>
     <li><a href="#contact">Контакты</a></li>
@@ -766,7 +767,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <ul>
     <li><a href="/#services" onclick="closeMobileNav()">Услуги</a></li>
     <li><a href="/#cases" onclick="closeMobileNav()">Кейсы</a></li>
-    <li><a href="#how" onclick="closeMobileNav()">Процесс</a></li>
+    <li><a href="/#how" onclick="closeMobileNav()">Процесс</a></li>
     <li><a href="/#testimonials" onclick="closeMobileNav()">Отзывы</a></li>
     <li><a href="#faq" onclick="closeMobileNav()">Вопросы</a></li>
     <li><a href="/#blog" onclick="closeMobileNav()">Блог</a></li>
@@ -824,67 +825,109 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
-<section id="case">
+<section id="day">
   <div class="container">
-    <div class="section-label">Пример</div>
-    <h2 class="section-title">Как это <span>работает на практике</span></h2>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Продажи</span><h3 class="case-brand">ТехноСтрой</h3></div>
-      <div class="case-title">Квалификация входящих лидов для оптового бизнеса</div>
-      <p class="case-desc">До внедрения был умеренный органический рост. Агент запущен в январе: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p>
-      <div class="case-kpis"><div class="case-kpi"><b>753</b><span>клиентов в августе 2026</span></div><div class="case-kpi"><b>6×</b><span>рост после запуска ИИ-агента</span></div></div>
-      <p style="margin-top:18px"><a href="/case-tehnostroy.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
-    </div>
-    <div class="case-card case-hero reveal" style="margin-top:28px">
-      <div class="case-top"><span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Каталог</span><h3 class="case-brand">Интернет-магазин</h3></div>
-      <div class="case-title">Интернет-магазин: агент знает весь каталог</div>
-      <p class="case-desc">ИИ-консультант отвечает покупателям по каталогу, днём и ночью, без участия менеджера.</p>
-      <div class="case-kpis"><div class="case-kpi"><b>10 сек</b><span>на ответ</span></div><div class="case-kpi"><b>30 000 ₽</b><span>в месяц экономии на консультанте</span></div></div>
-      <p style="margin-top:18px"><a href="/case-katalog.html" class="tg-link" style="margin-top:0">Подробнее о проекте →</a></p>
+    <div class="section-label">Один день агента</div>
+    <h2 class="section-title">Работает, пока вы <span>заняты другим</span></h2>
+    <p class="bk-sub">Четыре момента из обычных суток. Потяните ленту вбок или нажмите на время.</p>
+    <div class="day reveal" data-bk="day" data-phase="n">
+      <div class="day-sky" aria-hidden="true"><i class="n"></i><i class="m"></i><i class="d"></i><i class="e"></i></div>
+      <div class="day-hint"><i class="fa-solid fa-arrows-left-right"></i> Потяните ленту</div>
+      <div class="day-nav"><button type="button" data-d="-1" aria-label="Раньше"><i class="fa-solid fa-arrow-left"></i></button><button type="button" data-d="1" aria-label="Позже"><i class="fa-solid fa-arrow-right"></i></button></div>
+      <div class="day-track">
+        <div class="day-in">
+          <div class="day-rail"></div>
+          <div class="bk-buddy" aria-hidden="true"><i class="fa-solid fa-robot"></i></div>
+          <article class="day-card on" data-phase="n">
+            <time>02:14</time><h3>Ночная заявка</h3>
+            <div class="day-body"><div class="mm u">Здравствуйте, сколько стоит доставка в Казань?</div><div class="mm b">Доставка в Казань 2-3 дня, от 5 000 ₽ бесплатно. Оставьте телефон, менеджер подтвердит заказ утром.</div><div class="day-tag"><i class="fa-solid fa-moon"></i> Заявка принята, пока все спят</div></div>
+          </article>
+          <article class="day-card" data-phase="m">
+            <time>09:00</time><h3>Менеджер получает готовую заявку</h3>
+            <div class="day-body"><div class="mm b">Новая заявка: Алексей, +7 900 ···-··-12. Нужна доставка в Казань, заказ на 14 000 ₽. Переписка приложена.</div><div class="day-tag"><i class="fa-solid fa-address-card"></i> Карточка уже в CRM</div></div>
+          </article>
+          <article class="day-card" data-phase="d">
+            <time>13:30</time><h3>Вопрос про доставку: ответ по прайсу</h3>
+            <div class="day-body"><div class="mm u">А самовывоз есть? И сколько по времени?</div><div class="mm b">Да, самовывоз со склада бесплатно, заказ соберём за 2 часа. Курьером по городу 300 ₽, привезём завтра.</div><div class="day-tag"><i class="fa-solid fa-bolt"></i> Ответ за 10 секунд</div></div>
+          </article>
+          <article class="day-card" data-phase="e">
+            <time>19:45</time><h3>Сложный вопрос уходит человеку</h3>
+            <div class="day-body"><div class="mm u">Нужна отсрочка платежа на 60 дней, это возможно?</div><div class="mm b">Такие условия согласует менеджер. Передаю ему наш диалог, он напишет вам сегодня.</div><div class="day-tag"><i class="fa-solid fa-user-check"></i> Менеджер получил диалог с историей</div></div>
+          </article>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="how" style="background:var(--bg2);">
+<section id="niche">
   <div class="container">
-    <div class="section-label">Процесс</div>
-    <h2 class="section-title">Как мы <span>работаем</span></h2>
-    <p class="section-sub">Без лишней бюрократии — от задачи до готового решения за 3–7 дней.</p>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Консультация</div>
-        <p class="step-desc">Разбираемся в вашей задаче, предлагаем решение и называем точную цену. Без скрытых платежей.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Разработка</div>
-        <p class="step-desc">Строим систему, тестируем на реальных данных и показываем промежуточный результат.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Запуск</div>
-        <p class="step-desc">Деплоим на ваш сервер или наш, передаём управление и обучаем как пользоваться.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-title">Поддержка</div>
-        <p class="step-desc">Остаёмся на связи: гарантия 30 дней, ошибки исправляем бесплатно.</p>
+    <div class="section-label">Под ваш бизнес</div>
+    <h2 class="section-title">Говорит на языке <span>вашей ниши</span></h2>
+    <p class="bk-sub">Выберите свой тип бизнеса и посмотрите, как агент ведёт диалог.</p>
+    <div class="tabs reveal" data-bk="tabs">
+      <div class="tabs-bar" role="tablist"><i class="tabs-run"></i><button type="button" role="tab" class="on">Интернет-магазин</button><button type="button" role="tab">Опт</button><button type="button" role="tab">Услуги и запись</button></div>
+      <div class="tabs-stage">
+        <div class="tab-pane on">
+          <div class="tabs-chat bk-glass"><div class="mm u">Есть кроссовки 42 размера в чёрном?</div><div class="mm b">Да, в наличии 3 пары. Доставка по Москве завтра, 300 ₽. Оформить?</div><div class="mm u">Да, давайте</div><div class="mm b">Заказ принят. Менеджер подтвердит по телефону в течение 15 минут.</div></div>
+          <div class="tabs-does bk-glass"><h3>Что делает агент в магазине</h3><ul><li><i class="fa-solid fa-check"></i><span>Отвечает по каталогу, размерам и наличию</span></li><li><i class="fa-solid fa-check"></i><span>Считает доставку и помогает оформить заказ</span></li><li><i class="fa-solid fa-check"></i><span>Передаёт заказ менеджеру или в CRM</span></li></ul></div>
+        </div>
+        <div class="tab-pane">
+          <div class="tabs-chat bk-glass"><div class="mm u">Нужно 200 коробок, какая цена?</div><div class="mm b">От 200 штук цена 410 ₽ за коробку. Подскажите город и ИНН, подготовим счёт.</div><div class="mm u">Казань, ИНН пришлю</div><div class="mm b">Передаю заявку менеджеру: 200 коробок, Казань. Он свяжется с вами сегодня.</div></div>
+          <div class="tabs-does bk-glass"><h3>Что делает агент в опте</h3><ul><li><i class="fa-solid fa-check"></i><span>Называет оптовые цены по вашему прайсу</span></li><li><i class="fa-solid fa-check"></i><span>Уточняет объём, город и реквизиты</span></li><li><i class="fa-solid fa-check"></i><span>Отсеивает розницу и отдаёт менеджеру готовую заявку</span></li></ul></div>
+        </div>
+        <div class="tab-pane">
+          <div class="tabs-chat bk-glass"><div class="mm u">Можно записаться на стрижку в субботу?</div><div class="mm b">В субботу свободно 11:00 и 14:00. Какое время удобно?</div><div class="mm u">14:00</div><div class="mm b">Записал вас на субботу, 14:00. Адрес и как добраться пришлю следом.</div></div>
+          <div class="tabs-does bk-glass"><h3>Что делает агент в услугах</h3><ul><li><i class="fa-solid fa-check"></i><span>Показывает свободное время и записывает</span></li><li><i class="fa-solid fa-check"></i><span>Отвечает про цены, мастеров и адрес</span></li><li><i class="fa-solid fa-check"></i><span>Сразу сообщает вам о новой записи</span></li></ul></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<section id="case">
+  <div class="container">
+    <div class="section-label">Кейс</div>
+    <h2 class="section-title">ТехноСтрой: с 90-120 до <span>753 клиентов в месяц</span></h2>
+    <p class="bk-sub">Оптовая компания. Агент запущен в январе 2026: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p>
+    <div class="chart bk-glass reveal" data-bk="chart" data-launch="5" data-points="90,110,105,106,120,155,145,207,192,290,335,515,753" data-labels="Авг '25|Сен '25|Окт '25|Ноя '25|Дек '25|Янв '26|Фев '26|Мар '26|Апр '26|Май '26|Июн '26|Июл '26|Авг '26" data-alt="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: 90-120 клиентов до запуска ИИ-агента в январе 2026, затем рост до 753">
+      <div class="chart-kpi"><div><b data-count="753">753</b><span>клиентов в августе 2026</span></div><div class="sm"><b>6×</b><span>рост за 8 месяцев после запуска ИИ-агента</span></div></div>
+      <div class="chart-box"><div class="chart-tip"></div></div>
+      <div class="chart-cta"><a href="/case-tehnostroy.html" class="btn-secondary">Подробнее о проекте</a><span>Ещё кейс: <a class="more" href="/case-katalog.html">интернет-магазин, агент знает весь каталог →</a></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="need">
+  <div class="container">
+    <div class="section-label">Что нужно от вас</div>
+    <h2 class="section-title">Четыре вещи, <span>и агент готов к работе</span></h2>
+    <div class="need bk-st" data-bk="need" style="margin-top:36px">
+      <div class="need-i bk-glass"><i class="fa-solid fa-check"></i><b>Прайс или каталог</b></div>
+      <div class="need-i bk-glass"><i class="fa-solid fa-check"></i><b>Частые вопросы клиентов</b></div>
+      <div class="need-i bk-glass"><i class="fa-solid fa-check"></i><b>Доступ к CRM, если она есть</b></div>
+      <div class="need-i bk-glass"><i class="fa-solid fa-check"></i><b>30 минут на созвон</b></div>
+    </div>
+    <p class="need-note"><span>Остальное делаем мы.</span></p>
+  </div>
+</section>
+
 
 <section id="details">
   <div class="container">
     <div class="section-label">Стоимость</div>
-    <h2 class="section-title">Сколько это <span>стоит</span></h2>
-    <p class="section-sub">Точную цену называем после короткого разговора, до начала работы и без скрытых платежей.</p>
+    <h2 class="section-title">Сколько <span>стоит</span></h2>
+    <p class="bk-sub" style="max-width:860px;margin-bottom:28px">Цена зависит от числа подключений. Подключение - это канал, где вам пишут клиенты (сайт, Telegram), или ваша система (CRM, таблица, почта). База знаний из ваших файлов и уведомления вам в Telegram входят в любой пакет.</p>
+    <div class="pkc bk-glass reveal" data-bk="pkc">
+      <div class="pkc-title">Какой пакет мой?</div>
+      <div class="pkc-row"><div class="pkc-f"><span>Каналы, где пишут клиенты</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><div class="pkc-f"><span>Системы, куда передавать данные</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>0</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><label class="pkc-sw"><input type="checkbox"><i></i><span>Есть сложное подключение</span><em class="pkc-q" tabindex="0" aria-label="Что считается сложным подключением">?<u>1С, каталог товаров с поиском, своя система без готовой интеграции или нестандартная логика (расчёт цены, оплата, разные отделы).</u></em></label></div>
+      <div class="pkc-res" aria-live="polite"><span class="pkc-lead"><span class="pkc-num"><b>1</b></span> </span><span class="pkc-word">подключение</span> → пакет <b class="pkc-pk">«Старт»</b>, <span class="pkc-price"></span><small style="display:none">Точную цену называем в смете до старта.</small></div>
+    </div>
     <div class="pk-grid reveal">
       <div class="pk-card">
         <div class="pk-name">Старт</div>
         <div class="pk-price"><small>от</small> 4 990 ₽</div>
-        <div class="pk-for">подходит, если: один канал (сайт ИЛИ Telegram), без интеграций с CRM/1С</div>
+        <div class="pk-for pk-conn">1 подключение</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>ИИ-агент или Telegram-бот на одном канале</li>
           <li><i class="fa-solid fa-check"></i>Отвечает по вашим вопросам и материалам</li>
@@ -892,12 +935,13 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         </ul>
         <div class="pk-term">Срок: 3-5 дней</div>
         <a href="#contact" class="btn-secondary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Агент на сайте отвечает клиентам</div>
       </div>
       <div class="pk-card pk-hot">
         <div class="pk-badge">Чаще выбирают</div>
         <div class="pk-name">Бизнес</div>
         <div class="pk-price"><small>от</small> 25 000 ₽</div>
-        <div class="pk-for">подходит, если: нужны оба канала (сайт + Telegram) и передача заявок в CRM/1С/таблицу</div>
+        <div class="pk-for pk-conn">2-4 подключения</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>ИИ-агент сразу на сайте и в Telegram</li>
           <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам, ценам и материалам</li>
@@ -907,11 +951,12 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         </ul>
         <div class="pk-term">Срок: 5-7 дней</div>
         <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Сайт + Telegram + AmoCRM = 3 подключения</div>
       </div>
       <div class="pk-card">
         <div class="pk-name">Под ключ</div>
         <div class="pk-price"><small>от</small> 50 000 ₽</div>
-        <div class="pk-for">подходит, если: нужно несколько систем вместе (CRM + 1С + каталог товаров RAG)</div>
+        <div class="pk-for pk-conn">5+ подключений или есть сложное</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>ИИ-агент, CRM, 1С и каталог товаров (RAG)</li>
           <li><i class="fa-solid fa-check"></i>Отчёты и автоматизация процессов</li>
@@ -920,8 +965,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         </ul>
         <div class="pk-term">Срок: по смете</div>
         <a href="#contact" class="btn-secondary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Сайт + Telegram + AmoCRM + 1С + каталог товаров</div>
       </div>
     </div>
+    <p class="pk-after">Цена и срок фиксируются в смете до старта и потом не меняются. Не уверены, сколько у вас подключений? Нажмите «Получить расчёт за 1 минуту», посчитаем вместе.</p>
     <div class="service-card" style="margin-top:28px;max-width:860px">
       <div class="service-name">Сопровождение после запуска</div>
       <p class="service-desc" style="margin-bottom:10px">от 3 000 ₽ в месяц, по желанию</p>
@@ -936,6 +983,9 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="section-label">Вопросы</div>
     <h2 class="section-title">Частые <span>вопросы</span></h2>
     <div class="faq-list reveal" style="margin-top:36px">
+      <details class="faq-item"><summary>Агент заменит менеджера?</summary><p>Нет, он снимает с менеджера рутину: первые ответы, типовые вопросы, сбор контактов. Менеджер получает готовую заявку с историей переписки и занимается продажей.</p></details>
+      <details class="faq-item"><summary>Как агент понимает, что клиент готов купить?</summary><p>Задаёт уточняющие вопросы, которые мы заранее согласуем с вами: что нужно, в каком объёме, когда. Если клиент ответил и оставил контакт, заявка уходит менеджеру как целевая.</p></details>
+      <details class="faq-item"><summary>Можно ли самому менять ответы агента?</summary><p>Да. Агент отвечает по базе знаний: обновили прайс или условия - он отвечает по-новому. Как это делать, показываем при сдаче проекта.</p></details>
       <details class="faq-item"><summary>Чем ИИ-агент отличается от обычного чат-бота?</summary><p>Обычный бот работает по жёстким сценариям с кнопками. ИИ-агент понимает вопросы своими словами, отвечает по вашей базе знаний и ведёт диалог до заявки.</p></details>
       <details class="faq-item"><summary>Может ли агент ошибиться?</summary><p>Мы ограничиваем его вашей базой знаний и задаём правила: чего он не обещает и когда зовёт человека. На сдаче проверяем его на реальных вопросах ваших клиентов.</p></details>
       <details class="faq-item"><summary>Куда приходят заявки?</summary><p>В Telegram, таблицу, CRM (AmoCRM, Bitrix24) или на почту, как вам удобнее. Менеджер получает уведомление сразу.</p></details>
@@ -1022,7 +1072,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="footer-links">
       <a href="/#services">Услуги</a>
       <a href="/#cases">Кейсы</a>
-      <a href="#how">Процесс</a>
+      <a href="/#how">Процесс</a>
       <a href="/#testimonials">Отзывы</a>
       <a href="#faq">Вопросы</a>
       <a href="/#blog">Блог</a>
@@ -1136,7 +1186,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=6";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=1" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=7";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>

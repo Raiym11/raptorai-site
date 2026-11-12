@@ -524,6 +524,8 @@ function boot(host) {
   S.clear = () => { S.timers.forEach(clearTimeout); S.timers = []; };
   if (!weak) { try { S.gl = makeGL(S, def[1], def[2]); } catch (e) { S.gl = null; } }
   const sc = def[0](S);
+  /* снимок объекта для блоков ниже по странице */
+  if (S.gl) host.__shot = () => { S.gl.renderer.render(S.gl.scene, S.gl.camera); return S.gl.canvas.toDataURL('image/png'); };
 
   function fit() { host.style.setProperty('--u', (host.clientWidth / 100).toFixed(3) + 'px'); if (S.gl) S.gl.size(); if (reduce) once(); }
   if (window.ResizeObserver) new ResizeObserver(fit).observe(host); else window.addEventListener('resize', fit);
@@ -598,6 +600,18 @@ function boot(host) {
 
   fit();
   requestAnimationFrame(() => { host.classList.add('ready'); if (reduce) once(); });
+  /* снимок главного объекта: его маленькая копия сопровождает человека по блокам ниже */
+  const crop = { agent: [0.22, 0.14, 0.56, 0.72], chatgpt: [0.3, 0.2, 0.4, 0.4], gemini: [0.3, 0.27, 0.4, 0.4], claude: [0.1, 0.14, 0.25, 0.25], n8n: [0.36, 0.36, 0.28, 0.28] }[host.dataset.scene];
+  if (S.gl && crop) setTimeout(() => {
+    try {
+      S.gl.renderer.render(S.gl.scene, S.gl.camera);
+      const cv = S.gl.canvas, o = document.createElement('canvas');
+      o.width = 220; o.height = Math.round(220 * crop[3] / crop[2]);
+      o.getContext('2d').drawImage(cv, crop[0] * cv.width, crop[1] * cv.height, crop[2] * cv.width, crop[3] * cv.height, 0, 0, o.width, o.height);
+      window.__h3dSnap = o.toDataURL('image/png');
+      document.dispatchEvent(new CustomEvent('h3d:snap', { detail: { scene: host.dataset.scene, url: window.__h3dSnap } }));
+    } catch (e) { /* без копии: в блоках останется значок */ }
+  }, 1600);
   if (!reduce && !/[?&]h3d=manual/.test(location.search)) {
     setTimeout(() => { if (vis && !S.clicked) play(false); }, 3000);
     setInterval(() => { if (vis && !S.playing && !S.inside && performance.now() - S.lastUser > 9000) play(false); }, 12000);

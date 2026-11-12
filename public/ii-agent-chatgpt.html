@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=1">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -736,7 +737,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
 </head>
-<body>
+<body class="svc" style="--pacc:#10A37F;--pacc2:#5CFFC8">
 <a class="skip-link" href="/#services">К содержимому</a>
 <canvas id="fx-canvas" aria-hidden="true"></canvas>
 
@@ -752,7 +753,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <ul class="nav-links">
     <li><a href="/#services">Услуги</a></li>
     <li><a href="/#cases">Кейсы</a></li>
-    <li><a href="#how">Процесс</a></li>
+    <li><a href="/#how">Процесс</a></li>
     <li><a href="/#testimonials">Отзывы</a></li>
     <li><a href="/#blog">Блог</a></li>
     <li><a href="#contact">Контакты</a></li>
@@ -766,7 +767,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <ul>
     <li><a href="/#services" onclick="closeMobileNav()">Услуги</a></li>
     <li><a href="/#cases" onclick="closeMobileNav()">Кейсы</a></li>
-    <li><a href="#how" onclick="closeMobileNav()">Процесс</a></li>
+    <li><a href="/#how" onclick="closeMobileNav()">Процесс</a></li>
     <li><a href="/#testimonials" onclick="closeMobileNav()">Отзывы</a></li>
     <li><a href="#faq" onclick="closeMobileNav()">Вопросы</a></li>
     <li><a href="/#blog" onclick="closeMobileNav()">Блог</a></li>
@@ -845,46 +846,21 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   </div>
 </section>
 
-<section id="how" style="background:var(--bg2);">
-  <div class="container">
-    <div class="section-label">Процесс</div>
-    <h2 class="section-title">Как мы <span>работаем</span></h2>
-    <p class="section-sub">Без лишней бюрократии — от задачи до готового решения за 3–7 дней.</p>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Консультация</div>
-        <p class="step-desc">Разбираемся в вашей задаче, предлагаем решение и называем точную цену. Без скрытых платежей.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Разработка</div>
-        <p class="step-desc">Строим систему, тестируем на реальных данных и показываем промежуточный результат.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Запуск</div>
-        <p class="step-desc">Деплоим на ваш сервер или наш, передаём управление и обучаем как пользоваться.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-title">Поддержка</div>
-        <p class="step-desc">Остаёмся на связи: гарантия 30 дней, ошибки исправляем бесплатно.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="details">
   <div class="container">
     <div class="section-label">Стоимость</div>
-    <h2 class="section-title">Сколько это <span>стоит</span></h2>
-    <p class="section-sub">Точную цену называем после короткого разговора, до начала работы и без скрытых платежей.</p>
+    <h2 class="section-title">Сколько <span>стоит</span></h2>
+    <p class="bk-sub" style="max-width:860px;margin-bottom:28px">Цена зависит от числа подключений. Подключение - это канал, где вам пишут клиенты (сайт, Telegram), или ваша система (CRM, таблица, почта). База знаний из ваших файлов и уведомления вам в Telegram входят в любой пакет.</p>
+    <div class="pkc bk-glass reveal" data-bk="pkc">
+      <div class="pkc-title">Какой пакет мой?</div>
+      <div class="pkc-row"><div class="pkc-f"><span>Каналы, где пишут клиенты</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><div class="pkc-f"><span>Системы, куда передавать данные</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>0</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><label class="pkc-sw"><input type="checkbox"><i></i><span>Есть сложное подключение</span><em class="pkc-q" tabindex="0" aria-label="Что считается сложным подключением">?<u>1С, каталог товаров с поиском, своя система без готовой интеграции или нестандартная логика (расчёт цены, оплата, разные отделы).</u></em></label></div>
+      <div class="pkc-res" aria-live="polite"><span class="pkc-lead"><span class="pkc-num"><b>1</b></span> </span><span class="pkc-word">подключение</span> → пакет <b class="pkc-pk">«Старт»</b>, <span class="pkc-price"></span><small style="display:none">Точную цену называем в смете до старта.</small></div>
+    </div>
     <div class="pk-grid reveal">
       <div class="pk-card">
         <div class="pk-name">Старт</div>
         <div class="pk-price"><small>от</small> 4 990 ₽</div>
-        <div class="pk-for">подходит, если: один канал (сайт ИЛИ Telegram), без интеграций с CRM/1С</div>
+        <div class="pk-for pk-conn">1 подключение</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>ИИ-агент или Telegram-бот на одном канале</li>
           <li><i class="fa-solid fa-check"></i>Отвечает по вашим вопросам и материалам</li>
@@ -892,12 +868,13 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         </ul>
         <div class="pk-term">Срок: 3-5 дней</div>
         <a href="#contact" class="btn-secondary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Агент в Telegram отвечает на вопросы клиентов</div>
       </div>
       <div class="pk-card pk-hot">
         <div class="pk-badge">Чаще выбирают</div>
         <div class="pk-name">Бизнес</div>
         <div class="pk-price"><small>от</small> 25 000 ₽</div>
-        <div class="pk-for">подходит, если: нужны оба канала (сайт + Telegram) и передача заявок в CRM/1С/таблицу</div>
+        <div class="pk-for pk-conn">2-4 подключения</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>ИИ-агент сразу на сайте и в Telegram</li>
           <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам, ценам и материалам</li>
@@ -907,11 +884,12 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         </ul>
         <div class="pk-term">Срок: 5-7 дней</div>
         <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Сайт + Telegram + Bitrix24 = 3 подключения</div>
       </div>
       <div class="pk-card">
         <div class="pk-name">Под ключ</div>
         <div class="pk-price"><small>от</small> 50 000 ₽</div>
-        <div class="pk-for">подходит, если: нужно несколько систем вместе (CRM + 1С + каталог товаров RAG)</div>
+        <div class="pk-for pk-conn">5+ подключений или есть сложное</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>ИИ-агент, CRM, 1С и каталог товаров (RAG)</li>
           <li><i class="fa-solid fa-check"></i>Отчёты и автоматизация процессов</li>
@@ -920,8 +898,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         </ul>
         <div class="pk-term">Срок: по смете</div>
         <a href="#contact" class="btn-secondary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Агент считает цену по вашей формуле и принимает оплату</div>
       </div>
     </div>
+    <p class="pk-after">Цена и срок фиксируются в смете до старта и потом не меняются. Не уверены, сколько у вас подключений? Нажмите «Получить расчёт за 1 минуту», посчитаем вместе.</p>
     <div class="service-card" style="margin-top:28px;max-width:860px">
       <div class="service-name">Сопровождение после запуска</div>
       <p class="service-desc" style="margin-bottom:10px">от 3 000 ₽ в месяц, по желанию</p>
@@ -1022,7 +1002,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="footer-links">
       <a href="/#services">Услуги</a>
       <a href="/#cases">Кейсы</a>
-      <a href="#how">Процесс</a>
+      <a href="/#how">Процесс</a>
       <a href="/#testimonials">Отзывы</a>
       <a href="#faq">Вопросы</a>
       <a href="/#blog">Блог</a>
@@ -1136,7 +1116,8 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=6";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=1" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=7";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
