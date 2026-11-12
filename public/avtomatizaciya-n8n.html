@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=7">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=2">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=3">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -800,22 +800,22 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <h2 class="section-title">Что можно <span>автоматизировать</span></h2>
     <p class="bk-sub" style="margin-bottom:26px">Всё, что вы делаете руками по одной и той же схеме, можно отдать системе. Нажмите на любой сценарий и посмотрите, как он работает.</p>
     <ul class="hx-benefits hx-row" style="--acc:#EA4B71;--acc2:#FF8FA8"><li><i class="fa-solid fa-check"></i><span>Заявки с сайта, Telegram и почты сразу в CRM</span></li><li><i class="fa-solid fa-check"></i><span>Отчёты собираются сами и приходят утром</span></li><li><i class="fa-solid fa-check"></i><span>Накладные и документы попадают в 1С без ручного ввода</span></li></ul>
-    <div class="shw reveal" data-bk="shw">
+    <div class="shw reveal" data-bk="shw" data-mode="flow">
       <div class="shw-list">
-        <button type="button" class="shw-i on" data-s="n:fa-solid fa-globe:Заявка с сайта|n:fa-solid fa-diagram-project:n8n проверяет дубли|n:fa-solid fa-address-card:Карточка в AmoCRM|c:fa-solid fa-check:Без участия человека"><em>01</em><i class="fa-solid fa-inbox"></i><b>Заявки в CRM</b><span>Обращения с сайта, из Telegram и почты сами создают карточки в AmoCRM или Bitrix24.</span><u></u></button>
-        <button type="button" class="shw-i" data-s="n:fa-solid fa-address-card:Новая сделка в CRM|n:fa-solid fa-diagram-project:n8n выбирает ответственного|n:fa-solid fa-paper-plane:Сообщение менеджеру в Telegram|c:fa-solid fa-bell:Доставлено сразу"><em>02</em><i class="fa-solid fa-bell"></i><b>Уведомления</b><span>Менеджер узнаёт о новой заявке или задаче сразу, в Telegram или на почте.</span><u></u></button>
-        <button type="button" class="shw-i" data-s="n:fa-solid fa-clock:Каждое утро в 09:00|n:fa-solid fa-diagram-project:n8n собирает данные из CRM|n:fa-solid fa-table:Отчёт в Google Таблице|c:fa-solid fa-envelope:Ссылка ушла руководителю"><em>03</em><i class="fa-solid fa-chart-simple"></i><b>Отчёты и таблицы</b><span>Данные из разных сервисов собираются в Google Таблицу или отчёт по расписанию.</span><u></u></button>
+        <button type="button" class="shw-i on" data-s="n:fa-solid fa-globe:Заявка с сайта|n:fa-solid fa-diagram-project:Проверка: нет ли дубля|n:fa-solid fa-address-card:Карточка в AmoCRM|c:fa-solid fa-check:Без участия человека"><em>01</em><i class="fa-solid fa-inbox"></i><b>Заявки в CRM</b><span>Обращения с сайта, из Telegram и почты сами создают карточки в AmoCRM или Bitrix24.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="n:fa-solid fa-address-card:Новая сделка в CRM|n:fa-solid fa-diagram-project:Выбор ответственного|n:fa-solid fa-paper-plane:Сообщение менеджеру в Telegram|c:fa-solid fa-bell:Доставлено сразу"><em>02</em><i class="fa-solid fa-bell"></i><b>Уведомления</b><span>Менеджер узнаёт о новой заявке или задаче сразу, в Telegram или на почте.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="n:fa-solid fa-clock:Каждое утро в 09:00|n:fa-solid fa-diagram-project:Сбор данных из CRM|n:fa-solid fa-table:Отчёт в Google Таблице|c:fa-solid fa-envelope:Ссылка ушла руководителю"><em>03</em><i class="fa-solid fa-chart-simple"></i><b>Отчёты и таблицы</b><span>Данные из разных сервисов собираются в Google Таблицу или отчёт по расписанию.</span><u></u></button>
         <button type="button" class="shw-i" data-s="n:fa-solid fa-file-invoice:Накладная от поставщика|n:fa-solid fa-wand-magic-sparkles:ИИ распознаёт строки|n:fa-solid fa-database:Позиции в 1С|c:fa-solid fa-check:Без ручного ввода"><em>04</em><i class="fa-solid fa-file-invoice"></i><b>Обработка документов</b><span>ИИ разбирает счета и заявки и подставляет данные в нужные системы, например в 1С.</span><u></u></button>
-        <button type="button" class="shw-i" data-s="n:fa-solid fa-cart-shopping:Заказ в интернет-магазине|n:fa-solid fa-diagram-project:n8n|n:fa-solid fa-envelope:Письмо клиенту|n:fa-solid fa-table:Строка в таблице"><em>05</em><i class="fa-solid fa-plug"></i><b>Связка сервисов</b><span>Подключаем всё, что имеет API: сайты, интернет-магазины, почту, мессенджеры, базы.</span><u></u></button>
-        <button type="button" class="shw-i" data-s="n:fa-solid fa-clock:За день до записи|n:fa-solid fa-diagram-project:n8n находит завтрашние записи|n:fa-solid fa-paper-plane:Напоминание клиенту|c:fa-solid fa-check:Клиент подтвердил визит"><em>06</em><i class="fa-solid fa-clock"></i><b>Сценарии по расписанию</b><span>Напоминания, рассылки, проверки и выгрузки запускаются сами в нужное время.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="n:fa-solid fa-cart-shopping:Заказ в интернет-магазине|n:fa-solid fa-envelope:Письмо клиенту|n:fa-solid fa-table:Строка в таблице|c:fa-solid fa-plug:Три сервиса работают как один"><em>05</em><i class="fa-solid fa-plug"></i><b>Связка сервисов</b><span>Подключаем всё, что имеет API: сайты, интернет-магазины, почту, мессенджеры, базы.</span><u></u></button>
+        <button type="button" class="shw-i" data-s="n:fa-solid fa-clock:За день до записи|n:fa-solid fa-diagram-project:Поиск завтрашних записей|n:fa-solid fa-paper-plane:Напоминание клиенту|c:fa-solid fa-check:Клиент подтвердил визит"><em>06</em><i class="fa-solid fa-clock"></i><b>Сценарии по расписанию</b><span>Напоминания, рассылки, проверки и выгрузки запускаются сами в нужное время.</span><u></u></button>
       </div>
       <div class="shw-stage" aria-hidden="true">
         <div class="shw-halo"></div><div class="shw-orb"><i></i><i></i><i></i></div>
         <div class="shw-dev">
-          <div class="shw-top"><span class="shw-av"><i class="fa-solid fa-robot"></i></span><div><b>Сценарий n8n</b><small>в работе</small></div><span class="shw-dots"><i></i><i></i><i></i></span></div>
+          <div class="shw-top"><span class="shw-run"></span><div><b>Сценарий n8n</b><small>выполняется</small></div><span class="shw-dots"><i></i><i></i><i></i></span></div>
           <div class="shw-chat"></div>
         </div>
-        <div class="bk-buddy"><i class="fa-solid fa-robot"></i></div>
+        <div class="bk-buddy bk-tile" style="--face:#EA4B71"><span><b><i class="sh"></i><img src="/hero3d/logo-n8n.webp?v=3" alt="" loading="lazy" style="width:74%"></b></span></div>
       </div>
       <p class="shw-desc"></p>
     </div>
@@ -1106,7 +1106,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=2" defer></script>
+<script src="/hero3d/blocks.js?v=3" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=8";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->

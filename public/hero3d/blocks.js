@@ -17,7 +17,7 @@
 
   /* маленькая копия 3D-объекта из первого экрана */
   var snapUrl = window.__h3dSnap || null;
-  function paintBuddy(b) { if (snapUrl) { b.style.backgroundImage = 'url(' + snapUrl + ')'; b.classList.add('img'); } }
+  function paintBuddy(b) { if (snapUrl && !b.classList.contains('bk-tile')) { b.style.backgroundImage = 'url(' + snapUrl + ')'; b.classList.add('img'); } }
   document.addEventListener('h3d:snap', function (e) { snapUrl = e.detail.url; $$('.bk-buddy').forEach(paintBuddy); });
 
   /* счёт от нуля */
@@ -175,7 +175,7 @@
   /* ---------- первый блок: возможности в деле ---------- */
   INIT.shw = function (box) {
     var items = $$('.shw-i', box), chat = $('.shw-chat', box), stage = $('.shw-stage', box), desc = $('.shw-desc', box), bud = $('.bk-buddy', box);
-    var timers = [], cur = 0, seen = true;
+    var timers = [], cur = 0, seen = true, flow = box.getAttribute('data-mode') === 'flow', tile = bud && $('b', bud);
     if (bud) paintBuddy(bud);
     function node(step) {
       var k = step.charAt(0), rest = step.slice(2), el = document.createElement('div'), p;
@@ -190,7 +190,29 @@
       if (desc) desc.textContent = $('span', items[i]).textContent;
       if (items[i].scrollIntoView && items[i].parentNode.scrollWidth > items[i].parentNode.clientWidth) items[i].parentNode.scrollTo({ left: items[i].offsetLeft - 24, behavior: reduce ? 'auto' : 'smooth' });
       chat.innerHTML = '';
+      if (tile && !reduce) { tile.classList.remove('spin'); void tile.offsetWidth; tile.classList.add('spin'); }
       var steps = items[i].getAttribute('data-s').split('|'), t = 350;
+      if (flow) {
+        /* схема: узлы зигзагом, между ними рисуются светящиеся связи */
+        var W = chat.clientWidth, H = chat.clientHeight, ns = steps.filter(function (x) { return x.charAt(0) === 'n'; }), gap = Math.min(78, (H - 110) / Math.max(1, ns.length - 1));
+        var svg = '<svg aria-hidden="true"><defs><linearGradient id="flG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--pacc)"/><stop offset="1" stop-color="var(--pacc2)"/></linearGradient></defs>', pos = [];
+        ns.forEach(function (x, k) { pos.push({ l: k % 2 ? W * 0.34 : W * 0.04, t: 16 + k * gap }); });
+        for (var k = 0; k < pos.length - 1; k++) {
+          var x1 = pos[k].l + W * 0.31, y1 = pos[k].t + 50, x2 = pos[k + 1].l + W * 0.31, y2 = pos[k + 1].t + 2;
+          svg += '<path class="fl-p" pathLength="1" d="M' + x1 + ' ' + y1 + ' C' + x1 + ' ' + (y1 + 22) + ',' + x2 + ' ' + (y2 - 22) + ',' + x2 + ' ' + y2 + '"/>';
+        }
+        chat.innerHTML = svg + '</svg>';
+        var paths = $$('.fl-p', chat), els = [], ni = 0;
+        steps.forEach(function (st) {
+          var el = node(st); chat.appendChild(el);
+          if (st.charAt(0) === 'n') { el.style.left = pos[ni].l + 'px'; el.style.top = pos[ni].t + 'px'; el.insertAdjacentHTML('beforeend', '<em><i class="fa-solid fa-check"></i></em>'); (function (el, j) {
+            if (reduce) { el.classList.add('in', 'ok'); if (paths[j - 1]) paths[j - 1].classList.add('in'); return; }
+            if (j > 0) { timers.push(setTimeout(function () { els[j - 1].classList.add('ok'); paths[j - 1].classList.add('in'); }, t)); t += 520; }
+            timers.push(setTimeout(function () { el.classList.add('in'); }, t)); t += 780;
+          })(el, ni); els.push(el); ni++; }
+          else { if (reduce) { el.classList.add('in'); return; } timers.push(setTimeout(function () { if (els.length) els[els.length - 1].classList.add('ok'); el.classList.add('in'); }, t)); t += 700; }
+        });
+      } else
       steps.forEach(function (st) {
         var el = node(st); chat.appendChild(el);
         if (reduce) { el.classList.add('in'); return; }

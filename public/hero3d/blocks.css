@@ -252,3 +252,38 @@
   .shw-stage .bk-buddy{width:70px;height:70px;right:0;top:-4px}
 }
 @media (prefers-reduced-motion:reduce){.shw-halo,.shw-orb i,.sv span s,.sn+.sn::after{animation:none}.shw-i.on u{animation:none;transform:scaleX(1)}.shw-chat>*{transition:none}}
+
+/* ---------- объёмная плашка-спутник (логотип платформы) ---------- */
+.bk-tile{background:none !important;filter:none !important;width:112px !important;height:112px !important;perspective:520px;animation:tileFloat 5.5s ease-in-out infinite !important}
+@keyframes tileFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.bk-tile::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--pacc) 55%,transparent),transparent 66%);filter:blur(10px);animation:shwPulse 3.6s ease-in-out infinite}
+.bk-tile::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--pacc) 55%,transparent);border-left-color:transparent;border-bottom-color:transparent;transform:rotateX(68deg) rotateZ(0);animation:tileRing 5s linear infinite}
+@keyframes tileRing{to{transform:rotateX(68deg) rotateZ(360deg)}}
+.bk-tile>span{position:absolute;inset:14px;transform-style:preserve-3d;transform:rotateY(calc(var(--ry,0)*2.4deg)) rotateX(calc(var(--rx,0)*2.4deg));transition:transform .25s ease-out}
+.bk-tile b{position:absolute;inset:0;display:grid;place-items:center;border-radius:27%;transform-style:preserve-3d;background:linear-gradient(145deg,color-mix(in srgb,var(--face) 78%,#fff),var(--face) 46%,color-mix(in srgb,var(--face) 72%,#000));box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -8px 14px rgba(0,0,0,.2),1px 1px 0 color-mix(in srgb,var(--face) 62%,#000),2px 2px 0 color-mix(in srgb,var(--face) 58%,#000),3px 3px 0 color-mix(in srgb,var(--face) 54%,#000),4px 4px 0 color-mix(in srgb,var(--face) 50%,#000),5px 5px 0 color-mix(in srgb,var(--face) 46%,#000),10px 22px 26px -6px rgba(0,0,0,.7),0 0 40px -8px var(--pacc);animation:tileSway 7s ease-in-out infinite}
+@keyframes tileSway{0%,100%{transform:rotateY(-24deg) rotateX(10deg)}50%{transform:rotateY(22deg) rotateX(-6deg)}}
+.bk-tile b.spin{animation:tileSpin .95s cubic-bezier(.3,.1,.2,1)}
+@keyframes tileSpin{0%{transform:rotateY(-24deg) rotateX(10deg) scale(1)}50%{transform:rotateY(170deg) rotateX(0) scale(1.14)}100%{transform:rotateY(336deg) rotateX(10deg) scale(1)}}
+.bk-tile b img{width:66%;height:auto;transform:translateZ(16px);filter:drop-shadow(0 6px 5px rgba(0,0,0,.28))}
+.bk-tile b .lg{font-size:40px;color:#fff;transform:translateZ(16px);filter:drop-shadow(0 6px 5px rgba(0,0,0,.28))}
+.bk-tile .sh{position:absolute;inset:0;border-radius:27%;overflow:hidden;pointer-events:none}
+.bk-tile .sh::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%);transform:translateX(-90%);animation:tileSheen 4.6s ease-in-out infinite}
+@keyframes tileSheen{0%,55%{transform:translateX(-90%)}85%,100%{transform:translateX(90%)}}
+.shw-stage .bk-tile{right:-2%;top:-8px}
+.shw-stage .bk-buddy:not(.bk-tile){animation:bkBob 3.2s ease-in-out infinite}
+/* n8n: экран-схема вместо чата */
+.shw-run{width:12px;height:12px;margin:0 6px;border-radius:50%;background:var(--pacc);box-shadow:0 0 0 5px color-mix(in srgb,var(--pacc) 22%,transparent),0 0 16px var(--pacc);animation:bkBlink 1.4s ease-in-out infinite}
+.shw[data-mode="flow"] .shw-chat{position:relative;display:block;padding:0;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.2px);background-size:18px 18px}
+.shw[data-mode="flow"] .shw-chat svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;opacity:1;transform:none}
+.fl-p{fill:none;stroke:url(#flG);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .55s ease}
+.fl-p.in{stroke-dashoffset:0}
+.shw[data-mode="flow"] .sn{position:absolute;margin:0;width:62%;padding:10px 12px;gap:10px;font-size:13.5px;line-height:1.3;background:linear-gradient(160deg,#172230,#0e1620);border-color:rgba(255,255,255,.14);box-shadow:0 14px 26px -14px rgba(0,0,0,.9)}
+.shw[data-mode="flow"] .sn::before,.shw[data-mode="flow"] .sn::after{display:none}
+.shw[data-mode="flow"] .sn.in{border-color:color-mix(in srgb,var(--pacc) 55%,transparent);box-shadow:0 14px 26px -14px rgba(0,0,0,.9),0 0 26px -10px var(--pacc)}
+.shw[data-mode="flow"] .sn em{margin-left:auto;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-style:normal;color:#04121a;background:#5CFFC8;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.4,1);flex:none}
+.shw[data-mode="flow"] .sn.ok em{transform:scale(1)}
+.shw[data-mode="flow"] .sc{position:absolute;left:50%;bottom:16px;translate:-50% 0;white-space:nowrap}
+@media(max-width:900px){.bk-tile{width:84px !important;height:84px !important}.bk-tile b .lg{font-size:28px}.shw-stage .bk-tile{right:-4px;top:2px}}
+@media (prefers-reduced-motion:reduce){.bk-tile,.bk-tile::before,.bk-tile::after,.bk-tile b,.bk-tile .sh::after,.shw-run{animation:none !important}.fl-p{transition:none}}
+#features{overflow-x:clip}
+@media(max-width:900px){.shw-stage .bk-tile{right:10px}}
