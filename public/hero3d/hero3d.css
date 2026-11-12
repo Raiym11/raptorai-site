@@ -4,14 +4,18 @@
 /* ---------- левая колонка ---------- */
 .hx{--acc:#00D4FF;--acc2:#8C7BFF}
 .hx .hero-badge{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 48%,transparent);background:linear-gradient(140deg,color-mix(in srgb,var(--acc) 20%,transparent),color-mix(in srgb,var(--acc2) 14%,transparent));margin-bottom:22px}
-.hx .hero-sub{margin-bottom:34px;max-width:none;font-size:clamp(15.5px,1.3vw,18px)}
-.hx.page-hero h1{font-size:clamp(30px,3.4vw,48px) !important;margin-bottom:18px}
+.hx .hero-sub{margin-bottom:36px;max-width:none;font-size:clamp(16.5px,1.42vw,20px)}
+.hx .hero-badge{font-size:13.5px;padding:9px 18px}
+.hx .hero-btns .btn-primary,.hx .hero-btns .btn-secondary{font-size:16.5px;padding:17px 34px}
+.hx .crumbs{font-size:14.5px}
+.hx.page-hero h1{font-size:clamp(33px,3.7vw,54px) !important;line-height:1.1;margin-bottom:22px}
+@media (min-width:901px){.hx.page-hero{padding-left:max(24px,4vw);padding-right:max(24px,4vw)}.hx .hero-inner{max-width:1240px;grid-template-columns:minmax(0,1.14fr) minmax(0,.86fr)}}
 .hx.page-hero h1 .irid-text{display:block}
 .hx.page-hero{padding-top:112px}
 .hx-benefits{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:11px;max-width:560px}
 .hx-benefits li{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.45;color:rgba(240,244,248,.93);text-align:left}
 .hx-benefits li i{flex:none;width:22px;height:22px;margin-top:1px;border-radius:50%;display:grid;place-items:center;font-size:11px;color:#04121a;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 0 16px -3px var(--acc)}
-.hx-line{margin-top:22px;font-size:13.5px;letter-spacing:.01em;color:var(--gray)}
+.hx-line{margin-top:24px;font-size:15px;letter-spacing:.01em;color:var(--gray)}
 .hx-line{opacity:0;transform:translateY(18px);animation:heroIn .9s cubic-bezier(.2,.7,.2,1) .5s forwards}
 /* выгоды в первом блоке под первым экраном */
 .hx-row{display:flex;flex-wrap:wrap;gap:12px 14px;max-width:none;margin:-30px 0 44px}
