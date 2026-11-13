@@ -546,12 +546,14 @@
 .pk-guar i{color:var(--pacc);margin-right:9px}
 
 /* --- Raptor Guard block --- */
-.rg-block{display:flex;align-items:center;gap:48px;margin:40px auto 0;max-width:860px;padding:40px 44px;border-radius:24px;background:linear-gradient(135deg,rgba(0,230,180,.06),rgba(0,200,255,.04),rgba(120,80,255,.04));border:1px solid rgba(0,230,180,.15);position:relative;overflow:hidden}
+.rg-block{display:flex;align-items:center;gap:48px;margin:40px auto 0;max-width:860px;padding:40px 44px;border-radius:24px;background:linear-gradient(135deg,rgba(0,230,180,.06),rgba(0,200,255,.04),rgba(120,80,255,.04));border:1px solid rgba(0,230,180,.15);position:relative;overflow:hidden;transition:border-color .3s}
+.rg-block:hover{border-color:rgba(0,230,180,.3)}
 .rg-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(0,230,180,.08),transparent 70%);pointer-events:none}
 .rg-scene{position:relative;flex-shrink:0;width:160px;height:160px;display:flex;align-items:center;justify-content:center}
 .rg-glow{position:absolute;width:200%;height:200%;top:-50%;left:-50%;background:radial-gradient(circle,rgba(0,230,180,.15) 0%,transparent 60%);animation:rgPulse 4s ease-in-out infinite}
 .rg-logo-wrap{position:relative;width:96px;height:96px;perspective:600px}
-.rg-logo-3d{width:100%;height:100%;border-radius:22px;background:linear-gradient(145deg,rgba(0,230,180,.2),rgba(0,200,255,.1));backdrop-filter:blur(8px);border:1px solid rgba(0,230,180,.3);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,230,180,.2),0 0 60px rgba(0,230,180,.08);animation:rgFloat 6s ease-in-out infinite;transform-style:preserve-3d}
+.rg-logo-3d{width:100%;height:100%;border-radius:22px;background:linear-gradient(145deg,rgba(0,230,180,.2),rgba(0,200,255,.1));backdrop-filter:blur(8px);border:1px solid rgba(0,230,180,.3);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,230,180,.2),0 0 60px rgba(0,230,180,.08);animation:rgFloat 6s ease-in-out infinite;transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .3s ease}
+.rg-block:hover .rg-logo-3d{box-shadow:0 12px 48px rgba(0,230,180,.35),0 0 80px rgba(0,230,180,.12)}
 .rg-logo-img{width:64px;height:64px;border-radius:12px;filter:drop-shadow(0 2px 8px rgba(0,230,180,.4))}
 .rg-ring{position:absolute;inset:-12px;border:1.5px solid rgba(0,230,180,.2);border-radius:50%;animation:rgSpin 12s linear infinite}
 .rg-ring-2{inset:-24px;border-color:rgba(0,200,255,.1);animation-duration:18s;animation-direction:reverse}
