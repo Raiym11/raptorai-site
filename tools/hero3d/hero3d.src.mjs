@@ -567,9 +567,51 @@ function coach(S) {
   };
 }
 
+/* ---------- Raptor Guard: объёмная плашка с головой раптора ---------- */
+function guard(S) {
+  let grp = null, r1, r2, halo, dots = [], spin = 0, spinV = 0, pulse = 0;
+  if (S.gl) {
+    grp = medal(S, 'raptor', 0x0093B5, 2.0, { face: 0x07141D, ls: 1.12, glow: 0.2, sheen: 0.3 });
+    r1 = new Mesh(new TorusGeometry(1.72, 0.02, 10, 110), new MeshBasicMaterial({ color: 0x35E0C8, transparent: true, opacity: 0.8 }));
+    r2 = new Mesh(new TorusGeometry(1.92, 0.012, 8, 110), new MeshBasicMaterial({ color: 0x00D4FF, transparent: true, opacity: 0.4 }));
+    r1.rotation.x = 1.2; r2.rotation.x = 1.05; r2.rotation.y = 0.5;
+    halo = glow(0x00E6B4, 5.2, 0.34);
+    const holder = new Group(); holder.add(grp, r1, r2, halo);
+    const dg = new SphereGeometry(0.05, 12, 12);
+    for (let i = 0; i < 3; i++) {
+      const d = new Mesh(dg, new MeshBasicMaterial({ color: i === 1 ? 0x00D4FF : 0x5CFFC8 }));
+      holder.add(d); dots.push(d);
+    }
+    S.gl.scene.add(holder);
+  } else fallbackImg(S, 50, 50, 'raptor', 1.7, '#07141D');
+  return {
+    update(dt, t) {
+      if (!grp) return;
+      spinV *= 0.95; spin += spinV * dt; pulse = Math.max(0, pulse - dt * 1.4);
+      /* за курсором: S.lx/ly - положение внутри блока, S.px/py - по всему окну */
+      const hx = S.inside ? clamp((S.lx - 0.5) * 1.6, -1, 1) : 0, hy = S.inside ? clamp((S.ly - 0.5) * 1.6, -1, 1) : 0;
+      grp.rotation.y = Math.sin(t * 0.6) * 0.28 + S.px * 0.75 + hx * 0.35 + spin;
+      grp.rotation.x = S.py * 0.5 + hy * 0.3 + Math.sin(t * 0.8) * 0.06;
+      grp.position.y = Math.sin(t * 1.1) * 0.06;
+      grp.scale.setScalar(1 + pulse * 0.1 + (S.inside ? 0.04 : 0));
+      r1.rotation.z = t * 0.5; r1.rotation.x = 1.2 + S.py * 0.35;
+      r2.rotation.z = -t * 0.32; r2.rotation.x = 1.05 - S.py * 0.25;
+      halo.material.opacity = 0.3 + Math.sin(t * 1.5) * 0.06 + pulse * 0.35;
+      for (let i = 0; i < dots.length; i++) {
+        const a = t * (0.7 + i * 0.18) + i * 2.1, R = 1.72;
+        dots[i].position.set(Math.cos(a) * R, Math.sin(a) * R * Math.cos(1.2) + Math.sin(t + i) * 0.05, Math.sin(a) * R * Math.sin(1.2));
+      }
+    },
+    play(done, user) {
+      spinV = user ? 16 : 9; pulse = 1;
+      S.after(1500, done);
+    }
+  };
+}
+
 const SCENES = {
   agent: [agent, 0x00D4FF, 0x8C7BFF], chatgpt: [chatgpt, 0x10A37F, 0x5CFFC8], gemini: [gemini, 0x4285F4, 0x9B72CB],
-  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8]
+  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF]
 };
 
 /* ---------- движок ---------- */

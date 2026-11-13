@@ -422,35 +422,6 @@
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
   $$('[data-bk]').forEach(function (el) { io.observe(el); });
 
-  /* Raptor Guard 3D tilt on mouse move */
-  (function () {
-    var wrap = $('.rg-logo-wrap');
-    if (!wrap || reduce) return;
-    var logo3d = $('.rg-logo-3d', wrap);
-    var block = wrap.closest('.rg-block');
-    if (!block || !logo3d) return;
-    var raf = 0;
-    block.addEventListener('mousemove', function (e) {
-      if (raf) return;
-      raf = requestAnimationFrame(function () {
-        raf = 0;
-        var r = wrap.getBoundingClientRect();
-        var cx = r.left + r.width / 2;
-        var cy = r.top + r.height / 2;
-        var dx = (e.clientX - cx) / (r.width / 2);
-        var dy = (e.clientY - cy) / (r.height / 2);
-        dx = Math.max(-1, Math.min(1, dx));
-        dy = Math.max(-1, Math.min(1, dy));
-        logo3d.style.animation = 'none';
-        logo3d.style.transform = 'rotateY(' + (dx * 25) + 'deg) rotateX(' + (-dy * 25) + 'deg) translateY(-4px)';
-      });
-    });
-    block.addEventListener('mouseleave', function () {
-      logo3d.style.animation = '';
-      logo3d.style.transform = '';
-    });
-  })();
-
   var st = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { st.unobserve(e.target); e.target.classList.add('in'); } });
   }, { threshold: 0.12 });
