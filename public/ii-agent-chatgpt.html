@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=8">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=8">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=9">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -870,25 +870,34 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <section id="results" style="background: var(--bg2);">
   <div class="container">
-    <div class="section-label">Кейсы и отзывы</div>
+    <div class="section-label">Пример работы</div>
     <h2 class="section-title">Результаты <span>клиентов</span></h2>
-    <div class="rc-card reveal"><div class="case-card case-hero">
-      <div class="case-top">
-        <span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Продажи</span>
-        <h3 class="case-brand">ТехноСтрой</h3>
+    <div class="rc-card reveal"><div class="case-card case-hero rcx">
+      <div class="rcx-txt">
+        <div class="case-top">
+          <span class="case-tag"><i class="fa-brands fa-telegram"></i> ИИ-бот / Телеграм</span>
+          <h3 class="case-brand">Коучинг</h3>
+        </div>
+        <div class="case-title">Бот принимает голосовые и сам ведёт прогресс клиентов</div>
+        <p class="case-desc">Клиенты коуча отправляют боту в Телеграме голосовые сообщения. ИИ расшифровывает их, анализирует прогресс и состояние каждого участника и записывает результат в приватные Google Таблицы. Коуч открывает таблицу и видит всю картину, ничего не заполняя руками.</p>
+        <ul class="rcx-list"><li><i class="fa-solid fa-check"></i>Голосовые вместо анкет и отчётов</li><li><i class="fa-solid fa-check"></i>Анализ прогресса по каждому участнику</li><li><i class="fa-solid fa-check"></i>Данные в закрытых таблицах, доступ только у коуча</li></ul>
       </div>
-      <div class="case-title">Квалификация входящих лидов для оптового бизнеса</div>
-      <p class="case-desc">До внедрения — умеренный органический рост. Агент запущен в январе: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке. До запуска было 90-120 клиентов в месяц.</p>
-      <div class="rc-kpis">
-        <div class="rc-kpi"><b><span class="rc-from">90-120 → </span>753</b><span>клиентов в месяц: до запуска и в августе 2026</span></div>
-        <div class="rc-kpi"><b>6×</b><span>рост за 8 месяцев после запуска ИИ-агента</span></div>
+      <div class="rcx-vis" aria-hidden="true">
+        <div class="rcx-flow">
+          <div class="rcx-s s1"><i class="fa-solid fa-microphone"></i><b>Голосовое</b><small>в Телеграме</small><span class="rcx-w"><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s></span></div>
+          <u></u>
+          <div class="rcx-s s2"><i class="fa-solid fa-wand-magic-sparkles"></i><b>ИИ-анализ</b><small>прогресс и состояние</small></div>
+          <u></u>
+          <div class="rcx-s s3"><i class="fa-solid fa-table"></i><b>Таблица</b><small>приватная</small></div>
+        </div>
+        <div class="rcx-tbl">
+          <div class="rcx-th"><span>Участник</span><span>Прогресс</span><span>Состояние</span><i class="fa-solid fa-lock"></i></div>
+          <div class="rcx-tr r1"><span><s style="width:70%"></s></span><span><em style="--v:82%"></em></span><span><s style="width:60%"></s></span></div>
+          <div class="rcx-tr r2"><span><s style="width:55%"></s></span><span><em style="--v:46%"></em></span><span><s style="width:75%"></s></span></div>
+          <div class="rcx-tr r3"><span><s style="width:64%"></s></span><span><em style="--v:67%"></em></span><span><s style="width:50%"></s></span></div>
+        </div>
       </div>
-      <a href="/case-tehnostroy.html" class="btn-primary rc-btn">Подробнее о проекте</a>
     </div></div>
-    <div class="testimonials-grid rc-tst reveal">
-      <div class="testimonial-card"><p class="testimonial-text">Я предоставляю услуги коучинга. Нужен был бот, в котором пользователи записывают голосовое сообщение, а дальше автоматизация сама сортирует данные и состояние пользователей по приватным таблицам.</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Алексей С.</div><div class="author-company">Бот с голосовыми для коучинга</div></div></div></div>
-      <div class="testimonial-card"><p class="testimonial-text">Запустили ИИ-агента, который консультирует клиентов на сайте. Мы продаём брендовую одежду, у нас очень много товаров и данных. Агент прекрасно консультирует клиентов, отдельного консультанта нанимать не пришлось. Расход всего 2 500 рублей в месяц на API и VPS. Работой довольны.</p><div class="testimonial-author"><div class="author-avatar">И</div><div><div class="author-name">Илья Ф.</div><div class="author-company">ИИ-агент для магазина брендовой одежды</div></div></div></div>
-    </div>
     <p class="rc-more"><a href="/#cases">Больше проектов в разделе «Кейсы» →</a></p>
   </div>
 </section>
@@ -956,6 +965,17 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <ul style="list-style:none;display:grid;gap:8px"><li style="font-size:14px;color:rgba(240,244,248,.82)"><i class="fa-solid fa-check" style="color:var(--cyan);margin-right:8px"></i>исправления и мелкие доработки</li><li style="font-size:14px;color:rgba(240,244,248,.82)"><i class="fa-solid fa-check" style="color:var(--cyan);margin-right:8px"></i>ответы на вопросы команды</li><li style="font-size:14px;color:rgba(240,244,248,.82)"><i class="fa-solid fa-check" style="color:var(--cyan);margin-right:8px"></i>обновление базы знаний</li></ul>
     </div>
   </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <div class="section-label">Отзывы</div>
+    <h2 class="section-title">Что говорят <span>клиенты</span></h2>
+    <div class="testimonials-grid rc-tst reveal">
+      <div class="testimonial-card"><p class="testimonial-text">Я предоставляю услуги коучинга. Нужен был бот, в котором пользователи записывают голосовое сообщение, а дальше автоматизация сама сортирует данные и состояние пользователей по приватным таблицам.</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Алексей С.</div><div class="author-company">Бот с голосовыми для коучинга</div></div></div></div>
+      <div class="testimonial-card"><p class="testimonial-text">Запустили ИИ-агента, который консультирует клиентов на сайте. Мы продаём брендовую одежду, у нас очень много товаров и данных. Агент прекрасно консультирует клиентов, отдельного консультанта нанимать не пришлось. Расход всего 2 500 рублей в месяц на API и VPS. Работой довольны.</p><div class="testimonial-author"><div class="author-avatar">И</div><div><div class="author-name">Илья Ф.</div><div class="author-company">ИИ-агент для магазина брендовой одежды</div></div></div></div>
+    </div>
   </div>
 </section>
 
