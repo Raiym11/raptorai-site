@@ -506,145 +506,76 @@ function n8n(S) {
 }
 
 
-/* ---------- 7. Пример работы: голосовое -> ИИ -> таблица ---------- */
+/* ---------- 7. Пример работы: телефон с голосовым, запись уходит в строку таблицы ---------- */
 function coach(S) {
-  const cV = it('it-cv lift', 24, 13, 90, '<div class="h3d-fl" style="--d:-1s"><div class="g chip"><i class="fa-solid fa-microphone"></i><span>Голосовое в Телеграме</span></div></div>');
-  const cA = it('it-ca lift', 66, 7, 130, '<div class="h3d-fl" style="--d:-3s"><div class="g chip"><i class="fa-solid fa-wand-magic-sparkles"></i><span>ИИ-анализ</span></div></div>');
-  const cT = it('it-ct lift', 62, 91, 110, '<div class="h3d-fl" style="--d:-2s"><div class="g chip"><i class="fa-solid fa-lock"></i><span>Приватная таблица</span></div></div>');
-  S.stage.append(cV, cA, cT);
-  const chips = [cV, cA, cT]; let chipOn = -1;
-  function chip(k) { if (k !== chipOn) { chipOn = k; chips.forEach((c, i) => c.classList.toggle('on', i === k)); } }
   if (!S.gl) { fallback(S, 50, 50, 'fa-solid fa-microphone', 1); return { update() {}, play(done) { S.after(1500, done); } }; }
   const A = 0x10A37F, B = 0x5CFFC8, world = new Group();
-  S.gl.scene.add(world); world.scale.setScalar(0.95);
+  S.gl.scene.add(world);
   const basic = (c, o) => new MeshBasicMaterial(Object.assign({ color: c, toneMapped: false }, o || {}));
 
-  /* телефон с голосовыми */
   const phone = new Group();
-  phone.add(new Mesh(new RoundedBoxGeometry(1.02, 1.98, 0.13, 6, 0.14), glass(0x12222c, { rough: 0.2, opacity: 1, glow: 0.12, emissive: A, env: 1.1 })));
-  const scr = new Mesh(new RoundedBoxGeometry(0.9, 1.84, 0.02, 4, 0.1), basic(0x06121a)); scr.position.z = 0.062; phone.add(scr);
-  const notch = new Mesh(new RoundedBoxGeometry(0.26, 0.05, 0.02, 3, 0.025), basic(0x1b2c36)); notch.position.set(0, 0.84, 0.075); phone.add(notch);
-  const bubs = [], barGeo = new BoxGeometry(0.03, 0.15, 0.02), barMat = basic(0x04130e);
-  for (let i = 0; i < 3; i++) {
-    const g = new Group(), m = new Mesh(new RoundedBoxGeometry(0.66, 0.27, 0.06, 4, 0.12), basic(A));
-    g.add(m); g.userData = { m, bars: [] };
-    const dot = new Mesh(new SphereGeometry(0.055, 14, 10), barMat); dot.position.set(-0.24, 0, 0.035); g.add(dot);
-    for (let j = 0; j < 8; j++) { const b = new Mesh(barGeo, barMat); b.position.set(-0.13 + j * 0.052, 0, 0.035); g.add(b); g.userData.bars.push(b); }
-    g.position.set(0.07, 0.42 - i * 0.4, 0.1); phone.add(g); bubs.push(g);
-  }
-  phone.position.set(-1.36, 0.1, 0); phone.rotation.set(-0.08, 0.55, 0.07);
-  world.add(phone);
+  phone.add(new Mesh(new RoundedBoxGeometry(1.5, 2.95, 0.17, 7, 0.2), glass(0x14252f, { rough: 0.18, opacity: 1, glow: 0.14, emissive: A, env: 1.2 })));
+  const scr = new Mesh(new RoundedBoxGeometry(1.34, 2.78, 0.02, 4, 0.15), basic(0x06121a)); scr.position.z = 0.082; phone.add(scr);
+  const notch = new Mesh(new RoundedBoxGeometry(0.36, 0.07, 0.02, 3, 0.035), basic(0x1b2c36)); notch.position.set(0, 1.27, 0.095); phone.add(notch);
+  /* одно голосовое */
+  const bub = new Group(), bm = new Mesh(new RoundedBoxGeometry(1.06, 0.44, 0.08, 5, 0.2), basic(A)); bub.add(bm);
+  const dark = basic(0x04130e), pdot = new Mesh(new SphereGeometry(0.09, 18, 12), dark); pdot.position.set(-0.36, 0, 0.045); bub.add(pdot);
+  const bars = [], barGeo = new BoxGeometry(0.045, 0.26, 0.03);
+  for (let j = 0; j < 9; j++) { const m = new Mesh(barGeo, dark); m.position.set(-0.19 + j * 0.076, 0, 0.045); bub.add(m); bars.push(m); }
+  bub.position.set(0.06, 0.35, 0.14); phone.add(bub);
+  /* кнопка записи */
+  const mic = new Mesh(new CylinderGeometry(0.17, 0.17, 0.05, 32), basic(A)); mic.rotation.x = Math.PI / 2; mic.position.set(0, -0.98, 0.11); phone.add(mic);
+  const micRing = new Mesh(new TorusGeometry(0.2, 0.012, 8, 48), basic(B, { transparent: true, opacity: 0 })); micRing.position.copy(mic.position); phone.add(micRing);
+  phone.position.set(-0.5, 0.28, 0); phone.rotation.set(-0.1, 0.48, 0.05);
+  world.add(phone, glow(A, 5.2, 0.3));
 
-  /* ядро ИИ */
-  const core = new Group();
-  const cry = new Mesh(new IcosahedronGeometry(0.5, 0), glass(A, { flat: true, rough: 0.06, opacity: 0.9, glow: 0.4, irid: 1, env: 1.3 }));
-  const inner = new Mesh(new IcosahedronGeometry(0.22, 1), basic(0xdffff3));
-  const wire = new Mesh(new IcosahedronGeometry(0.72, 1), basic(B, { wireframe: true, transparent: true, opacity: 0.22 }));
-  const r1 = new Mesh(new TorusGeometry(0.95, 0.014, 8, 90), basic(B, { transparent: true, opacity: 0.8 }));
-  const r2 = new Mesh(new TorusGeometry(1.12, 0.008, 8, 90), basic(A, { transparent: true, opacity: 0.6 }));
-  const halo = glow(A, 3.8, 0.42);
-  core.add(cry, inner, wire, r1, r2, halo);
-  core.position.set(0.28, 0.72, 0.1);
-  world.add(core);
+  /* одна строка таблицы */
+  const row = new Group();
+  row.add(new Mesh(new RoundedBoxGeometry(2.3, 0.46, 0.09, 5, 0.12), glass(0x12232d, { rough: 0.2, opacity: 1, glow: 0.12, emissive: A, env: 1.1 })));
+  const hl = new Mesh(new RoundedBoxGeometry(2.3, 0.46, 0.012, 3, 0.12), basic(B, { transparent: true, opacity: 0 })); hl.position.z = 0.052; row.add(hl);
+  const name = new Mesh(new RoundedBoxGeometry(0.46, 0.1, 0.03, 2, 0.04), basic(0x8fa6b2)); name.position.set(-0.78, 0, 0.065); row.add(name);
+  const track = new Mesh(new RoundedBoxGeometry(1.0, 0.1, 0.02, 2, 0.04), basic(0x1a2b34)); track.position.set(0.12, 0, 0.06); row.add(track);
+  const fillGeo = new BoxGeometry(1, 0.1, 0.05); fillGeo.translate(0.5, 0, 0);
+  const fill = new Mesh(fillGeo, basic(B)); fill.position.set(-0.38, 0, 0.075); fill.scale.x = 0.001; row.add(fill);
+  const ok = new Mesh(new SphereGeometry(0.075, 18, 12), basic(0x3a4c57)); ok.position.set(0.94, 0, 0.08); row.add(ok);
+  row.position.set(0.55, -1.38, 0.95); row.rotation.set(-0.5, -0.22, 0.08);
+  world.add(row);
 
-  /* таблица */
-  const sheet = new Group();
-  sheet.add(new Mesh(new RoundedBoxGeometry(1.86, 1.36, 0.08, 5, 0.1), glass(0x10202a, { rough: 0.22, opacity: 1, glow: 0.1, emissive: A, env: 1 })));
-  const top = new Mesh(new RoundedBoxGeometry(1.72, 1.22, 0.02, 3, 0.07), basic(0x07141b)); top.position.z = 0.04; sheet.add(top);
-  const head = new Mesh(new RoundedBoxGeometry(1.64, 0.17, 0.03, 3, 0.05), basic(A)); head.position.set(0, 0.46, 0.06); sheet.add(head);
-  const fillGeo = new BoxGeometry(1, 0.075, 0.05); fillGeo.translate(0.5, 0, 0);
-  const rows = [], init = [0.72, 0.4, 0, 0];
-  for (let i = 0; i < 4; i++) {
-    const y = 0.22 - i * 0.235, g = new Group();
-    const hl = new Mesh(new RoundedBoxGeometry(1.64, 0.2, 0.012, 2, 0.04), basic(B, { transparent: true, opacity: 0 })); hl.position.z = 0.052;
-    const name = new Mesh(new RoundedBoxGeometry(0.34, 0.08, 0.03, 2, 0.03), basic(0x3a4c57)); name.position.set(-0.6, 0, 0.065);
-    const track = new Mesh(new RoundedBoxGeometry(0.72, 0.075, 0.02, 2, 0.03), basic(0x16262f)); track.position.set(0.03, 0, 0.06);
-    const fill = new Mesh(fillGeo, basic(B)); fill.position.set(-0.33, 0, 0.075); fill.scale.x = 0.001;
-    const dot = new Mesh(new SphereGeometry(0.05, 14, 10), basic(0x3a4c57)); dot.position.set(0.66, 0, 0.07);
-    g.add(hl, name, track, fill, dot); g.position.y = y; sheet.add(g);
-    rows.push({ g, hl, fill, dot, name, v: init[i], flash: 0 });
-  }
-  sheet.position.set(0.62, -0.95, 0.35); sheet.rotation.set(-0.92, -0.2, 0.16); sheet.scale.setScalar(0.92);
-  world.add(sheet);
+  const orb = new Mesh(new SphereGeometry(0.07, 16, 12), basic(0xeafff7)); const og = glow(B, 0.9, 0.95); og.position.z = 0; orb.add(og); orb.visible = false; world.add(orb);
+  const tail = []; for (let i = 0; i < 5; i++) { const m = new Mesh(new SphereGeometry(0.045 - i * 0.007, 10, 8), basic(B, { transparent: true, opacity: 0.6 - i * 0.1 })); m.visible = false; world.add(m); tail.push(m); }
 
-  const floor = new Mesh(new TorusGeometry(2.25, 0.008, 6, 120), basic(A, { transparent: true, opacity: 0.28 }));
-  floor.rotation.x = 1.38; floor.position.y = -1.55; world.add(floor);
-
-  /* летящие данные */
-  const orbGeo = new SphereGeometry(0.045, 12, 8), cubeGeo = new BoxGeometry(0.085, 0.085, 0.085);
-  const orbs = [], cubes = [], dust = [];
-  for (let i = 0; i < 7; i++) { const o = new Mesh(orbGeo, basic(0xeafff7)); const gl = glow(B, 0.55, 0.9); gl.position.z = 0; o.add(gl); o.visible = false; world.add(o); orbs.push(o); }
-  for (let i = 0; i < 4; i++) { const c = new Mesh(cubeGeo, basic(B)); const gl = glow(B, 0.5, 0.8); gl.position.z = 0; c.add(gl); c.visible = false; world.add(c); cubes.push(c); }
-  for (let i = 0; i < 12; i++) { const d = new Mesh(new SphereGeometry(0.016, 6, 5), basic(B, { transparent: true, opacity: 0.55 })); world.add(d); dust.push(d); }
-
-  const pA = new Vector3(), pB = new Vector3(), pC = new Vector3(), pR = new Vector3(), pM = new Vector3();
-  function bez(o, a, c, b, u) { const k = 1 - u; o.position.set(k * k * a.x + 2 * k * u * c.x + u * u * b.x, k * k * a.y + 2 * k * u * c.y + u * u * b.y, k * k * a.z + 2 * k * u * c.z + u * u * b.z); }
+  const pA = new Vector3(), pB = new Vector3(), pC = new Vector3();
+  function bez(o, u) { const k = 1 - u; o.position.set(k * k * pA.x + 2 * k * u * pC.x + u * u * pB.x, k * k * pA.y + 2 * k * u * pC.y + u * u * pB.y, k * k * pA.z + 2 * k * u * pC.z + u * u * pB.z); }
   const ease = (u) => u * u * (3 - 2 * u);
-  const T = 4.6; let ct = 0, cyc = 0, landed = false, sp = 1, boost = 0, spin = 0;
+  const T = 5; let ct = 0, cyc = 0, val = 0, flash = 0, sp = 1, boost = 0;
 
   return {
     update(dt, t) {
-      boost = Math.max(0, boost - dt); sp = lerp(sp, boost > 0 ? 2.6 : 1, 0.08);
-      ct += dt * sp; if (ct >= T) { ct -= T; cyc++; landed = false; }
-      const bi = cyc % 3, ri = cyc % 4, row = rows[ri];
-      world.rotation.y = S.px * 0.38 + Math.sin(t * 0.35) * 0.06; world.rotation.x = S.py * 0.22;
-      phone.position.y = 0.1 + Math.sin(t * 0.9) * 0.05; phone.rotation.y = 0.55 + Math.sin(t * 0.5) * 0.07;
-      sheet.position.y = -0.98 + Math.sin(t * 0.8 + 2) * 0.04;
-      phone.updateMatrix(); sheet.updateMatrix();
-      pA.copy(bubs[bi].position).applyMatrix4(phone.matrix);
-      pB.copy(core.position);
-      pR.copy(row.g.position); pR.z = 0.12; pR.applyMatrix4(sheet.matrix);
-      /* голосовые на экране */
-      const speak = ct < 1.5;
-      bubs.forEach((g, i) => {
-        const on = i === bi && speak;
-        g.userData.m.material.color.setHex(on ? B : A);
-        g.position.z = lerp(g.position.z, on ? 0.2 : 0.1, 0.15);
-        g.userData.bars.forEach((b, j) => { b.scale.y = lerp(b.scale.y, on ? 0.35 + (Math.sin(t * 14 + j * 1.7) * 0.5 + 0.5) * 0.9 : 0.35 + ((j * 7 + i * 3) % 5) * 0.13, 0.3); });
-      });
-      /* искры: телефон -> ядро */
-      pC.set((pA.x + pB.x) / 2, Math.max(pA.y, pB.y) + 0.75, 0.9);
-      orbs.forEach((o, i) => {
-        const u = (ct - 0.3 - i * 0.13) / 0.95;
-        o.visible = u > 0 && u < 1; if (!o.visible) return;
-        bez(o, pA, pC, pB, ease(u)); o.scale.setScalar(1.25 - u * 0.7);
-      });
-      /* ядро */
-      const e = clamp((ct - 1.0) / 0.5, 0, 1) * clamp((2.9 - ct) / 0.6, 0, 1);
-      spin += dt * (0.5 + e * 5 + boost * 2);
-      cry.rotation.y = spin; cry.rotation.x = spin * 0.6; cry.scale.setScalar(1 + e * 0.16 + Math.sin(t * 2) * 0.02);
-      inner.scale.setScalar(1 + e * 0.9 + Math.sin(t * 5) * 0.08); inner.rotation.y = -spin * 1.4;
-      wire.rotation.y = -spin * 0.35; wire.rotation.z = t * 0.2; wire.material.opacity = 0.18 + e * 0.4; wire.scale.setScalar(1 + e * 0.12);
-      r1.rotation.set(1.25 + S.py * 0.3, t * 0.25, t * 0.7); r2.rotation.set(1.9, t * 0.4, -t * 0.5);
-      halo.material.opacity = 0.36 + e * 0.4; halo.scale.setScalar(3.8 + e * 1.2);
-      core.position.y = 0.72 + Math.sin(t * 1.1 + 1) * 0.05;
-      /* кубики данных: ядро -> строка */
-      pM.set((pB.x + pR.x) / 2 + 0.7, pB.y + 0.2, 1.1);
-      cubes.forEach((c, i) => {
-        const u = (ct - 2.2 - i * 0.14) / 0.9;
-        c.visible = u > 0 && u < 1; if (!c.visible) return;
-        bez(c, pB, pM, pR, ease(u)); c.position.x += (i - 1.5) * 0.16 * u;
-        c.rotation.set(t * 4 + i, t * 3, 0); c.scale.setScalar(1.3 - u * 0.5);
-      });
-      if (!landed && ct > 3.15) { landed = true; row.v = 0.3 + ((cyc * 37 + ri * 53) % 70) / 100; row.flash = 1; }
-      rows.forEach((r) => {
-        r.flash = Math.max(0, r.flash - dt * 0.9);
-        r.fill.scale.x = lerp(r.fill.scale.x, Math.max(0.001, r.v * 0.72), 0.09);
-        r.hl.material.opacity = r.flash * 0.4; r.g.position.z = r.flash * 0.05;
-        r.dot.material.color.setHex(r.v ? (r.flash > 0.1 ? 0xffffff : B) : 0x3a4c57);
-        r.name.material.color.setHex(r.v ? 0x8fa6b2 : 0x3a4c57);
-      });
-      /* слабый поток вдоль пути */
-      dust.forEach((d, i) => {
-        const u = (t * 0.22 + i / dust.length) % 1;
-        if (i % 2) { pM.set((pB.x + pR.x) / 2 + 0.7, pB.y + 0.2, 1.1); bez(d, pB, pM, pR, u); }
-        else { pC.set((pA.x + pB.x) / 2, Math.max(pA.y, pB.y) + 0.75, 0.9); bez(d, pA, pC, pB, u); }
-        d.material.opacity = Math.sin(u * Math.PI) * 0.5;
-      });
-      floor.rotation.z = t * 0.1;
-      chip(ct < 1.1 ? 0 : ct < 2.6 ? 1 : ct < 4.1 ? 2 : -1);
+      boost = Math.max(0, boost - dt); sp = lerp(sp, boost > 0 ? 2.2 : 1, 0.08);
+      ct += dt * sp; if (ct >= T) { ct -= T; cyc++; }
+      world.rotation.y = S.px * 0.4; world.rotation.x = S.py * 0.22;
+      phone.position.y = 0.28 + Math.sin(t * 0.9) * 0.06; phone.rotation.y = 0.48 + Math.sin(t * 0.55) * 0.09;
+      row.position.y = -1.38 + Math.sin(t * 0.9 + 1.6) * 0.05;
+      const rec = ct < 1.7;
+      bm.material.color.setHex(rec ? B : A);
+      bub.position.z = lerp(bub.position.z, rec ? 0.3 : 0.14, 0.12);
+      bars.forEach((b, j) => { b.scale.y = lerp(b.scale.y, rec ? 0.3 + (Math.sin(t * 13 + j * 1.7) * 0.5 + 0.5) * 0.9 : 0.35 + ((j * 7) % 5) * 0.14, 0.3); });
+      const pr = rec ? (t * 1.4) % 1 : 1; micRing.scale.setScalar(1 + pr * 1.1); micRing.material.opacity = rec ? (1 - pr) * 0.8 : 0;
+      phone.updateMatrix(); row.updateMatrix();
+      pA.copy(bub.position).applyMatrix4(phone.matrix);
+      pB.set(fill.position.x, 0, 0.14).applyMatrix4(row.matrix);
+      pC.set(pA.x + 1.5, pA.y + 0.35, 1.5);
+      const u = (ct - 1.7) / 1.1;
+      orb.visible = u > 0 && u < 1; if (orb.visible) { bez(orb, ease(u)); orb.scale.setScalar(1.4 - u * 0.6); }
+      tail.forEach((m, i) => { const v = u - (i + 1) * 0.045; m.visible = v > 0 && v < 1; if (m.visible) bez(m, ease(v)); });
+      if (ct > 2.8 && ct < 4.5) { if (!flash && val === 0) flash = 1; val = 0.45 + ((cyc * 37) % 50) / 100; }
+      else if (ct < 1) val = 0;
+      flash = Math.max(0, flash - dt * 0.8);
+      fill.scale.x = lerp(fill.scale.x, Math.max(0.001, val), val ? 0.07 : 0.12);
+      hl.material.opacity = flash * 0.45; row.scale.setScalar(1 + flash * 0.05);
+      ok.material.color.setHex(val ? (flash > 0.15 ? 0xffffff : B) : 0x3a4c57);
     },
-    play(done) { boost = 3.6; S.after(3800, done); }
+    play(done) { boost = 3; S.after(3200, done); }
   };
 }
 
