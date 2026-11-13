@@ -349,6 +349,52 @@
       return run;
     }
   };
+  /* живая переписка: реплики печатаются по одной, в конце собирается заявка менеджеру */
+  function dlgInit(p, zone) {
+    var box = $('.czd', p), mgr = $('.czd-mgr', p);
+    if (!box || !mgr || reduce) return null;
+    var ms = $$('.czd-m', box), run = 0;
+    var rail = document.createElement('div'); rail.className = 'czd-rail'; rail.setAttribute('aria-hidden', 'true');
+    rail.innerHTML = '<span class="czd-n"><i class="fa-solid fa-user"></i>Клиент</span><u class="czd-l"></u><span class="czd-n"><i class="fa-solid fa-robot"></i>Агент</span><u class="czd-l"></u><span class="czd-n"><i class="fa-solid fa-user-check"></i>Менеджер</span>';
+    box.parentNode.insertBefore(rail, box);
+    var ns = $$('.czd-n', rail), ls = $$('.czd-l', rail);
+    ms.forEach(function (m) {
+      var v = $('.czd-v', m);
+      if (v) { v.insertAdjacentHTML('beforeend', '<em class="czd-bars"><s></s><s></s><s></s><s></s><s></s><s></s><s></s></em>'); return; }
+      var b = $('b', m), txt = m.textContent.slice(b.textContent.length).trim(), sp = document.createElement('span');
+      m.setAttribute('aria-label', m.textContent); m.innerHTML = ''; m.appendChild(b); m.appendChild(document.createTextNode(' ')); sp.className = 'czd-tx'; m.appendChild(sp); m.__t = txt; m.__s = sp;
+    });
+    var lab = $('b', mgr), parts = mgr.textContent.slice(lab.textContent.length).split('·');
+    mgr.innerHTML = '<b><i class="fa-solid fa-bolt"></i> Менеджер получил</b><span class="czd-chips">' + parts.map(function (x, i) { return '<i style="--i:' + i + '">' + x.trim() + '</i>'; }).join('') + '</span>';
+    var typ = document.createElement('p'); typ.className = 'czd-typ'; typ.innerHTML = '<s></s><s></s><s></s>'; box.appendChild(typ);
+    box.classList.add('live'); mgr.classList.add('live');
+    if (!zone.__io) { zone.__vis = true; zone.__io = new IntersectionObserver(function (es) { zone.__vis = es[0].isIntersecting; }); zone.__io.observe(zone); }
+    function who(k) { ns.forEach(function (n, i) { n.classList.toggle('on', i === k); n.classList.toggle('was', i < k); }); }
+    function flow(l) { l.classList.remove('run'); void l.offsetWidth; l.classList.add('run'); }
+    function play() {
+      var id = ++run, t = 350;
+      function at(d, fn) { setTimeout(function () { if (id === run && p.classList.contains('on')) fn(); }, d); }
+      ms.forEach(function (m) { m.classList.remove('in', 'old'); if (m.__s) m.__s.textContent = ''; });
+      mgr.classList.remove('in'); typ.classList.remove('in'); ls.forEach(function (l) { l.classList.remove('run'); }); who(-1);
+      ms.forEach(function (m, k) {
+        var agent = m.classList.contains('a');
+        if (agent) { at(t, function () { flow(ls[0]); who(1); typ.classList.add('in'); }); t += 800; }
+        at(t, function () {
+          typ.classList.remove('in'); who(agent ? 1 : 0); if (k > 1) ms[k - 2].classList.add('old'); m.classList.add('in');
+          if (!m.__s) return;
+          var n = 0, txt = m.__t, iv = setInterval(function () {
+            if (id !== run) { clearInterval(iv); return; }
+            n += 2; m.__s.textContent = txt.slice(0, n); if (n >= txt.length) clearInterval(iv);
+          }, agent ? 26 : 38);
+        });
+        t += (m.__s ? m.__t.length / 2 * (agent ? 26 : 38) : 1500) + 650;
+      });
+      at(t, function () { flow(ls[1]); who(2); mgr.classList.add('in'); });
+      at(t + 9000, function loop() { if (zone.__vis) play(); else at(2000, loop); });
+    }
+    return play;
+  }
+
   INIT.cz = function (box) {
     var tabs = $$('.cz-t', box), panes = $$('.cz-pane', box), runs = [];
     function show(i) {
@@ -357,6 +403,8 @@
       var p = panes[i];
       if (!p.__v) { p.__v = true; runs[i] = VIS[p.getAttribute('data-v')]($('.cz-vis', p)); }
       else if (runs[i]) runs[i]();
+      if (!p.__d) p.__d = dlgInit(p, box) || function () {};
+      p.__d();
       $$('[data-count]', p).forEach(function (el) { count(el, +el.getAttribute('data-count'), 1600); });
     }
     tabs.forEach(function (t, i) { t.addEventListener('click', function () { show(i); }); });
