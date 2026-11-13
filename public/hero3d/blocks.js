@@ -51,7 +51,7 @@
     var n8n = box.getAttribute('data-mode') === 'n8n';
     var cards = $$('.pk-card', box.parentNode);
     var outs = $$('output', box), sw = $('input[type=checkbox]', box);
-    var vals = n8n ? [2] : [1, 0], mins = n8n ? [1] : [0, 0];
+    var vals = n8n ? [2] : [1, 1], mins = n8n ? [1] : [0, 0];
     var num = $('.pkc-num b', box), word = $('.pkc-word', box), name = $('.pkc-pk', box), price = $('.pkc-price', box), note = $('.pkc-res small', box), lead = $('.pkc-lead', box);
     var last = null;
     function pick() {
