@@ -27,11 +27,11 @@ function it(cls, x, y, z, html) {
 function restart(node, cls) { node.classList.remove(cls); void node.offsetWidth; node.classList.add(cls); }
 
 /* ---------- WebGL ---------- */
-function makeGL(S, acc, acc2) {
+function makeGL(S, acc, acc2, ss) {
   const canvas = document.createElement('canvas');
   canvas.className = 'h3d-gl';
   const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2));
+  renderer.setPixelRatio(ss ? Math.min((window.devicePixelRatio || 1) * ss, 3) : Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2));
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
   const scene = new Scene();
@@ -94,7 +94,7 @@ function medal(S, name, color, w, o) {
   const face = new Mesh(geo, new MeshBasicMaterial({ color: fc, toneMapped: false }));
   face.position.z = z0; g.add(face);
   /* знак парит над подложкой и отбрасывает тень: при наклоне видна глубина */
-  const tex = new TextureLoader().load('/hero3d/logo-' + name + '.webp?v=3', () => { if (S.redraw) S.redraw(); });
+  const tex = new TextureLoader().load('/hero3d/logo-' + name + '.webp?v=' + (o.v || 3), () => { if (S.redraw) S.redraw(); });
   tex.colorSpace = SRGBColorSpace; tex.anisotropy = 8;
   const ls = o.ls || 1;
   const shadow = new Mesh(geo, new MeshBasicMaterial({ map: tex, color: 0x000000, transparent: true, opacity: 0.2, depthWrite: false }));
@@ -117,7 +117,7 @@ function medal(S, name, color, w, o) {
   });
   return g;
 }
-function fallbackImg(S, x, y, name, k, bg) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb fbi h3d-fl" style="--k:' + (k || 1) + ';background-color:' + (bg || 'var(--acc)') + ';background-image:url(/hero3d/logo-' + name + '.webp?v=3)"></div>')); }
+function fallbackImg(S, x, y, name, k, bg, v) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb fbi h3d-fl" style="--k:' + (k || 1) + ';background-color:' + (bg || 'var(--acc)') + ';background-image:url(/hero3d/logo-' + name + '.webp?v=' + (v || 3) + ')"></div>')); }
 function fallback(S, x, y, icon, k) { S.stage.appendChild(it('h3d-fb', x, y, -20, '<div class="fb h3d-fl" style="--k:' + (k || 1) + '"><i class="' + icon + '"></i></div>')); }
 
 /* ---------- 1. ИИ-агент: живой робот ---------- */
@@ -571,7 +571,7 @@ function coach(S) {
 function guard(S) {
   let grp = null, r1, r2, halo, dots = [], spin = 0, spinV = 0, pulse = 0;
   if (S.gl) {
-    grp = medal(S, 'raptor', 0x0093B5, 2.0, { face: 0x07141D, ls: 1.12, glow: 0.2, sheen: 0.3 });
+    grp = medal(S, 'raptor', 0x0093B5, 2.0, { face: 0x07141D, ls: 1.18, glow: 0.2, sheen: 0.3, v: 4 });
     r1 = new Mesh(new TorusGeometry(1.72, 0.02, 10, 110), new MeshBasicMaterial({ color: 0x35E0C8, transparent: true, opacity: 0.8 }));
     r2 = new Mesh(new TorusGeometry(1.92, 0.012, 8, 110), new MeshBasicMaterial({ color: 0x00D4FF, transparent: true, opacity: 0.4 }));
     r1.rotation.x = 1.2; r2.rotation.x = 1.05; r2.rotation.y = 0.5;
@@ -583,7 +583,7 @@ function guard(S) {
       holder.add(d); dots.push(d);
     }
     S.gl.scene.add(holder);
-  } else fallbackImg(S, 50, 50, 'raptor', 1.7, '#07141D');
+  } else fallbackImg(S, 50, 50, 'raptor', 1.7, '#07141D', 4);
   return {
     update(dt, t) {
       if (!grp) return;
@@ -611,7 +611,7 @@ function guard(S) {
 
 const SCENES = {
   agent: [agent, 0x00D4FF, 0x8C7BFF], chatgpt: [chatgpt, 0x10A37F, 0x5CFFC8], gemini: [gemini, 0x4285F4, 0x9B72CB],
-  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF]
+  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF, false, 2]
 };
 
 /* ---------- движок ---------- */
@@ -626,7 +626,7 @@ function boot(host) {
   const S = { host, stage, gl: null, px: 0, py: 0, tx: 0, ty: 0, lx: 0.5, ly: 0.5, inside: false, playing: false, timers: [], ticks: [], lastUser: 0, clicked: false };
   S.after = (ms, fn) => { S.timers.push(setTimeout(fn, reduce ? 0 : ms)); };
   S.clear = () => { S.timers.forEach(clearTimeout); S.timers = []; };
-  if (!weak && !def[3]) { try { S.gl = makeGL(S, def[1], def[2]); } catch (e) { S.gl = null; } }
+  if (!weak && !def[3]) { try { S.gl = makeGL(S, def[1], def[2], def[4]); } catch (e) { S.gl = null; } }
   const sc = def[0](S);
   /* снимок объекта для блоков ниже по странице */
   if (S.gl) host.__shot = () => { S.gl.renderer.render(S.gl.scene, S.gl.camera); return S.gl.canvas.toDataURL('image/png'); };
