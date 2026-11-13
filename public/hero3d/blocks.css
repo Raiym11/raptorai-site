@@ -632,3 +632,10 @@
 @media(max-width:900px){.rcx{grid-template-columns:1fr;gap:26px}.rcx-vis{padding:14px}.rcx-flow u{width:10px}.rcx-s small{display:none}}
 @media (prefers-reduced-motion:reduce){.rcx-s,.rcx-flow u::after,.rcx-tr,.rcx-w s{animation:none}}
 @media(max-width:600px){.rcx-th>i{display:none}.rcx-th,.rcx-tr{gap:8px;padding:10px 11px}}
+/* 3D-сцена в примере работы */
+.rcx-3d{position:relative;z-index:1;min-width:0;display:grid;place-items:center}
+.rcx-3d .h3d{width:min(100%,540px)}
+.rcx-3d .h3d .chip{font-size:max(11px,calc(var(--u)*2.5))}
+.rcx-3d .h3d-hint{top:1%}
+.h3d-coach .h3d-hint{display:none}
+@media(max-width:900px){.rcx-3d .h3d{width:min(100%,440px)}}
