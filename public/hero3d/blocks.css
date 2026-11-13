@@ -512,3 +512,40 @@
 .cod.s2 .bug em{background:#5CFFC8}
 @media(max-width:900px){.an{min-height:250px}.doc-p em{left:auto;right:6px}.clk-ring{width:190px;height:190px}.clk-ring>i{transform:rotate(var(--a)) translateY(-82px)}.clk-ring u{height:78px;margin-top:-78px}}
 @media (prefers-reduced-motion:reduce){.an *{animation:none !important;transition:none !important}}
+
+/* ---------- страница ChatGPT: переписка, результаты клиентов, мелочи ---------- */
+.hx-trust{margin:12px 0 0;font-size:14.5px;font-weight:600}
+.hx-trust a{display:inline-flex;align-items:center;gap:9px;color:#fff;text-decoration:none;border-bottom:1px dashed color-mix(in srgb,var(--acc2,#5CFFC8) 60%,transparent);padding-bottom:3px;transition:color .25s,border-color .25s}
+.hx-trust a i{color:var(--acc2,#5CFFC8);font-size:13px}
+.hx-trust a:hover{color:var(--acc2,#5CFFC8);border-bottom-style:solid}
+.cz-info .czd{display:grid;gap:9px;margin:0 0 14px}
+.cz-info .czd-m{margin:0;padding:9px 13px;font-size:14.5px;line-height:1.55;color:rgba(240,244,248,.88);border-radius:12px;background:rgba(255,255,255,.04);border-left:3px solid rgba(255,255,255,.22)}
+.cz-info .czd-m.a{background:color-mix(in srgb,var(--pacc) 9%,transparent);border-left-color:var(--pacc)}
+.czd-m b{color:#fff}.czd-m.a b{color:var(--pacc2)}
+.czd-m small{display:block;margin-top:3px;font-size:13px;color:var(--gray);font-style:italic}
+.czd-v{white-space:nowrap}.czd-v i{font-size:12px;color:var(--pacc2);margin-right:2px}
+.cz-info .czd-mgr{margin:0;padding:11px 14px;font-size:14px;line-height:1.5;font-weight:600;color:#eafff7;border-radius:12px;border:1px dashed color-mix(in srgb,var(--pacc) 55%,transparent);background:color-mix(in srgb,var(--pacc) 6%,transparent)}
+.czd-mgr b{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--pacc2);margin-right:4px}
+.cz-info .czd-fn{margin:10px 0 0;font-size:12.5px;line-height:1.5;color:var(--gray)}
+.czd-note{margin:16px 4px 0;font-size:13px;line-height:1.55;color:var(--gray)}
+.cz-pane.on .czd-m,.cz-pane.on .czd-mgr{animation:czdIn .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.25s + var(--i)*.4s)}
+@keyframes czdIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.cz-pane.on .czd-m,.cz-pane.on .czd-mgr{animation:none}}
+.rc-card{margin-top:26px}.rc-card .case-hero{margin-top:0}
+.rc-kpis{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:26px}
+.rc-kpi{flex:1 1 280px;padding:20px 24px;border-radius:18px;background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+.rc-kpi b{display:block;font:900 clamp(44px,6vw,72px)/1 'Inter',sans-serif;letter-spacing:-.05em;white-space:nowrap;font-variant-numeric:tabular-nums;background:linear-gradient(135deg,#00d4ff 0%,#a855f7 50%,#ff6bcb 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rc-kpi b .rc-from{font-size:.42em;letter-spacing:-.01em;margin-right:.15em;vertical-align:.55em;-webkit-text-fill-color:rgba(240,244,248,.6)}
+.rc-kpi>span{display:block;margin-top:12px;font-size:14.5px;font-weight:500;color:rgba(240,244,248,.72)}
+.rc-btn{position:relative;z-index:1;display:inline-flex}
+.rc-tst{margin-top:20px}
+.rc-more{margin:22px 0 0;font-size:15px;font-weight:600}
+.rc-more a{color:var(--pacc,#00D4FF);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--pacc,#00D4FF) 45%,transparent)}
+.rc-more a:hover{border-bottom-color:currentColor}
+.pk-guar{margin-top:10px;color:rgba(240,244,248,.9)}
+.pk-guar i{color:var(--pacc);margin-right:9px}
+.form-note-cta{text-align:center;margin-top:12px}
+.pkc-title.pkc-h{font:800 clamp(20px,2.2vw,25px)/1.25 'Inter',sans-serif;letter-spacing:-.01em;text-transform:none;color:#fff;cursor:default}
+.pkc-title.pkc-h small{display:block;margin-top:7px;font:500 13.5px/1.5 'Inter',sans-serif;letter-spacing:0;color:var(--gray)}
+@media(max-width:600px){.rc-kpi{padding:16px 18px}.cz-info .czd-m{font-size:14px}}
+@media(max-width:480px){.cz-tabs{gap:6px}.cz-t{gap:8px;padding:8px}.cz-t>i{flex:none;width:30px;height:30px;border-radius:9px;font-size:12px}.cz-t b{font-size:13px;line-height:1.25}}
