@@ -5,7 +5,7 @@ import {
   WebGLRenderer, Scene, PerspectiveCamera, PMREMGenerator, ACESFilmicToneMapping,
   DirectionalLight, PointLight, AmbientLight, Group, Mesh, Sprite,
   MeshPhysicalMaterial, MeshBasicMaterial, SpriteMaterial,
-  SphereGeometry, IcosahedronGeometry, CylinderGeometry, TorusGeometry, BoxGeometry, CapsuleGeometry,
+  SphereGeometry, CylinderGeometry, TorusGeometry, BoxGeometry, CapsuleGeometry,
   BufferGeometry, BufferAttribute, CanvasTexture, Vector3, Shape, ShapeGeometry, ExtrudeGeometry,
   TextureLoader, SRGBColorSpace, AdditiveBlending, DoubleSide
 } from 'three';
@@ -506,82 +506,70 @@ function n8n(S) {
 }
 
 
-/* ---------- 7. Пример работы: телефон с голосовым, запись уходит в строку таблицы ---------- */
+/* ---------- 7. Пример работы: живой телефон с голосовыми и таблица, всё вёрсткой в 3D ---------- */
 function coach(S) {
-  if (!S.gl) { fallback(S, 50, 50, 'fa-solid fa-microphone', 1); return { update() {}, play(done) { S.after(1500, done); } }; }
-  const A = 0x10A37F, B = 0x5CFFC8, world = new Group();
-  S.gl.scene.add(world);
-  const basic = (c, o) => new MeshBasicMaterial(Object.assign({ color: c, toneMapped: false }, o || {}));
-
-  const phone = new Group();
-  phone.add(new Mesh(new RoundedBoxGeometry(1.5, 2.95, 0.17, 7, 0.2), glass(0x14252f, { rough: 0.18, opacity: 1, glow: 0.14, emissive: A, env: 1.2 })));
-  const scr = new Mesh(new RoundedBoxGeometry(1.34, 2.78, 0.02, 4, 0.15), basic(0x06121a)); scr.position.z = 0.082; phone.add(scr);
-  const notch = new Mesh(new RoundedBoxGeometry(0.36, 0.07, 0.02, 3, 0.035), basic(0x1b2c36)); notch.position.set(0, 1.27, 0.095); phone.add(notch);
-  /* одно голосовое */
-  const bub = new Group(), bm = new Mesh(new RoundedBoxGeometry(1.06, 0.44, 0.08, 5, 0.2), basic(A)); bub.add(bm);
-  const dark = basic(0x04130e), pdot = new Mesh(new SphereGeometry(0.09, 18, 12), dark); pdot.position.set(-0.36, 0, 0.045); bub.add(pdot);
-  const bars = [], barGeo = new BoxGeometry(0.045, 0.26, 0.03);
-  for (let j = 0; j < 9; j++) { const m = new Mesh(barGeo, dark); m.position.set(-0.19 + j * 0.076, 0, 0.045); bub.add(m); bars.push(m); }
-  bub.position.set(0.06, 0.35, 0.14); phone.add(bub);
-  /* кнопка записи */
-  const mic = new Mesh(new CylinderGeometry(0.17, 0.17, 0.05, 32), basic(A)); mic.rotation.x = Math.PI / 2; mic.position.set(0, -0.98, 0.11); phone.add(mic);
-  const micRing = new Mesh(new TorusGeometry(0.2, 0.012, 8, 48), basic(B, { transparent: true, opacity: 0 })); micRing.position.copy(mic.position); phone.add(micRing);
-  phone.position.set(-0.5, 0.28, 0); phone.rotation.set(-0.1, 0.48, 0.05);
-  world.add(phone, glow(A, 5.2, 0.3));
-
-  /* одна строка таблицы */
-  const row = new Group();
-  row.add(new Mesh(new RoundedBoxGeometry(2.3, 0.46, 0.09, 5, 0.12), glass(0x12232d, { rough: 0.2, opacity: 1, glow: 0.12, emissive: A, env: 1.1 })));
-  const hl = new Mesh(new RoundedBoxGeometry(2.3, 0.46, 0.012, 3, 0.12), basic(B, { transparent: true, opacity: 0 })); hl.position.z = 0.052; row.add(hl);
-  const name = new Mesh(new RoundedBoxGeometry(0.46, 0.1, 0.03, 2, 0.04), basic(0x8fa6b2)); name.position.set(-0.78, 0, 0.065); row.add(name);
-  const track = new Mesh(new RoundedBoxGeometry(1.0, 0.1, 0.02, 2, 0.04), basic(0x1a2b34)); track.position.set(0.12, 0, 0.06); row.add(track);
-  const fillGeo = new BoxGeometry(1, 0.1, 0.05); fillGeo.translate(0.5, 0, 0);
-  const fill = new Mesh(fillGeo, basic(B)); fill.position.set(-0.38, 0, 0.075); fill.scale.x = 0.001; row.add(fill);
-  const ok = new Mesh(new SphereGeometry(0.075, 18, 12), basic(0x3a4c57)); ok.position.set(0.94, 0, 0.08); row.add(ok);
-  row.position.set(0.55, -1.38, 0.95); row.rotation.set(-0.5, -0.22, 0.08);
-  world.add(row);
-
-  const orb = new Mesh(new SphereGeometry(0.07, 16, 12), basic(0xeafff7)); const og = glow(B, 0.9, 0.95); og.position.z = 0; orb.add(og); orb.visible = false; world.add(orb);
-  const tail = []; for (let i = 0; i < 5; i++) { const m = new Mesh(new SphereGeometry(0.045 - i * 0.007, 10, 8), basic(B, { transparent: true, opacity: 0.6 - i * 0.1 })); m.visible = false; world.add(m); tail.push(m); }
-
-  const pA = new Vector3(), pB = new Vector3(), pC = new Vector3();
-  function bez(o, u) { const k = 1 - u; o.position.set(k * k * pA.x + 2 * k * u * pC.x + u * u * pB.x, k * k * pA.y + 2 * k * u * pC.y + u * u * pB.y, k * k * pA.z + 2 * k * u * pC.z + u * u * pB.z); }
-  const ease = (u) => u * u * (3 - 2 * u);
-  const T = 5; let ct = 0, cyc = 0, val = 0, flash = 0, sp = 1, boost = 0;
-
+  const bars = (n, seed) => { let h = ''; for (let i = 0; i < n; i++) h += '<s style="--i:' + i + ';--h:' + (28 + ((i * 37 + seed * 17) % 9) * 9) + '"></s>'; return h; };
+  const voice = (d, seed) => '<div class="cm u"><span class="cm-play"><i class="fa-solid fa-play"></i></span><span class="cm-w">' + bars(18, seed) + '</span><em>' + d + '</em></div>';
+  const reply = '<div class="cm b"><span class="cm-dots"><s></s><s></s><s></s></span><span class="cm-t"><i class="fa-solid fa-circle-check"></i>Записал в таблицу</span></div>';
+  const bg = it('it-cbg', 50, 50, -90, '<div class="cbg"><i></i><i></i><u></u></div>');
+  const ph = it('it-cph', 36, 47, 0, '<div class="h3d-fl"><div class="cph"><div class="cph-b">' +
+    '<div class="cph-top"><span class="cph-av"><i class="fa-solid fa-robot"></i></span><div><b>Коуч-бот</b><small>бот · онлайн</small></div><i class="fa-brands fa-telegram cph-tg"></i></div>' +
+    '<div class="cph-chat">' + voice('0:42', 1) + reply + voice('0:27', 4) + reply + '</div>' +
+    '<div class="cph-in"><span>Сообщение</span><b class="cph-mic"><i class="fa-solid fa-microphone"></i></b></div><div class="cph-shine"></div></div></div></div>');
+  const row = (n, v) => '<div class="csh-r" style="--v:' + v + '"><span class="csh-n"><i></i>Участник ' + n + '</span><span class="csh-p"><u></u></span><b class="csh-v">' + v + '%</b></div>';
+  const sh = it('it-csh', 69, 80, 130, '<div class="h3d-fl" style="--d:-2.5s"><div class="csh"><div class="csh-b g">' +
+    '<div class="csh-h"><span class="csh-ic"><i class="fa-solid fa-table-cells"></i></span><b>Прогресс клиентов</b><em><i class="fa-solid fa-lock"></i> приватная</em></div>' +
+    row(1, 64) + row(2, 38) + row(3, 81) + '</div></div></div>');
+  S.stage.append(bg, ph, sh);
+  const pk = [0, 1, 2].map(() => { const d = el('<div class="cpk"></div>'); S.host.appendChild(d); return d; });
+  const chat = ph.querySelector('.cph-chat'), ms = [...ph.querySelectorAll('.cm')];
+  const rows = [...sh.querySelectorAll('.csh-r')].map((r) => ({ el: r, num: r.querySelector('.csh-v'), cur: +r.style.getPropertyValue('--v'), to: +r.style.getPropertyValue('--v'), shown: -1 }));
+  let cyc = 0;
+  function fly(from, r) {
+    if (reduce || !from.animate) return;
+    const h = S.host.getBoundingClientRect(), a = from.getBoundingClientRect(), b = r.el.getBoundingClientRect();
+    const ax = a.left + a.width * 0.7 - h.left, ay = a.top + a.height / 2 - h.top, bx = b.left + b.width * 0.55 - h.left, by = b.top + b.height / 2 - h.top;
+    const mx = (ax + bx) / 2 + h.width * 0.16, my = Math.min(ay, by) - h.height * 0.04;
+    pk.forEach((d, i) => d.animate([
+      { transform: 'translate(' + ax + 'px,' + ay + 'px) scale(.4)', opacity: 0 },
+      { transform: 'translate(' + lerp(ax, mx, 0.4) + 'px,' + lerp(ay, my, 0.6) + 'px) scale(1.2)', opacity: 1, offset: 0.2 },
+      { transform: 'translate(' + mx + 'px,' + my + 'px) scale(1.25)', opacity: 1, offset: 0.55 },
+      { transform: 'translate(' + bx + 'px,' + by + 'px) scale(.5)', opacity: 0 }
+    ], { duration: 820, delay: i * 70, easing: 'cubic-bezier(.45,0,.25,1)' }));
+  }
+  function hit(k) {
+    const r = rows[k]; r.to = 42 + ((cyc * 29 + k * 17) % 55);
+    r.el.style.setProperty('--v', r.to); r.el.classList.add('hit'); setTimeout(() => r.el.classList.remove('hit'), 1300);
+  }
+  const say = (i) => { ms[i].classList.add('in', 'play'); setTimeout(() => ms[i].classList.remove('play'), 1700); };
+  const steps = [
+    [0.5, () => say(0)], [2.3, () => ms[1].classList.add('in')],
+    [3.1, () => { ms[1].classList.add('done'); fly(ms[1], rows[cyc % 3]); }], [3.85, () => hit(cyc % 3)],
+    [4.7, () => say(2)], [6.5, () => ms[3].classList.add('in')],
+    [7.3, () => { ms[3].classList.add('done'); fly(ms[3], rows[(cyc + 1) % 3]); }], [8.05, () => hit((cyc + 1) % 3)],
+    [9.6, () => chat.classList.add('out')],
+    [10.2, () => { ms.forEach((m) => m.classList.remove('in', 'play', 'done')); chat.classList.remove('out'); }]
+  ];
+  const T = 10.6; let ct = 0, si = 0, boost = 0;
+  if (reduce) { ms.forEach((m) => m.classList.add('in', 'done')); }
   return {
-    update(dt, t) {
-      boost = Math.max(0, boost - dt); sp = lerp(sp, boost > 0 ? 2.2 : 1, 0.08);
-      ct += dt * sp; if (ct >= T) { ct -= T; cyc++; }
-      world.rotation.y = S.px * 0.4; world.rotation.x = S.py * 0.22;
-      phone.position.y = 0.28 + Math.sin(t * 0.9) * 0.06; phone.rotation.y = 0.48 + Math.sin(t * 0.55) * 0.09;
-      row.position.y = -1.38 + Math.sin(t * 0.9 + 1.6) * 0.05;
-      const rec = ct < 1.7;
-      bm.material.color.setHex(rec ? B : A);
-      bub.position.z = lerp(bub.position.z, rec ? 0.3 : 0.14, 0.12);
-      bars.forEach((b, j) => { b.scale.y = lerp(b.scale.y, rec ? 0.3 + (Math.sin(t * 13 + j * 1.7) * 0.5 + 0.5) * 0.9 : 0.35 + ((j * 7) % 5) * 0.14, 0.3); });
-      const pr = rec ? (t * 1.4) % 1 : 1; micRing.scale.setScalar(1 + pr * 1.1); micRing.material.opacity = rec ? (1 - pr) * 0.8 : 0;
-      phone.updateMatrix(); row.updateMatrix();
-      pA.copy(bub.position).applyMatrix4(phone.matrix);
-      pB.set(fill.position.x, 0, 0.14).applyMatrix4(row.matrix);
-      pC.set(pA.x + 1.5, pA.y + 0.35, 1.5);
-      const u = (ct - 1.7) / 1.1;
-      orb.visible = u > 0 && u < 1; if (orb.visible) { bez(orb, ease(u)); orb.scale.setScalar(1.4 - u * 0.6); }
-      tail.forEach((m, i) => { const v = u - (i + 1) * 0.045; m.visible = v > 0 && v < 1; if (m.visible) bez(m, ease(v)); });
-      if (ct > 2.8 && ct < 4.5) { if (!flash && val === 0) flash = 1; val = 0.45 + ((cyc * 37) % 50) / 100; }
-      else if (ct < 1) val = 0;
-      flash = Math.max(0, flash - dt * 0.8);
-      fill.scale.x = lerp(fill.scale.x, Math.max(0.001, val), val ? 0.07 : 0.12);
-      hl.material.opacity = flash * 0.45; row.scale.setScalar(1 + flash * 0.05);
-      ok.material.color.setHex(val ? (flash > 0.15 ? 0xffffff : B) : 0x3a4c57);
+    update(dt) {
+      if (reduce) return;
+      boost = Math.max(0, boost - dt); ct += dt * (boost > 0 ? 2.2 : 1);
+      while (si < steps.length && ct >= steps[si][0]) steps[si++][1]();
+      if (ct >= T) { ct = 0; si = 0; cyc += 2; }
+      rows.forEach((r) => {
+        r.cur = lerp(r.cur, r.to, 0.07); const n = Math.round(r.cur);
+        if (n !== r.shown) { r.shown = n; r.num.textContent = n + '%'; }
+      });
     },
-    play(done) { boost = 3; S.after(3200, done); }
+    play(done) { boost = 3; S.after(3000, done); }
   };
 }
 
 const SCENES = {
   agent: [agent, 0x00D4FF, 0x8C7BFF], chatgpt: [chatgpt, 0x10A37F, 0x5CFFC8], gemini: [gemini, 0x4285F4, 0x9B72CB],
-  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8], n8n: [n8n, 0xEA4B71, 0xFF8FA8]
+  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8]
 };
 
 /* ---------- движок ---------- */
@@ -596,7 +584,7 @@ function boot(host) {
   const S = { host, stage, gl: null, px: 0, py: 0, tx: 0, ty: 0, lx: 0.5, ly: 0.5, inside: false, playing: false, timers: [], ticks: [], lastUser: 0, clicked: false };
   S.after = (ms, fn) => { S.timers.push(setTimeout(fn, reduce ? 0 : ms)); };
   S.clear = () => { S.timers.forEach(clearTimeout); S.timers = []; };
-  if (!weak) { try { S.gl = makeGL(S, def[1], def[2]); } catch (e) { S.gl = null; } }
+  if (!weak && !def[3]) { try { S.gl = makeGL(S, def[1], def[2]); } catch (e) { S.gl = null; } }
   const sc = def[0](S);
   /* снимок объекта для блоков ниже по странице */
   if (S.gl) host.__shot = () => { S.gl.renderer.render(S.gl.scene, S.gl.camera); return S.gl.canvas.toDataURL('image/png'); };
