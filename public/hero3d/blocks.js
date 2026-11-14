@@ -422,6 +422,42 @@
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
   $$('[data-bk]').forEach(function (el) { io.observe(el); });
 
+  /* Raptor Guard: вход по скроллу, буквы заголовка, счётчик цены, параллакс */
+  (function () {
+    var b = $('.rgx'); if (!b || !('IntersectionObserver' in window)) return;
+    var t = $('.rgx-title', b), num = $('.rgx-price b i', b), n = 0;
+    if (!reduce && t) {
+      $$('.w', t).forEach(function (w) {
+        var s = w.textContent; w.textContent = '';
+        s.split('').forEach(function (c) { var e = document.createElement('span'); e.className = 'ch'; e.style.setProperty('--i', n++); e.textContent = c; w.appendChild(e); });
+      });
+      b.classList.add('rdy');
+    }
+    function count() {
+      if (reduce || !num) return;
+      var t0 = performance.now();
+      (function f(now) {
+        var k = Math.min(1, (now - t0) / 1300), v = Math.round(3000 * (1 - Math.pow(1 - k, 3)) / 50) * 50;
+        num.textContent = String(v).replace(/\B(?=(\d{3})+$)/g, ' ');
+        if (k < 1) requestAnimationFrame(f);
+      })(t0);
+    }
+    new IntersectionObserver(function (es, o) {
+      es.forEach(function (e) { if (e.isIntersecting) { b.classList.add('on'); setTimeout(count, 1900); o.disconnect(); } });
+    }, { threshold: 0.28 }).observe(b);
+    if (reduce) return;
+    var raf = 0;
+    b.addEventListener('mousemove', function (e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0; var r = b.getBoundingClientRect();
+        b.style.setProperty('--mx', (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+        b.style.setProperty('--my', (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+      });
+    });
+    b.addEventListener('mouseleave', function () { b.style.setProperty('--mx', 0); b.style.setProperty('--my', 0); });
+  })();
+
   var st = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { st.unobserve(e.target); e.target.classList.add('in'); } });
   }, { threshold: 0.12 });

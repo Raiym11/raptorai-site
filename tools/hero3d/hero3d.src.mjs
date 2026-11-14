@@ -5,7 +5,7 @@ import {
   WebGLRenderer, Scene, PerspectiveCamera, PMREMGenerator, ACESFilmicToneMapping,
   DirectionalLight, PointLight, AmbientLight, Group, Mesh, Sprite,
   MeshPhysicalMaterial, MeshBasicMaterial, SpriteMaterial,
-  SphereGeometry, CylinderGeometry, TorusGeometry, BoxGeometry, CapsuleGeometry,
+  SphereGeometry, IcosahedronGeometry, CylinderGeometry, TorusGeometry, BoxGeometry, CapsuleGeometry,
   BufferGeometry, BufferAttribute, CanvasTexture, Vector3, Shape, ShapeGeometry, ExtrudeGeometry,
   TextureLoader, SRGBColorSpace, AdditiveBlending, DoubleSide
 } from 'three';
@@ -577,14 +577,15 @@ function coach(S) {
 
 /* ---------- Raptor Guard: объёмная плашка с головой раптора ---------- */
 function guard(S) {
-  let grp = null, r1, r2, halo, dots = [], spin = 0, spinV = 0, pulse = 0;
+  let grp = null, r1, r2, halo, dome, dots = [], spin = 0, spinV = 0, pulse = 0;
   if (S.gl) {
     grp = medal(S, 'raptor', 0x0093B5, 2.0, { face: 0x07141D, ls: 1.18, glow: 0.2, sheen: 0.3, v: 4 });
     r1 = new Mesh(new TorusGeometry(1.72, 0.02, 10, 110), new MeshBasicMaterial({ color: 0x35E0C8, transparent: true, opacity: 0.8 }));
     r2 = new Mesh(new TorusGeometry(1.92, 0.012, 8, 110), new MeshBasicMaterial({ color: 0x00D4FF, transparent: true, opacity: 0.4 }));
     r1.rotation.x = 1.2; r2.rotation.x = 1.05; r2.rotation.y = 0.5;
     halo = glow(0x00E6B4, 5.2, 0.34);
-    const holder = new Group(); holder.add(grp, r1, r2, halo);
+    dome = new Mesh(new IcosahedronGeometry(2.12, 1), new MeshBasicMaterial({ color: 0x5CFFC8, wireframe: true, transparent: true, opacity: 0.12 }));
+    const holder = new Group(); holder.add(grp, r1, r2, halo, dome);
     const dg = new SphereGeometry(0.05, 12, 12);
     for (let i = 0; i < 3; i++) {
       const d = new Mesh(dg, new MeshBasicMaterial({ color: i === 1 ? 0x00D4FF : 0x5CFFC8 }));
@@ -605,6 +606,8 @@ function guard(S) {
       r1.rotation.z = t * 0.5; r1.rotation.x = 1.2 + S.py * 0.35;
       r2.rotation.z = -t * 0.32; r2.rotation.x = 1.05 - S.py * 0.25;
       halo.material.opacity = 0.3 + Math.sin(t * 1.5) * 0.06 + pulse * 0.35;
+      dome.rotation.y = t * 0.22; dome.rotation.x = Math.sin(t * 0.3) * 0.35;
+      dome.material.opacity = 0.1 + Math.sin(t * 2.1) * 0.035 + pulse * 0.5; dome.scale.setScalar(1 + pulse * 0.16);
       for (let i = 0; i < dots.length; i++) {
         const a = t * (0.7 + i * 0.18) + i * 2.1, R = 1.72;
         dots[i].position.set(Math.cos(a) * R, Math.sin(a) * R * Math.cos(1.2) + Math.sin(t + i) * 0.05, Math.sin(a) * R * Math.sin(1.2));

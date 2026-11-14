@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=10">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=20">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=21">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -946,25 +946,27 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     </div>
     <p class="pk-after">Цена и срок фиксируются в смете до старта и потом не меняются. Не уверены, сколько у вас подключений? Нажмите «Получить расчёт за 1 минуту», посчитаем вместе.</p>
     <p class="pk-after pk-guar"><i class="fa-solid fa-shield-halved"></i>Гарантия 30 дней после запуска: если агент работает не так, как договорились, исправляем бесплатно.</p>
-    <div class="rg-block reveal">
-      <div class="rg-scene">
+    <div class="rgx" data-rgx>
+      <i class="rgx-bar t"></i><i class="rgx-bar b"></i>
+      <div class="rgx-bg" aria-hidden="true"><i class="rgx-aur"></i><i class="rgx-grid"></i><i class="rgx-sweep"></i><i class="rgx-grain"></i></div>
+      <span class="rgx-c tl"></span><span class="rgx-c tr"></span><span class="rgx-c bl"></span><span class="rgx-c br"></span>
+      <div class="rgx-hud"><span class="rgx-tag"><i class="fa-solid fa-shield-halved"></i>Поддержка после запуска</span><span class="rgx-live"><i></i>агент под наблюдением</span></div>
+      <div class="rgx-stage">
+        <i class="rgx-radar"></i><i class="rgx-pulse"></i><i class="rgx-pulse p2"></i><i class="rgx-pulse p3"></i>
         <div class="h3d" data-scene="guard" role="img" aria-label="Логотип RaptorAI в 3D"></div>
-        <div class="rg-shield"><i class="fa-solid fa-shield-halved"></i></div>
       </div>
-      <div class="rg-content">
-        <div class="rg-top"><span class="rg-tag"><i class="fa-solid fa-shield-halved"></i>Поддержка после запуска</span><span class="rg-live"><i></i>агент под наблюдением</span></div>
-        <div class="rg-title">Raptor <em>Guard</em></div>
-        <p class="rg-lead">Агент - не коробка, которую поставили и забыли. У вас появляются новые услуги, меняются цены, приходят вопросы, которых раньше не было. Raptor Guard держит агента в форме и развивает его вместе с вашим бизнесом.</p>
-        <div class="rg-price"><b>от 3 000 ₽</b><span>в месяц</span><small>по желанию</small></div>
-        <ul class="rg-list">
-          <li style="--i:0"><i class="fa-solid fa-sliders"></i><div><b>Контроль автоматизаций</b><span>Следим, чтобы всё работало как задумано</span></div></li>
-          <li style="--i:1"><i class="fa-solid fa-percent"></i><div><b>Скидка 10%</b><span>На все следующие заказы</span></div></li>
-          <li style="--i:2"><i class="fa-solid fa-arrows-rotate"></i><div><b>Обновления проектов</b><span>Дополняем то, что уже запущено</span></div></li>
-          <li style="--i:3"><i class="fa-solid fa-wave-square"></i><div><b>Мониторинг агента</b><span>Смотрим за работой и чиним сбои</span></div></li>
-        </ul>
-        <p class="rg-etc"><i class="fa-solid fa-plus"></i>и другие задачи по вашим проектам</p>
-      </div>
+      <h3 class="rgx-title" data-text="Raptor Guard"><span class="w">Raptor</span> <span class="w g">Guard</span></h3>
+      <p class="rgx-lead">Агент - не коробка, которую поставили и забыли. У вас появляются новые услуги, меняются цены, приходят вопросы, которых раньше не было. Raptor Guard держит агента в форме и развивает его вместе с вашим бизнесом.</p>
+      <div class="rgx-price"><b>от <i>3&nbsp;000</i> ₽</b><span>в месяц</span><small>по желанию</small></div>
+      <ul class="rgx-list">
+        <li style="--i:0"><span class="rgx-n">01</span><i class="fa-solid fa-sliders"></i><b>Контроль автоматизаций</b><span>Следим, чтобы всё работало как задумано</span></li>
+        <li style="--i:1"><span class="rgx-n">02</span><i class="fa-solid fa-percent"></i><b>Скидка 10%</b><span>На все следующие заказы</span></li>
+        <li style="--i:2"><span class="rgx-n">03</span><i class="fa-solid fa-arrows-rotate"></i><b>Обновления проектов</b><span>Дополняем то, что уже запущено</span></li>
+        <li style="--i:3"><span class="rgx-n">04</span><i class="fa-solid fa-wave-square"></i><b>Мониторинг агента</b><span>Смотрим за работой и чиним сбои</span></li>
+      </ul>
+      <p class="rgx-etc"><i class="fa-solid fa-plus"></i>и другие задачи по вашим проектам</p>
     </div>
+  </div>
   </div>
   </div>
 </section>
@@ -1295,8 +1297,8 @@ var co=document.getElementById('cookie-open');if(co)co.addEventListener('click',
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=12" defer></script>
-<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=15";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
+<script src="/hero3d/blocks.js?v=13" defer></script>
+<script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=16";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
