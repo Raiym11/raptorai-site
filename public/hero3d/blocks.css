@@ -24,7 +24,7 @@
 .bk-buddy.img>i{display:none}
 
 /* ---------- цены: счётчик «Какой пакет мой?» ---------- */
-.pkc{margin:30px auto 0;padding:30px 32px;max-width:1000px}
+.pkc{margin:30px auto 0;padding:30px 32px}
 .pkc-title{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;color:var(--pacc);margin-bottom:18px}
 .pkc-row{display:flex;flex-wrap:wrap;gap:16px 34px;align-items:center}
 .pkc-f{display:flex;align-items:center;gap:14px;font-size:15px;color:rgba(240,244,248,.9)}
@@ -60,7 +60,7 @@
 .pk-conn{font-weight:700;color:#F0F4F8 !important;font-size:15px !important;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--pacc) 10%,transparent);border:1px dashed color-mix(in srgb,var(--pacc) 40%,transparent);width:fit-content}
 .pk-ex{font-size:13px;line-height:1.5;color:var(--gray);margin-top:2px}
 .pk-ex b{color:rgba(240,244,248,.8);font-weight:600}
-.pk-after{margin:48px auto 0;max-width:1000px;font-size:15px;line-height:1.7;color:var(--gray)}
+.pk-after{margin:72px auto 0;font-size:15px;line-height:1.7;color:var(--gray)}
 @media(max-width:900px){.svc .pk-card.is-pick{transform:none}.pkc{padding:22px 18px}.pkc-f{width:100%;justify-content:space-between}}
 
 /* ---------- ИИ-агент: один день ---------- */
@@ -546,7 +546,7 @@
 .pk-guar i{color:var(--pacc);margin-right:9px}
 
 /* --- Raptor Guard block --- */
-.rg-block{display:flex;align-items:center;gap:48px;margin:76px auto 0;max-width:1000px;padding:44px 48px 44px 36px;border-radius:24px;background:linear-gradient(135deg,rgba(0,230,180,.06),rgba(0,200,255,.04),rgba(120,80,255,.04));border:1px solid rgba(0,230,180,.15);position:relative;overflow:hidden;transition:border-color .3s}
+.rg-block{display:flex;align-items:center;gap:48px;margin:76px auto 0;padding:44px 48px 44px 36px;border-radius:24px;background:linear-gradient(135deg,rgba(0,230,180,.06),rgba(0,200,255,.04),rgba(120,80,255,.04));border:1px solid rgba(0,230,180,.15);position:relative;overflow:hidden;transition:border-color .3s}
 .rg-block:hover{border-color:rgba(0,230,180,.3)}
 .rg-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(0,230,180,.08),transparent 70%);pointer-events:none}
 .rg-scene{position:relative;flex-shrink:0;width:290px;height:290px;margin:-20px 0}
