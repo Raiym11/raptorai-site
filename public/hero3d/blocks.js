@@ -68,7 +68,7 @@
       else { lead.style.display = ''; word.textContent = plural(total, 'подключение', 'подключения', 'подключений'); if (num.textContent !== String(total)) { num.textContent = total; num.classList.remove('flip'); void num.offsetWidth; num.classList.add('flip'); } }
       var c = cards[k];
       name.textContent = '«' + $('.pk-name', c).textContent.trim() + '»';
-      price.textContent = $('.pk-price', c).textContent.replace(/\s+/g, ' ').trim();
+      price.textContent = $('.pk-price', c).textContent.replace(/\s+/g, ' ').trim() + '.';
       note.style.display = hard ? '' : 'none';
       if (k !== last) { last = k; cards.forEach(function (x, i) { x.classList.toggle('is-pick', i === k); x.classList.toggle('is-dim', i !== k); }); }
     }
