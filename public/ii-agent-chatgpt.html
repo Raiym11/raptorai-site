@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="/hero3d/hero3d.css?v=10">
-<link rel="stylesheet" href="/hero3d/blocks.css?v=17">
+<link rel="stylesheet" href="/hero3d/blocks.css?v=18">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -69,7 +69,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .stat-label { font-size: 13px; color: var(--gray); margin-top: 4px; font-weight: 500; }
 
 /* SECTIONS */
-section { padding: 100px 24px; }
+section { padding: 76px 24px; }
 .container { max-width: 1100px; margin: 0 auto; }
 .section-label { font-size: 12px; font-weight: 600; color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 16px; }
 .section-title { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 16px; }
@@ -209,7 +209,7 @@ body.theme-newyear nav { border-bottom-color: #A8D8FF33; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .stats { gap: 28px; }
-  section { padding: 70px 20px; }
+  section { padding: 56px 20px; }
   .form-wrap { grid-template-columns: 1fr; gap: 32px; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { justify-content: center; text-align: center; }
@@ -896,7 +896,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="pkc bk-glass reveal" data-bk="pkc">
       <div class="pkc-title pkc-h">Какой пакет мой?<small>Укажите кнопками − и +, сколько у вас каналов и систем: подходящий пакет подсветится ниже</small></div>
       <div class="pkc-row"><div class="pkc-f"><span>Каналы, где пишут клиенты</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><div class="pkc-f"><span>Системы, куда передавать данные</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><label class="pkc-sw"><input type="checkbox"><i></i><span>Есть сложное подключение</span><span class="pkc-q" tabindex="0" aria-label="Что считается сложным подключением">?<u>1С, каталог товаров с поиском, своя система без готовой интеграции или нестандартная логика (расчёт цены, оплата, разные отделы).</u></span></label></div>
-      <div class="pkc-res" aria-live="polite"><span class="pkc-lead"><span class="pkc-num"><b>2</b></span> </span><span class="pkc-word">подключения</span> → пакет <b class="pkc-pk">«Бизнес»</b>, <span class="pkc-price"></span><small style="display:none"> Точную цену называем в смете до старта.</small></div>
+      <div class="pkc-res" aria-live="polite"><span class="pkc-lead"><span class="pkc-num"><b>2</b></span> </span><span class="pkc-word">подключения</span> → пакет <b class="pkc-pk">«Бизнес»</b><span class="pkc-price">, от 25 000 ₽.</span><small style="display:none"> Точную цену называем в смете до старта.</small></div>
     </div>
     <div class="pk-grid reveal">
       <div class="pk-card">
@@ -952,8 +952,9 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="rg-shield"><i class="fa-solid fa-shield-halved"></i></div>
       </div>
       <div class="rg-content">
-        <div class="rg-tag"><i class="fa-solid fa-shield-halved"></i>Поддержка после запуска</div>
+        <div class="rg-top"><span class="rg-tag"><i class="fa-solid fa-shield-halved"></i>Поддержка после запуска</span><span class="rg-live"><i></i>агент под наблюдением</span></div>
         <div class="rg-title">Raptor <em>Guard</em></div>
+        <p class="rg-lead">Агент - не коробка, которую поставили и забыли. У вас появляются новые услуги, меняются цены, приходят вопросы, которых раньше не было. Raptor Guard держит агента в форме и развивает его вместе с вашим бизнесом.</p>
         <div class="rg-price"><b>от 3 000 ₽</b><span>в месяц</span><small>по желанию</small></div>
         <ul class="rg-list">
           <li style="--i:0"><i class="fa-solid fa-sliders"></i><div><b>Контроль автоматизаций</b><span>Следим, чтобы всё работало как задумано</span></div></li>
@@ -1205,7 +1206,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 #cookie-note.flash{animation:ckFlash 1.2s ease-out}@keyframes ckFlash{0%{box-shadow:0 0 0 0 rgba(0,212,255,.9),0 10px 30px rgba(0,0,0,.5);transform:translateY(8px)}100%{box-shadow:0 0 0 22px rgba(0,212,255,0),0 10px 30px rgba(0,0,0,.5);transform:none}}
 @media (max-width: 480px) { #cookie-note { left: 8px; right: 8px; bottom: 8px; max-width: none; } }
 </style>
-<div id="cookie-note" role="dialog" aria-label="Настройки cookie">Мы используем cookie Яндекс Метрики (в том числе запись действий на странице — Вебвизор), чтобы понимать, как посетители пользуются сайтом. Вы можете принять или отказаться - сайт работает в любом случае. Подробнее в <a href="/privacy.html">политике</a>.
+<div id="cookie-note" role="dialog" aria-label="Настройки cookie">Мы используем cookie Яндекс Метрики (в том числе запись действий на странице — Вебвизор), чтобы понимать, как посетители пользуются сайтом. Вы можете принять или отказаться — сайт работает в любом случае. Подробнее в <a href="/privacy.html">политике</a>.
 <div class="cookie-btns"><button type="button" id="cookie-accept">Принять</button><button type="button" id="cookie-decline">Отклонить</button></div></div>
 <script>
 (function(){
@@ -1294,7 +1295,7 @@ var co=document.getElementById('cookie-open');if(co)co.addEventListener('click',
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=5" defer></script>
-<script src="/hero3d/blocks.js?v=11" defer></script>
+<script src="/hero3d/blocks.js?v=12" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=15";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
