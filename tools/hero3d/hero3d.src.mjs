@@ -520,7 +520,12 @@ function coach(S) {
   const sh = it('it-csh', 69, 80, 130, '<div class="h3d-fl" style="--d:-2.5s"><div class="csh"><div class="csh-b g">' +
     '<div class="csh-h"><span class="csh-ic"><i class="fa-solid fa-table-cells"></i></span><b>Прогресс клиентов</b><em><i class="fa-solid fa-lock"></i> приватная</em></div>' +
     row(1, 64) + row(2, 38) + row(3, 81) + '</div></div></div>');
-  S.stage.append(bg, ph, sh);
+  const sv = it('it-csv', 74, 17, 70, '<div class="h3d-fl" style="--d:-4s"><div class="csv">' +
+    '<span class="csv-ic"><i class="fa-regular fa-clock"></i></span>' +
+    '<div><b class="csv-n">+0 часов</b><small>в неделю у владельца</small></div></div></div>');
+  S.stage.append(bg, ph, sh, sv);
+  const svCard = sv.querySelector('.csv'), svNum = sv.querySelector('.csv-n');
+  let svCur = 0, svTo = 0, svShown = -1;
   const pk = [0, 1, 2].map(() => { const d = el('<div class="cpk"></div>'); S.host.appendChild(d); return d; });
   const chat = ph.querySelector('.cph-chat'), ms = [...ph.querySelectorAll('.cm')];
   const rows = [...sh.querySelectorAll('.csh-r')].map((r) => ({ el: r, num: r.querySelector('.csh-v'), cur: +r.style.getPropertyValue('--v'), to: +r.style.getPropertyValue('--v'), shown: -1 }));
@@ -540,10 +545,11 @@ function coach(S) {
   function hit(k) {
     const r = rows[k]; r.to = 42 + ((cyc * 29 + k * 17) % 55);
     r.el.style.setProperty('--v', r.to); r.el.classList.add('hit'); setTimeout(() => r.el.classList.remove('hit'), 1300);
+    restart(svCard, 'tick');
   }
   const say = (i) => { ms[i].classList.add('in', 'play'); setTimeout(() => ms[i].classList.remove('play'), 1700); };
   const steps = [
-    [0.5, () => say(0)], [2.3, () => ms[1].classList.add('in')],
+    [0.4, () => { svTo = 12; }], [0.5, () => say(0)], [2.3, () => ms[1].classList.add('in')],
     [3.1, () => { ms[1].classList.add('done'); fly(ms[1], rows[cyc % 3]); }], [3.85, () => hit(cyc % 3)],
     [4.7, () => say(2)], [6.5, () => ms[3].classList.add('in')],
     [7.3, () => { ms[3].classList.add('done'); fly(ms[3], rows[(cyc + 1) % 3]); }], [8.05, () => hit((cyc + 1) % 3)],
@@ -551,7 +557,7 @@ function coach(S) {
     [10.2, () => { ms.forEach((m) => m.classList.remove('in', 'play', 'done')); chat.classList.remove('out'); }]
   ];
   const T = 10.6; let ct = 0, si = 0, boost = 0;
-  if (reduce) { ms.forEach((m) => m.classList.add('in', 'done')); }
+  if (reduce) { ms.forEach((m) => m.classList.add('in', 'done')); svNum.textContent = '+12 часов'; }
   return {
     update(dt) {
       if (reduce) return;
@@ -562,6 +568,8 @@ function coach(S) {
         r.cur = lerp(r.cur, r.to, 0.07); const n = Math.round(r.cur);
         if (n !== r.shown) { r.shown = n; r.num.textContent = n + '%'; }
       });
+      svCur = lerp(svCur, svTo, 0.085); const sn = Math.round(svCur);
+      if (sn !== svShown) { svShown = sn; svNum.textContent = '+' + sn + ' часов'; }
     },
     play(done) { boost = 3; S.after(3000, done); }
   };

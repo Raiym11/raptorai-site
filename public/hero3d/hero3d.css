@@ -251,5 +251,12 @@
 .csh-p u{display:block;height:100%;width:calc(var(--v)*1%);border-radius:99px;background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 calc(var(--u)*1.6) var(--acc2);transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
 .csh-v{font:800 calc(var(--u)*2.6)/1 'Inter',sans-serif;color:#fff;text-align:right;font-variant-numeric:tabular-nums}
 .csh-r.hit .csh-v{color:var(--acc2)}
+.csv{display:flex;align-items:center;gap:calc(var(--u)*2.1);padding:calc(var(--u)*2.2) calc(var(--u)*3.2) calc(var(--u)*2.2) calc(var(--u)*2.2);border-radius:calc(var(--u)*3.4);background:linear-gradient(150deg,rgba(17,38,32,.96),rgba(8,16,21,.94));border:calc(var(--u)*.16) solid color-mix(in srgb,var(--acc) 45%,transparent);box-shadow:0 calc(var(--u)*3) calc(var(--u)*9) calc(var(--u)*-3) rgba(0,0,0,.75),0 0 calc(var(--u)*10) calc(var(--u)*-3) color-mix(in srgb,var(--acc) 55%,transparent);transform:rotateY(-14deg) rotateX(8deg) rotateZ(-2deg);transform-style:preserve-3d;font-size:calc(var(--u)*2.2);line-height:1.25;white-space:nowrap}
+.csv-ic{flex:none;width:calc(var(--u)*6.4);height:calc(var(--u)*6.4);border-radius:calc(var(--u)*2);display:grid;place-items:center;font-size:calc(var(--u)*2.9);color:#04130e;background:linear-gradient(140deg,var(--acc),var(--acc2))}
+.csv-n{display:block;font:800 calc(var(--u)*3.3)/1 'Inter',sans-serif;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+.csv small{display:block;margin-top:calc(var(--u)*.75);font-size:calc(var(--u)*1.85);font-weight:500;color:rgba(240,244,248,.66)}
+.csv.tick{animation:csvTick .95s cubic-bezier(.3,.9,.3,1)}
+@keyframes csvTick{0%,100%{transform:rotateY(-14deg) rotateX(8deg) rotateZ(-2deg) scale(1)}22%{transform:rotateY(-14deg) rotateX(8deg) rotateZ(-2deg) scale(1.075)}}
+@media(prefers-reduced-motion:reduce){.csv.tick{animation:none}}
 .cpk{position:absolute;left:0;top:0;width:calc(var(--u)*2.2);height:calc(var(--u)*2.2);margin:calc(var(--u)*-1.1);border-radius:50%;background:#eafff7;box-shadow:0 0 calc(var(--u)*1.6) calc(var(--u)*.6) var(--acc2),0 0 calc(var(--u)*6) calc(var(--u)*2) var(--acc);opacity:0;pointer-events:none;z-index:6}
 .cph-chat{justify-content:flex-start}
