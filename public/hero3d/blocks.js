@@ -443,7 +443,7 @@
       })(t0);
     }
     new IntersectionObserver(function (es, o) {
-      es.forEach(function (e) { if (e.isIntersecting) { b.classList.add('on'); setTimeout(count, 1900); o.disconnect(); } });
+      es.forEach(function (e) { if (e.isIntersecting) { b.classList.add('on'); setTimeout(count, 950); o.disconnect(); } });
     }, { threshold: 0.28 }).observe(b);
     if (reduce) return;
     var raf = 0;

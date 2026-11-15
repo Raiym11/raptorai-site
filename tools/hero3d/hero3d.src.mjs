@@ -607,7 +607,7 @@ function guard(S) {
       r2.rotation.z = -t * 0.32; r2.rotation.x = 1.05 - S.py * 0.25;
       halo.material.opacity = 0.3 + Math.sin(t * 1.5) * 0.06 + pulse * 0.35;
       dome.rotation.y = t * 0.22; dome.rotation.x = Math.sin(t * 0.3) * 0.35;
-      dome.material.opacity = 0.1 + Math.sin(t * 2.1) * 0.035 + pulse * 0.5; dome.scale.setScalar(1 + pulse * 0.16);
+      dome.material.opacity = 0.055 + Math.sin(t * 1.2) * 0.02 + pulse * 0.3; dome.scale.setScalar(1 + pulse * 0.16);
       for (let i = 0; i < dots.length; i++) {
         const a = t * (0.7 + i * 0.18) + i * 2.1, R = 1.72;
         dots[i].position.set(Math.cos(a) * R, Math.sin(a) * R * Math.cos(1.2) + Math.sin(t + i) * 0.05, Math.sin(a) * R * Math.sin(1.2));
