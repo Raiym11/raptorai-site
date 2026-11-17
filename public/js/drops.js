@@ -1,4 +1,4 @@
-/* Первый экран главной: стеклянные капли перетекают друг в друга */
+/* Первый экран главной: ИИ-ядро из жидкого стекла, вокруг кружат капли */
 (function () {
   var box = document.querySelector('.hx-drops'); if (!box) return;
   var cv = box.querySelector('canvas');
@@ -11,21 +11,23 @@
     'vec3 pal(float t){vec3 a=vec3(0.,.83,1.),b=vec3(.55,.48,1.),c=vec3(1.,.48,.88),d=vec3(.36,1.,.78);',
     ' t=fract(t);return t<.25?mix(a,b,t*4.):t<.5?mix(b,c,(t-.25)*4.):t<.75?mix(c,d,(t-.5)*4.):mix(d,a,(t-.75)*4.);}',
     'float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}',
-    'float map(vec3 p){float d=1e5;for(int i=0;i<6;i++){float fi=float(i);',
-    ' float sp=1.+C*1.4;vec3 c=vec3(sin(T*.31+fi*1.7)*.82,cos(T*.25+fi*2.3)*.58,sin(T*.21+fi*1.1)*.4)*sp;',
-    ' if(i==0)c=mix(vec3(sin(T*.4)*.5,cos(T*.33)*.4,.4),vec3(M.x*1.05,M.y*.95,.45),H);',
-    ' float r=.33+.08*sin(fi*3.7+1.)+.015*sin(T*1.3+fi);d=smin(d,length(p-c)-r,.44-C*.2);}return d;}',
+    'mat2 r2(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}',
+    'float map(vec3 p){p.xz*=r2(M.x*.55*H);p.yz*=r2(-M.y*.4*H);',
+    ' float d=length(p)-.55-.05*sin(p.x*5.+T*1.5)*sin(p.y*5.-T)*sin(p.z*5.+T*.7)-C*.12;',
+    ' for(int i=0;i<6;i++){float fi=float(i);float a=T*(.6+fi*.07)+fi*1.05;float r=.95+.45*sin(T*.7+fi*1.9)+C*.5;',
+    '  vec3 c=vec3(cos(a)*r,sin(a)*r*sin(fi*1.1+.6),sin(a)*r*cos(fi*1.1+.6));d=smin(d,length(p-c)-.16,.38);}',
+    ' return d;}',
     'vec3 nor(vec3 p){vec2 e=vec2(.0015,0);return normalize(vec3(map(p+e.xyy)-map(p-e.xyy),map(p+e.yxy)-map(p-e.yxy),map(p+e.yyx)-map(p-e.yyx)));}',
-    'void main(){vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;vec3 ro=vec3(0,0,4.3),rd=normalize(vec3(uv,-1.55));',
-    ' float b=dot(ro,rd),h0=b*b-dot(ro,ro)+4.4;if(h0<0.){gl_FragColor=vec4(0.);return;}',
+    'void main(){vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;vec3 ro=vec3(0,0,4.6),rd=normalize(vec3(uv,-1.55));',
+    ' float b=dot(ro,rd),h0=b*b-dot(ro,ro)+5.3;if(h0<0.){gl_FragColor=vec4(0.);return;}',
     ' float t=max(0.,-b-sqrt(h0)),mh=1e5,mt=0.;bool hit=false;',
-    ' for(int i=0;i<72;i++){float h=map(ro+rd*t);if(h<mh){mh=h;mt=t;}if(h<.0008){hit=true;break;}t+=h;if(t>8.)break;}',
+    ' for(int i=0;i<90;i++){float h=map(ro+rd*t);if(h<mh){mh=h;mt=t;}if(h<.0008){hit=true;break;}t+=h*.9;if(t>9.)break;}',
     ' float px=2.2/R.y*mt*.62;float a=hit?1.:1.-smoothstep(0.,px,mh);if(a<.003){gl_FragColor=vec4(0.);return;}',
     ' vec3 p=ro+rd*(hit?t:mt),n=nor(p),v=-rd;',
     ' vec3 L=normalize(vec3(-.6,.8,.7)),L2=normalize(vec3(.8,-.35,.5));',
     ' float df=max(dot(n,L),0.),fr=pow(1.-max(dot(n,v),0.),2.2),sp=pow(max(dot(reflect(-L,n),v),0.),80.),sp2=pow(max(dot(reflect(-L2,n),v),0.),22.);',
-    ' vec3 f=pal(dot(n,v)*.85+n.y*.25+T*.025);',
-    ' vec3 col=vec3(.035,.045,.07)+f*(.2+.32*df)+f*fr*1.1+vec3(1.)*sp*.95+pal(T*.025+.5)*sp2*.28;',
+    ' vec3 f=pal(dot(n,v)*.85+n.y*.25+T*.025);f=pow(f,vec3(.85))*1.15;',
+    ' vec3 col=vec3(.03,.04,.06)+f*(.34+.5*df)+f*fr*1.6+vec3(1.)*sp*1.05+pal(T*.025+.5)*sp2*.5;',
     ' gl_FragColor=vec4(col,a);}'
   ].join('\n');
   function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; }
