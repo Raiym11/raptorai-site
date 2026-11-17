@@ -577,7 +577,7 @@ function coach(S) {
 
 /* ---------- Raptor Guard: объёмная плашка с головой раптора ---------- */
 function guard(S) {
-  let grp = null, r1, r2, halo, dome, dots = [], spin = 0, spinV = 0, pulse = 0;
+  let grp = null, r1, r2, halo, dome, dots = [], spin = 0, spinTo = 0, pulse = 0;
   if (S.gl) {
     grp = medal(S, 'raptor', 0x0093B5, 2.0, { face: 0x07141D, ls: 1.18, glow: 0.2, sheen: 0.3, v: 4 });
     r1 = new Mesh(new TorusGeometry(1.72, 0.02, 10, 110), new MeshBasicMaterial({ color: 0x35E0C8, transparent: true, opacity: 0.8 }));
@@ -596,7 +596,7 @@ function guard(S) {
   return {
     update(dt, t) {
       if (!grp) return;
-      spinV *= 0.95; spin += spinV * dt; pulse = Math.max(0, pulse - dt * 1.4);
+      spin += (spinTo - spin) * (1 - Math.exp(-dt * 2.6)); pulse = Math.max(0, pulse - dt * 1.4);
       /* за курсором: S.lx/ly - положение внутри блока, S.px/py - по всему окну */
       const hx = S.inside ? clamp((S.lx - 0.5) * 1.6, -1, 1) : 0, hy = S.inside ? clamp((S.ly - 0.5) * 1.6, -1, 1) : 0;
       grp.rotation.y = Math.sin(t * 0.6) * 0.28 + S.px * 0.75 + hx * 0.35 + spin;
@@ -614,15 +614,93 @@ function guard(S) {
       }
     },
     play(done, user) {
-      spinV = user ? 16 : 9; pulse = 1;
+      spinTo += Math.PI * 2; pulse = 1;
       S.after(1500, done);
+    }
+  };
+}
+
+/* ---------- главная: 3D-раптор на голографическом постаменте, вокруг живой диалог ---------- */
+function home(S) {
+  const msg = it('it-msg lift', 26, 14, 90, '<div class="h3d-fl" style="--d:-1s"><div class="g bub"><small>23:47 · клиент, Telegram</small><b>Сколько стоит и когда сможете?</b></div></div>');
+  const lead = it('it-lead lift', 80, 30, 70, '<div class="h3d-fl" style="--d:-2.4s"><div class="g chip"><i class="fa-solid fa-user-plus"></i><span>Новый клиент</span></div></div>');
+  const ans = it('it-ans lift', 74, 86, 130, '<div class="h3d-fl" style="--d:-3s"><div class="g bub"><small><i class="fa-solid fa-bolt"></i> ИИ-агент · 8 сек</small><span class="txt">Подберу решение под вашу задачу и бюджет. Записать на звонок?</span><span class="dots"><i></i><i></i><i></i></span></div></div>');
+  const crm = it('it-crm lift', 20, 68, 60, '<div class="h3d-fl" style="--d:-4.5s"><div class="g chip"><i class="fa-solid fa-circle-check"></i><span>Заявка в CRM</span></div></div>');
+  S.stage.append(msg, lead, ans, crm);
+  const bub = ans.querySelector('.bub'), crmTxt = crm.querySelector('span');
+  let grp = null, rig, ring, base, beam, halo, orbs = [], sparks = [], spin = 0, spinTo = 0, pulse = 0, think = 0;
+  if (S.gl) {
+    rig = new Group();
+    grp = medal(S, 'raptor', 0x0093B5, 1.55, { face: 0x061019, ls: 1.16, glow: 0.2, sheen: 0.45, v: 4 });
+    grp.position.y = 0.3;
+    /* постамент: стеклянный диск с подсвеченной кромкой */
+    base = new Group();
+    const disc = new Mesh(new CylinderGeometry(1.22, 1.32, 0.11, 72), glass(0x0c2433, { rough: 0.2, opacity: 0.72, glow: 0.08, env: 1, irid: 0.6 }));
+    ring = new Mesh(new TorusGeometry(1.27, 0.02, 10, 120), new MeshBasicMaterial({ color: 0x00D4FF, transparent: true, opacity: 0.9 }));
+    ring.rotation.x = Math.PI / 2; ring.position.y = 0.06;
+    const ring2 = new Mesh(new TorusGeometry(0.92, 0.01, 8, 100), new MeshBasicMaterial({ color: 0xC86BFF, transparent: true, opacity: 0.55 }));
+    ring2.rotation.x = Math.PI / 2; ring2.position.y = 0.075;
+    base.add(disc, ring, ring2);
+    base.position.y = -1.02; base.rotation.x = 0.36;
+    /* световой столб от постамента к знаку */
+    beam = new Mesh(new CylinderGeometry(0.7, 1.12, 0.62, 48, 1, true), new MeshBasicMaterial({ color: 0x00D4FF, transparent: true, opacity: 0.07, side: DoubleSide, blending: AdditiveBlending, depthWrite: false }));
+    beam.position.y = -0.7; beam.renderOrder = -2;
+    halo = glow(0x00C8FF, 3.8, 0.26); halo.position.y = 0.3;
+    const under = glow(0x00D4FF, 2.8, 0.45); under.position.set(0, -1.0, -0.2);
+    rig.add(beam, base, halo, under, grp);
+    /* три стеклянные сферы на наклонной орбите */
+    [[0x00D4FF, 0.17, 0], [0xC86BFF, 0.13, 2.1], [0x5CFFC8, 0.1, 4.2]].forEach(([c, r, ph]) => {
+      const o = new Mesh(new SphereGeometry(r, 32, 24), glass(c, { rough: 0.08, opacity: 0.92, glow: 0.45, env: 1.1, irid: 1 }));
+      const og = glow(c, r * 6, 0.45); o.add(og); og.position.z = 0;
+      rig.add(o); orbs.push([o, ph, r]);
+    });
+    /* искры поднимаются с постамента */
+    for (let i = 0; i < 14; i++) {
+      const sp = glow(i % 3 === 1 ? 0xC86BFF : 0x7FE9FF, 0.16 + (i % 4) * 0.04, 0);
+      sp.userData = { a: Math.random() * 6.28, r: 0.55 + Math.random() * 0.75, sp: 0.25 + Math.random() * 0.35, o: Math.random() };
+      rig.add(sp); sparks.push(sp);
+    }
+    S.gl.scene.add(rig);
+  } else fallbackImg(S, 50, 47, 'raptor', 1.6, '#061019', 4);
+
+  return {
+    update(dt, t) {
+      if (!grp) return;
+      spin += (spinTo - spin) * (1 - Math.exp(-dt * 3.2)); pulse = Math.max(0, pulse - dt * 1.2); think = Math.max(0, think - dt * 0.6);
+      rig.rotation.y = S.px * 0.28; rig.rotation.x = S.py * 0.14;
+      grp.rotation.y = Math.sin(t * 0.5) * 0.32 + S.px * 0.45 + spin;
+      grp.rotation.x = S.py * 0.28 + Math.sin(t * 0.7) * 0.05;
+      grp.position.y = 0.3 + Math.sin(t * 1.1) * 0.07;
+      grp.scale.setScalar(1 + pulse * 0.08);
+      ring.material.opacity = 0.7 + Math.sin(t * 2) * 0.15 + pulse * 0.3;
+      beam.material.opacity = 0.06 + Math.sin(t * 1.6) * 0.015 + pulse * 0.1 + think * 0.06;
+      halo.material.opacity = 0.26 + Math.sin(t * 1.3) * 0.05 + pulse * 0.3;
+      for (const [o, ph, r] of orbs) {
+        const a = t * (0.55 + r) + ph, R = 1.55;
+        o.position.set(Math.cos(a) * R, 0.25 + Math.sin(a) * R * 0.26, Math.sin(a) * R * 0.95);
+        o.scale.setScalar(1 + pulse * 0.25);
+      }
+      for (const sp of sparks) {
+        const u = sp.userData, k = ((t * u.sp + u.o) % 1);
+        sp.position.set(Math.cos(u.a + t * 0.3) * u.r * 0.85, -0.98 + k * 2.3, Math.sin(u.a + t * 0.3) * u.r * 0.5 - 0.3);
+        sp.material.opacity = Math.sin(k * Math.PI) * (0.55 + think * 0.4);
+      }
+    },
+    play(done, user) {
+      ans.classList.add('hid'); crm.classList.add('hid'); lead.classList.add('hid'); crmTxt.textContent = 'Заявка в CRM';
+      restart(msg.firstChild, 'fly'); think = 1;
+      S.after(700, () => { ans.classList.remove('hid'); bub.classList.add('typing'); think = 1; });
+      S.after(2000, () => { bub.classList.remove('typing'); restart(ans.firstChild, 'pop'); spinTo += Math.PI * 2; pulse = 1; });
+      S.after(2800, () => { crm.classList.remove('hid'); crmTxt.textContent = 'Заявка передана'; restart(crm.firstChild, 'pop'); });
+      S.after(3300, () => { lead.classList.remove('hid'); restart(lead.firstChild, 'pop'); pulse = 0.6; });
+      S.after(4600, () => { [ans, crm, lead].forEach((x) => x.firstChild.classList.remove('pop')); msg.firstChild.classList.remove('fly'); done(); });
     }
   };
 }
 
 const SCENES = {
   agent: [agent, 0x00D4FF, 0x8C7BFF], chatgpt: [chatgpt, 0x10A37F, 0x5CFFC8], gemini: [gemini, 0x4285F4, 0x9B72CB],
-  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF, false, 2]
+  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF, false, 2], home: [home, 0x00D4FF, 0xC86BFF, false, 1.5]
 };
 
 /* ---------- движок ---------- */
