@@ -7,7 +7,7 @@ import {
   MeshPhysicalMaterial, MeshBasicMaterial, SpriteMaterial,
   SphereGeometry, IcosahedronGeometry, CylinderGeometry, TorusGeometry, BoxGeometry, CapsuleGeometry,
   BufferGeometry, BufferAttribute, CanvasTexture, Vector3, Shape, ShapeGeometry, ExtrudeGeometry,
-  TextureLoader, SRGBColorSpace, AdditiveBlending, DoubleSide
+  TextureLoader, SRGBColorSpace, AdditiveBlending, DoubleSide, Points, ShaderMaterial, Color
 } from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
@@ -620,68 +620,126 @@ function guard(S) {
   };
 }
 
-/* ---------- главная: вложенные кольца из чёрного жидкого хрома ---------- */
-function liquidRing(R0, r0, sq, ph) {
-  const U = small ? 120 : 200, V = small ? 16 : 26, n = (U + 1) * (V + 1);
-  const pos = new Float32Array(n * 3), nor = new Float32Array(n * 3), idx = [];
-  for (let i = 0; i < U; i++) for (let j = 0; j < V; j++) {
-    const a = i * (V + 1) + j, b = a + V + 1;
-    idx.push(a, b, a + 1, b, b + 1, a + 1);
+/* ---------- главная: рой частиц собирается в историю: шар -> сообщение -> «10 сек» -> готово ---------- */
+function sampleShape(draw, n, depth) {
+  const W = 200, c = document.createElement('canvas'); c.width = c.height = W;
+  const x = c.getContext('2d'); x.fillStyle = '#fff'; x.strokeStyle = '#fff'; draw(x);
+  const d = x.getImageData(0, 0, W, W).data, pts = [];
+  for (let y = 0; y < W; y++) for (let i = 0; i < W; i++) if (d[(y * W + i) * 4 + 3] > 128) pts.push(i, y);
+  const out = new Float32Array(n * 3), k = 3.3 / W;
+  for (let i = 0; i < n; i++) {
+    const j = ((Math.random() * pts.length / 2) | 0) * 2;
+    out[i * 3] = (pts[j] + Math.random() - W / 2) * k;
+    out[i * 3 + 1] = -(pts[j + 1] + Math.random() - W / 2) * k;
+    out[i * 3 + 2] = (Math.random() - 0.5) * depth;
   }
-  const g = new BufferGeometry();
-  g.setAttribute('position', new BufferAttribute(pos, 3)); g.setAttribute('normal', new BufferAttribute(nor, 3)); g.setIndex(idx);
-  const m = new Mesh(g, null);
-  m.userData.morph = (t) => {
-    let k = 0;
-    for (let i = 0; i <= U; i++) {
-      const u = (i % U) / U * Math.PI * 2, cu = Math.cos(u), su = Math.sin(u);
-      /* скруглённый квадрат (sq > 2) или круг (sq = 2), контур слегка «дышит» */
-      const sup = sq === 2 ? 1 : Math.pow(Math.pow(Math.abs(cu), sq) + Math.pow(Math.abs(su), sq), -1 / sq);
-      const Rr = R0 * sup * (1 + 0.035 * Math.sin(2 * u + t * 0.7 + ph));
-      /* толщина перетекает по кольцу: отсюда ощущение жидкости */
-      const r = r0 * (1 + 0.34 * Math.sin(3 * u - t * 0.9 + ph) + 0.16 * Math.sin(5 * u + t * 0.6 + ph * 2));
-      const z0 = R0 * 0.06 * Math.sin(2 * u - t * 0.5 + ph);
-      for (let j = 0; j <= V; j++) {
-        const v = j / V * Math.PI * 2, cv = Math.cos(v), sv = Math.sin(v);
-        pos[k] = (Rr + r * cv) * cu; pos[k + 1] = (Rr + r * cv) * su; pos[k + 2] = z0 + r * sv;
-        nor[k] = cv * cu; nor[k + 1] = cv * su; nor[k + 2] = sv; k += 3;
-      }
-    }
-    g.attributes.position.needsUpdate = true; g.attributes.normal.needsUpdate = true;
-  };
-  return m;
+  return out;
 }
+function rr(x, X, Y, w, h, r) { x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + w, Y, X + w, Y + h, r); x.arcTo(X + w, Y + h, X, Y + h, r); x.arcTo(X, Y + h, X, Y, r); x.arcTo(X, Y, X + w, Y, r); x.closePath(); }
 function home(S) {
-  let rig = null, rings = [], core, halo, boost = 0, ang = [0, 0, 0];
+  let pts = null, mat, aA, aB, shapes = [], cur = 0, mix = 0, hold = 1.2, hover = 0, burst = 0, burstV = 0, grp;
   if (S.gl) {
-    S.gl.renderer.toneMappingExposure = 1.0;
-    const chrome = (c) => new MeshPhysicalMaterial({ color: c, metalness: 0.9, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.5, emissive: c, emissiveIntensity: 0.1, iridescence: 0.8, iridescenceIOR: 1.5, side: DoubleSide });
-    rig = new Group();
-    [[1.55, 0.15, 4, 0, 0x1FB6E8], [1.14, 0.125, 2, 1.7, 0x7C6BF2], [0.74, 0.105, 4, 3.4, 0xE86BC8]].forEach(([R0, r0, sq, ph, c]) => {
-      const m = liquidRing(R0, r0, sq, ph); m.material = chrome(c); rig.add(m); rings.push(m);
+    const N = small ? 3600 : 7200;
+    const sphere = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const y = 1 - (i + 0.5) / N * 2, r = Math.sqrt(1 - y * y), th = i * 2.39996, R = 1.28 * (0.94 + Math.random() * 0.08);
+      sphere[i * 3] = Math.cos(th) * r * R; sphere[i * 3 + 1] = y * R; sphere[i * 3 + 2] = Math.sin(th) * r * R;
+    }
+    const font = (w, px) => w + ' ' + px + 'px Inter, "Segoe UI", Arial, sans-serif';
+    const bubble = sampleShape((x) => {
+      rr(x, 28, 42, 144, 100, 30); x.fill();
+      x.beginPath(); x.moveTo(58, 136); x.lineTo(46, 170); x.lineTo(92, 138); x.closePath(); x.fill();
+      x.globalCompositeOperation = 'destination-out';
+      [70, 100, 130].forEach((cx) => { x.beginPath(); x.arc(cx, 92, 11, 0, 7); x.fill(); });
+    }, N, 0.28);
+    const sec = sampleShape((x) => {
+      x.textAlign = 'center'; x.textBaseline = 'middle';
+      x.font = font(800, 100); x.fillText('10', 100, 78);
+      x.font = font(700, 50); x.fillText('сек', 100, 150);
+    }, N, 0.24);
+    const done = sampleShape((x) => {
+      x.lineWidth = 13; x.beginPath(); x.arc(100, 100, 78, 0, 7); x.stroke();
+      x.lineWidth = 19; x.lineCap = 'round'; x.lineJoin = 'round';
+      x.beginPath(); x.moveTo(62, 102); x.lineTo(90, 130); x.lineTo(142, 74); x.stroke();
+    }, N, 0.26);
+    shapes = [sphere, bubble, sec, done];
+    const rnd = new Float32Array(N * 3); for (let i = 0; i < rnd.length; i++) rnd[i] = Math.random();
+    const g = new BufferGeometry();
+    aA = new BufferAttribute(sphere.slice(), 3); aB = new BufferAttribute(bubble.slice(), 3);
+    g.setAttribute('position', aA); g.setAttribute('aB', aB); g.setAttribute('aR', new BufferAttribute(rnd, 3));
+    mat = new ShaderMaterial({
+      transparent: true, depthWrite: false, blending: AdditiveBlending,
+      uniforms: {
+        uMix: { value: 0 }, uTime: { value: 0 }, uMouse: { value: new Vector3(9, 9, 0) }, uHover: { value: 0 }, uBurst: { value: 0 },
+        uSize: { value: 33 * S.gl.renderer.getPixelRatio() }, uAlpha: { value: 0.95 }, uSphA: { value: 1 }, uSphB: { value: 0 },
+        c1: { value: new Color(0x4FE3FF) }, c2: { value: new Color(0x8F7BFF) }, c3: { value: new Color(0xFF7AD1) }
+      },
+      vertexShader: `
+        attribute vec3 aB; attribute vec3 aR;
+        uniform float uMix, uTime, uHover, uBurst, uSize, uSphA, uSphB; uniform vec3 uMouse, c1, c2, c3;
+        varying vec3 vC; varying float vA;
+        void main() {
+          float e = clamp(uMix * 1.7 - aR.x * 0.7, 0.0, 1.0); e = e * e * (3.0 - 2.0 * e);
+          float w = uSphA * (1.0 - e) + uSphB * e, ang = uTime * 0.45 * w, ca = cos(ang), sa = sin(ang);
+          vec3 p = mix(position, aB, e);
+          p = vec3(p.x * ca + p.z * sa, p.y, -p.x * sa + p.z * ca);
+          float tr = e * (1.0 - e) * 4.0;
+          p += (aR - 0.5) * tr * 1.1;
+          p += vec3(sin(uTime * 0.9 + aR.x * 40.0), cos(uTime * 1.1 + aR.y * 40.0), sin(uTime * 0.7 + aR.z * 40.0)) * vec3(0.018, 0.018, 0.05);
+          vec2 d = p.xy - uMouse.xy; float dl = length(d) + 1e-4;
+          float f = uHover * smoothstep(0.75, 0.0, dl);
+          p.xy += d / dl * f * 0.5; p.z += f * 0.45;
+          p += (aR - 0.5) * uBurst * 3.2;
+          vec4 mv = modelViewMatrix * vec4(p, 1.0);
+          gl_Position = projectionMatrix * mv;
+          gl_PointSize = uSize * (0.55 + aR.y * 0.9) / -mv.z;
+          float k = p.x * 0.45 + p.y * 0.25 + sin(uTime * 0.35) * 0.3;
+          vC = mix(mix(c1, c2, smoothstep(-0.55, 0.25, k)), c3, smoothstep(0.3, 0.95, k)) + f * 0.3;
+          vA = (0.5 + aR.z * 0.5) * (1.0 - tr * 0.25);
+        }`,
+      fragmentShader: `
+        uniform float uAlpha; varying vec3 vC; varying float vA;
+        void main() {
+          vec2 c = gl_PointCoord - 0.5; float r = length(c);
+          if (r > 0.5) discard;
+          float a = pow(smoothstep(0.5, 0.0, r), 1.7);
+          gl_FragColor = vec4(vC, a * vA * uAlpha);
+        }`
     });
-    core = new Mesh(new SphereGeometry(0.26, 48, 36), chrome(0x4FE0B4)); rig.add(core);
-    halo = glow(0x5f9fb6, 5.4, 0.1);
-    const top = new DirectionalLight(0xffffff, 1.4); top.position.set(-2, 5, 3);
-    S.gl.scene.add(halo, top, rig);
-    rig.scale.setScalar(1.02);
-  } else fallback(S, 50, 50, 'fa-solid fa-atom', 1.4);
+    pts = new Points(g, mat);
+    grp = new Group(); grp.add(pts);
+    S.gl.scene.add(grp);
+  } else fallback(S, 50, 50, 'fa-solid fa-comment-dots', 1.4);
   return {
     update(dt, t) {
-      if (!rig) return;
-      boost = Math.max(0, boost - dt * 0.55);
-      const sp = 1 + boost * boost * 5;
-      ang[0] += dt * 0.34 * sp; ang[1] += dt * 0.46 * sp; ang[2] += dt * 0.6 * sp;
-      rings[0].rotation.set(0.5 + Math.sin(t * 0.21) * 0.25, ang[0], 0.2);
-      rings[1].rotation.set(ang[1], 0.6 + Math.sin(t * 0.17) * 0.3, ang[1] * 0.35);
-      rings[2].rotation.set(1.1, ang[2] * 0.6, ang[2]);
-      rings.forEach((m) => m.userData.morph(t));
-      core.scale.set(1 + Math.sin(t * 1.3) * 0.08, 1 + Math.sin(t * 1.7 + 1) * 0.08, 1 + Math.sin(t * 1.1 + 2) * 0.08);
-      rig.rotation.y = S.px * 0.5; rig.rotation.x = S.py * 0.35;
-      rig.position.y = Math.sin(t * 0.8) * 0.05;
-      halo.material.opacity = 0.09 + boost * 0.07;
+      if (!pts) return;
+      mat.uniforms.uTime.value = t;
+      if (hold > 0) hold -= dt;
+      else {
+        mix = Math.min(1, mix + dt / 1.7);
+        if (mix >= 1) {
+          cur = (cur + 1) % shapes.length;
+          aA.array.set(aB.array); aA.needsUpdate = true;
+          aB.array.set(shapes[(cur + 1) % shapes.length]); aB.needsUpdate = true;
+          mix = 0; hold = cur === 0 ? 2.2 : 2.4;
+        }
+        mat.uniforms.uSphA.value = cur === 0 ? 1 : 0; mat.uniforms.uSphB.value = (cur + 1) % shapes.length === 0 ? 1 : 0;
+      }
+      mat.uniforms.uMix.value = mix;
+      hover = lerp(hover, S.inside ? 1 : 0, 0.08);
+      mat.uniforms.uHover.value = hover;
+      mat.uniforms.uMouse.value.set((S.lx - 0.5) * 100 / K, -(S.ly - 0.5) * 100 / K, 0);
+      burstV += (0 - burst) * 18 * dt; burstV *= Math.exp(-dt * 6); burst += burstV * dt;
+      mat.uniforms.uBurst.value = Math.max(0, burst);
+      const flat = cur === 0 && hold > 0 ? 0 : 1;
+      grp.rotation.y = lerp(grp.rotation.y, Math.sin(t * 0.32) * 0.2 * flat + S.px * 0.35, 0.06);
+      grp.rotation.x = lerp(grp.rotation.x, S.py * 0.22 + Math.sin(t * 0.27) * 0.06, 0.06);
+      grp.position.y = Math.sin(t * 0.9) * 0.04;
     },
-    play(done) { boost = 1; S.after(1800, done); }
+    play(done, user) {
+      if (user) burstV = 7;
+      S.after(1500, done);
+    }
   };
 }
 
