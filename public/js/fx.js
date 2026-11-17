@@ -541,7 +541,7 @@
         for (j = 0; j <= n; j++) html += '<i>' + (j % 10) + '</i>';
         var dg = document.createElement('span'); dg.className = 'dg'; dg.setAttribute('aria-hidden', 'true');
         var st = document.createElement('span'); st.className = 'dgi'; st.innerHTML = html;
-        dg.appendChild(st); el.appendChild(dg); strips.push({ st: st, n: n, k: k }); k++;
+        dg.appendChild(st); el.appendChild(dg); strips.push({ st: st, n: n, k: k, dg: dg, d: d }); k++;
       } else {
         // «млн ₽» и пробел перед ними — меньшим кеглем, чтобы «+10 млн ₽» помещалось в колонку
         var sx = document.createElement('span'); sx.className = /[\sA-Za-zА-Яа-яЁё₽]/.test(ch) ? 'sx u' : 'sx';
@@ -555,7 +555,16 @@
     rows.forEach(function (r) { r.item.classList.remove('go', 'hit'); r.strips.forEach(function (s) { s.st.style.transition = 'none'; s.st.style.transform = 'translateY(0)'; }); });
     if (band) band.classList.remove('fire');
   }
+  // каждый разряд шириной своей итоговой цифры, иначе «1» в моноширинной колонке выглядит как пробел
+  function fitW() {
+    rows.forEach(function (r) { r.strips.forEach(function (s) {
+      var m = document.createElement('span'); m.textContent = s.d; m.style.cssText = 'position:absolute;visibility:hidden;white-space:pre';
+      s.dg.parentNode.appendChild(m); var w = m.getBoundingClientRect().width; m.remove();
+      if (w) s.dg.style.width = w + 'px';
+    }); });
+  }
   function play() {
+    fitW();
     reset();
     void band.offsetHeight;
     if (band) band.classList.add('fire');
