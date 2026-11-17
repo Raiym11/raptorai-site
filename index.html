@@ -854,8 +854,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .case-kpi b .kpi-from{font-size:.42em !important;letter-spacing:-.01em;margin-right:.15em !important;vertical-align:.55em;-webkit-text-fill-color:rgba(240,244,248,.6);opacity:1}
 .case-kpi > span{font-size:15px;margin-top:12px}
 </style>
-<link rel="stylesheet" href="/hero3d/hero3d.css?v=11">
-<style>.hx-home{width:min(100%,560px)}.hx-home .h3d-hint{display:none}@media (max-width:900px){.hx-home{order:-1;width:min(92vw,420px);margin:6px auto 4px}}</style>
+<style>.hx-drops{position:relative;width:min(100%,560px);aspect-ratio:1/1;cursor:pointer}.hx-drops::before{content:"";position:absolute;inset:14%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,212,255,.10),rgba(140,123,255,.06) 60%,transparent);filter:blur(20px);pointer-events:none}.hx-drops canvas{position:absolute;inset:0;width:100%;height:100%;display:block}@media (max-width:900px){.hx-drops{order:-1;width:min(88vw,400px);margin:6px auto 4px}}</style>
 </head>
 <body>
 <a class="skip-link" href="#services">К содержимому</a>
@@ -908,7 +907,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     </div>
     <p class="hero-line">от 4 990 ₽ · цена и срок до старта · 30 дней гарантии</p>
   </div>
-  <div class="h3d hx-home" data-scene="home" aria-hidden="true" style="--acc:#7FB8CC;--acc2:#9A92C8"></div>
+  <div class="hx-drops" aria-hidden="true"><canvas></canvas></div>
   </div>
 </section>
 
@@ -1698,7 +1697,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.js?v=20261106" defer></script>
 <script src="/js/fx.js?v=8" defer></script>
-<script src="/hero3d/hero3d.js?v=22" defer></script>
+<script src="/js/drops.js?v=1" defer></script>
 </div>
 <!-- CHAT WIDGET -->
 <style>
