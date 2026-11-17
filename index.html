@@ -375,6 +375,7 @@ nav{background:rgba(8,11,15,.45) !important;-webkit-backdrop-filter:blur(18px) s
 /* one orchestrated entrance */
 .hero-badge,.hero h1,.hero-sub,.hero-btns{opacity:0;transform:translateY(18px);animation:heroIn .9s cubic-bezier(.2,.7,.2,1) forwards}
 .hero h1{animation-delay:.12s}.hero-sub{animation-delay:.26s}.hero-btns{animation-delay:.4s}
+.hero-line{margin-top:22px;font-size:15px;letter-spacing:.01em;color:var(--gray);opacity:0;transform:translateY(18px);animation:heroIn .9s cubic-bezier(.2,.7,.2,1) .5s forwards}
 @keyframes heroIn{to{opacity:1;transform:none}}
 
 @media (max-width:900px){
@@ -390,7 +391,7 @@ nav{background:rgba(8,11,15,.45) !important;-webkit-backdrop-filter:blur(18px) s
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
-  .hero-badge,.hero h1,.hero-sub,.hero-btns{opacity:1;transform:none}
+  .hero-badge,.hero h1,.hero-sub,.hero-btns,.hero-line{opacity:1;transform:none}
 }
 
 /* chat launcher: glass, iridescent edge, pulsing */
@@ -903,6 +904,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
       <a href="#cases" class="btn-secondary">Смотреть кейсы</a>
     </div>
+    <p class="hero-line">от 4 990 ₽ · цена и срок до старта · 30 дней гарантии</p>
   </div>
   <div class="orb-anchor" id="orb-anchor" aria-hidden="true"></div>
   </div>
@@ -1764,7 +1766,7 @@ body.theme-newyear #chat-panel { border-color: #A8D8FF33; box-shadow: 0 20px 60p
 
   <div class="chat-body" id="chat-body" style="display:none"></div>
   <div id="chat-preview" style="display:none">
-    <img id="chat-preview-img" src="" alt="preview">
+    <img id="chat-preview-img" src="" alt="">
     <button onclick="removeChatImage()" aria-label="Убрать фото"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <div class="chat-input-row" id="chat-input-row" style="display:none">
