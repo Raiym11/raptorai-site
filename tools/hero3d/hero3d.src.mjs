@@ -654,13 +654,13 @@ function liquidRing(R0, r0, sq, ph) {
 function home(S) {
   let rig = null, rings = [], core, halo, boost = 0, ang = [0, 0, 0];
   if (S.gl) {
-    S.gl.renderer.toneMappingExposure = 1.15;
-    const chrome = new MeshPhysicalMaterial({ color: 0x06090c, metalness: 1, roughness: 0.07, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.9, side: DoubleSide });
+    S.gl.renderer.toneMappingExposure = 1.0;
+    const chrome = (c) => new MeshPhysicalMaterial({ color: c, metalness: 0.9, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.5, emissive: c, emissiveIntensity: 0.1, iridescence: 0.8, iridescenceIOR: 1.5, side: DoubleSide });
     rig = new Group();
-    [[1.55, 0.15, 4, 0], [1.14, 0.125, 2, 1.7], [0.74, 0.105, 4, 3.4]].forEach(([R0, r0, sq, ph]) => {
-      const m = liquidRing(R0, r0, sq, ph); m.material = chrome; rig.add(m); rings.push(m);
+    [[1.55, 0.15, 4, 0, 0x1FB6E8], [1.14, 0.125, 2, 1.7, 0x7C6BF2], [0.74, 0.105, 4, 3.4, 0xE86BC8]].forEach(([R0, r0, sq, ph, c]) => {
+      const m = liquidRing(R0, r0, sq, ph); m.material = chrome(c); rig.add(m); rings.push(m);
     });
-    core = new Mesh(new SphereGeometry(0.26, 48, 36), chrome); rig.add(core);
+    core = new Mesh(new SphereGeometry(0.26, 48, 36), chrome(0x4FE0B4)); rig.add(core);
     halo = glow(0x5f9fb6, 5.4, 0.1);
     const top = new DirectionalLight(0xffffff, 1.4); top.position.set(-2, 5, 3);
     S.gl.scene.add(halo, top, rig);
