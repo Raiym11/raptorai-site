@@ -60,7 +60,7 @@
 .pk-conn{font-weight:700;color:#F0F4F8 !important;font-size:15px !important;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--pacc) 10%,transparent);border:1px dashed color-mix(in srgb,var(--pacc) 40%,transparent);width:fit-content}
 .pk-ex{font-size:13px;line-height:1.5;color:var(--gray);margin-top:2px}
 .pk-ex b{color:rgba(240,244,248,.8);font-weight:600}
-.pk-after{margin:72px auto 0;font-size:15px;line-height:1.7;color:var(--gray)}
+.pk-after{margin:72px auto 0;font-size:15px;line-height:1.7;color:var(--gray);text-align:center;text-wrap:balance}
 @media(max-width:900px){.svc .pk-card.is-pick{transform:none}.pkc{padding:22px 18px}.pkc-f{width:100%;justify-content:space-between}}
 
 /* ---------- ИИ-агент: один день ---------- */
@@ -542,7 +542,7 @@
 .rc-more{margin:22px 0 0;font-size:15px;font-weight:600}
 .rc-more a{color:var(--pacc,#00D4FF);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--pacc,#00D4FF) 45%,transparent)}
 .rc-more a:hover{border-bottom-color:currentColor}
-.pk-guar{margin-top:16px;color:rgba(240,244,248,.9)}
+.pk-guar{margin-top:16px;color:rgba(240,244,248,.9);justify-content:center}
 .pk-guar i{color:var(--pacc);margin-right:9px}
 
 /* --- Raptor Guard block --- */
