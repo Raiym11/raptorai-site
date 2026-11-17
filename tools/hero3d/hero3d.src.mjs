@@ -620,79 +620,74 @@ function guard(S) {
   };
 }
 
-/* ---------- главная: один дружелюбный робот-агент, спокойные цвета ---------- */
+/* ---------- главная: вложенные кольца из чёрного жидкого хрома ---------- */
+function liquidRing(R0, r0, sq, ph) {
+  const U = small ? 120 : 200, V = small ? 16 : 26, n = (U + 1) * (V + 1);
+  const pos = new Float32Array(n * 3), nor = new Float32Array(n * 3), idx = [];
+  for (let i = 0; i < U; i++) for (let j = 0; j < V; j++) {
+    const a = i * (V + 1) + j, b = a + V + 1;
+    idx.push(a, b, a + 1, b, b + 1, a + 1);
+  }
+  const g = new BufferGeometry();
+  g.setAttribute('position', new BufferAttribute(pos, 3)); g.setAttribute('normal', new BufferAttribute(nor, 3)); g.setIndex(idx);
+  const m = new Mesh(g, null);
+  m.userData.morph = (t) => {
+    let k = 0;
+    for (let i = 0; i <= U; i++) {
+      const u = (i % U) / U * Math.PI * 2, cu = Math.cos(u), su = Math.sin(u);
+      /* скруглённый квадрат (sq > 2) или круг (sq = 2), контур слегка «дышит» */
+      const sup = sq === 2 ? 1 : Math.pow(Math.pow(Math.abs(cu), sq) + Math.pow(Math.abs(su), sq), -1 / sq);
+      const Rr = R0 * sup * (1 + 0.035 * Math.sin(2 * u + t * 0.7 + ph));
+      /* толщина перетекает по кольцу: отсюда ощущение жидкости */
+      const r = r0 * (1 + 0.34 * Math.sin(3 * u - t * 0.9 + ph) + 0.16 * Math.sin(5 * u + t * 0.6 + ph * 2));
+      const z0 = R0 * 0.06 * Math.sin(2 * u - t * 0.5 + ph);
+      for (let j = 0; j <= V; j++) {
+        const v = j / V * Math.PI * 2, cv = Math.cos(v), sv = Math.sin(v);
+        pos[k] = (Rr + r * cv) * cu; pos[k + 1] = (Rr + r * cv) * su; pos[k + 2] = z0 + r * sv;
+        nor[k] = cv * cu; nor[k + 1] = cv * su; nor[k + 2] = sv; k += 3;
+      }
+    }
+    g.attributes.position.needsUpdate = true; g.attributes.normal.needsUpdate = true;
+  };
+  return m;
+}
 function home(S) {
-  const ans = it('it-ans lift', 73, 15, 120, '<div class="h3d-fl" style="--d:-2s"><div class="g bub"><small><i class="fa-solid fa-bolt"></i> ИИ-агент · 8 сек</small><span class="txt">Здравствуйте! Подскажу цену и запишу на звонок.</span><span class="dots"><i></i><i></i><i></i></span></div></div>');
-  S.stage.append(ans);
-  const bub = ans.querySelector('.bub');
-  let bot = null, head, eyes = [], mouth = [], tip, tipGlow, arms = [], typing = false, nod = 0, wave = 0;
+  let rig = null, rings = [], core, halo, boost = 0, ang = [0, 0, 0];
   if (S.gl) {
-    S.gl.renderer.toneMappingExposure = 0.92;
-    bot = new Group();
-    const shell = glass(0xa9c6d6, { rough: 0.36, opacity: 0.9, glow: 0.1, emissive: 0x2c5f78, env: 0.85 });
-    const dark = new MeshPhysicalMaterial({ color: 0x0b1820, roughness: 0.2, clearcoat: 1, envMapIntensity: 1 });
-    const lit = new MeshBasicMaterial({ color: 0xbfe9f4 });
-    head = new Group();
-    head.add(new Mesh(new RoundedBoxGeometry(1.7, 1.3, 1.16, 7, 0.4), shell));
-    const visor = new Mesh(new RoundedBoxGeometry(1.26, 0.7, 0.14, 5, 0.07), dark); visor.position.set(0, 0.02, 0.55); head.add(visor);
-    [-0.3, 0.3].forEach((x) => { const e = new Mesh(new SphereGeometry(0.12, 24, 18), lit); e.position.set(x, 0.1, 0.63); head.add(e); eyes.push(e); });
-    [-0.14, 0, 0.14].forEach((x) => { const d = new Mesh(new SphereGeometry(0.036, 12, 10), lit); d.position.set(x, -0.17, 0.64); d.visible = false; head.add(d); mouth.push(d); });
-    /* улыбка, когда не печатает */
-    const smile = new Mesh(new TorusGeometry(0.13, 0.022, 8, 24, Math.PI), lit); smile.rotation.z = Math.PI; smile.position.set(0, -0.1, 0.63); head.add(smile); head.userData.smile = smile;
-    [-0.91, 0.91].forEach((x) => { const ear = new Mesh(new CylinderGeometry(0.2, 0.2, 0.16, 28), shell); ear.rotation.z = Math.PI / 2; ear.position.set(x, 0, 0); head.add(ear); });
-    const stem = new Mesh(new CylinderGeometry(0.035, 0.035, 0.34, 12), shell); stem.position.set(0, 0.82, 0); head.add(stem);
-    tip = new Mesh(new SphereGeometry(0.095, 18, 14), lit); tip.position.set(0, 1.03, 0); head.add(tip);
-    tipGlow = glow(0x7fc4da, 0.7, 0.4); tipGlow.position.copy(tip.position); head.add(tipGlow);
-    head.position.y = 0.42;
-    const neck = new Mesh(new CylinderGeometry(0.16, 0.2, 0.26, 18), shell); neck.position.y = -0.33;
-    const body = new Mesh(new RoundedBoxGeometry(1.2, 0.74, 0.86, 6, 0.3), shell); body.position.y = -0.8;
-    const badge = new Mesh(new SphereGeometry(0.07, 14, 10), lit); badge.position.set(0, -0.74, 0.45);
-    [-1, 1].forEach((sd) => {
-      const arm = new Group(); arm.position.set(sd * 0.72, -0.62, 0);
-      const m = new Mesh(new CapsuleGeometry(0.11, 0.3, 6, 14), shell); m.position.y = -0.2; arm.add(m);
-      arm.rotation.z = sd * 0.25; bot.add(arm); arms.push(arm);
+    S.gl.renderer.toneMappingExposure = 1.15;
+    const chrome = new MeshPhysicalMaterial({ color: 0x06090c, metalness: 1, roughness: 0.07, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.9, side: DoubleSide });
+    rig = new Group();
+    [[1.55, 0.15, 4, 0], [1.14, 0.125, 2, 1.7], [0.74, 0.105, 4, 3.4]].forEach(([R0, r0, sq, ph]) => {
+      const m = liquidRing(R0, r0, sq, ph); m.material = chrome; rig.add(m); rings.push(m);
     });
-    bot.add(head, neck, body, badge);
-    /* мягкая тень-подсветка под роботом */
-    const floor = glow(0x4f8fa8, 1, 0.22); floor.scale.set(3.4, 0.62, 1); floor.position.set(0, -1.55, -0.3); bot.userData.floor = floor;
-    S.gl.scene.add(floor);
-    bot.scale.setScalar(1.08); bot.position.y = 0.1;
-    S.gl.scene.add(bot);
-  } else fallback(S, 50, 50, 'fa-solid fa-robot', 1.3);
-
+    core = new Mesh(new SphereGeometry(0.26, 48, 36), chrome); rig.add(core);
+    halo = glow(0x5f9fb6, 5.4, 0.1);
+    const top = new DirectionalLight(0xffffff, 1.4); top.position.set(-2, 5, 3);
+    S.gl.scene.add(halo, top, rig);
+    rig.scale.setScalar(1.02);
+  } else fallback(S, 50, 50, 'fa-solid fa-atom', 1.4);
   return {
     update(dt, t) {
-      if (!bot) return;
-      head.rotation.y = lerp(head.rotation.y, S.px * 0.6, 0.1);
-      head.rotation.x = lerp(head.rotation.x, S.py * 0.32 + nod, 0.12);
-      head.rotation.z = Math.sin(t * 0.7) * 0.03;
-      bot.rotation.y = S.px * 0.18;
-      const bob = Math.sin(t * 1.25) * 0.07;
-      bot.position.y = 0.1 + bob;
-      bot.userData.floor.material.opacity = 0.2 - bob * 0.5;
-      const blink = (t % 4.2) > 4.05 ? 0.1 : 1;
-      eyes.forEach((e) => { e.scale.y = lerp(e.scale.y, typing ? 0.6 : blink, 0.4); });
-      mouth.forEach((d, i) => { d.visible = typing; d.position.y = -0.17 + Math.max(0, Math.sin(t * 9 - i * 0.9)) * 0.05; });
-      head.userData.smile.visible = !typing;
-      tip.scale.setScalar(1 + Math.sin(t * (typing ? 11 : 2.6)) * 0.16);
-      tipGlow.material.opacity = 0.3 + (typing ? 0.25 : 0) + Math.sin(t * 2.6) * 0.06;
-      wave = Math.max(0, wave - dt * 0.55);
-      arms[0].rotation.z = -0.25 + Math.sin(t * 1.25) * 0.05;
-      arms[1].rotation.z = 0.25 + wave * 2.1 + (wave > 0 ? Math.sin(t * 11) * 0.28 * Math.min(1, wave * 2) : Math.sin(t * 1.25 + 1) * 0.05);
-      nod *= 0.92;
+      if (!rig) return;
+      boost = Math.max(0, boost - dt * 0.55);
+      const sp = 1 + boost * boost * 5;
+      ang[0] += dt * 0.34 * sp; ang[1] += dt * 0.46 * sp; ang[2] += dt * 0.6 * sp;
+      rings[0].rotation.set(0.5 + Math.sin(t * 0.21) * 0.25, ang[0], 0.2);
+      rings[1].rotation.set(ang[1], 0.6 + Math.sin(t * 0.17) * 0.3, ang[1] * 0.35);
+      rings[2].rotation.set(1.1, ang[2] * 0.6, ang[2]);
+      rings.forEach((m) => m.userData.morph(t));
+      core.scale.set(1 + Math.sin(t * 1.3) * 0.08, 1 + Math.sin(t * 1.7 + 1) * 0.08, 1 + Math.sin(t * 1.1 + 2) * 0.08);
+      rig.rotation.y = S.px * 0.5; rig.rotation.x = S.py * 0.35;
+      rig.position.y = Math.sin(t * 0.8) * 0.05;
+      halo.material.opacity = 0.09 + boost * 0.07;
     },
-    play(done) {
-      ans.classList.add('hid'); wave = 1;
-      S.after(600, () => { ans.classList.remove('hid'); bub.classList.add('typing'); typing = true; });
-      S.after(1900, () => { bub.classList.remove('typing'); typing = false; restart(ans.firstChild, 'pop'); nod = 0.4; });
-      S.after(3400, () => { ans.firstChild.classList.remove('pop'); done(); });
-    }
+    play(done) { boost = 1; S.after(1800, done); }
   };
 }
 
 const SCENES = {
   agent: [agent, 0x00D4FF, 0x8C7BFF], chatgpt: [chatgpt, 0x10A37F, 0x5CFFC8], gemini: [gemini, 0x4285F4, 0x9B72CB],
-  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF, false, 2], home: [home, 0x6FA8C0, 0x8E86C4, false, 1.5]
+  claude: [claude, 0xD97757, 0xF2B39B], telegram: [telegram, 0x2AABEE, 0x7FD4FF], coach: [coach, 0x10A37F, 0x5CFFC8, true], n8n: [n8n, 0xEA4B71, 0xFF8FA8], guard: [guard, 0x00E6B4, 0x00D4FF, false, 2], home: [home, 0x7FC4DA, 0x9A92C8, false, 1.5]
 };
 
 /* ---------- движок ---------- */
