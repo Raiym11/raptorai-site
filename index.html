@@ -908,7 +908,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <section class="hero" style="position:relative;z-index:1">
   <div class="hero-inner">
   <div class="hero-copy">
-    <h1>ИИ-агенты под ключ<br><span style="color:var(--cyan)" id="typing-text">по цене подписки</span></h1>
+    <h1><span class="h1a">ИИ-агенты под ключ</span><br><span style="color:var(--cyan)" id="typing-text">по цене подписки</span></h1>
     <p class="hero-sub">Отвечают клиентам за 10 секунд, обрабатывают заявки и ведут до продажи. Готовый агент за 3-7 дней. Платите один раз, система ваша навсегда.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
@@ -1033,25 +1033,31 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <div class="container">
     <div class="section-label">Пакеты</div>
     <h2 class="section-title">Сколько <span>стоит</span></h2>
-    <p class="section-sub">Ориентир по цене. Точную стоимость называем после консультации и фиксируем до старта.</p>
+    <p class="section-sub" style="max-width:860px">Цена зависит от числа подключений. Подключение - это канал, где вам пишут клиенты (сайт, Telegram), или ваша система (CRM, таблица, почта). База знаний из ваших файлов и уведомления вам в Telegram входят в любой пакет.</p>
+    <div class="pkc bk-glass reveal" data-bk="pkc">
+      <div class="pkc-title pkc-h">Какой пакет мой?<small>Укажите кнопками − и +, сколько у вас каналов и систем: подходящий пакет подсветится ниже</small></div>
+      <div class="pkc-row"><div class="pkc-f"><span>Каналы, где пишут клиенты</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><div class="pkc-f"><span>Системы, куда передавать данные</span><div class="pkc-step"><button type="button" data-d="-1" aria-label="Меньше">−</button><output>1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div><label class="pkc-sw"><input type="checkbox"><i></i><span>Есть сложное подключение</span><span class="pkc-q" tabindex="0" aria-label="Что считается сложным подключением">?<u>1С, каталог товаров с поиском, своя система без готовой интеграции или нестандартная логика (расчёт цены, оплата, разные отделы).</u></span></label></div>
+      <div class="pkc-res" aria-live="polite"><span class="pkc-lead"><span class="pkc-num"><b>2</b></span> </span><span class="pkc-word">подключения</span> → пакет <b class="pkc-pk">«Бизнес»</b><span class="pkc-price">, от 25 000 ₽.</span><small style="display:none"> Точную цену называем в смете до старта.</small></div>
+    </div>
     <div class="pk-grid reveal">
       <div class="pk-card">
         <div class="pk-name">Старт</div>
         <div class="pk-price"><small>от</small> 4 990 ₽</div>
-        <div class="pk-for">Лёгкое подключение</div>
+        <div class="pk-for pk-conn">Лёгкое подключение</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>Один канал общения с клиентами</li>
           <li><i class="fa-solid fa-check"></i>База знаний из ваших материалов</li>
           <li><i class="fa-solid fa-check"></i>Уведомления о заявках</li>
         </ul>
         <div class="pk-term">Срок: от 3 дней</div>
-        <a href="#contact" class="btn-secondary">Получить расчёт</a>
+        <a href="#contact" class="btn-secondary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Агент в Telegram отвечает на вопросы клиентов</div>
       </div>
       <div class="pk-card pk-hot">
         <div class="pk-badge">Чаще выбирают</div>
         <div class="pk-name">Бизнес</div>
         <div class="pk-price"><small>от</small> 25 000 ₽</div>
-        <div class="pk-for">Среднее подключение</div>
+        <div class="pk-for pk-conn">Среднее подключение</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>Несколько каналов и систем</li>
           <li><i class="fa-solid fa-check"></i>База знаний по вашим услугам и материалам</li>
@@ -1060,12 +1066,13 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           <li><i class="fa-solid fa-check"></i>Уведомления менеджеру о каждой заявке</li>
         </ul>
         <div class="pk-term">Срок: от 5 дней</div>
-        <a href="#contact" class="btn-primary">Получить расчёт</a>
+        <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Сайт + Telegram + CRM = 3 подключения</div>
       </div>
       <div class="pk-card">
         <div class="pk-name">Под ключ</div>
         <div class="pk-price"><small>от</small> 50 000 ₽</div>
-        <div class="pk-for">Сложное подключение</div>
+        <div class="pk-for pk-conn">Сложное подключение</div>
         <ul>
           <li><i class="fa-solid fa-check"></i>Любое количество каналов и систем</li>
           <li><i class="fa-solid fa-check"></i>Нестандартные интеграции и логика</li>
@@ -1074,10 +1081,12 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           <li><i class="fa-solid fa-check"></i>NDA и оплата по этапам</li>
         </ul>
         <div class="pk-term">Срок: от 7 дней</div>
-        <a href="#contact" class="btn-secondary">Получить расчёт</a>
+        <a href="#contact" class="btn-secondary">Получить расчёт за 1 минуту</a>
+        <div class="pk-ex"><b>Пример:</b> Агент считает цену по вашей формуле и принимает оплату</div>
       </div>
     </div>
-    <p class="pk-note">Во всех пакетах: цена и срок фиксируются до старта, 30 дней гарантии, система остаётся вашей. После запуска вы платите только за ИИ-модель и хостинг, обычно до 3 000 ₽ в месяц.</p>
+    <p class="pk-after">Цена и срок фиксируются в смете до старта и потом не меняются. Не уверены, сколько у вас подключений? Нажмите «Получить расчёт за 1 минуту», посчитаем вместе.</p>
+    <p class="pk-after pk-guar"><i class="fa-solid fa-shield-halved"></i>Гарантия 30 дней после запуска: если система работает не так, как договорились, исправляем бесплатно.</p>
   </div>
 </section>
 <!-- HOW IT WORKS -->
@@ -1085,28 +1094,12 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   <div class="container">
     <div class="section-label">Процесс</div>
     <h2 class="section-title">Как мы <span>работаем</span></h2>
-    <p class="section-sub">Без лишней бюрократии — от задачи до готового решения за 3–7 дней.</p>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Консультация</div>
-        <p class="step-desc">Разбираемся в вашей задаче, предлагаем решение и называем точную цену. Без скрытых платежей.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Разработка</div>
-        <p class="step-desc">Строим систему, тестируем на реальных данных и показываем промежуточный результат.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Запуск</div>
-        <p class="step-desc">Деплоим на ваш сервер или наш, передаём управление и обучаем как пользоваться.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-title">Поддержка</div>
-        <p class="step-desc">Остаёмся на связи: гарантия 30 дней, ошибки исправляем бесплатно.</p>
-      </div>
+    <p class="section-sub">Без лишней бюрократии: от задачи до готового решения за 3-7 дней.</p>
+    <div class="pw reveal" id="pw">
+      <div class="pw-step"><span class="pw-n">01</span><div class="pw-ic"><i class="fa-solid fa-comments"></i></div><div class="pw-chip">цена до старта</div><div class="pw-t">Консультация</div><p class="pw-d">Разбираемся в вашей задаче, предлагаем решение и называем точную цену. Без скрытых платежей.</p></div>
+      <div class="pw-step"><span class="pw-n">02</span><div class="pw-ic"><i class="fa-solid fa-code"></i></div><div class="pw-chip">от 3 дней</div><div class="pw-t">Разработка</div><p class="pw-d">Строим систему, тестируем на реальных данных и показываем промежуточный результат.</p></div>
+      <div class="pw-step"><span class="pw-n">03</span><div class="pw-ic"><i class="fa-solid fa-rocket"></i></div><div class="pw-chip">обучаем команду</div><div class="pw-t">Запуск</div><p class="pw-d">Ставим на ваш сервер или наш, передаём управление и показываем, как пользоваться.</p></div>
+      <div class="pw-step"><span class="pw-n">04</span><div class="pw-ic"><i class="fa-solid fa-shield-halved"></i></div><div class="pw-chip">30 дней гарантии</div><div class="pw-t">Поддержка</div><p class="pw-d">Остаёмся на связи: ошибки в работе системы исправляем бесплатно.</p></div>
     </div>
   </div>
 </section>
@@ -1964,5 +1957,109 @@ a.service-card-link>.service-card{flex:1}
 .footer-logo-block{order:2}
 .footer-copy{order:3}
 </style>
+<style id="upd-1117b">
+/* пакеты как на страницах услуг */
+#packages{--pacc:#00D4FF}
+.bk-glass{border-radius:22px;background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.025) 60%),rgba(10,16,24,.6);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 30px 70px -40px rgba(0,0,0,.9)}
+.pkc{margin:30px auto 0;padding:30px 36px}
+.pkc-title.pkc-h{font:800 clamp(20px,2.2vw,25px)/1.25 'Inter',sans-serif;letter-spacing:-.01em;color:#fff;margin-bottom:18px}
+.pkc-title.pkc-h small{display:block;margin-top:7px;font:500 13.5px/1.5 'Inter',sans-serif;color:var(--gray)}
+.pkc-row{display:flex;flex-wrap:wrap;gap:16px 34px;align-items:center}
+.pkc-f{display:flex;align-items:center;gap:14px;font-size:15px;color:rgba(240,244,248,.9)}
+.pkc-step{display:inline-flex;align-items:center;border-radius:99px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04)}
+.pkc-step button{width:38px;height:38px;border:0;background:none;color:#F0F4F8;font-size:20px;line-height:1;cursor:pointer;border-radius:50%;transition:background .2s,color .2s}
+.pkc-step button:hover:not(:disabled){background:var(--pacc);color:#04121a}
+.pkc-step button:disabled{opacity:.3;cursor:default}
+.pkc-step output{min-width:30px;text-align:center;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.pkc-sw{display:inline-flex;align-items:center;gap:12px;font-size:15px;cursor:pointer;color:rgba(240,244,248,.9);position:relative}
+.pkc-sw input{position:absolute;opacity:0;pointer-events:none}
+.pkc-sw>i{width:46px;height:26px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);position:relative;transition:background .3s;flex:none}
+.pkc-sw>i::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#F0F4F8;transition:transform .3s cubic-bezier(.3,1.4,.5,1)}
+.pkc-sw input:checked+i{background:var(--pacc);border-color:transparent;box-shadow:0 0 18px -2px var(--pacc)}
+.pkc-sw input:checked+i::after{transform:translateX(20px);background:#04121a}
+.pkc-q{position:relative;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:12px;font-weight:800;color:var(--pacc);border:1px solid rgba(0,212,255,.6);cursor:help}
+.pkc-q u{position:absolute;right:-8px;bottom:calc(100% + 10px);width:min(300px,78vw);padding:12px 14px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:500;line-height:1.5;color:#F0F4F8;background:#0d1620;border:1px solid rgba(0,212,255,.45);box-shadow:0 20px 40px -18px rgba(0,0,0,.9);opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .2s,transform .2s;z-index:5}
+.pkc-q:hover u,.pkc-q:focus u{opacity:1;transform:none}
+.pkc-res{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.5}
+.pkc-res b{color:var(--pacc)}
+.pkc-num{display:inline-block;overflow:hidden;vertical-align:bottom;height:1.5em}
+.pkc-num>b{display:inline-block;font-variant-numeric:tabular-nums}
+.pkc-num>b.flip{animation:pkcFlip .38s cubic-bezier(.2,.7,.2,1)}
+@keyframes pkcFlip{0%{transform:translateY(-100%) rotateX(80deg);opacity:0}100%{transform:none;opacity:1}}
+.pkc-res small{display:block;margin-top:4px;font-size:14px;font-weight:500;color:var(--gray)}
+#packages .pk-grid{margin-top:44px}
+#packages .pk-card{transition:transform .35s ease,border-color .35s,box-shadow .35s,opacity .35s}
+#packages .pk-card.is-pick{transform:translateY(-10px);border-color:var(--pacc);box-shadow:0 0 0 1px rgba(0,212,255,.4),0 30px 70px -26px var(--pacc)}
+#packages .pk-card.is-dim{opacity:.72}
+#packages .pk-hot:not(.is-pick){border-color:rgba(255,255,255,.16);box-shadow:none}
+.pk-conn{font-weight:700;color:#F0F4F8 !important;font-size:15px !important;padding:8px 12px;border-radius:10px;background:rgba(0,212,255,.1);border:1px dashed rgba(0,212,255,.4);width:fit-content}
+.pk-ex{font-size:13px;line-height:1.5;color:var(--gray);margin-top:2px}
+.pk-ex b{color:rgba(240,244,248,.8);font-weight:600}
+.pk-after{margin:64px auto 0;font-size:15px;line-height:1.7;color:var(--gray);text-align:center;text-wrap:balance;max-width:860px}
+.pk-guar{margin-top:16px;color:rgba(240,244,248,.9)}
+.pk-guar i{color:var(--pacc);margin-right:9px}
+@media(max-width:900px){#packages .pk-card.is-pick{transform:none}.pkc{padding:22px 18px}.pkc-f{width:100%;justify-content:space-between}}
+/* процесс */
+.pw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:pw}
+.pw-step{position:relative;overflow:hidden;padding:34px 28px 32px;border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 60%),rgba(10,16,24,.55);border:1px solid rgba(255,255,255,.1);transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .5s,box-shadow .5s}
+.pw-step::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(135deg,#00D4FF,#8C7BFF,#FF7AE0);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .5s}
+.pw-step::after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-110px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,212,255,.22),rgba(140,123,255,.08),transparent);opacity:0;transition:opacity .6s;pointer-events:none}
+.pw-step.on,.pw-step:hover{transform:translateY(-8px);box-shadow:0 30px 70px -30px rgba(0,212,255,.45)}
+.pw-step.on::before,.pw-step:hover::before,.pw-step.on::after,.pw-step:hover::after{opacity:1}
+.pw-n{position:absolute;right:18px;top:6px;font:900 86px/1 'Inter',sans-serif;letter-spacing:-.05em;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0));-webkit-background-clip:text;background-clip:text;color:transparent;transition:all .5s}
+.pw-step.on .pw-n,.pw-step:hover .pw-n{background-image:linear-gradient(180deg,rgba(0,212,255,.55),rgba(140,123,255,0))}
+.pw-ic{position:relative;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:21px;color:#9fe9ff;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);transition:all .5s}
+.pw-step.on .pw-ic,.pw-step:hover .pw-ic{color:#06131c;background:linear-gradient(135deg,#00D4FF,#8C7BFF);border-color:transparent;box-shadow:0 10px 30px -8px rgba(0,212,255,.7)}
+.pw-chip{display:inline-block;margin-top:22px;padding:5px 11px;border-radius:99px;font:700 12px/1.3 'Manrope',sans-serif;letter-spacing:.04em;color:#5CFFC8;background:rgba(92,255,200,.08);border:1px solid rgba(92,255,200,.25)}
+.pw-t{margin-top:14px;font-size:20px;font-weight:800;letter-spacing:-.01em}
+.pw-d{margin-top:10px;font-size:15px;line-height:1.65;color:var(--gray)}
+@media(max-width:1000px){.pw{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.pw{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.pw-step{transition:none}}
+/* контакт крупнее */
+#contact .container{max-width:1320px}
+#contact .form-wrap{gap:72px;align-items:center}
+#contact .form-info h2{font-size:clamp(32px,4vw,54px)}
+#contact .form-info p{font-size:18px}
+#contact .form-perk{font-size:17px;gap:14px}
+#contact .form-perk i{font-size:16px}
+#contact .form-perks{gap:18px}
+#contact .consult-badge{font-size:16px;padding:12px 20px}
+#contact .contact-form{padding:52px 48px}
+#contact .quiz-q{font-size:26px;margin-bottom:22px}
+#contact .quiz-opts{gap:12px}
+#contact .quiz-opts button{font-size:17px;padding:19px 22px;border-radius:14px}
+#contact .quiz-count{font-size:14px}
+#contact .form-group input,#contact .form-group textarea{font-size:16px;padding:15px 16px}
+@media(max-width:760px){#contact .contact-form{padding:30px 20px}#contact .quiz-q{font-size:21px}#contact .quiz-opts button{font-size:15.5px;padding:15px 16px}}
+/* слоган в одну строку */
+.hero h1 .h1a{white-space:nowrap;color:inherit}
+@media(min-width:1001px){.hero-inner{max-width:1280px;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}.hero h1{font-size:clamp(40px,3.9vw,60px);text-wrap:wrap}.hero h1 #typing-text{white-space:nowrap;font-size:.84em}}
+</style>
+<script>
+(function(){
+function plural(n,a,b,c){var m=n%100,k=n%10;return(m>10&&m<20)?c:k===1?a:(k>1&&k<5)?b:c}
+var box=document.querySelector('#packages .pkc');if(box){
+ var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+ var cards=$$('.pk-card',box.parentNode),outs=$$('output',box),sw=$('input[type=checkbox]',box),vals=[1,1],mins=[0,0];
+ var num=$('.pkc-num b',box),word=$('.pkc-word',box),name=$('.pkc-pk',box),price=$('.pkc-price',box),note=$('.pkc-res small',box),lead=$('.pkc-lead',box),last=null;
+ function pick(){var total=vals[0]+vals[1],hard=sw.checked,k=hard?2:total<=1?0:total<=4?1:2;
+  outs.forEach(function(o,i){o.textContent=vals[i]});
+  $$('.pkc-step',box).forEach(function(st,i){var b=$$('button',st);b[0].disabled=vals[i]<=mins[i]||total<=1;b[1].disabled=vals[i]>=12});
+  if(hard){lead.style.display='none';word.textContent='Есть сложное подключение'}
+  else{lead.style.display='';word.textContent=plural(total,'подключение','подключения','подключений');if(num.textContent!==String(total)){num.textContent=total;num.classList.remove('flip');void num.offsetWidth;num.classList.add('flip')}}
+  var c=cards[k];name.textContent='«'+$('.pk-name',c).textContent.trim()+'»';price.textContent=', '+$('.pk-price',c).textContent.replace(/\s+/g,' ').trim()+'.';
+  note.style.display=hard?'':'none';
+  if(k!==last){last=k;cards.forEach(function(x,i){x.classList.toggle('is-pick',i===k);x.classList.toggle('is-dim',i!==k)})}}
+ $$('.pkc-step',box).forEach(function(st,i){st.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;vals[i]=Math.max(mins[i],Math.min(12,vals[i]+(+b.getAttribute('data-d'))));pick()})});
+ sw.addEventListener('change',pick);pick();}
+var pw=document.getElementById('pw');if(pw&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ var st=[].slice.call(pw.children),k=0,tm=null,hov=false;
+ function go(){st.forEach(function(x,i){x.classList.toggle('on',i===k)});k=(k+1)%st.length}
+ pw.addEventListener('mouseenter',function(){hov=true;st.forEach(function(x){x.classList.remove('on')})});
+ pw.addEventListener('mouseleave',function(){hov=false});
+ new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!tm){go();tm=setInterval(function(){if(!hov)go()},2200)}}else{clearInterval(tm);tm=null}}).observe(pw);}
+})();
+</script>
 </body>
 </html>
