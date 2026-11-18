@@ -43,15 +43,36 @@ function init() {
     wrap.position.copy(home); objs.push(o); return o;
   };
 
-  // 1. Иконка: объёмная плитка + картинка владельца на лицевой стороне
+  // 1. Иконка: полностью объёмная модель (плитка с градиентом, выпуклая рамка, объектив, точка)
   {
     const g = new Group();
-    const body = new Mesh(new RoundedBoxGeometry(1.5, 1.5, 0.38, 6, 0.32), phys(0xc8186a, { roughness: 0.3 }));
-    g.add(body);
-    const tex = new TextureLoader().load('/assets/ig-3d.png'); tex.colorSpace = SRGBColorSpace;
-    const face = new Mesh(new PlaneGeometry(1.64, 1.6), new MeshBasicMaterial({ map: tex, transparent: true, toneMapped: false }));
-    face.position.z = 0.195; g.add(face);
-    add(g, { x: 0, y: 0, z: 0 }, [-0.2, 0.35, 0], 'logo');
+    const rr = (w, h, r) => { const s = new Shape(), x = -w / 2, y = -h / 2;
+      s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r); s.lineTo(x + w, y + h - r);
+      s.quadraticCurveTo(x + w, y + h, x + w - r, y + h); s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+      s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s; };
+    const S = 1.6;
+    const gc = document.createElement('canvas'); gc.width = gc.height = 256; const gx = gc.getContext('2d');
+    let gr = gx.createRadialGradient(40, 256, 10, 60, 230, 330);
+    gr.addColorStop(0, '#ffd56b'); gr.addColorStop(0.25, '#ff8a3d'); gr.addColorStop(0.5, '#ff2e63'); gr.addColorStop(0.7, '#c81ea0'); gr.addColorStop(1, '#5a2bff');
+    gx.fillStyle = gr; gx.fillRect(0, 0, 256, 256);
+    const gt = new CanvasTexture(gc); gt.colorSpace = SRGBColorSpace;
+    gt.repeat.set(1 / (S + 0.3), 1 / (S + 0.3)); gt.offset.set(0.5, 0.5);
+    const tileGeo = new ExtrudeGeometry(rr(S, S, 0.42), { depth: 0.22, bevelEnabled: true, bevelThickness: 0.16, bevelSize: 0.14, bevelSegments: 10, curveSegments: 24 });
+    tileGeo.translate(0, 0, -0.11);
+    const capMat = new MeshPhysicalMaterial({ map: gt, roughness: 0.4, clearcoat: 0.6, clearcoatRoughness: 0.08, envMapIntensity: 0.15 });
+    const sideMat = phys(0xd81b7a);
+    g.add(new Mesh(tileGeo, [capMat, sideMat]));
+    const white = phys(0xffffff, { roughness: 0.22, envMapIntensity: 0.45 });
+    const frame = rr(1.12, 1.12, 0.32); frame.holes.push(rr(0.88, 0.88, 0.2));
+    const fGeo = new ExtrudeGeometry(frame, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.03, bevelSegments: 6, curveSegments: 24 });
+    const fm = new Mesh(fGeo, white); fm.position.z = 0.26; g.add(fm);
+    const ring = new Shape(); ring.absarc(0, 0, 0.3, 0, Math.PI * 2, false);
+    const hole = new Shape(); hole.absarc(0, 0, 0.19, 0, Math.PI * 2, true); ring.holes.push(hole);
+    const rm = new Mesh(new ExtrudeGeometry(ring, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.03, bevelSegments: 6, curveSegments: 40 }), white);
+    rm.position.z = 0.26; g.add(rm);
+    const dot = new Mesh(new SphereGeometry(0.075, 24, 18), white); dot.position.set(0.3, 0.3, 0.33); dot.scale.z = 0.7; g.add(dot);
+    g.scale.setScalar(0.68);
+    add(g, { x: 0, y: 0, z: 0 }, [-0.25, 0.4, 0], 'logo');
   }
   // 2. Сердце
   {
@@ -66,7 +87,7 @@ function init() {
     const geo = new ExtrudeGeometry(s, { depth: 0.28, bevelEnabled: true, bevelThickness: 0.2, bevelSize: 0.16, bevelSegments: 10, curveSegments: 40 });
     geo.center();
     const m = new Mesh(geo, phys(0xe8125f));
-    m.scale.setScalar(0.5);
+    m.scale.setScalar(0.36);
     add(m, { x: 0, y: 0, z: 0 }, [0.15, -0.3, 0.1], 'heart');
   }
   // 3. Облачко комментария с числом
@@ -84,7 +105,7 @@ function init() {
     bubTex.redraw(24);
     const label = new Mesh(new PlaneGeometry(1.9, 0.95), new MeshBasicMaterial({ map: bubTex, transparent: true, toneMapped: false }));
     label.position.set(0, 0.1, 0.36); g.add(label);
-    g.scale.setScalar(0.52);
+    g.scale.setScalar(0.38);
     add(g, { x: 0, y: 0, z: 0 }, [-0.1, 0.4, 0], 'bubble');
   }
   // 4. Плашка подписчиков
@@ -101,7 +122,7 @@ function init() {
     badgeTex.redraw('1 000');
     const label = new Mesh(new PlaneGeometry(3.3, 0.825), new MeshBasicMaterial({ map: badgeTex, transparent: true, toneMapped: false }));
     label.position.z = 0.165; g.add(label);
-    g.scale.setScalar(0.62);
+    g.scale.setScalar(0.46);
     add(g, { x: 0, y: 0, z: 0 }, [0.1, -0.35, -0.05], 'badge');
   }
 
@@ -119,7 +140,7 @@ function init() {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = { logo: [0.06, 0.12], heart: [0.98, 0.38], bubble: [0.03, 0.72], badge: [0.86, 0.9] };
+  const anchors = { logo: [0.1, 0.1], heart: [0.9, 0.36], bubble: [0.08, 0.72], badge: [0.76, 0.88] };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
