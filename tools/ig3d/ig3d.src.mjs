@@ -140,8 +140,8 @@ function init() {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = { logo: [0.07, 0.11], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] };
-  const sizePx = { logo: 110, heart: 72, bubble: 86, badge: 175 };
+  const anchors = { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] };
+  const sizePx = { logo: 140, heart: 72, bubble: 86, badge: 175 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
