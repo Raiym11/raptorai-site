@@ -261,7 +261,7 @@ function init(host, cv, mode) {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = mode === 'lead' ? { target: [0.92, 0.0], bell: [0.0, 0.05], doc: [0.93, 0.97] } : mode === 'tour' ? { globe: [1.0, 0.04], plane: [0.03, 0.02], pin: [-0.01, 0.9] } : mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [1.0, 0.06], bars: [-0.01, 0.95], coin: [0.0, 0.04] };
+  const anchors = mode === 'lead' ? { target: [0.92, 0.0], bell: [0.0, 0.05], doc: [0.93, 0.97] } : mode === 'tour' ? { globe: [1.0, 0.04], plane: [0.03, 0.02], pin: [-0.01, 0.9] } : mode === 'ig' ? { logo: [0.05, 0.22], heart: [0.95, 0.4], bubble: [0.05, 0.72], badge: [0.8, 0.89] } : { lens: [0.9, 0.1], bars: [-0.01, 0.95], coin: [0.0, 0.04] };
   const sizePx = mode === 'lead' ? { target: 110, bell: 80, doc: 90 } : mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
