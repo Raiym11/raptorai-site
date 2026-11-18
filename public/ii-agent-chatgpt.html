@@ -739,6 +739,76 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <link rel="stylesheet" href="/css/home-blocks.css?v=2">
 <style id="hb-theme">.hb{--hba:#10A37F;--hba-rgb:16,163,127;--hbb:#5CFFC8;--hbb-rgb:92,255,200;--hbc:#5CFFC8}</style>
 <style id="pg-acc">body{--pa:#10A37F;--pb:#5CFFC8}</style>
+<style id="gpt-examples">
+.hb .cx3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.hb .pf .tw-nav b,.hb .pf .tw-nav em{color:#9b2c63}.hb .pf .tw-nav b i{color:#e85d9b}
+.hb .pf-hero{background:linear-gradient(120deg,#fde7ef,#f4e3ff 55%,#ffeedd)}
+.hb .pf .tw-h1{color:#4a1734;text-shadow:none}
+.hb .pf-bottles{position:absolute;right:22px;bottom:12px;display:flex;gap:10px;align-items:flex-end}
+.hb .pf-bottles i{display:block;width:26px;height:44px;border-radius:7px 7px 9px 9px;background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(232,93,155,.55));box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 8px 14px -6px rgba(120,20,70,.5);position:relative}
+.hb .pf-bottles i::before{content:"";position:absolute;left:8px;top:-9px;width:10px;height:9px;border-radius:2px;background:#c9a24a}
+.hb .pf-bottles i:nth-child(2){height:56px;background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(160,110,255,.6))}
+.hb .pf-bottles i:nth-child(3){height:38px;background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(255,170,90,.6))}
+.hb .pf .tw-cards .c1{background:linear-gradient(135deg,#ffb3cf,#e85d9b)}.hb .pf .tw-cards .c2{background:linear-gradient(135deg,#d9b48a,#8a5a3c)}.hb .pf .tw-cards .c3{background:linear-gradient(135deg,#bff3e2,#3fb8a0)}
+.hb .pf .tw-cards small{color:#9b2c63}
+.hb .pf .tw-ch{background:linear-gradient(90deg,#e85d9b,#9b6bff)}
+.hb .pf .tw-u{background:#9b2c63}.hb .pf .tw-a b{color:#9b2c63}
+/* командный центр */
+.hb .hq{position:relative;width:100%;max-width:470px;min-height:380px;margin:0 auto;padding:16px;border-radius:22px;background:radial-gradient(80% 60% at 20% 0%,rgba(var(--hba-rgb),.25),transparent 70%),linear-gradient(160deg,#0c1622,#070b11);border:1px solid rgba(var(--hba-rgb),.35);box-shadow:0 40px 80px -30px rgba(var(--hba-rgb),.55),inset 0 1px 0 rgba(255,255,255,.08);color:#e9f3f8;font-family:'Inter',sans-serif;overflow:hidden}
+.hb .hq::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);pointer-events:none}
+.hb .hq-top{display:flex;align-items:center;gap:12px}
+.hb .hq-top b{display:block;font:800 14px 'Unbounded','Inter',sans-serif;letter-spacing:-.01em}
+.hb .hq-top small{font-size:10.5px;color:#9fb3c2}
+.hb .hq-core{position:relative;width:46px;height:46px;flex:none}
+.hb .hq-core i{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(var(--hba-rgb),.8);border-left-color:transparent;border-bottom-color:transparent;animation:hqSpin 3s linear infinite}
+.hb .hq-core i:nth-child(2){inset:7px;border-color:rgba(var(--hbb-rgb),.85);border-right-color:transparent;animation-duration:2.2s;animation-direction:reverse}
+.hb .hq-core i:nth-child(3){inset:16px;border:0;background:radial-gradient(circle,#fff,rgba(var(--hba-rgb),.9) 60%,transparent 70%);animation:hqPulse 1.8s ease-in-out infinite}
+@keyframes hqSpin{to{transform:rotate(360deg)}}@keyframes hqPulse{50%{transform:scale(.75);opacity:.7}}
+.hb .hq-src{margin-left:auto;display:flex;gap:6px}
+.hb .hq-src span{font-size:10px;padding:4px 7px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.hb .hq-src i{color:var(--hba);margin-right:4px}
+.hb .hq-list{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.hb .hq-t{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(var(--hba-rgb),.2);opacity:0;transform:translateX(16px);transition:all .45s cubic-bezier(.2,.8,.2,1.2)}
+.hb .hq-t>i{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;font-size:13px;color:#06131c;background:linear-gradient(135deg,var(--hba),var(--hbb))}
+.hb .hq-t div{flex:1;min-width:0}.hb .hq-t b{display:block;font-size:11.5px}.hb .hq-t small{display:block;font-size:10px;color:#9fb3c2;margin-top:2px}
+.hb .hq-b,.hb .hq-tag{font-style:normal;font-size:10px;font-weight:700;padding:5px 9px;border-radius:8px;white-space:nowrap}
+.hb .hq-b{background:var(--hba);color:#06131c;transition:all .3s}.hb .hq-b.ok{background:#5CFFC8}
+.hb .hq-tag{background:rgba(255,193,77,.15);color:#ffd27a;border:1px solid rgba(255,193,77,.35)}
+.hb .hq-bar{display:block;height:3px;margin-top:6px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}.hb .hq-bar u{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--hba),var(--hbb));transition:width 2s ease-out}
+.hb .hq.s1 .t1,.hb .hq.s2 .t1,.hb .hq.s2 .t2,.hb .hq.s3 .t1,.hb .hq.s3 .t2,.hb .hq.s3 .t3,.hb .hq.s4 .hq-t{opacity:1;transform:none}
+.hb .hq.s2 .hq-bar u,.hb .hq.s3 .hq-bar u,.hb .hq.s4 .hq-bar u{width:65%}
+.hb .hq-chat{margin-top:10px;display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-height:58px}
+.hb .hq-chat span{font-size:11px;padding:7px 10px;border-radius:11px;opacity:0;transform:translateY(8px);transition:all .4s}
+.hb .hq-me{background:#2b5278;color:#fff}.hb .hq-ai{align-self:flex-start;background:rgba(92,255,200,.12);color:#5CFFC8;border:1px solid rgba(92,255,200,.35)}
+.hb .hq.s4 .hq-me,.hb .hq.s5 .hq-me,.hb .hq.s5 .hq-ai{opacity:1;transform:none}
+.hb .hq.s5 .hq-t{opacity:1;transform:none}.hb .hq.s5 .hq-bar u{width:65%}
+/* учётная система */
+.hb .uc{position:relative;display:flex;width:100%;max-width:520px;height:400px;margin:0 auto;border-radius:16px;overflow:hidden;background:#f2f3f5;color:#222;font-family:'Inter',sans-serif;font-size:10.5px;box-shadow:0 40px 80px -30px rgba(var(--hba-rgb),.5),0 0 0 1px rgba(255,255,255,.35)}
+.hb .uc-side{width:112px;flex:none;padding:10px 8px;display:flex;flex-direction:column;gap:4px;background:#f2f3f5;border-right:1px solid #e3e5e8}
+.hb .uc-logo{display:flex;align-items:center;gap:7px;margin-bottom:8px;font-size:10px;line-height:1.15;font-weight:700}
+.hb .uc-logo i{width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#ffcc33,#e6a800)}
+.hb .uc-logo small{font-weight:500;color:#888}
+.hb .uc-side>span{padding:6px 7px;border-radius:7px;color:#555}.hb .uc-side>span.on{background:#fff;color:#111;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.hb .uc-main{flex:1;min-width:0;display:flex;flex-direction:column;padding:8px;gap:7px;position:relative}
+.hb .uc-tabs{display:flex;gap:4px}.hb .uc-tabs span{padding:5px 8px;border-radius:7px;background:#fff;color:#666;white-space:nowrap}.hb .uc-tabs span.on{color:#111;font-weight:600;box-shadow:inset 3px 0 0 #f5c400}
+.hb .uc-work{background:#fff;border-radius:10px;padding:8px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.hb .uc-h{display:flex;align-items:center;gap:10px;margin-bottom:6px}.hb .uc-h b{font-size:13px;font-weight:600}.hb .uc-h em{font-style:normal;color:#3d6ee8}
+.hb .uc-r{display:grid;grid-template-columns:.7fr 1.4fr 1.1fr .8fr;gap:4px;padding:4px 4px;border-radius:6px;transition:background .3s}
+.hb .uc-hd{color:#777;font-weight:600;border-bottom:1px solid #eee}
+.hb .uc-r span:last-child{text-align:right}
+.hb .uc.s1 .r1,.hb .uc.s1 .r2,.hb .uc.s1 .r4,.hb .uc.s2 .r1,.hb .uc.s2 .r2,.hb .uc.s2 .r4,.hb .uc.s3 .r1,.hb .uc.s3 .r2,.hb .uc.s3 .r4{background:rgba(var(--hba-rgb),.16)}
+.hb .uc-links{display:flex;flex-wrap:nowrap;gap:4px}.hb .uc-links span{font-size:9.5px;white-space:nowrap}
+.hb .uc-links span{display:flex;align-items:center;gap:5px;padding:5px 8px;border-radius:8px;background:#fff;border:1px solid #e3e5e8;font-weight:600;opacity:0;transform:translateY(8px);transition:all .4s}
+.hb .uc-links .l1 i{color:#2aabee}.hb .uc-links .l2 i{color:#e1306c}.hb .uc-links .l3 i{color:#888}
+.hb .uc.s2 .uc-links span,.hb .uc.s3 .uc-links span{opacity:1;transform:none}.hb .uc.s2 .l2{transition-delay:.25s}.hb .uc.s2 .l3{transition-delay:.5s}
+.hb .uc-ai{position:relative;flex:1;padding:8px 10px;border-radius:10px;background:linear-gradient(135deg,#0f1b28,#122434);color:#e8f2f8;opacity:0;transform:translateY(10px);transition:all .45s cubic-bezier(.2,.8,.2,1.15)}
+.hb .uc.s3 .uc-ai{opacity:1;transform:none}
+.hb .uc-ai-h{display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--hba)}
+.hb .uc-ai p{margin:5px 0 0!important;font-size:11px!important;line-height:1.45!important;color:#e8f2f8!important;max-width:none!important}
+.hb .uc-ai p b{color:#5CFFC8}
+.hb .uc-tools{width:30px;flex:none;display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:12px;color:#888;border-left:1px solid #e3e5e8;font-size:12px}
+@media(max-width:900px){.hb .cx3{grid-template-columns:1fr!important}.hb .uc-side{display:none}}
+</style>
 </head>
 <body class="svc svc-brand" style="--pacc:#10A37F;--pacc2:#5CFFC8;--pbt:#04130e">
 <a class="skip-link" href="/#services">К содержимому</a>
@@ -874,28 +944,77 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
 <section id="case">
   <div class="container">
-    <div class="section-label">Задачи</div>
-    <h2 class="section-title">Как это выглядит <span>в переписке</span></h2>
-    <p class="bk-sub" style="max-width:760px">Выберите задачу: что пишет клиент, что отвечает агент и что получает менеджер.</p>
-    <div class="cz reveal" data-bk="cz" style="margin-top:30px">
-      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-filter"></i><span><b>Отдел продаж</b><small>первая линия</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-headset"></i><span><b>Поддержка 24/7</b><small>днём и ночью</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-microphone"></i><span><b>Голосовые</b><small>речь в текст</small></span></button></div>
-      <div class="cz-pane on" data-v="anim">
-        <div class="cz-info"><h3>Отвечает на вопросы и доводит до заявки</h3><div class="czd"><p class="czd-m u" style="--i:0"><b>Клиент:</b> Здравствуйте, есть межкомнатные двери белого цвета?</p><p class="czd-m a" style="--i:1"><b>Агент:</b> Здравствуйте! Да, белые есть в трёх сериях. Сколько дверей нужно и какой ширины проёмы?</p><p class="czd-m u" style="--i:2"><b>Клиент:</b> 4 штуки, 80 см</p><p class="czd-m a" style="--i:3"><b>Агент:</b> Понял. Подготовить расчёт с доставкой? Оставьте номер, менеджер перезвонит.</p></div><p class="czd-mgr" style="--i:4"><b>Менеджер получил:</b> двери белые · 4 шт., 80 см · расчёт с доставкой · телефон</p></div>
-        <div class="cz-vis"><div class="an fun" data-t="500,1300,2100,2900"><div class="fun-r r1"><i></i><span>Все обращения</span></div><div class="fun-r r2"><i></i><span>Целевые</span></div><div class="fun-r r3"><i></i><span>Готовы купить</span></div><div class="an-res"><i class="fa-solid fa-user-check"></i><span>Менеджер получает только готовых</span></div></div></div>
+    <div class="section-label">Примеры</div>
+    <h2 class="section-title">Что умеет <span>агент на ChatGPT</span></h2>
+    <p class="bk-sub" style="max-width:760px">Три примера из разных задач: консультант на сайте, личный ассистент руководителя и аналитик учётной системы.</p>
+    <div class="hb"><div class="cx reveal" id="cx2" style="margin-top:30px">
+      <div class="cx-tabs cx3" role="tablist">
+        <button type="button" class="cx-tab on" data-i="0" data-d="12000" style="--cxd:12s"><b><i class="fa-solid fa-spray-can-sparkles"></i></b><span>Консультант на сайте</span><small>на примере парфюмерии</small><i class="cx-bar"></i></button>
+        <button type="button" class="cx-tab" data-i="1" data-d="13000" style="--cxd:13s"><b><i class="fa-solid fa-satellite-dish"></i></b><span>Командный центр</span><small>ассистент руководителя</small><i class="cx-bar"></i></button>
+        <button type="button" class="cx-tab" data-i="2" data-d="12000" style="--cxd:12s"><b><i class="fa-solid fa-table-list"></i></b><span>Аналитик учёта</span><small>учёт + соцсети + Telegram</small><i class="cx-bar"></i></button>
       </div>
-      <div class="cz-pane" data-v="anim">
-        <div class="cz-info"><h3>Закрывает частые вопросы днём и ночью</h3><div class="czd"><p class="czd-m u" style="--i:0"><b>Клиент:</b> Добрый вечер, заказ 4512 когда привезут?</p><p class="czd-m a" style="--i:1"><b>Агент:</b> Добрый вечер! Заказ передан в доставку, привезут завтра с 10 до 14.</p><p class="czd-m u" style="--i:2"><b>Клиент:</b> А можно на субботу?</p><p class="czd-m a" style="--i:3"><b>Агент:</b> Перенос согласует менеджер. Я передал запрос, вам напишут утром.</p></div><p class="czd-mgr" style="--i:4"><b>Менеджер получил:</b> заказ 4512 · перенести доставку на субботу</p><p class="czd-fn">Статус заказа агент видит, если подключена ваша CRM или учётная система.</p></div>
-        <div class="cz-vis"><div class="an clk" data-t="400,1000,1600,2200,3000"><div class="clk-ring"><u></u><i style="--a:25deg"></i><i style="--a:110deg"></i><i style="--a:205deg"></i><i style="--a:300deg"></i><b>24/7</b><small>на связи</small></div><div class="an-res"><i class="fa-solid fa-moon"></i><span>Отвечает, когда менеджеры спят</span></div></div></div>
-      </div>
-      <div class="cz-pane" data-v="anim">
-        <div class="cz-info"><h3>Понимает голосовые сообщения</h3><div class="czd"><p class="czd-m u" style="--i:0"><b>Клиент:</b> <span class="czd-v"><i class="fa-solid fa-microphone"></i> Голосовое 0:18</span> <small>«Хочу записаться на шиномонтаж в субботу после обеда, четыре колеса, R16»</small></p><p class="czd-m a" style="--i:1"><b>Агент:</b> Добрый день! В субботу свободно 14:00 и 16:30. Записать вас?</p><p class="czd-m u" style="--i:2"><b>Клиент:</b> <span class="czd-v"><i class="fa-solid fa-microphone"></i> Голосовое 0:03</span> <small>«Давайте на два»</small></p><p class="czd-m a" style="--i:3"><b>Агент:</b> Записал на субботу, 14:00. Напомню за день.</p></div><p class="czd-mgr" style="--i:4"><b>Менеджер получил:</b> шиномонтаж 4 колеса R16 · суббота 14:00</p></div>
-        <div class="cz-vis"><div class="an wav" data-t="1500,2300"><div class="wav-b"><s style="--k:0"></s><s style="--k:7"></s><s style="--k:3"></s><s style="--k:10"></s><s style="--k:6"></s><s style="--k:2"></s><s style="--k:9"></s><s style="--k:5"></s><s style="--k:1"></s><s style="--k:8"></s><s style="--k:4"></s><s style="--k:0"></s><s style="--k:7"></s><s style="--k:3"></s><s style="--k:10"></s><s style="--k:6"></s><s style="--k:2"></s><s style="--k:9"></s><s style="--k:5"></s><s style="--k:1"></s><s style="--k:8"></s><s style="--k:4"></s><s style="--k:0"></s><s style="--k:7"></s><s style="--k:3"></s><s style="--k:10"></s><s style="--k:6"></s><s style="--k:2"></s></div><div class="wav-t"><s style="--w:92%"></s><s style="--w:78%"></s><s style="--w:55%"></s></div><div class="an-res"><i class="fa-solid fa-wave-square"></i><span>Голосовое превратилось в текст</span></div></div></div>
-      </div>
-    </div>
-    <p class="czd-note">Пример переписки. Агент отвечает по вашему прайсу и правилам, которые мы задаём при настройке.</p>
-  
-    <div class="sec-cta"><a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a></div>
-</div></section>
+
+      <div class="cx-p on" data-i="0"><article class="cw cw-wide sacase">
+        <div class="cw-txt sa-txt">
+          <h3>Консультант на сайте <span class="ig-grad">подбирает аромат как продавец</span></h3>
+          <p>Покупатель описывает, что ему нравится, агент задаёт пару вопросов, советует подходящие ароматы из вашего каталога и оформляет заказ.</p>
+          <div class="sa-pts"><span><i class="fa-solid fa-book-open"></i>Знает весь каталог и наличие</span><span><i class="fa-solid fa-wand-magic-sparkles"></i>Советует, а не просто ищет</span><span><i class="fa-solid fa-cart-shopping"></i>Доводит до корзины</span></div>
+        </div>
+        <div class="cw-vis" aria-hidden="true"><div class="sa3d pf3d"><canvas class="ig3c sa3c"></canvas>
+          <div class="tw pf" id="pf">
+            <div class="tw-nav"><b><i class="fa-solid fa-spray-can-sparkles"></i>Ароматика</b><span>Женские</span><span>Мужские</span><span>Нишевые</span><em><i class="fa-solid fa-bag-shopping"></i> 0</em></div>
+            <div class="tw-hero pf-hero"><div class="tw-h1">Найдём ваш аромат<br><small>консультант онлайн 24/7</small></div><div class="pf-bottles"><i></i><i></i><i></i></div></div>
+            <div class="tw-cards"><div><i class="c1"></i><b>Цветочные</b><small>от 3 900 ₽</small></div><div><i class="c2"></i><b>Древесные</b><small>от 4 500 ₽</small></div><div><i class="c3"></i><b>Свежие</b><small>от 3 200 ₽</small></div></div>
+            <div class="tw-chat"><div class="tw-ch"><i class="fa-solid fa-robot"></i><b>ИИ-консультант</b><span>онлайн</span></div>
+              <div class="tw-msgs"><p class="tw-u m1">Ищу аромат на подарок девушке, она любит что-то тёплое, не сладкое</p><p class="tw-a m2"></p><p class="tw-u m3">Давайте второй</p><p class="tw-ok m4"><i class="fa-solid fa-check"></i> Добавил в корзину, упаковка в подарок бесплатно</p></div></div>
+          </div></div></div>
+      </article></div>
+
+      <div class="cx-p" data-i="1"><article class="cw cw-wide sacase">
+        <div class="cw-txt sa-txt">
+          <h3>Командный центр <span class="ig-grad">одна панель для всех дел руководителя</span></h3>
+          <p>Ассистент видит почту, календарь, документы и Telegram. Сам напоминает, что важно сегодня, и делает то, что вы ответите ему одной фразой.</p>
+          <div class="sa-pts"><span><i class="fa-solid fa-calendar-check"></i>Встречи и сроки под контролем</span><span><i class="fa-solid fa-file-signature"></i>Помнит про договоры и отчёты</span><span><i class="fa-brands fa-telegram"></i>Выполняет просьбы из Telegram</span></div>
+        </div>
+        <div class="cw-vis" aria-hidden="true"><div class="sa3d bs3d"><canvas class="ig3c sa3c"></canvas>
+          <div class="hq" id="hq">
+            <div class="hq-top"><div class="hq-core"><i></i><i></i><i></i></div><div><b>Командный центр</b><small>Доброе утро. На сегодня 3 вопроса</small></div><div class="hq-src"><span><i class="fa-solid fa-envelope"></i>4</span><span><i class="fa-solid fa-calendar"></i>2</span><span><i class="fa-brands fa-telegram"></i>7</span></div></div>
+            <div class="hq-list">
+              <div class="hq-t t1"><i class="fa-solid fa-calendar-days"></i><div><b>Встреча с поставщиком в понедельник, 11:00</b><small>Подтвердите, что сможете</small></div><em class="hq-b" id="hq-b1">Подтвердить</em></div>
+              <div class="hq-t t2"><i class="fa-solid fa-file-contract"></i><div><b>2 договора нужно рассмотреть до четверга</b><small>Я выделил рискованные пункты</small><span class="hq-bar"><u></u></span></div><em class="hq-tag">до чт</em></div>
+              <div class="hq-t t3"><i class="fa-solid fa-chart-pie"></i><div><b>Отчёт за ноябрь готов</b><small>Напишите, кому из сотрудников его переслать, отправлю через Telegram</small></div></div>
+            </div>
+            <div class="hq-chat"><span class="hq-me">Перешли Ильину</span><span class="hq-ai"><i class="fa-solid fa-check"></i> Отправил отчёт Ильину в Telegram</span></div>
+          </div></div></div>
+      </article></div>
+
+      <div class="cx-p" data-i="2"><article class="cw cw-wide sacase">
+        <div class="cw-txt sa-txt">
+          <h3>Аналитик учёта <span class="ig-grad">связывает продажи с соцсетями и Telegram</span></h3>
+          <p>Агент постоянно смотрит документы продаж в учётной системе, сверяет их с заявками из Telegram и откликом в соцсетях и пишет вывод, который можно сразу применить.</p>
+          <div class="sa-pts"><span><i class="fa-solid fa-database"></i>Читает учётную систему</span><span><i class="fa-solid fa-link"></i>Связывает данные из разных мест</span><span><i class="fa-solid fa-lightbulb"></i>Пишет вывод и следующий шаг</span></div>
+        </div>
+        <div class="cw-vis" aria-hidden="true"><div class="sa3d"><canvas class="ig3c sa3c"></canvas>
+          <div class="uc" id="uc">
+            <aside class="uc-side"><div class="uc-logo"><i></i><span>Учёт<br><small>торговля</small></span></div><span>Главное</span><span class="on">Продажи</span><span>Товарные запасы</span><span>Финансы</span><span>Предприятие</span></aside>
+            <div class="uc-main">
+              <div class="uc-tabs"><span><i class="fa-solid fa-house"></i> Начало</span><span>Контрагенты</span><span class="on">Документы продаж</span></div>
+              <div class="uc-work"><div class="uc-h"><b>Документы продаж</b><em>+ Создать</em></div>
+                <div class="uc-t"><div class="uc-r uc-hd"><span>Дата</span><span>Покупатель</span><span>Товар</span><span>Сумма</span></div>
+                  <div class="uc-r r1"><span>17.11</span><span>Магазин «Уют»</span><span>Плед XL</span><span>12 400</span></div>
+                  <div class="uc-r r2"><span>17.11</span><span>ИП Котов</span><span>Плед XL</span><span>8 900</span></div>
+                  <div class="uc-r r3"><span>18.11</span><span>ООО «Дом»</span><span>Подушка</span><span>5 300</span></div>
+                  <div class="uc-r r4"><span>18.11</span><span>Магазин «Уют»</span><span>Плед XL</span><span>15 600</span></div>
+                </div></div>
+              <div class="uc-links"><span class="l1"><i class="fa-brands fa-telegram"></i>Telegram: 23 заявки</span><span class="l2"><i class="fa-solid fa-hashtag"></i>Соцсети: +4 800 охват</span><span class="l3"><i class="fa-solid fa-envelope"></i>Почта: 6</span></div>
+              <div class="uc-ai"><div class="uc-ai-h"><i class="fa-solid fa-robot"></i>Вывод агента</div><p id="uc-msg"></p></div>
+            </div>
+            <aside class="uc-tools"><i class="fa-solid fa-magnifying-glass"></i><i class="fa-regular fa-bell"></i><i class="fa-solid fa-clock-rotate-left"></i><i class="fa-regular fa-star"></i></aside>
+          </div></div></div>
+      </article></div>
+    </div></div>
+  </div>
+</section>
 <!--hb:mid--><div class="hb">
 <section id="how">
   <div class="container">
@@ -1667,5 +1786,34 @@ html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-pan
  pw.addEventListener('mouseenter',function(){hov=true;st.forEach(function(x){x.classList.remove('on')})});
  pw.addEventListener('mouseleave',function(){hov=false});
  new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!tm){go();tm=setInterval(function(){if(!hov)go()},2200)}}else{clearInterval(tm);tm=null}}).observe(pw);}})();</script>
+<script>
+(function(){
+var cx=document.getElementById('cx2');if(!cx)return;var red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var tabs=[].slice.call(cx.querySelectorAll('.cx-tab')),ps=[].slice.call(cx.querySelectorAll('.cx-p')),k=0,tm=null,vis=false;
+function show(i){k=i;tabs.forEach(function(t,j){t.classList.toggle('on',j===i);var b=t.querySelector('.cx-bar');b.style.animation='none';void b.offsetWidth;b.style.animation=''});ps.forEach(function(p,j){p.classList.toggle('on',j===i)});arm()}
+function arm(){clearTimeout(tm);if(red||!vis||cx.classList.contains('paused'))return;tm=setTimeout(function(){show((k+1)%tabs.length)},+(tabs[k].getAttribute('data-d')||9000))}
+tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i)})});
+cx.addEventListener('mouseenter',function(){cx.classList.add('paused');clearTimeout(tm)});cx.addEventListener('mouseleave',function(){cx.classList.remove('paused');arm()});
+new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)arm();else clearTimeout(tm)},{threshold:.25}).observe(cx);
+function typer(el,T,cb){var plain=T.replace(/<[^>]+>/g,''),i=0,h=[];(function step(){i+=2;var out='',n=0,tag=false;for(var j=0;j<T.length&&n<i;j++){var c=T[j];out+=c;if(c==='<')tag=true;else if(c==='>')tag=false;else if(!tag)n++}el.innerHTML=out;if(n<plain.length)h.push(setTimeout(step,26));else if(cb)cb()})();return h}
+function scene(el,steps,reset){var pan=el.closest('.cx-p'),tm=[],run=false;
+ function clear(){tm.forEach(clearTimeout);tm=[]}
+ function cycle(){clear();el.classList.remove('s1','s2','s3','s4','s5');reset();if(red){el.classList.add('s'+steps.length);steps[steps.length-1][1]&&steps[steps.length-1][1](true);return}
+  steps.forEach(function(st,i){tm.push(setTimeout(function(){el.classList.remove('s'+i);el.classList.add('s'+(i+1));if(st[1])tm=tm.concat(st[1]()||[])},st[0]))});tm.push(setTimeout(cycle,steps.total||12000))}
+ new MutationObserver(function(){var on=pan.classList.contains('on');if(on&&!run){run=true;cycle()}else if(!on&&run){run=false;clear()}}).observe(pan,{attributes:true,attributeFilter:['class']});
+ if(pan.classList.contains('on')){run=true;cycle()}}
+var pf=document.getElementById('pf'),pa=pf.querySelector('.tw-a'),bag=pf.querySelector('.tw-nav em');
+var PT='Посоветую два тёплых аромата без сладости: <b>«Кашемир и сандал»</b>, 50 мл - 6 900 ₽ и <b>«Янтарный чай»</b>, 50 мл - 5 400 ₽. Оба есть в наличии. Какой добавить в корзину?';
+scene(pf,[[500],[2200,function(){return typer(pa,PT)}],[7600],[9000,function(){bag.innerHTML='<i class="fa-solid fa-bag-shopping"></i> 1'}]],function(){pa.innerHTML='';bag.innerHTML='<i class="fa-solid fa-bag-shopping"></i> 0'});
+var hq=document.getElementById('hq'),b1=document.getElementById('hq-b1');
+var st=[[500],[1900],[3300],[7400],[9200]];st.total=13000;
+st[2][1]=function(){return[setTimeout(function(){b1.textContent='Подтверждено ✓';b1.classList.add('ok')},2200)]};
+scene(hq,st,function(){b1.textContent='Подтвердить';b1.classList.remove('ok')});
+var uc=document.getElementById('uc'),um=document.getElementById('uc-msg');
+var UT='Плед XL продаётся в 2 раза чаще, чем в октябре: <b>40% заявок пришли из Telegram</b> после поста в соцсетях. Остаток 12 шт., закончится примерно через 5 дней. Заказать у поставщика ещё 50 шт.?';
+scene(uc,[[600],[2600],[4600,function(){return typer(um,UT)}]],function(){um.innerHTML=''});
+})();
+</script>
+<script src="/js/ig3d.js?v=14" defer></script>
 </body>
 </html>

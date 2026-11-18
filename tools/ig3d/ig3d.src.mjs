@@ -11,7 +11,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 
 document.querySelectorAll('.ig3d,.sa3d').forEach((host) => {
   const cv = host.querySelector('canvas.ig3c');
-  if (cv) init(host, cv, host.classList.contains('ld3d') ? 'lead' : host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
+  if (cv) init(host, cv, host.classList.contains('pf3d') ? 'perf' : host.classList.contains('bs3d') ? 'boss' : host.classList.contains('ld3d') ? 'lead' : host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
 });
 
 function init(host, cv, mode) {
@@ -134,6 +134,60 @@ function init(host, cv, mode) {
     add(g, { x: 0, y: 0, z: 0 }, [0.1, -0.35, -0.05], 'badge');
   }
 
+  } else if (mode === 'perf') {
+    {
+      // Флакон духов: стеклянное тело, золотая крышка
+      const pts = [[0.001, -0.75], [0.5, -0.75], [0.58, -0.68], [0.6, -0.4], [0.6, 0.25], [0.55, 0.38], [0.3, 0.48], [0.16, 0.52], [0.16, 0.62], [0.001, 0.62]].map(([r, y]) => new Vector2(r, y));
+      const g = new Group();
+      g.add(new Mesh(new LatheGeometry(pts, 6), phys(0xff5fa2, { opacity: 0.8 })));
+      const liquid = new Mesh(new LatheGeometry(pts.map((v) => new Vector2(v.x * 0.86, Math.min(v.y * 0.86, 0.05))), 6), phys(0xffb3d1, { opacity: 0.9 })); g.add(liquid);
+      const cap = new Mesh(new RoundedBoxGeometry(0.42, 0.42, 0.42, 4, 0.08), phys(0xd9a520, { metalness: 0.6, roughness: 0.2, opacity: 1 })); cap.position.y = 0.82; g.add(cap);
+      add(g, { x: 0, y: 0, z: 0 }, [0.15, 0.4, 0.05], 'bottle');
+    }
+    {
+      // Подарочная коробка с бантом
+      const g = new Group(); const box = phys(0x9b6bff), rib = phys(0xffc93c, { metalness: 0.4 });
+      g.add(new Mesh(new RoundedBoxGeometry(1.1, 0.9, 1.1, 4, 0.08), box));
+      const r1 = new Mesh(new RoundedBoxGeometry(0.2, 0.93, 1.13, 2, 0.04), rib); g.add(r1);
+      const r2 = new Mesh(new RoundedBoxGeometry(1.13, 0.93, 0.2, 2, 0.04), rib); g.add(r2);
+      [-1, 1].forEach((sg) => { const b = new Mesh(new TorusGeometry(0.2, 0.07, 16, 40), rib); b.position.set(sg * 0.18, 0.58, 0); b.rotation.set(0, 0, sg * 0.6); g.add(b); });
+      add(g, { x: 0, y: 0, z: 0 }, [0.4, 0.5, 0], 'gift');
+    }
+    {
+      // Капля аромата
+      const g = new Group(); const pts = []; for (let i = 0; i <= 30; i++) { const t = i / 30; pts.push(new Vector2(Math.max(0.0001, Math.sin(t * Math.PI) * 0.5 * Math.pow(t, 0.6)), 0.7 - t * 1.4)); }
+      g.add(new Mesh(new LatheGeometry(pts, 48), phys(0xff8fc8, { opacity: 0.75 })));
+      add(g, { x: 0, y: 0, z: 0 }, [0.1, 0, 0.2], 'drop');
+    }
+  } else if (mode === 'boss') {
+    {
+      // Календарь
+      const g = new Group();
+      g.add(new Mesh(new RoundedBoxGeometry(1.2, 1.2, 0.2, 4, 0.08), phys(0xf4f7fb, { roughness: 0.3 })));
+      const top = new Mesh(new RoundedBoxGeometry(1.2, 0.34, 0.24, 4, 0.08), phys(0xff3d6e)); top.position.y = 0.43; g.add(top);
+      [-0.3, 0.3].forEach((x) => { const r = new Mesh(new CylinderGeometry(0.05, 0.05, 0.3, 16), phys(0x9fb3c2, { metalness: 0.6 })); r.position.set(x, 0.62, 0); g.add(r); });
+      const ct = textTex((x) => { x.fillStyle = '#1d2433'; x.font = '900 150px Unbounded, Inter, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('11', 128, 140); }, 256, 256); ct.redraw();
+      const f = new Mesh(new PlaneGeometry(0.9, 0.9), new MeshBasicMaterial({ map: ct, transparent: true, toneMapped: false })); f.position.set(0, -0.12, 0.11); g.add(f);
+      add(g, { x: 0, y: 0, z: 0 }, [0.15, 0.45, 0], 'cal');
+    }
+    {
+      // Бумажный самолётик (сообщение в Telegram)
+      const s1 = new Shape(); s1.moveTo(0, 0); s1.lineTo(1.2, 0.35); s1.lineTo(0.25, -0.1); s1.closePath();
+      const s2 = new Shape(); s2.moveTo(0, 0); s2.lineTo(1.2, 0.35); s2.lineTo(0.3, 0.45); s2.closePath();
+      const g = new Group(); const m = phys(0x2aabee), m2 = phys(0x7fd4ff);
+      g.add(new Mesh(new ExtrudeGeometry(s1, { depth: 0.04, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 3 }), m));
+      const w = new Mesh(new ExtrudeGeometry(s2, { depth: 0.04, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 3 }), m2); w.rotation.x = 0.7; g.add(w);
+      g.position.x = -0.6;
+      add(g, { x: 0, y: 0, z: 0 }, [0.4, -0.4, 0.2], 'plane2');
+    }
+    {
+      // Светящееся ядро с кольцами
+      const g = new Group();
+      g.add(new Mesh(new SphereGeometry(0.42, 48, 32), phys(0x00b8ff, { emissiveIntensity: 0.6 })));
+      const r1 = new Mesh(new TorusGeometry(0.75, 0.05, 16, 100), phys(0x9b6bff)); r1.rotation.x = 1.1; g.add(r1);
+      const r2 = new Mesh(new TorusGeometry(0.95, 0.035, 16, 100), phys(0x5cffc8)); r2.rotation.set(0.4, 1.0, 0); g.add(r2);
+      const o = add(g, { x: 0, y: 0, z: 0 }, [0, 0, 0], 'core'); o.idle = 0.6;
+    }
   } else if (mode === 'lead') {
     {
       // Мишень со стрелой
@@ -261,8 +315,8 @@ function init(host, cv, mode) {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = mode === 'lead' ? { target: [0.92, 0.0], bell: [0.0, 0.05], doc: [0.93, 0.97] } : mode === 'tour' ? { globe: [1.0, 0.04], plane: [0.03, 0.02], pin: [-0.01, 0.9] } : mode === 'ig' ? { logo: [0.05, 0.22], heart: [0.95, 0.4], bubble: [0.05, 0.72], badge: [0.8, 0.89] } : { lens: [0.9, 0.1], bars: [-0.01, 0.95], coin: [0.0, 0.04] };
-  const sizePx = mode === 'lead' ? { target: 110, bell: 80, doc: 90 } : mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
+  const anchors = mode === 'perf' ? { bottle: [0.97, 0.08], gift: [0.02, 0.85], drop: [0.03, 0.08] } : mode === 'boss' ? { cal: [0.97, 0.08], plane2: [0.0, 0.9], core: [0.02, 0.06] } : mode === 'lead' ? { target: [0.92, 0.0], bell: [0.0, 0.05], doc: [0.93, 0.97] } : mode === 'tour' ? { globe: [1.0, 0.04], plane: [0.03, 0.02], pin: [-0.01, 0.9] } : mode === 'ig' ? { logo: [0.05, 0.22], heart: [0.95, 0.4], bubble: [0.05, 0.72], badge: [0.8, 0.89] } : { lens: [0.9, 0.1], bars: [-0.01, 0.95], coin: [0.0, 0.04] };
+  const sizePx = mode === 'perf' ? { bottle: 110, gift: 90, drop: 60 } : mode === 'boss' ? { cal: 90, plane2: 110, core: 90 } : mode === 'lead' ? { target: 110, bell: 80, doc: 90 } : mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -306,6 +360,7 @@ function init(host, cv, mode) {
     if (o.kind === 'logo') burst(o, [0xffc94d, 0xff4f8f, 0xc64cff]);
     if (o.kind === 'heart') burst(o, [0xff3d84, 0xff7ae0, 0xffffff]);
     if (o.kind === 'bubble') { bubTex.redraw(++bubN); burst(o, [0x10b8ec, 0x8c7bff, 0xffffff]); }
+    if (['bottle', 'gift', 'drop', 'cal', 'plane2', 'core'].includes(o.kind)) burst(o, [0xff8fc8, 0x9b6bff, 0x00b8ff]);
     if (o.kind === 'target' || o.kind === 'bell' || o.kind === 'doc') burst(o, [0x5cffc8, 0x00b8ff, 0xffb400]);
     if (o.kind === 'globe' || o.kind === 'plane' || o.kind === 'pin') burst(o, [0x36c6ff, 0xffd43b, 0x3fd99a]);
     if (o.kind === 'lens' || o.kind === 'bars' || o.kind === 'coin') burst(o, [0xffb400, 0x8c7bff, 0x00d68f]);
