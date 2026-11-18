@@ -20,7 +20,7 @@ function init(host, cv, mode) {
   try { gl = new WebGLRenderer({ canvas: cv, antialias: true, alpha: true, powerPreference: 'high-performance' }); }
   catch (e) { host.classList.add('ig3-fallback'); return; }
   gl.setClearColor(0, 0);
-  gl.toneMapping = ACESFilmicToneMapping; gl.toneMappingExposure = 0.85;
+  gl.toneMapping = ACESFilmicToneMapping; gl.toneMappingExposure = 0.92;
   gl.outputColorSpace = SRGBColorSpace;
   const scene = new Scene();
   const pm = new PMREMGenerator(gl);
@@ -30,7 +30,14 @@ function init(host, cv, mode) {
   const d2 = new DirectionalLight(0x8c7bff, 1.2); d2.position.set(4, -2, 3); scene.add(d2);
   const cam = new PerspectiveCamera(30, 1, 0.1, 100); cam.position.set(0, 0, 14);
 
-  const phys = (color, extra) => new MeshPhysicalMaterial(Object.assign({ color, roughness: 0.28, metalness: 0.0, clearcoat: 0.7, clearcoatRoughness: 0.05, envMapIntensity: 0.3 }, extra || {}));
+  // «Стекло»: полупрозрачность, перламутровый отлив, яркая подсветка своим цветом
+  const phys = (color, extra) => new MeshPhysicalMaterial(Object.assign({
+    color, emissive: color, emissiveIntensity: 0.22, roughness: 0.04, metalness: 0.0,
+    clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 0.75,
+    iridescence: 0.55, iridescenceIOR: 1.3, iridescenceThicknessRange: [120, 480],
+    
+    transparent: true, opacity: 0.9, ior: 1.5, specularIntensity: 1
+  }, extra || {}));
   const textTex = (draw, w, h) => {
     const c = document.createElement('canvas'); c.width = w; c.height = h;
     const t = new CanvasTexture(c); t.colorSpace = SRGBColorSpace; t.anisotropy = 4;
@@ -130,23 +137,23 @@ function init(host, cv, mode) {
   } else if (mode === 'lead') {
     {
       // Мишень со стрелой
-      const g = new Group(); const cols = [0xff3d6e, 0xffffff, 0xff3d6e, 0xffffff, 0xff3d6e];
+      const g = new Group(); const cols = [0xff1f5a, 0xffffff, 0xff1f5a, 0xffffff, 0xff1f5a];
       cols.forEach((c, i) => { const r = 0.85 - i * 0.17; const m = new Mesh(new CylinderGeometry(r, r, 0.16 + i * 0.03, 64), phys(c)); m.rotation.x = Math.PI / 2; m.position.z = i * 0.02; g.add(m); });
       const shaft = new Mesh(new CylinderGeometry(0.035, 0.035, 1.2, 16), phys(0x2b3445)); shaft.rotation.x = Math.PI / 2; shaft.position.z = 0.65; g.add(shaft);
       const fl = new Shape(); fl.moveTo(0, 0); fl.lineTo(0.18, 0.1); fl.lineTo(0.18, 0.28); fl.lineTo(0, 0.18); fl.closePath();
       const flG = new ExtrudeGeometry(fl, { depth: 0.01, bevelEnabled: false });
-      [0, 1, 2].forEach((k) => { const f = new Mesh(flG, phys(0x00d4ff)); f.rotation.z = k * 2.09; f.rotation.y = Math.PI / 2; f.position.z = 1.1; g.add(f); });
+      [0, 1, 2].forEach((k) => { const f = new Mesh(flG, phys(0x00b8ff)); f.rotation.z = k * 2.09; f.rotation.y = Math.PI / 2; f.position.z = 1.1; g.add(f); });
       g.rotation.y = 0.6;
       add(g, { x: 0, y: 0, z: 0 }, [0.25, -0.5, 0], 'target');
     }
     {
       // Колокольчик уведомления
       const pts = [[0.001, 0.62], [0.12, 0.61], [0.22, 0.57], [0.29, 0.5], [0.33, 0.4], [0.35, 0.25], [0.37, 0.05], [0.4, -0.15], [0.45, -0.3], [0.53, -0.4], [0.58, -0.46], [0.56, -0.5], [0.001, -0.5]].map(([r, y]) => new Vector2(r, y));
-      const g = new Group(); const gold = phys(0xffc93c, { metalness: 0.55, roughness: 0.22 });
+      const g = new Group(); const gold = phys(0xffb400, { metalness: 0.55, roughness: 0.22 });
       g.add(new Mesh(new LatheGeometry(pts, 64), gold));
       const top = new Mesh(new SphereGeometry(0.13, 32, 16), gold); top.position.y = 0.66; g.add(top);
       const clap = new Mesh(new SphereGeometry(0.12, 32, 16), gold); clap.position.y = -0.58; g.add(clap);
-      const badge = new Mesh(new SphereGeometry(0.17, 32, 16), phys(0xff3d6e)); badge.position.set(0.42, 0.42, 0.1); g.add(badge);
+      const badge = new Mesh(new SphereGeometry(0.17, 32, 16), phys(0xff1f5a)); badge.position.set(0.42, 0.42, 0.1); g.add(badge);
       g.rotation.z = 0.25;
       const o = add(g, { x: 0, y: 0, z: 0 }, [0.2, 0.2, 0.2], 'bell'); o.idle = 0;
     }
@@ -155,7 +162,7 @@ function init(host, cv, mode) {
       const g = new Group();
       g.add(new Mesh(new RoundedBoxGeometry(1.1, 1.4, 0.12, 4, 0.08), phys(0xf4f7fb, { roughness: 0.3 })));
       for (let i = 0; i < 4; i++) { const l = new Mesh(new RoundedBoxGeometry(i === 0 ? 0.7 : 0.8, 0.07, 0.03, 2, 0.02), phys(i === 0 ? 0x2f8cff : 0xc5cfdd)); l.position.set(i === 0 ? -0.05 : 0, 0.45 - i * 0.2, 0.07); g.add(l); }
-      const chk = new Group(); const cm = phys(0x22d3a6);
+      const chk = new Group(); const cm = phys(0x00d68f);
       const c1 = new Mesh(new RoundedBoxGeometry(0.12, 0.32, 0.12, 3, 0.05), cm); c1.rotation.z = 0.8; c1.position.set(-0.1, -0.05, 0); chk.add(c1);
       const c2 = new Mesh(new RoundedBoxGeometry(0.12, 0.6, 0.12, 3, 0.05), cm); c2.rotation.z = -0.65; c2.position.set(0.14, 0.06, 0); chk.add(c2);
       const disc = new Mesh(new CylinderGeometry(0.38, 0.38, 0.1, 48), phys(0xe6fbf4)); disc.rotation.x = Math.PI / 2; chk.add(disc); c1.position.z = c2.position.z = 0.08;
@@ -206,7 +213,7 @@ function init(host, cv, mode) {
       // Метка: капля через вращение профиля
       const pts = []; for (let i = 0; i <= 40; i++) { const t = i / 40, a = t * Math.PI; const r = Math.sin(a) * (0.5 * Math.pow(1 - t, 0.15)) * (t < 0.5 ? 1 : 1 - (t - 0.5) * 0.15); pts.push(new Vector2(Math.max(0.0001, r), 0.55 - t * 1.6 + (t > 0.6 ? 0 : 0))); }
       const g = new Group();
-      const body = new Mesh(new LatheGeometry(pts, 64), phys(0xff3d6e, { roughness: 0.22 })); g.add(body);
+      const body = new Mesh(new LatheGeometry(pts, 64), phys(0xff1f5a, { roughness: 0.22 })); g.add(body);
       const dot = new Mesh(new CylinderGeometry(0.19, 0.19, 0.06, 48), phys(0xffffff)); dot.rotation.x = Math.PI / 2; dot.position.set(0, 0.12, 0.44); g.add(dot);
       const sh = new Mesh(new CylinderGeometry(0.28, 0.28, 0.01, 48), new MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.25 })); sh.position.y = -1.1; sh.scale.z = 0.4; g.add(sh);
       add(g, { x: 0, y: 0, z: 0 }, [0.1, 0.3, 0], 'pin');
@@ -224,16 +231,16 @@ function init(host, cv, mode) {
     add(g, { x: 0, y: 0, z: 0 }, [0.2, -0.4, 0], 'lens');
   }
   {
-    const g = new Group(); const hs = [0.55, 0.9, 1.3, 1.85]; const cols = [0x8c7bff, 0x6f8dff, 0x2fb7ff, 0x22d3a6];
+    const g = new Group(); const hs = [0.55, 0.9, 1.3, 1.85]; const cols = [0x8c7bff, 0x6f8dff, 0x2fb7ff, 0x00d68f];
     hs.forEach((h, i) => { const m = new Mesh(new RoundedBoxGeometry(0.42, h, 0.42, 4, 0.1), phys(cols[i])); m.position.set(-0.75 + i * 0.5, h / 2 - 0.9, 0); g.add(m); });
     const arr = new Shape(); arr.moveTo(-0.08, 0); arr.lineTo(0.08, 0); arr.lineTo(0.08, 0.9); arr.lineTo(0.24, 0.9); arr.lineTo(0, 1.22); arr.lineTo(-0.24, 0.9); arr.lineTo(-0.08, 0.9); arr.closePath();
-    const am = new Mesh(new ExtrudeGeometry(arr, { depth: 0.12, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 4 }), phys(0x22d3a6));
+    const am = new Mesh(new ExtrudeGeometry(arr, { depth: 0.12, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 4 }), phys(0x00d68f));
     am.position.set(-0.55, -0.35, 0.35); am.rotation.z = -0.75; g.add(am);
     add(g, { x: 0, y: 0, z: 0 }, [0.15, 0.45, 0], 'bars');
   }
   {
     const g = new Group();
-    const coin = new Mesh(new CylinderGeometry(0.7, 0.7, 0.2, 64), phys(0xffc93c, { metalness: 0.6, roughness: 0.25 }));
+    const coin = new Mesh(new CylinderGeometry(0.7, 0.7, 0.2, 64), phys(0xffb400, { metalness: 0.6, roughness: 0.25 }));
     coin.rotation.x = Math.PI / 2; g.add(coin);
     const ct = textTex((x) => { x.fillStyle = '#a86a00'; x.font = '900 170px Inter, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('₽', 128, 140); }, 256, 256); ct.redraw();
     const f = new Mesh(new PlaneGeometry(1.1, 1.1), new MeshBasicMaterial({ map: ct, transparent: true, toneMapped: false })); f.position.z = 0.105; g.add(f);
@@ -299,10 +306,10 @@ function init(host, cv, mode) {
     if (o.kind === 'logo') burst(o, [0xffc94d, 0xff4f8f, 0xc64cff]);
     if (o.kind === 'heart') burst(o, [0xff3d84, 0xff7ae0, 0xffffff]);
     if (o.kind === 'bubble') { bubTex.redraw(++bubN); burst(o, [0x10b8ec, 0x8c7bff, 0xffffff]); }
-    if (o.kind === 'target' || o.kind === 'bell' || o.kind === 'doc') burst(o, [0x5cffc8, 0x00d4ff, 0xffc93c]);
+    if (o.kind === 'target' || o.kind === 'bell' || o.kind === 'doc') burst(o, [0x5cffc8, 0x00b8ff, 0xffb400]);
     if (o.kind === 'globe' || o.kind === 'plane' || o.kind === 'pin') burst(o, [0x36c6ff, 0xffd43b, 0x3fd99a]);
-    if (o.kind === 'lens' || o.kind === 'bars' || o.kind === 'coin') burst(o, [0xffc93c, 0x8c7bff, 0x22d3a6]);
-    if (o.kind === 'badge') { folN += 40 + Math.floor(Math.random() * 60); badgeTex.redraw(fmt(folN)); burst(o, [0x37e8c0, 0x00d4ff, 0xffffff]); }
+    if (o.kind === 'lens' || o.kind === 'bars' || o.kind === 'coin') burst(o, [0xffb400, 0x8c7bff, 0x00d68f]);
+    if (o.kind === 'badge') { folN += 40 + Math.floor(Math.random() * 60); badgeTex.redraw(fmt(folN)); burst(o, [0x37e8c0, 0x00b8ff, 0xffffff]); }
     wake();
   });
   // Счётчик подписчиков синхронно с анимацией телефона
