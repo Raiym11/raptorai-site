@@ -2244,15 +2244,15 @@ a.service-card-link>.service-card{flex:1}
 @keyframes i3sp{0%{opacity:1;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.2) rotate(var(--r))}}
 .ig3-logo.spin{animation:i3spin .8s cubic-bezier(.3,1.2,.4,1)!important}
 @keyframes i3spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
-.ig3d>canvas.ig3c{position:absolute;inset:-70px;width:calc(100% + 140px);height:calc(100% + 140px);z-index:8;pointer-events:auto;cursor:default;filter:none;animation:none}
-.cx-p .sacase{display:grid;grid-template-columns:minmax(0,1fr) 560px;gap:36px;align-items:center;padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
+.ig3d>canvas.ig3c{position:absolute;inset:-110px;width:calc(100% + 220px);height:calc(100% + 220px);z-index:8;pointer-events:auto;cursor:default;filter:none;animation:none}
+.cx-p .sacase{display:grid;grid-template-columns:minmax(0,1fr) 590px;gap:36px;align-items:center;padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
 .sa-txt h3{font-family:'Unbounded','Inter',sans-serif!important;font-weight:800!important;font-size:clamp(24px,2.4vw,34px)!important;line-height:1.18!important;letter-spacing:-.025em!important}
 .sa-txt p{font-size:17px!important}
 .sa-pts{margin-top:22px;display:flex;flex-direction:column;gap:10px}
 .sa-pts span{display:flex;align-items:center;gap:12px;font-size:15.5px;font-weight:600}
 .sa-pts i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:14px;color:#06131c;background:linear-gradient(135deg,#00D4FF,#8C7BFF)}
-.sa3d{position:relative;padding:30px 20px}
-.sa3d>canvas.sa3c{position:absolute;inset:-70px;width:calc(100% + 140px);height:calc(100% + 140px);z-index:8}
+.sa3d{position:relative;padding:44px 64px 44px 40px}
+.sa3d>canvas.sa3c{position:absolute;inset:-110px;width:calc(100% + 220px);height:calc(100% + 220px);z-index:8}
 .dx{position:relative;display:flex;width:100%;max-width:520px;height:340px;margin:0 auto;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#eceaf7 0%,#f4f0f4 55%,#fbefe8 100%);color:#21242b;font-family:'Inter',sans-serif;box-shadow:0 40px 80px -30px rgba(122,92,255,.55),0 0 0 1px rgba(255,255,255,.4)}
 .dx-side{width:132px;flex:none;padding:14px 10px;font-size:11px}
 .dx-logo{display:flex;align-items:center;gap:7px;margin-bottom:12px}
@@ -2329,7 +2329,7 @@ a.service-card-link>.service-card{flex:1}
 .tw.s1 .m1,.tw.s2 .m1,.tw.s3 .m1,.tw.s4 .m1,.tw.s2 .m2,.tw.s3 .m2,.tw.s4 .m2,.tw.s3 .m3,.tw.s4 .m3,.tw.s4 .m4{display:block;animation:twIn .35s ease-out}
 @keyframes twIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media(max-width:600px){.tw-chat{width:auto;left:10px}.tw{height:380px}}
-.ld{position:relative;width:100%;max-width:520px;min-height:385px;margin:0 auto;padding:14px;border-radius:20px;background:linear-gradient(160deg,#121a26,#0b1119);border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 80px -30px rgba(0,212,255,.45);font-family:'Inter',sans-serif;color:#eaf2fb}
+.ld{position:relative;width:100%;max-width:470px;min-height:385px;margin:0 auto;padding:14px;border-radius:20px;background:linear-gradient(160deg,#121a26,#0b1119);border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 80px -30px rgba(0,212,255,.45);font-family:'Inter',sans-serif;color:#eaf2fb}
 .ld-sites{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ld-s{padding:10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-size:10.5px}
 .ld-s b{display:flex;align-items:center;gap:6px;font-size:11px}
@@ -2433,7 +2433,7 @@ items.forEach(function(el){el.addEventListener('click',function(){bump(el);
 })();
 </script>
 <script>
-(function(){var cx=document.getElementById('cx');if(!cx||!window.IntersectionObserver)return;var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();var s=document.createElement('script');s.src='/js/ig3d.js?v=8';s.defer=true;document.body.appendChild(s)}},{rootMargin:'600px'});io.observe(cx)})();
+(function(){var cx=document.getElementById('cx');if(!cx||!window.IntersectionObserver)return;var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();var s=document.createElement('script');s.src='/js/ig3d.js?v=10';s.defer=true;document.body.appendChild(s)}},{rootMargin:'600px'});io.observe(cx)})();
 </script>
 <script>
 (function(){var dx=document.getElementById('dx');if(!dx)return;var pan=dx.closest('.cx-p'),msg=document.getElementById('dx-msg'),btn=document.getElementById('dx-btn'),tm=[],run=false,red=matchMedia('(prefers-reduced-motion: reduce)').matches;
