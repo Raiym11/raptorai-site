@@ -11,7 +11,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 
 document.querySelectorAll('.ig3d,.sa3d').forEach((host) => {
   const cv = host.querySelector('canvas.ig3c');
-  if (cv) init(host, cv, host.classList.contains('sa3d') ? 'sales' : 'ig');
+  if (cv) init(host, cv, host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
 });
 
 function init(host, cv, mode) {
@@ -127,6 +127,38 @@ function init(host, cv, mode) {
     add(g, { x: 0, y: 0, z: 0 }, [0.1, -0.35, -0.05], 'badge');
   }
 
+  } else if (mode === 'tour') {
+    {
+      // Глобус: сфера с нарисованными «материками» и кольцом-орбитой
+      const c = document.createElement('canvas'); c.width = 512; c.height = 256; const x = c.getContext('2d');
+      const sea = x.createLinearGradient(0, 0, 0, 256); sea.addColorStop(0, '#36c6ff'); sea.addColorStop(1, '#0a6fd0'); x.fillStyle = sea; x.fillRect(0, 0, 512, 256);
+      x.fillStyle = '#3fd99a';
+      [[70, 70, 60, 38], [120, 150, 34, 50], [250, 60, 70, 30], [270, 130, 40, 56], [380, 80, 80, 40], [430, 180, 36, 22], [180, 210, 50, 14]].forEach(([a, b, w, h]) => { x.beginPath(); x.ellipse(a, b, w, h, 0.4, 0, Math.PI * 2); x.fill(); });
+      const tx = new CanvasTexture(c); tx.colorSpace = SRGBColorSpace;
+      const g = new Group();
+      g.add(new Mesh(new SphereGeometry(0.8, 64, 48), new MeshPhysicalMaterial({ map: tx, roughness: 0.35, clearcoat: 0.8, envMapIntensity: 0.3 })));
+      const orbit = new Mesh(new TorusGeometry(1.08, 0.035, 16, 100), phys(0xffd43b, { metalness: 0.4 })); orbit.rotation.x = 1.25; g.add(orbit);
+      add(g, { x: 0, y: 0, z: 0 }, [0.3, 0, 0.2], 'globe');
+    }
+    {
+      // Самолёт из простых форм
+      const g = new Group(); const w = phys(0xf4f7fb, { roughness: 0.25 }), acc = phys(0x2f8cff);
+      const body = new Mesh(new CylinderGeometry(0.16, 0.12, 1.6, 32), w); body.rotation.z = Math.PI / 2; g.add(body);
+      const nose = new Mesh(new SphereGeometry(0.16, 32, 16), w); nose.position.x = 0.8; nose.scale.x = 1.6; g.add(nose);
+      const wing = new Mesh(new RoundedBoxGeometry(0.42, 0.05, 1.7, 3, 0.02), acc); wing.position.x = 0.05; g.add(wing);
+      const tailW = new Mesh(new RoundedBoxGeometry(0.22, 0.04, 0.6, 3, 0.015), acc); tailW.position.x = -0.68; g.add(tailW);
+      const fin = new Mesh(new RoundedBoxGeometry(0.28, 0.4, 0.04, 3, 0.015), acc); fin.position.set(-0.7, 0.2, 0); g.add(fin);
+      g.rotation.set(0.5, -0.5, 0.25);
+      add(g, { x: 0, y: 0, z: 0 }, [0.4, -0.6, 0.2], 'plane');
+    }
+    {
+      // Метка на карте
+      const g = new Group(); const m = phys(0xff4d6d);
+      const head = new Mesh(new SphereGeometry(0.5, 48, 32), m); head.position.y = 0.35; g.add(head);
+      const tip = new Mesh(new CylinderGeometry(0.43, 0.0, 0.85, 48), m); tip.position.y = -0.2; g.add(tip);
+      const hole = new Mesh(new SphereGeometry(0.2, 32, 16), phys(0xffffff)); hole.position.set(0, 0.38, 0.38); hole.scale.z = 0.5; g.add(hole);
+      add(g, { x: 0, y: 0, z: 0 }, [0.1, 0.3, 0], 'pin');
+    }
   } else {
   // Сцена «продажи»: лупа, столбики с ростом, монета
   {
@@ -170,8 +202,8 @@ function init(host, cv, mode) {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
-  const sizePx = mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
+  const anchors = mode === 'tour' ? { globe: [0.95, 0.1], plane: [0.04, 0.14], pin: [0.03, 0.82] } : mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
+  const sizePx = mode === 'tour' ? { globe: 105, plane: 115, pin: 70 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -215,6 +247,7 @@ function init(host, cv, mode) {
     if (o.kind === 'logo') burst(o, [0xffc94d, 0xff4f8f, 0xc64cff]);
     if (o.kind === 'heart') burst(o, [0xff3d84, 0xff7ae0, 0xffffff]);
     if (o.kind === 'bubble') { bubTex.redraw(++bubN); burst(o, [0x10b8ec, 0x8c7bff, 0xffffff]); }
+    if (o.kind === 'globe' || o.kind === 'plane' || o.kind === 'pin') burst(o, [0x36c6ff, 0xffd43b, 0x3fd99a]);
     if (o.kind === 'lens' || o.kind === 'bars' || o.kind === 'coin') burst(o, [0xffc93c, 0x8c7bff, 0x22d3a6]);
     if (o.kind === 'badge') { folN += 40 + Math.floor(Math.random() * 60); badgeTex.redraw(fmt(folN)); burst(o, [0x37e8c0, 0x00d4ff, 0xffffff]); }
     wake();
