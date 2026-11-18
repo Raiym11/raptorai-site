@@ -11,7 +11,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 
 document.querySelectorAll('.ig3d,.sa3d').forEach((host) => {
   const cv = host.querySelector('canvas.ig3c');
-  if (cv) init(host, cv, host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
+  if (cv) init(host, cv, host.classList.contains('ld3d') ? 'lead' : host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
 });
 
 function init(host, cv, mode) {
@@ -127,6 +127,41 @@ function init(host, cv, mode) {
     add(g, { x: 0, y: 0, z: 0 }, [0.1, -0.35, -0.05], 'badge');
   }
 
+  } else if (mode === 'lead') {
+    {
+      // Мишень со стрелой
+      const g = new Group(); const cols = [0xff3d6e, 0xffffff, 0xff3d6e, 0xffffff, 0xff3d6e];
+      cols.forEach((c, i) => { const r = 0.85 - i * 0.17; const m = new Mesh(new CylinderGeometry(r, r, 0.16 + i * 0.03, 64), phys(c)); m.rotation.x = Math.PI / 2; m.position.z = i * 0.02; g.add(m); });
+      const shaft = new Mesh(new CylinderGeometry(0.035, 0.035, 1.2, 16), phys(0x2b3445)); shaft.rotation.x = Math.PI / 2; shaft.position.z = 0.65; g.add(shaft);
+      const fl = new Shape(); fl.moveTo(0, 0); fl.lineTo(0.18, 0.1); fl.lineTo(0.18, 0.28); fl.lineTo(0, 0.18); fl.closePath();
+      const flG = new ExtrudeGeometry(fl, { depth: 0.01, bevelEnabled: false });
+      [0, 1, 2].forEach((k) => { const f = new Mesh(flG, phys(0x00d4ff)); f.rotation.z = k * 2.09; f.rotation.y = Math.PI / 2; f.position.z = 1.1; g.add(f); });
+      g.rotation.y = 0.6;
+      add(g, { x: 0, y: 0, z: 0 }, [0.25, -0.5, 0], 'target');
+    }
+    {
+      // Колокольчик уведомления
+      const pts = [[0.001, 0.62], [0.12, 0.61], [0.22, 0.57], [0.29, 0.5], [0.33, 0.4], [0.35, 0.25], [0.37, 0.05], [0.4, -0.15], [0.45, -0.3], [0.53, -0.4], [0.58, -0.46], [0.56, -0.5], [0.001, -0.5]].map(([r, y]) => new Vector2(r, y));
+      const g = new Group(); const gold = phys(0xffc93c, { metalness: 0.55, roughness: 0.22 });
+      g.add(new Mesh(new LatheGeometry(pts, 64), gold));
+      const top = new Mesh(new SphereGeometry(0.13, 32, 16), gold); top.position.y = 0.66; g.add(top);
+      const clap = new Mesh(new SphereGeometry(0.12, 32, 16), gold); clap.position.y = -0.58; g.add(clap);
+      const badge = new Mesh(new SphereGeometry(0.17, 32, 16), phys(0xff3d6e)); badge.position.set(0.42, 0.42, 0.1); g.add(badge);
+      g.rotation.z = 0.25;
+      const o = add(g, { x: 0, y: 0, z: 0 }, [0.2, 0.2, 0.2], 'bell'); o.idle = 0;
+    }
+    {
+      // Документ-заказ с галочкой
+      const g = new Group();
+      g.add(new Mesh(new RoundedBoxGeometry(1.1, 1.4, 0.12, 4, 0.08), phys(0xf4f7fb, { roughness: 0.3 })));
+      for (let i = 0; i < 4; i++) { const l = new Mesh(new RoundedBoxGeometry(i === 0 ? 0.7 : 0.8, 0.07, 0.03, 2, 0.02), phys(i === 0 ? 0x2f8cff : 0xc5cfdd)); l.position.set(i === 0 ? -0.05 : 0, 0.45 - i * 0.2, 0.07); g.add(l); }
+      const chk = new Group(); const cm = phys(0x22d3a6);
+      const c1 = new Mesh(new RoundedBoxGeometry(0.12, 0.32, 0.12, 3, 0.05), cm); c1.rotation.z = 0.8; c1.position.set(-0.1, -0.05, 0); chk.add(c1);
+      const c2 = new Mesh(new RoundedBoxGeometry(0.12, 0.6, 0.12, 3, 0.05), cm); c2.rotation.z = -0.65; c2.position.set(0.14, 0.06, 0); chk.add(c2);
+      const disc = new Mesh(new CylinderGeometry(0.38, 0.38, 0.1, 48), phys(0xe6fbf4)); disc.rotation.x = Math.PI / 2; chk.add(disc); c1.position.z = c2.position.z = 0.08;
+      chk.position.set(0.32, -0.42, 0.12); g.add(chk);
+      add(g, { x: 0, y: 0, z: 0 }, [0.1, 0.4, -0.08], 'doc');
+    }
   } else if (mode === 'tour') {
     {
       // Глобус: океан с глубиной, материки с мягкими краями, облака отдельной сферой, орбита со спутником
@@ -219,8 +254,8 @@ function init(host, cv, mode) {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = mode === 'tour' ? { globe: [0.96, 0.1], plane: [0.08, 0.07], pin: [0.03, 0.8] } : mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
-  const sizePx = mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
+  const anchors = mode === 'lead' ? { target: [0.9, 0.12], bell: [0.06, 0.14], doc: [0.9, 0.82] } : mode === 'tour' ? { globe: [0.96, 0.1], plane: [0.08, 0.07], pin: [0.03, 0.8] } : mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
+  const sizePx = mode === 'lead' ? { target: 110, bell: 80, doc: 90 } : mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -264,6 +299,7 @@ function init(host, cv, mode) {
     if (o.kind === 'logo') burst(o, [0xffc94d, 0xff4f8f, 0xc64cff]);
     if (o.kind === 'heart') burst(o, [0xff3d84, 0xff7ae0, 0xffffff]);
     if (o.kind === 'bubble') { bubTex.redraw(++bubN); burst(o, [0x10b8ec, 0x8c7bff, 0xffffff]); }
+    if (o.kind === 'target' || o.kind === 'bell' || o.kind === 'doc') burst(o, [0x5cffc8, 0x00d4ff, 0xffc93c]);
     if (o.kind === 'globe' || o.kind === 'plane' || o.kind === 'pin') burst(o, [0x36c6ff, 0xffd43b, 0x3fd99a]);
     if (o.kind === 'lens' || o.kind === 'bars' || o.kind === 'coin') burst(o, [0xffc93c, 0x8c7bff, 0x22d3a6]);
     if (o.kind === 'badge') { folN += 40 + Math.floor(Math.random() * 60); badgeTex.redraw(fmt(folN)); burst(o, [0x37e8c0, 0x00d4ff, 0xffffff]); }
