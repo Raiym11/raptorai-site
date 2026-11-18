@@ -1167,10 +1167,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           </div>
           <div class="cw-vis" aria-hidden="true">
             <div class="ig3d">
-            <img class="ig3-logo i3" src="/assets/ig-3d.png" alt="" width="260" height="255" loading="lazy">
-            <svg class="ig3-heart i3" viewBox="0 0 100 92"><defs><radialGradient id="hg" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#ffd1e8"/><stop offset=".35" stop-color="#ff4f8f"/><stop offset="1" stop-color="#b3104d"/></radialGradient></defs><path d="M50 88C20 66 3 50 3 29 3 14 15 3 29 3c9 0 16 5 21 12C55 8 62 3 71 3c14 0 26 11 26 26 0 21-17 37-47 59z" fill="url(#hg)"/><ellipse cx="28" cy="22" rx="11" ry="7" fill="#fff" opacity=".55" transform="rotate(-25 28 22)"/></svg>
-            <div class="ig3-bub i3"><svg viewBox="0 0 100 90"><defs><radialGradient id="bg3" cx="35%" cy="30%" r="85%"><stop offset="0" stop-color="#d6f7ff"/><stop offset=".4" stop-color="#00C2F0"/><stop offset="1" stop-color="#4b3bd6"/></radialGradient></defs><path d="M50 4C24 4 4 20 4 41c0 11 6 21 15 28l-4 17 18-10c5 2 11 3 17 3 26 0 46-16 46-38S76 4 50 4z" fill="url(#bg3)"/><ellipse cx="32" cy="22" rx="13" ry="6" fill="#fff" opacity=".5" transform="rotate(-18 32 22)"/></svg><b>+24</b></div>
-            <div class="ig3-fol i3"><i class="fa-solid fa-user-plus"></i><b id="ig-plus">+1&nbsp;000</b><span>подписчиков</span></div>
+            <canvas class="ig3c" aria-hidden="true"></canvas>
             <div class="ph" id="igph">
               <div class="ph-scr">
                 <div class="ph-sb"><span>9:41</span><span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span></div>
@@ -2207,6 +2204,7 @@ a.service-card-link>.service-card{flex:1}
 @keyframes i3sp{0%{opacity:1;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.2) rotate(var(--r))}}
 .ig3-logo.spin{animation:i3spin .8s cubic-bezier(.3,1.2,.4,1)!important}
 @keyframes i3spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.ig3d>canvas.ig3c{position:absolute;inset:-70px;width:calc(100% + 140px);height:calc(100% + 140px);z-index:8;pointer-events:auto;cursor:default;filter:none;animation:none}
 .all-auto{margin:34px auto 0;padding:30px 32px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(140,123,255,.07) 55%,rgba(255,122,224,.06));border:1px solid rgba(0,212,255,.22)}
 .aa-t{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.01em}
 .aa-chips{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -2262,7 +2260,7 @@ function cycle(){clear();var f=4812;fol.textContent=fmt(f);pst.textContent='128'
  tm.push(setTimeout(function(){st(1)},500));
  tm.push(setTimeout(function(){st(2)},3300));
  tm.push(setTimeout(function(){st(3);pst.textContent='129'},5600));
- for(var i=0;i<12;i++)(function(i){tm.push(setTimeout(function(){f+=Math.floor(76+Math.random()*16);fol.textContent=fmt(f);fol.classList.remove('ph-fol-up');void fol.offsetWidth;fol.classList.add('ph-fol-up')},6200+i*500))})(i);
+ for(var i=0;i<12;i++)(function(i){tm.push(setTimeout(function(){f+=Math.floor(76+Math.random()*16);fol.textContent=fmt(f);window.dispatchEvent(new CustomEvent('ig:followers',{detail:f-4812}));fol.classList.remove('ph-fol-up');void fol.offsetWidth;fol.classList.add('ph-fol-up')},6200+i*500))})(i);
  tm.push(setTimeout(function(){st(4)},8200));
  tm.push(setTimeout(cycle,13000));}
 new MutationObserver(function(){var on=pan.classList.contains('on');if(on&&!run){run=true;cycle()}else if(!on&&run){run=false;clear()}}).observe(pan,{attributes:true,attributeFilter:['class']});
@@ -2282,6 +2280,9 @@ items.forEach(function(el){el.addEventListener('click',function(){bump(el);
  else{pc+=Math.floor(40+Math.random()*60);plus.textContent='+'+String(pc).replace(/\B(?=(\d{3})+(?!\d))/g,' ');sparks(el,['👤','🎉','✨'])}
 })});
 })();
+</script>
+<script>
+(function(){var cx=document.getElementById('cx');if(!cx||!window.IntersectionObserver)return;var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();var s=document.createElement('script');s.src='/js/ig3d.js?v=1';s.defer=true;document.body.appendChild(s)}},{rootMargin:'600px'});io.observe(cx)})();
 </script>
 </body>
 </html>
