@@ -9,7 +9,7 @@
 <meta name="description" content="ИИ-агенты, Telegram-боты и автоматизация на n8n под ключ: заявки, CRM, соцсети и отчёты. От 4 990 ₽, запуск за 3-7 дней, цена фиксируется в смете, 30 дней гарантии.">
 <title>ИИ-агенты и автоматизация бизнеса под ключ от 4 990 ₽ | RaptorAI</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="stylesheet" href="/vendor/fonts/fonts.css?v=2">
+<link rel="stylesheet" href="/vendor/fonts/fonts.css?v=3">
 <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1161,12 +1161,16 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="cx-p" data-i="3">
       <article class="cw cw-wide igcase">
           <div class="cw-txt ig-txt">
-            <div class="cw-kind">ИИ-агент · соцсети</div>
             <h3>Инстаграм, который <span class="ig-grad">ведёт себя&nbsp;сам</span></h3>
             <p>Агент каждый день придумывает темы, пишет посты, делает картинки и публикует по графику. Маркетологу остаётся нажать «одобрить».</p>
             <div class="ig-kpi"><div><b>95%</b><span>работы делает ИИ</span></div><div><b>5%</b><span>утверждает маркетолог</span></div><div><b>1000+</b><span>подписчиков</span></div><div><b>100+</b><span>клиентов</span></div></div>
           </div>
           <div class="cw-vis" aria-hidden="true">
+            <div class="ig3d">
+            <img class="ig3-logo" src="/assets/ig-3d.png" alt="" width="260" height="255" loading="lazy">
+            <svg class="ig3-heart" viewBox="0 0 100 92"><defs><radialGradient id="hg" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#ffd1e8"/><stop offset=".35" stop-color="#ff4f8f"/><stop offset="1" stop-color="#b3104d"/></radialGradient></defs><path d="M50 88C20 66 3 50 3 29 3 14 15 3 29 3c9 0 16 5 21 12C55 8 62 3 71 3c14 0 26 11 26 26 0 21-17 37-47 59z" fill="url(#hg)"/><ellipse cx="28" cy="22" rx="11" ry="7" fill="#fff" opacity=".55" transform="rotate(-25 28 22)"/></svg>
+            <div class="ig3-bub"><svg viewBox="0 0 100 90"><defs><radialGradient id="bg3" cx="35%" cy="30%" r="85%"><stop offset="0" stop-color="#d6f7ff"/><stop offset=".4" stop-color="#00C2F0"/><stop offset="1" stop-color="#4b3bd6"/></radialGradient></defs><path d="M50 4C24 4 4 20 4 41c0 11 6 21 15 28l-4 17 18-10c5 2 11 3 17 3 26 0 46-16 46-38S76 4 50 4z" fill="url(#bg3)"/><ellipse cx="32" cy="22" rx="13" ry="6" fill="#fff" opacity=".5" transform="rotate(-18 32 22)"/></svg><b>+24</b></div>
+            <div class="ig3-fol"><i class="fa-solid fa-user-plus"></i><b>+138</b><span>подписчиков</span></div>
             <div class="ph" id="igph">
               <div class="ph-scr">
                 <div class="ph-sb"><span>9:41</span><span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span></div>
@@ -1183,6 +1187,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
                 <div class="ph-toast t2"><i class="fa-solid fa-user-check"></i><div><b>Маркетолог одобрил</b><small>Публикация по графику, 18:00</small></div></div>
                 <div class="ph-toast t3"><i class="fa-regular fa-paper-plane"></i><div><b>Новое сообщение в директ</b><small>«Сколько стоит кухня 3 метра?» → ИИ ответил, заявка у менеджера</small></div></div>
               </div>
+            </div>
             </div>
             <div class="ph-steps"><span data-s="1">ИИ готовит пост</span><span data-s="2">Маркетолог одобряет</span><span data-s="3">Публикация</span><span data-s="4">Подписчики и заявки</span></div>
           </div>
@@ -2175,11 +2180,25 @@ a.service-card-link>.service-card{flex:1}
 .ig-kpi div:nth-child(2) b{color:#FF7AE0}
 .ig-kpi div:nth-child(3) b,.ig-kpi div:nth-child(4) b{color:#5CFFC8}
 .ig-kpi span{display:block;margin-top:4px;font-size:12.5px;line-height:1.35;color:var(--gray)}
-.cx-p .igcase{grid-template-columns:minmax(0,1fr) 300px!important;padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
+.cx-p .igcase{grid-template-columns:minmax(0,1fr) 360px!important;padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
 .igcase .ph{zoom:.8}
 .igcase .ph-steps{margin-top:12px;max-width:300px}
 .igcase .ph-steps span{font-size:11px;padding:4px 9px}
 @media(max-width:700px){.ig-kpi{grid-template-columns:1fr 1fr}}
+.ig-txt h3{font-family:'Unbounded','Inter',sans-serif!important;font-weight:800!important;font-size:clamp(26px,2.7vw,38px)!important;line-height:1.15!important;letter-spacing:-.025em!important}
+.ig-kpi b{font-family:'Unbounded','Inter',sans-serif;font-weight:800;letter-spacing:-.03em}
+.ig3d{position:relative;padding:20px 30px}
+.ig3d>*:not(.ph){position:absolute;z-index:8;pointer-events:none;filter:drop-shadow(0 18px 24px rgba(0,0,0,.55))}
+.ig3-logo{width:112px;height:auto;left:-78px;top:-6px;animation:igF 6s ease-in-out infinite;transform-origin:center}
+.ig3-heart{width:62px;right:-14px;top:150px;animation:igF 5s ease-in-out -1.5s infinite}
+.ig3-bub{width:74px;left:-30px;bottom:110px;animation:igF 5.5s ease-in-out -3s infinite}
+.ig3-bub svg{width:100%;display:block}
+.ig3-bub b{position:absolute;left:0;right:0;top:27%;text-align:center;font:800 15px 'Unbounded','Inter',sans-serif;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.ig3-fol{right:-36px;bottom:70px;display:flex;align-items:center;gap:7px;padding:9px 13px;border-radius:14px;background:linear-gradient(135deg,rgba(92,255,200,.95),rgba(0,212,255,.95));color:#06131c;font-size:11px;font-weight:700;animation:igF 6.5s ease-in-out -2s infinite}
+.ig3-fol b{font:800 14px 'Unbounded','Inter',sans-serif}
+@keyframes igF{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+@media(prefers-reduced-motion:reduce){.ig3d>*{animation:none!important}}
+@media(max-width:700px){.ig3-logo{width:84px;left:-6px}.ig3-heart{right:0}.ig3-bub{left:0}.ig3-fol{right:0}}
 .all-auto{margin:34px auto 0;padding:30px 32px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(140,123,255,.07) 55%,rgba(255,122,224,.06));border:1px solid rgba(0,212,255,.22)}
 .aa-t{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.01em}
 .aa-chips{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
