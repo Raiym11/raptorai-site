@@ -783,3 +783,4 @@ section:not(.hero){padding-top:72px!important;padding-bottom:72px!important}
 .hb .stats .stat-item+.stat-item{border-left:1px solid rgba(var(--hba-rgb),.22)!important}
 .hb .stat-num .dgi i,.hb .stat-num>span:not([class]){background:linear-gradient(180deg,#fff 30%,var(--hbb) 130%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hb .stat-label{color:rgba(240,244,248,.75)!important}
+.hb .stat-num .sx{color:var(--hba)!important;-webkit-text-fill-color:var(--hba)!important;text-shadow:0 0 24px rgba(var(--hba-rgb),.45)}
