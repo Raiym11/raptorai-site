@@ -42,6 +42,12 @@ def walk(t):
     return '\n'.join(res)
 
 out = walk(css)
+# цвета главной -> переменные, чтобы каждая страница подставила свой стиль
+for a, b in [(r'rgba\(0,\s*212,\s*255,', 'rgba(var(--hba-rgb),'), (r'rgba\(140,\s*123,\s*255,', 'rgba(var(--hbb-rgb),'),
+             (r'#00[Dd]4[Ff][Ff]\b', 'var(--hba)'), (r'#00b4e6\b', 'var(--hba)'), (r'var\(--cyan\)', 'var(--hba)'),
+             (r'#8[Cc]7[Bb][Ff][Ff]\b', 'var(--hbb)'), (r'#7a5cff\b', 'var(--hbb)'), (r'#FF7AE0\b', 'var(--hbc)')]:
+    out = re.sub(a, b, out)
+out = '.hb{--hba:#00D4FF;--hba-rgb:0,212,255;--hbb:#8C7BFF;--hbb-rgb:140,123,255;--hbc:#FF7AE0}\n' + out
 open(os.path.join(ROOT, 'css', 'home-blocks.css'), 'w', encoding='utf-8').write('/* сгенерировано tools/homeblocks/build.py из index.html */\n' + out)
 print(len(out))
 
@@ -76,6 +82,10 @@ for f in pages:
     s = after_section(s, anchor, W(['why', 'compare', 'calc'], 'low'))
     s = before(s, r'<section id="contact"', W(['final-cta'], 'cta'))
     s = after_section(s, 'contact', W(['checklist'], 'end'))
+    acc = re.search(r'--acc:(#[0-9A-Fa-f]{6})', s).group(1); acc2 = re.search(r'--acc2:(#[0-9A-Fa-f]{6})', s).group(1)
+    rgb = lambda h: ','.join(str(int(h[i:i + 2], 16)) for i in (1, 3, 5))
+    s = re.sub(r'<style id="hb-theme">.*?</style>\n?', '', s, flags=re.S)
+    s = s.replace('</head>', '<style id="hb-theme">.hb{--hba:%s;--hba-rgb:%s;--hbb:%s;--hbb-rgb:%s;--hbc:%s}</style>\n</head>' % (acc, rgb(acc), acc2, rgb(acc2), acc2), 1)
     if '/css/home-blocks.css' not in s:
         s = s.replace('</head>', '<link rel="stylesheet" href="/css/home-blocks.css?v=1">\n</head>', 1)
     s = re.sub(r'/js/fx\.js\?v=\d+', '/js/fx.js?v=10', s)
