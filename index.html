@@ -1160,11 +1160,11 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       </div>
       <div class="cx-p" data-i="3">
       <article class="cw cw-wide igcase">
-          <div class="cw-txt">
+          <div class="cw-txt ig-txt">
             <div class="cw-kind">ИИ-агент · соцсети</div>
-            <h3>ИИ-агент сам ведёт Инстаграм</h3>
-            <p>Агент придумывает темы, пишет посты, делает картинки и публикует по графику. Маркетолог только утверждает готовое.</p>
-            <div class="cw-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Тысячи подписчиков и сотни клиентов</span></div>
+            <h3>Инстаграм, который <span class="ig-grad">ведёт себя&nbsp;сам</span></h3>
+            <p>Агент каждый день придумывает темы, пишет посты, делает картинки и публикует по графику. Маркетологу остаётся нажать «одобрить».</p>
+            <div class="ig-kpi"><div><b>95%</b><span>работы делает ИИ</span></div><div><b>5%</b><span>утверждает маркетолог</span></div><div><b>1000+</b><span>подписчиков</span></div><div><b>100+</b><span>клиентов</span></div></div>
           </div>
           <div class="cw-vis" aria-hidden="true">
             <div class="ph" id="igph">
@@ -2166,6 +2166,20 @@ a.service-card-link>.service-card{flex:1}
 .ph-steps span{font-size:12px;font-weight:600;padding:5px 10px;border-radius:99px;color:var(--gray);border:1px solid rgba(255,255,255,.1);transition:all .3s}
 .ph-steps span.on{color:#06131c;background:linear-gradient(90deg,#00D4FF,#8C7BFF);border-color:transparent}
 @media(max-width:900px){.cx-p .igcase{grid-template-columns:1fr}.ph{transform:scale(.92)}}
+.ig-txt h3{font-size:clamp(28px,3vw,40px)!important;line-height:1.12!important;letter-spacing:-.02em}
+.ig-grad{background:linear-gradient(90deg,#00D4FF,#8C7BFF,#FF7AE0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ig-txt p{font-size:17px!important;max-width:520px}
+.ig-kpi{margin-top:24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ig-kpi div{padding:14px 12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.ig-kpi b{display:block;font-size:clamp(22px,2.2vw,30px);font-weight:900;letter-spacing:-.02em;color:#00D4FF}
+.ig-kpi div:nth-child(2) b{color:#FF7AE0}
+.ig-kpi div:nth-child(3) b,.ig-kpi div:nth-child(4) b{color:#5CFFC8}
+.ig-kpi span{display:block;margin-top:4px;font-size:12.5px;line-height:1.35;color:var(--gray)}
+.cx-p .igcase{grid-template-columns:minmax(0,1fr) 300px!important;padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
+.igcase .ph{zoom:.8}
+.igcase .ph-steps{margin-top:12px;max-width:300px}
+.igcase .ph-steps span{font-size:11px;padding:4px 9px}
+@media(max-width:700px){.ig-kpi{grid-template-columns:1fr 1fr}}
 .all-auto{margin:34px auto 0;padding:30px 32px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(140,123,255,.07) 55%,rgba(255,122,224,.06));border:1px solid rgba(0,212,255,.22)}
 .aa-t{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.01em}
 .aa-chips{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
