@@ -166,7 +166,7 @@ if (canvas) {
 // TYPING
 const typingEl = document.getElementById('typing-text');
 if (typingEl) {
-  const phrases = ['заявки и продажи','соцсети и контент','отчёты и рутину','всё, что можно'];
+  const phrases = ['заявки и продажи','соцсети и контент','отчёты и документы','CRM и 1С'];
   // Первая фраза уже есть в HTML — начинаем с паузы и стирания
   let pi=0, ci=phrases[0].length, del=true;
   const type = () => {

@@ -881,7 +881,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <section class="hero" style="position:relative;z-index:1">
   <div class="hero-inner">
   <div class="hero-copy">
-    <h1><span class="h1a">Доверьте ИИ</span><br><span style="color:var(--cyan)" id="typing-text">заявки и продажи</span></h1>
+    <h1><span class="h1a">Бизнес на автопилоте</span><br><span style="color:var(--cyan)" id="typing-text">заявки и продажи</span></h1>
     <p class="hero-sub">ИИ-агенты отвечают клиентам за 10 секунд, заявки сами попадают в CRM, отчёты и контент собираются без вас. Запуск за 3-7 дней, платите один раз - система остаётся вашей.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a>
@@ -915,7 +915,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="pain-card"><i class="fa-solid fa-table"></i><b>Отчёты собирают руками</b><span>Каждую неделю часы на таблицы, которые могут собираться сами.</span></div>
     <div class="pain-card"><i class="fa-solid fa-user-clock"></i><b>Клиент написал и о нём забыли</b><span>Никто не вернулся, не напомнил, не дожал - а он был тёплым.</span></div>
   </div>
-  <div class="fn-cta reveal"><a href="#calc" class="btn-primary">Посчитать, сколько это стоит</a><p>Минута, без регистрации. Считаем по вашим цифрам.</p></div>
+  <div class="fn-cta reveal"><a href="#calc" class="btn-primary">Посчитать, сколько это стоит</a><p>Узнайте за минуту, сколько денег бизнес теряет без автоматизации</p></div>
 </section>
 <!-- SERVICES -->
 <section id="services" style="background: var(--bg2);">
@@ -1088,7 +1088,10 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <h2 class="section-title">Реальные <span>результаты</span></h2>
     <p class="section-sub">Примеры систем которые мы построили и которые работают прямо сейчас.</p>
 
-    <a href="/case-tehnostroy.html" class="case-card-link"><div class="case-card case-hero" id="case-techno">
+    <div class="cx reveal" id="cx">
+      <div class="cx-tabs" role="tablist"><button type="button" class="cx-tab on" data-i="0"><b>6×</b><span>ИИ-продажник</span><small>клиентов за 8 месяцев</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="1"><b>30 000 ₽</b><span>ИИ-консультант каталога</span><small>экономии в месяц</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="2"><b>50 000</b><span>Накладные в 1С</span><small>позиций сверяются сами</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="3"><b>10 сек</b><span>Обложки в Телеграме</span><small>на готовую обложку</small><i class="cx-bar"></i></button></div>
+      <div class="cx-p on" data-i="0">
+      <a href="/case-tehnostroy.html" class="case-card-link"><div class="case-card case-hero" id="case-techno">
       <div class="case-top">
         <span class="case-tag"><i class="fa-solid fa-robot"></i> ИИ-агент / Продажи</span>
         <h3 class="case-brand">ТехноСтрой</h3>
@@ -1102,16 +1105,14 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="case-chart-wrap"><canvas id="caseFx" role="img" aria-label="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: умеренный рост 90-120 клиентов до внедрения ИИ-агента в январе 2026, затем ускоряющийся рост до 753"></canvas></div>
       <div class="case-more">Подробнее о проекте →</div>
     </div></a>
-
-    <div class="cw-wrap">
-
-      <a href="/case-katalog.html" class="case-card-link"><article class="cw cw-wide reveal">
+      </div>
+      <div class="cx-p" data-i="1">
+      <a href="/case-katalog.html" class="case-card-link"><article class="cw cw-wide">
         <div class="cw-txt">
           <div class="cw-kind">ИИ-агент · интернет-магазин оборудования</div>
           <h3>Агент знает весь каталог и подбирает товар сам</h3>
           <p>Клиент пишет задачу своими словами, агент подбирает товар из 13&#8239;379 позиций и доводит до заявки.</p>
           <div class="cw-money"><b>30&#8201;000&nbsp;₽</b><span>экономии в месяц: отдельного консультанта в штат нанимать не пришлось</span></div>
-          <div class="cw-stack"><i>n8n</i><i>Pinecone</i><i>RAG</i><i>виджет на сайт</i></div>
           <div class="case-more">Подробнее о проекте →</div>
         </div>
         <div class="cw-vis" aria-hidden="true">
@@ -1122,36 +1123,34 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           </div>
         </div>
       </article></a>
-
-      <div class="cw-row2">
-
-        <a href="/case-nakladnye-1c.html" class="case-card-link"><article class="cw reveal">
+      </div>
+      <div class="cx-p" data-i="2">
+      <a href="/case-nakladnye-1c.html" class="case-card-link"><article class="cw cw-wide">
           <div class="cw-txt">
             <div class="cw-kind">Автоматизация · оптовая торговля</div>
             <h3>Накладные поставщиков попадают в 1С без ручного ввода</h3>
             <p>Накладная в любом формате сама сверяется с 50&#8239;000 позиций. Человек подтверждает только спорное.</p>
             <div class="cw-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Вместо ручного переноса каждой строки в 1С</span></div>
-            <div class="cw-stack"><i>n8n</i><i>PostgreSQL</i><i>pgvector</i><i>GPT</i></div>
+            <div class="case-more">Подробнее о проекте →</div>
           </div>
-          <div class="cw-mini" aria-hidden="true">
+          <div class="cw-vis" aria-hidden="true">
             <div class="cwi">
               <div class="cwi-r"><span class="cwi-a">БОЛТ М10х40 ОЦ ГОСТ7798</span><span class="cwi-ar">→</span><span class="cwi-b">Болт М10x40 оцинк.</span></div>
               <div class="cwi-r"><span class="cwi-a">Анкер клин. 10*77</span><span class="cwi-ar">→</span><span class="cwi-b">Анкер клиновой 10х77</span></div>
               <div class="cwi-r"><span class="cwi-a">Саморез ГК 3,5х41 ч</span><span class="cwi-ar">→</span><span class="cwi-b q">2 варианта, нужен оператор</span></div>
             </div>
           </div>
-          <div class="case-more">Подробнее о проекте →</div>
         </article></a>
-
-        <article class="cw reveal">
+      </div>
+      <div class="cx-p" data-i="3">
+      <article class="cw cw-wide">
           <div class="cw-txt">
             <div class="cw-kind">Телеграм-бот · производство контента</div>
             <h3>Обложки для роликов собираются в Телеграме</h3>
             <p>Фото и текст в бот, через 10 секунд готовая обложка в фирменном стиле.</p>
             <div class="cw-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Готовая обложка примерно за 10 секунд</span></div>
-            <div class="cw-stack"><i>Python</i><i>Telegram Bot API</i><i>Pillow</i></div>
           </div>
-          <div class="cw-mini" aria-hidden="true">
+          <div class="cw-vis" aria-hidden="true">
             <div class="cwp">
               <div style="flex:1">
                 <div class="cwp-c cwp-1"></div>
@@ -1165,11 +1164,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
             </div>
           </div>
         </article>
-
       </div>
     </div>
-
-
   </div>
 </section>
 <!-- COMPANIES -->
@@ -1682,7 +1678,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 .gate-consent span{font-size:12px;line-height:1.5;color:rgba(240,244,248,.65)}
 .gate-consent a{color:#00D4FF}
 </style>
-<script src="/js/main.js?v=20261117" defer></script>
+<script src="/js/main.js?v=20261118" defer></script>
 <script src="/js/fx.js?v=10" defer></script>
 <script src="/js/drops.js?v=3" defer></script>
 </div>
@@ -2013,7 +2009,29 @@ a.service-card-link>.service-card{flex:1}
 @media(max-width:760px){#contact .contact-form{padding:30px 20px}#contact .quiz-q{font-size:21px}#contact .quiz-opts button{font-size:15.5px;padding:15px 16px}}
 /* слоган в одну строку */
 .hero h1 .h1a{white-space:nowrap;color:inherit}
-@media(min-width:1001px){.hero-inner{max-width:1280px;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}.hero h1{font-size:clamp(40px,3.7vw,60px);text-wrap:wrap}.hero h1 #typing-text{white-space:nowrap;font-size:.95em}.hero-sub{font-size:20px!important;line-height:1.65!important;max-width:680px}}
+@media(min-width:1001px){.hero-inner{max-width:1280px;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}.hero h1{font-size:clamp(40px,3.6vw,64px);text-wrap:wrap}.hero h1 #typing-text{white-space:nowrap;font-size:.95em}.hero-sub{font-size:20px!important;line-height:1.65!important;max-width:680px}}
+.cx-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.cx-tab{position:relative;overflow:hidden;text-align:left;padding:18px 20px 20px;border-radius:18px;cursor:pointer;color:#F0F4F8;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);font-family:'Inter',sans-serif;transition:border-color .3s,background .3s,transform .3s}
+.cx-tab:hover{transform:translateY(-3px);border-color:rgba(0,212,255,.35)}
+.cx-tab b{display:block;font-size:clamp(24px,2.4vw,32px);font-weight:900;letter-spacing:-.02em;color:#00D4FF;line-height:1.1}
+.cx-tab span{display:block;margin-top:8px;font-size:15.5px;font-weight:700}
+.cx-tab small{display:block;margin-top:3px;font-size:13px;color:var(--gray)}
+.cx-tab .cx-bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,#00D4FF,#8C7BFF,#FF7AE0)}
+.cx-tab.on{background:linear-gradient(150deg,rgba(0,212,255,.12),rgba(140,123,255,.08));border-color:rgba(0,212,255,.55);box-shadow:0 18px 50px -24px rgba(0,212,255,.6)}
+.cx-tab.on .cx-bar{animation:cxBar var(--cxd,8s) linear forwards}
+.cx.paused .cx-tab.on .cx-bar{animation-play-state:paused}
+@keyframes cxBar{to{width:100%}}
+.cx-p{display:none}
+.cx-p.on{display:block;animation:cxIn .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes cxIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cx-p .case-card-link,.cx-p>article{display:block}
+.cx-p .cw-wide{min-height:380px;align-items:center}
+.cx-p .cw h3{font-size:clamp(24px,2.4vw,32px)}
+.cx-p .cw p{font-size:17px}
+.cx-p .cw-vis .cwi,.cx-p .cw-vis .cwp{width:100%}
+@media(max-width:900px){.cx-tabs{grid-template-columns:1fr 1fr}.cx-p .cw-wide{min-height:0}}
+.fn-cta p{margin-top:22px!important;font-size:17px!important;color:rgba(240,244,248,.75)!important}
+.calc-note{margin-top:18px!important;text-align:center;text-wrap:balance;font-size:13.5px}
 .all-auto{margin:34px auto 0;padding:30px 32px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(140,123,255,.07) 55%,rgba(255,122,224,.06));border:1px solid rgba(0,212,255,.22)}
 .aa-t{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.01em}
 .aa-chips{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -2048,6 +2066,16 @@ var pw=document.getElementById('pw');if(pw&&!matchMedia('(prefers-reduced-motion
  pw.addEventListener('mouseleave',function(){hov=false});
  new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!tm){go();tm=setInterval(function(){if(!hov)go()},2200)}}else{clearInterval(tm);tm=null}}).observe(pw);}
 })();
+</script>
+<script>
+(function(){var cx=document.getElementById('cx');if(!cx)return;var tabs=[].slice.call(cx.querySelectorAll('.cx-tab')),ps=[].slice.call(cx.querySelectorAll('.cx-p')),k=0,tm=null,D=8000,vis=false,red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function show(i){k=i;tabs.forEach(function(t,j){t.classList.toggle('on',j===i);var b=t.querySelector('.cx-bar');b.style.animation='none';void b.offsetWidth;b.style.animation=''});ps.forEach(function(p,j){p.classList.toggle('on',j===i)});if(i===0)window.dispatchEvent(new Event('resize'));arm()}
+function arm(){clearTimeout(tm);if(red||!vis||cx.classList.contains('paused'))return;tm=setTimeout(function(){show((k+1)%tabs.length)},D)}
+tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i)})});
+cx.addEventListener('mouseenter',function(){cx.classList.add('paused');clearTimeout(tm)});
+cx.addEventListener('mouseleave',function(){cx.classList.remove('paused');show(k)});
+new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)show(k);else clearTimeout(tm)},{threshold:.25}).observe(cx);
+if(red)cx.style.setProperty('--cxd','0s');})();
 </script>
 </body>
 </html>
