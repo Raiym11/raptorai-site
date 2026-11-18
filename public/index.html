@@ -1105,7 +1105,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <p class="section-sub">Примеры систем, которые мы построили и которые работают прямо сейчас.</p>
 
     <div class="cx reveal" id="cx">
-      <div class="cx-tabs" role="tablist"><button type="button" class="cx-tab on" data-i="0"><b>6×</b><span>ИИ-продажник</span><small>клиентов за 8 месяцев</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="1"><b>30 000 ₽</b><span>ИИ-консультант каталога</span><small>экономии в месяц</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="2"><b>50 000</b><span>Накладные в 1С</span><small>позиций сверяются сами</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="3" data-d="13000" style="--cxd:13s"><b>95%</b><span>ИИ ведёт Инстаграм</span><small>работы делает агент</small><i class="cx-bar"></i></button></div>
+      <div class="cx-tabs" role="tablist"><button type="button" class="cx-tab on" data-i="0"><b>6×</b><span>ИИ-продажник</span><small>клиентов за 8 месяцев</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="1"><b>30 000 ₽</b><span>ИИ-консультант каталога</span><small>экономии в месяц</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="2" data-d="12000" style="--cxd:12s"><b><i class="fa-solid fa-chart-line"></i></b><span>ИИ-аналитик продаж</span><small>советует, куда вливать рекламу</small><i class="cx-bar"></i></button><button type="button" class="cx-tab" data-i="3" data-d="13000" style="--cxd:13s"><b>95%</b><span>ИИ ведёт Инстаграм</span><small>работы делает агент</small><i class="cx-bar"></i></button></div>
       <div class="cx-p on" data-i="0">
       <a href="/case-tehnostroy.html" class="case-card-link"><div class="case-card case-hero" id="case-techno">
       <div class="case-top">
@@ -1141,22 +1141,37 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       </article></a>
       </div>
       <div class="cx-p" data-i="2">
-      <a href="/case-nakladnye-1c.html" class="case-card-link"><article class="cw cw-wide">
-          <div class="cw-txt">
-            <div class="cw-kind">Автоматизация · оптовая торговля</div>
-            <h3>Накладные поставщиков попадают в 1С без ручного ввода</h3>
-            <p>Накладная в любом формате сама сверяется с 50&#8239;000 позиций. Человек подтверждает только спорное.</p>
-            <div class="cw-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Вместо ручного переноса каждой строки в 1С</span></div>
-            <div class="case-more">Подробнее о проекте →</div>
+      <article class="cw cw-wide sacase">
+          <div class="cw-txt sa-txt">
+            <h3>ИИ-аналитик подсказывает, <span class="ig-grad">куда вливать рекламу</span></h3>
+            <p>Агент каждый день смотрит продажи, остатки и рекламу и пишет конкретный совет: какой товар растёт и куда перенести бюджет в Директе.</p>
+            <div class="sa-pts"><span><i class="fa-solid fa-chart-line"></i>Продажи по каждому товару</span><span><i class="fa-solid fa-lightbulb"></i>Совет простыми словами</span><span><i class="fa-solid fa-bullseye"></i>Бюджет туда, где растёт</span></div>
           </div>
           <div class="cw-vis" aria-hidden="true">
-            <div class="cwi">
-              <div class="cwi-r"><span class="cwi-a">БОЛТ М10х40 ОЦ ГОСТ7798</span><span class="cwi-ar">→</span><span class="cwi-b">Болт М10x40 оцинк.</span></div>
-              <div class="cwi-r"><span class="cwi-a">Анкер клин. 10*77</span><span class="cwi-ar">→</span><span class="cwi-b">Анкер клиновой 10х77</span></div>
-              <div class="cwi-r"><span class="cwi-a">Саморез ГК 3,5х41 ч</span><span class="cwi-ar">→</span><span class="cwi-b q">2 варианта, нужен оператор</span></div>
+            <div class="sa3d">
+              <canvas class="ig3c sa3c" aria-hidden="true"></canvas>
+              <div class="dx" id="dx">
+                <aside class="dx-side">
+                  <div class="dx-logo"><i></i><b>Реклама</b></div>
+                  <div class="dx-user"><i class="fa-regular fa-user"></i><span></span></div>
+                  <div class="dx-bal"><span></span><em>Пополнить</em></div>
+                  <div class="dx-m on"><i class="fa-solid fa-wand-magic-sparkles"></i>Кампании<u>+</u></div>
+                  <div class="dx-m"><i class="fa-solid fa-bolt"></i>Рекомендации<s>1</s></div>
+                  <div class="dx-m"><i class="fa-solid fa-circle-info"></i>Информация</div>
+                </aside>
+                <div class="dx-main">
+                  <div class="dx-top"><b>Кампании</b><span>Все кампании <i class="fa-solid fa-angle-down"></i></span></div>
+                  <div class="dx-prod">
+                    <div class="dx-pi"><i></i><div><b>N1486 Пальто чёрное, каштан</b><small>продажи за 30 дней</small></div><em class="dx-up">+17%</em></div>
+                    <svg class="dx-spark" viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="dxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a5cff" stop-opacity=".35"/><stop offset="1" stop-color="#7a5cff" stop-opacity="0"/></linearGradient></defs><path class="dx-area" d="M0 58 L30 54 L60 56 L90 47 L120 50 L150 40 L180 42 L210 30 L240 26 L270 15 L300 8 L300 70 L0 70Z" fill="url(#dxg)"/><path class="dx-line" d="M0 58 L30 54 L60 56 L90 47 L120 50 L150 40 L180 42 L210 30 L240 26 L270 15 L300 8" fill="none" stroke="#6a4cff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="dx-ai"><div class="dx-ai-h"><i class="fa-solid fa-robot"></i>ИИ-агент · совет дня</div><p id="dx-msg"></p></div>
+                  <div class="dx-act"><span class="dx-btn" id="dx-btn">Создать кампанию</span></div>
+                </div>
+              </div>
             </div>
           </div>
-        </article></a>
+        </article>
       </div>
       <div class="cx-p" data-i="3">
       <article class="cw cw-wide igcase">
@@ -2205,6 +2220,58 @@ a.service-card-link>.service-card{flex:1}
 .ig3-logo.spin{animation:i3spin .8s cubic-bezier(.3,1.2,.4,1)!important}
 @keyframes i3spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
 .ig3d>canvas.ig3c{position:absolute;inset:-70px;width:calc(100% + 140px);height:calc(100% + 140px);z-index:8;pointer-events:auto;cursor:default;filter:none;animation:none}
+.cx-p .sacase{display:grid;grid-template-columns:minmax(0,1fr) 560px;gap:36px;align-items:center;padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
+.sa-txt h3{font-family:'Unbounded','Inter',sans-serif!important;font-weight:800!important;font-size:clamp(24px,2.4vw,34px)!important;line-height:1.18!important;letter-spacing:-.025em!important}
+.sa-txt p{font-size:17px!important}
+.sa-pts{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.sa-pts span{display:flex;align-items:center;gap:12px;font-size:15.5px;font-weight:600}
+.sa-pts i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:14px;color:#06131c;background:linear-gradient(135deg,#00D4FF,#8C7BFF)}
+.sa3d{position:relative;padding:30px 20px}
+.sa3d>canvas.sa3c{position:absolute;inset:-70px;width:calc(100% + 140px);height:calc(100% + 140px);z-index:8}
+.dx{position:relative;display:flex;width:100%;max-width:520px;height:340px;margin:0 auto;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#eceaf7 0%,#f4f0f4 55%,#fbefe8 100%);color:#21242b;font-family:'Inter',sans-serif;box-shadow:0 40px 80px -30px rgba(122,92,255,.55),0 0 0 1px rgba(255,255,255,.4)}
+.dx-side{width:132px;flex:none;padding:14px 10px;font-size:11px}
+.dx-logo{display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.dx-logo i{width:24px;height:24px;border-radius:50%;background:conic-gradient(from 200deg,#ffd43b,#5b7cff,#ffd43b)}
+.dx-logo b{font-size:13px;font-weight:800;letter-spacing:-.01em}
+.dx-user{display:flex;align-items:center;gap:7px;color:#5b7cff;margin-bottom:10px}
+.dx-user span,.dx-bal span{display:block;height:5px;width:48px;border-radius:3px;background:#cfd5e6}
+.dx-bal{padding:9px;border-radius:12px;background:rgba(255,255,255,.65);margin-bottom:10px}
+.dx-bal em{display:inline-block;margin-top:7px;font-style:normal;font-size:9.5px;padding:3px 7px;border-radius:6px;background:#ffd43b;font-weight:600}
+.dx-m{position:relative;display:flex;align-items:center;gap:7px;padding:7px 7px;border-radius:9px;font-weight:500}
+.dx-m i{color:#5b7cff;width:13px}
+.dx-m.on{background:#fff}
+.dx-m u{margin-left:auto;text-decoration:none;width:16px;height:16px;border-radius:50%;background:#ffd43b;display:grid;place-items:center;font-weight:800}
+.dx-m s{margin-left:auto;text-decoration:none;min-width:15px;height:15px;border-radius:8px;background:#ff4d6d;color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:all .4s cubic-bezier(.3,1.6,.5,1)}
+.dx.s1 .dx-m s,.dx.s2 .dx-m s,.dx.s3 .dx-m s{opacity:1;transform:none}
+.dx-main{flex:1;padding:12px 12px 12px 0;display:flex;flex-direction:column;gap:9px;min-width:0}
+.dx-top{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:14px;background:#fff}
+.dx-top b{font-size:15px;font-weight:600}
+.dx-top span{font-size:10px;padding:5px 8px;border:1px solid #e3e5ee;border-radius:8px}
+.dx-prod{padding:10px 12px 0;border-radius:14px;background:rgba(255,255,255,.75)}
+.dx-pi{display:flex;align-items:center;gap:9px}
+.dx-pi>i{width:28px;height:34px;border-radius:7px;background:linear-gradient(160deg,#3a3a44,#111)}
+.dx-pi b{display:block;font-size:11.5px;font-weight:700}
+.dx-pi small{font-size:9.5px;color:#7c8193}
+.dx-up{margin-left:auto;font-style:normal;font-weight:800;font-size:13px;color:#11a36b;background:#dff7ec;padding:3px 7px;border-radius:7px}
+.dx-spark{display:block;width:100%;height:58px;margin-top:4px}
+.dx-line{stroke-dasharray:420;stroke-dashoffset:420}
+.dx-area{opacity:0;transition:opacity .8s .6s}
+.dx.s1 .dx-line,.dx.s2 .dx-line,.dx.s3 .dx-line{animation:dxLine 1.6s ease-out forwards}
+.dx.s1 .dx-area,.dx.s2 .dx-area,.dx.s3 .dx-area{opacity:1}
+@keyframes dxLine{to{stroke-dashoffset:0}}
+.dx-ai{flex:1;padding:10px 12px;border-radius:14px;background:#fff;box-shadow:0 10px 24px -14px rgba(91,124,255,.45);opacity:0;transform:translateY(10px);transition:all .45s cubic-bezier(.2,.8,.2,1.15)}
+.dx.s2 .dx-ai,.dx.s3 .dx-ai{opacity:1;transform:none}
+.dx-ai-h{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;color:#6a4cff;text-transform:uppercase;letter-spacing:.06em}
+.dx-ai-h i{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#00b4e6,#7a5cff);font-size:10px}
+.dx-ai p{margin-top:6px!important;font-size:12px!important;line-height:1.5!important;color:#2b2f3a!important;min-height:54px;max-width:none!important}
+.dx-ai p b{color:#11a36b}
+.dx-act{display:flex;justify-content:flex-end}
+.dx-btn{font-size:11.5px;font-weight:600;padding:8px 14px;border-radius:11px;background:#ffd43b;transition:all .3s}
+.dx.s2 .dx-btn{animation:dxPulse 1.2s ease-in-out infinite}
+.dx.s3 .dx-btn{background:#11a36b;color:#fff}
+@keyframes dxPulse{50%{box-shadow:0 0 0 6px rgba(255,212,59,.35)}}
+@media(max-width:1000px){.cx-p .sacase{grid-template-columns:1fr}}
+@media(max-width:600px){.dx-side{display:none}.dx-main{padding:10px}.dx{height:auto;min-height:320px}}
 .all-auto{margin:34px auto 0;padding:30px 32px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(140,123,255,.07) 55%,rgba(255,122,224,.06));border:1px solid rgba(0,212,255,.22)}
 .aa-t{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.01em}
 .aa-chips{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -2282,7 +2349,22 @@ items.forEach(function(el){el.addEventListener('click',function(){bump(el);
 })();
 </script>
 <script>
-(function(){var cx=document.getElementById('cx');if(!cx||!window.IntersectionObserver)return;var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();var s=document.createElement('script');s.src='/js/ig3d.js?v=4';s.defer=true;document.body.appendChild(s)}},{rootMargin:'600px'});io.observe(cx)})();
+(function(){var cx=document.getElementById('cx');if(!cx||!window.IntersectionObserver)return;var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();var s=document.createElement('script');s.src='/js/ig3d.js?v=5';s.defer=true;document.body.appendChild(s)}},{rootMargin:'600px'});io.observe(cx)})();
+</script>
+<script>
+(function(){var dx=document.getElementById('dx');if(!dx)return;var pan=dx.closest('.cx-p'),msg=document.getElementById('dx-msg'),btn=document.getElementById('dx-btn'),tm=[],run=false,red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var T='Товар N1486 (пальто чёрное, каштан) продаётся на <b>17% лучше</b>, чем в прошлом месяце. Есть смысл обратить на него внимание и влить рекламу в Директ.';
+function clear(){tm.forEach(clearTimeout);tm=[]}
+function st(n){dx.className='dx'+(n?' s'+n:'')}
+function type(){var plain=T.replace(/<[^>]+>/g,''),i=0;(function step(){i+=2;var out='',k=0,inTag=false;for(var j=0;j<T.length&&k<i;j++){var c=T[j];out+=c;if(c==='<')inTag=true;else if(c==='>')inTag=false;else if(!inTag)k++}msg.innerHTML=out+(k<plain.length?'<span style="opacity:.5">|</span>':'');if(k<plain.length)tm.push(setTimeout(step,28))})()}
+function cycle(){clear();st(0);msg.innerHTML='';btn.textContent='Создать кампанию';
+ if(red){st(3);msg.innerHTML=T;btn.textContent='Кампания запущена ✓';return}
+ tm.push(setTimeout(function(){st(1)},400));
+ tm.push(setTimeout(function(){st(2);type()},2300));
+ tm.push(setTimeout(function(){st(3);btn.textContent='Кампания запущена ✓'},8300));
+ tm.push(setTimeout(cycle,12000));}
+new MutationObserver(function(){var on=pan.classList.contains('on');if(on&&!run){run=true;cycle()}else if(!on&&run){run=false;clear()}}).observe(pan,{attributes:true,attributeFilter:['class']});
+})();
 </script>
 </body>
 </html>

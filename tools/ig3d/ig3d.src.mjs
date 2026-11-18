@@ -4,16 +4,17 @@ import {
   WebGLRenderer, Scene, PerspectiveCamera, PMREMGenerator, ACESFilmicToneMapping,
   DirectionalLight, AmbientLight, Group, Mesh, MeshPhysicalMaterial, MeshBasicMaterial,
   PlaneGeometry, Shape, ExtrudeGeometry, CanvasTexture, TextureLoader, SRGBColorSpace,
-  Raycaster, Vector2, SphereGeometry, Box3, Vector3
+  Raycaster, Vector2, SphereGeometry, Box3, Vector3, TorusGeometry, CylinderGeometry
 } from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 
-const host = document.querySelector('.ig3d');
-const cv = host && host.querySelector('canvas.ig3c');
-if (host && cv) init();
+document.querySelectorAll('.ig3d,.sa3d').forEach((host) => {
+  const cv = host.querySelector('canvas.ig3c');
+  if (cv) init(host, cv, host.classList.contains('sa3d') ? 'sales' : 'ig');
+});
 
-function init() {
+function init(host, cv, mode) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let gl;
   try { gl = new WebGLRenderer({ canvas: cv, antialias: true, alpha: true, powerPreference: 'high-performance' }); }
@@ -43,6 +44,8 @@ function init() {
     wrap.position.copy(home); const sz = new Box3().setFromObject(g).getSize(new Vector3()); o.unit = Math.max(sz.x, sz.y); o.fit = 1; objs.push(o); return o;
   };
 
+  let bubTex, badgeTex;
+  if (mode === 'ig') {
   // 1. Иконка: полностью объёмная модель (плитка с градиентом, выпуклая рамка, объектив, точка)
   {
     const g = new Group();
@@ -91,7 +94,6 @@ function init() {
     add(m, { x: 0, y: 0, z: 0 }, [0.15, -0.3, 0.1], 'heart');
   }
   // 3. Облачко комментария с числом
-  let bubTex;
   {
     const s = new Shape();
     s.absellipse(0, 0.08, 1.15, 0.86, 0, Math.PI * 2, false);
@@ -109,7 +111,6 @@ function init() {
     add(g, { x: 0, y: 0, z: 0 }, [-0.1, 0.4, 0], 'bubble');
   }
   // 4. Плашка подписчиков
-  let badgeTex;
   {
     const g = new Group();
     g.add(new Mesh(new RoundedBoxGeometry(3.3, 0.86, 0.32, 6, 0.3), phys(0x14d6a8, { roughness: 0.22 })));
@@ -126,6 +127,35 @@ function init() {
     add(g, { x: 0, y: 0, z: 0 }, [0.1, -0.35, -0.05], 'badge');
   }
 
+  } else {
+  // Сцена «продажи»: лупа, столбики с ростом, монета
+  {
+    const g = new Group();
+    const rim = new Mesh(new TorusGeometry(0.62, 0.13, 32, 80), phys(0xb9c8ff, { roughness: 0.2 }));
+    const glass = new Mesh(new CylinderGeometry(0.6, 0.6, 0.05, 64), new MeshPhysicalMaterial({ color: 0xdff1ff, transmission: 0.9, roughness: 0.05, thickness: 0.4, transparent: true, opacity: 0.55, clearcoat: 1 }));
+    glass.rotation.x = Math.PI / 2;
+    const handle = new Mesh(new CylinderGeometry(0.13, 0.15, 0.95, 32), phys(0x8fa6ff));
+    handle.position.set(0.72, -0.72, 0); handle.rotation.z = Math.PI / 4;
+    g.add(rim, glass, handle);
+    add(g, { x: 0, y: 0, z: 0 }, [0.2, -0.4, 0], 'lens');
+  }
+  {
+    const g = new Group(); const hs = [0.55, 0.9, 1.3, 1.85]; const cols = [0x8c7bff, 0x6f8dff, 0x2fb7ff, 0x22d3a6];
+    hs.forEach((h, i) => { const m = new Mesh(new RoundedBoxGeometry(0.42, h, 0.42, 4, 0.1), phys(cols[i])); m.position.set(-0.75 + i * 0.5, h / 2 - 0.9, 0); g.add(m); });
+    const arr = new Shape(); arr.moveTo(-0.08, 0); arr.lineTo(0.08, 0); arr.lineTo(0.08, 0.9); arr.lineTo(0.24, 0.9); arr.lineTo(0, 1.22); arr.lineTo(-0.24, 0.9); arr.lineTo(-0.08, 0.9); arr.closePath();
+    const am = new Mesh(new ExtrudeGeometry(arr, { depth: 0.12, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.04, bevelSegments: 4 }), phys(0x22d3a6));
+    am.position.set(-0.55, -0.35, 0.35); am.rotation.z = -0.75; g.add(am);
+    add(g, { x: 0, y: 0, z: 0 }, [0.15, 0.45, 0], 'bars');
+  }
+  {
+    const g = new Group();
+    const coin = new Mesh(new CylinderGeometry(0.7, 0.7, 0.2, 64), phys(0xffc93c, { metalness: 0.6, roughness: 0.25 }));
+    coin.rotation.x = Math.PI / 2; g.add(coin);
+    const ct = textTex((x) => { x.fillStyle = '#a86a00'; x.font = '900 170px Inter, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('₽', 128, 140); }, 256, 256); ct.redraw();
+    const f = new Mesh(new PlaneGeometry(1.1, 1.1), new MeshBasicMaterial({ map: ct, transparent: true, toneMapped: false })); f.position.z = 0.105; g.add(f);
+    add(g, { x: 0, y: 0, z: 0 }, [0.2, 0.5, 0], 'coin');
+  }
+  }
   // Частицы при нажатии
   const parts = [];
   const pGeo = new SphereGeometry(0.07, 12, 10);
@@ -140,8 +170,8 @@ function init() {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] };
-  const sizePx = { logo: 140, heart: 72, bubble: 86, badge: 175 };
+  const anchors = mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
+  const sizePx = mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -185,11 +215,12 @@ function init() {
     if (o.kind === 'logo') burst(o, [0xffc94d, 0xff4f8f, 0xc64cff]);
     if (o.kind === 'heart') burst(o, [0xff3d84, 0xff7ae0, 0xffffff]);
     if (o.kind === 'bubble') { bubTex.redraw(++bubN); burst(o, [0x10b8ec, 0x8c7bff, 0xffffff]); }
+    if (o.kind === 'lens' || o.kind === 'bars' || o.kind === 'coin') burst(o, [0xffc93c, 0x8c7bff, 0x22d3a6]);
     if (o.kind === 'badge') { folN += 40 + Math.floor(Math.random() * 60); badgeTex.redraw(fmt(folN)); burst(o, [0x37e8c0, 0x00d4ff, 0xffffff]); }
     wake();
   });
   // Счётчик подписчиков синхронно с анимацией телефона
-  window.addEventListener('ig:followers', (e) => { folN = e.detail; badgeTex.redraw(fmt(folN)); });
+  if (mode === 'ig') window.addEventListener('ig:followers', (e) => { folN = e.detail; badgeTex.redraw(fmt(folN)); });
 
   // Цикл
   let vis = false, raf = 0, t0 = performance.now(), idleUntil = 0;
