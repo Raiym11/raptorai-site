@@ -4,7 +4,7 @@ import {
   WebGLRenderer, Scene, PerspectiveCamera, PMREMGenerator, ACESFilmicToneMapping,
   DirectionalLight, AmbientLight, Group, Mesh, MeshPhysicalMaterial, MeshBasicMaterial,
   PlaneGeometry, Shape, ExtrudeGeometry, CanvasTexture, TextureLoader, SRGBColorSpace,
-  Raycaster, Vector2, SphereGeometry, Box3, Vector3, TorusGeometry, CylinderGeometry
+  Raycaster, Vector2, SphereGeometry, Box3, Vector3, TorusGeometry, CylinderGeometry, CapsuleGeometry, LatheGeometry
 } from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
@@ -129,34 +129,51 @@ function init(host, cv, mode) {
 
   } else if (mode === 'tour') {
     {
-      // Глобус: сфера с нарисованными «материками» и кольцом-орбитой
-      const c = document.createElement('canvas'); c.width = 512; c.height = 256; const x = c.getContext('2d');
-      const sea = x.createLinearGradient(0, 0, 0, 256); sea.addColorStop(0, '#36c6ff'); sea.addColorStop(1, '#0a6fd0'); x.fillStyle = sea; x.fillRect(0, 0, 512, 256);
-      x.fillStyle = '#3fd99a';
-      [[70, 70, 60, 38], [120, 150, 34, 50], [250, 60, 70, 30], [270, 130, 40, 56], [380, 80, 80, 40], [430, 180, 36, 22], [180, 210, 50, 14]].forEach(([a, b, w, h]) => { x.beginPath(); x.ellipse(a, b, w, h, 0.4, 0, Math.PI * 2); x.fill(); });
-      const tx = new CanvasTexture(c); tx.colorSpace = SRGBColorSpace;
+      // Глобус: океан с глубиной, материки с мягкими краями, облака отдельной сферой, орбита со спутником
+      const c = document.createElement('canvas'); c.width = 1024; c.height = 512; const x = c.getContext('2d');
+      const sea = x.createLinearGradient(0, 0, 0, 512); sea.addColorStop(0, '#1fb6ff'); sea.addColorStop(0.5, '#0a7fe0'); sea.addColorStop(1, '#0756b8'); x.fillStyle = sea; x.fillRect(0, 0, 1024, 512);
+      const blob = (cx, cy, r, n, col) => { x.fillStyle = col; x.beginPath(); for (let i = 0; i <= n; i++) { const a = (i / n) * Math.PI * 2, rr = r * (0.7 + 0.3 * Math.sin(a * 3 + cx) * Math.cos(a * 2 + cy)); const px = cx + Math.cos(a) * rr * 1.4, py = cy + Math.sin(a) * rr; i ? x.lineTo(px, py) : x.moveTo(px, py); } x.closePath(); x.fill(); };
+      const lands = [[150, 150, 70], [230, 330, 60], [520, 130, 80], [560, 290, 70], [800, 170, 95], [870, 360, 45], [380, 430, 40]];
+      lands.forEach(([cx, cy, r]) => blob(cx, cy, r * 1.12, 40, 'rgba(120,230,210,.55)'));
+      lands.forEach(([cx, cy, r]) => blob(cx, cy, r, 40, '#2fd18f'));
+      lands.forEach(([cx, cy, r]) => blob(cx + 10, cy - 8, r * 0.45, 30, '#ffd77a'));
+      const tx = new CanvasTexture(c); tx.colorSpace = SRGBColorSpace; tx.anisotropy = 4;
+      const cc = document.createElement('canvas'); cc.width = 1024; cc.height = 512; const cx2 = cc.getContext('2d');
+      for (let i = 0; i < 26; i++) { cx2.fillStyle = 'rgba(255,255,255,' + (0.35 + Math.random() * 0.4) + ')'; cx2.beginPath(); cx2.ellipse(Math.random() * 1024, 60 + Math.random() * 390, 30 + Math.random() * 70, 8 + Math.random() * 14, 0, 0, Math.PI * 2); cx2.fill(); }
+      const ct = new CanvasTexture(cc); ct.colorSpace = SRGBColorSpace;
       const g = new Group();
-      g.add(new Mesh(new SphereGeometry(0.8, 64, 48), new MeshPhysicalMaterial({ map: tx, roughness: 0.35, clearcoat: 0.8, envMapIntensity: 0.3 })));
-      const orbit = new Mesh(new TorusGeometry(1.08, 0.035, 16, 100), phys(0xffd43b, { metalness: 0.4 })); orbit.rotation.x = 1.25; g.add(orbit);
-      add(g, { x: 0, y: 0, z: 0 }, [0.3, 0, 0.2], 'globe');
+      g.add(new Mesh(new SphereGeometry(0.8, 96, 64), new MeshPhysicalMaterial({ map: tx, roughness: 0.38, clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 0.35 })));
+      const clouds = new Mesh(new SphereGeometry(0.835, 96, 64), new MeshPhysicalMaterial({ map: ct, transparent: true, depthWrite: false, roughness: 0.9 })); g.add(clouds);
+      const ringG = new Group(); ringG.rotation.set(1.2, 0.3, 0);
+      ringG.add(new Mesh(new TorusGeometry(1.12, 0.022, 16, 160), phys(0xffd43b, { metalness: 0.5, roughness: 0.2 })));
+      const sat = new Mesh(new SphereGeometry(0.08, 24, 16), phys(0xffffff)); sat.position.x = 1.12; ringG.add(sat); g.add(ringG);
+      const o = add(g, { x: 0, y: 0, z: 0 }, [0.25, 0, 0.15], 'globe'); o.idle = 0.35;
     }
     {
-      // Самолёт из простых форм
-      const g = new Group(); const w = phys(0xf4f7fb, { roughness: 0.25 }), acc = phys(0x2f8cff);
-      const body = new Mesh(new CylinderGeometry(0.16, 0.12, 1.6, 32), w); body.rotation.z = Math.PI / 2; g.add(body);
-      const nose = new Mesh(new SphereGeometry(0.16, 32, 16), w); nose.position.x = 0.8; nose.scale.x = 1.6; g.add(nose);
-      const wing = new Mesh(new RoundedBoxGeometry(0.42, 0.05, 1.7, 3, 0.02), acc); wing.position.x = 0.05; g.add(wing);
-      const tailW = new Mesh(new RoundedBoxGeometry(0.22, 0.04, 0.6, 3, 0.015), acc); tailW.position.x = -0.68; g.add(tailW);
-      const fin = new Mesh(new RoundedBoxGeometry(0.28, 0.4, 0.04, 3, 0.015), acc); fin.position.set(-0.7, 0.2, 0); g.add(fin);
-      g.rotation.set(0.5, -0.5, 0.25);
-      add(g, { x: 0, y: 0, z: 0 }, [0.4, -0.6, 0.2], 'plane');
+      // Лайнер: обтекаемый фюзеляж, стреловидные крылья с фаской, двигатели, иллюминаторы
+      const g = new Group(); const white = phys(0xf7f9fc, { roughness: 0.22 }), blue = phys(0x1f7cff, { roughness: 0.25 }), dark = phys(0x1c2a44);
+      const body = new Mesh(new CapsuleGeometry(0.2, 1.5, 12, 32), white); body.rotation.z = Math.PI / 2; g.add(body);
+      const nose = new Mesh(new SphereGeometry(0.205, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), dark); nose.rotation.z = -Math.PI / 2; nose.position.x = 0.93; nose.scale.set(0.55, 0.55, 0.9); g.add(nose);
+      const wingS = new Shape(); wingS.moveTo(0.25, 0); wingS.lineTo(-0.15, 0); wingS.lineTo(-0.55, 1.05); wingS.lineTo(-0.35, 1.05); wingS.closePath();
+      const wGeo = new ExtrudeGeometry(wingS, { depth: 0.035, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 4 });
+      [1, -1].forEach((sg) => { const w = new Mesh(wGeo, blue); w.rotation.x = sg * -Math.PI / 2; w.position.set(0.05, -0.04, 0); g.add(w);
+        const eng = new Mesh(new CapsuleGeometry(0.07, 0.22, 8, 20), white); eng.rotation.z = Math.PI / 2; eng.position.set(0.02, -0.14, sg * 0.42); g.add(eng); });
+      const tailS = new Shape(); tailS.moveTo(0, 0); tailS.lineTo(-0.3, 0); tailS.lineTo(-0.42, 0.45); tailS.lineTo(-0.28, 0.45); tailS.closePath();
+      const fin = new Mesh(new ExtrudeGeometry(tailS, { depth: 0.03, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.015, bevelSegments: 3 }), blue); fin.position.set(-0.62, 0.12, -0.015); g.add(fin);
+      const stS = new Shape(); stS.moveTo(0, 0); stS.lineTo(-0.2, 0); stS.lineTo(-0.3, 0.38); stS.lineTo(-0.2, 0.38); stS.closePath();
+      const stG = new ExtrudeGeometry(stS, { depth: 0.025, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01, bevelSegments: 2 });
+      [1, -1].forEach((sg) => { const st = new Mesh(stG, blue); st.rotation.x = sg * -Math.PI / 2; st.position.set(-0.68, 0.02, 0); g.add(st); });
+      for (let i = 0; i < 8; i++) { const wdw = new Mesh(new SphereGeometry(0.028, 12, 8), dark); wdw.position.set(0.55 - i * 0.14, 0.07, 0.19); wdw.scale.z = 0.4; g.add(wdw); }
+      g.rotation.set(0.35, -0.55, 0.18);
+      add(g, { x: 0, y: 0, z: 0 }, [0.3, -0.5, 0.15], 'plane');
     }
     {
-      // Метка на карте
-      const g = new Group(); const m = phys(0xff4d6d);
-      const head = new Mesh(new SphereGeometry(0.5, 48, 32), m); head.position.y = 0.35; g.add(head);
-      const tip = new Mesh(new CylinderGeometry(0.43, 0.0, 0.85, 48), m); tip.position.y = -0.2; g.add(tip);
-      const hole = new Mesh(new SphereGeometry(0.2, 32, 16), phys(0xffffff)); hole.position.set(0, 0.38, 0.38); hole.scale.z = 0.5; g.add(hole);
+      // Метка: капля через вращение профиля
+      const pts = []; for (let i = 0; i <= 40; i++) { const t = i / 40, a = t * Math.PI; const r = Math.sin(a) * (0.5 * Math.pow(1 - t, 0.15)) * (t < 0.5 ? 1 : 1 - (t - 0.5) * 0.15); pts.push(new Vector2(Math.max(0.0001, r), 0.55 - t * 1.6 + (t > 0.6 ? 0 : 0))); }
+      const g = new Group();
+      const body = new Mesh(new LatheGeometry(pts, 64), phys(0xff3d6e, { roughness: 0.22 })); g.add(body);
+      const dot = new Mesh(new CylinderGeometry(0.19, 0.19, 0.06, 48), phys(0xffffff)); dot.rotation.x = Math.PI / 2; dot.position.set(0, 0.12, 0.44); g.add(dot);
+      const sh = new Mesh(new CylinderGeometry(0.28, 0.28, 0.01, 48), new MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.25 })); sh.position.y = -1.1; sh.scale.z = 0.4; g.add(sh);
       add(g, { x: 0, y: 0, z: 0 }, [0.1, 0.3, 0], 'pin');
     }
   } else {
@@ -202,8 +219,8 @@ function init(host, cv, mode) {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = mode === 'tour' ? { globe: [0.95, 0.1], plane: [0.04, 0.14], pin: [0.03, 0.82] } : mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
-  const sizePx = mode === 'tour' ? { globe: 105, plane: 115, pin: 70 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
+  const anchors = mode === 'tour' ? { globe: [0.96, 0.1], plane: [0.08, 0.07], pin: [0.03, 0.8] } : mode === 'ig' ? { logo: [0.05, 0.12], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] } : { lens: [0.95, 0.12], bars: [0.03, 0.86], coin: [0.04, 0.1] };
+  const sizePx = mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -280,7 +297,7 @@ function init(host, cv, mode) {
       o.wrap.scale.setScalar(sc * o.fit);
       const look = reduce ? 0 : 1;
       o.g.rotation.x = o.base[0] + py * 0.45 * look + Math.sin(t * 0.9 + o.phase) * 0.08 * look;
-      o.g.rotation.y = o.base[1] + px * 0.7 * look + Math.sin(t * 0.7 + o.phase) * 0.15 * look + (o.spinT < 1 ? ease(o.spinT) * Math.PI * 2 : 0);
+      o.g.rotation.y = o.base[1] + px * 0.7 * look + Math.sin(t * 0.7 + o.phase) * 0.15 * look + (o.spinT < 1 ? ease(o.spinT) * Math.PI * 2 : 0) + (o.idle && !reduce ? t * o.idle : 0);
       o.g.rotation.z = o.base[2];
     });
     for (let i = parts.length - 1; i >= 0; i--) {
