@@ -4,7 +4,7 @@ import {
   WebGLRenderer, Scene, PerspectiveCamera, PMREMGenerator, ACESFilmicToneMapping,
   DirectionalLight, AmbientLight, Group, Mesh, MeshPhysicalMaterial, MeshBasicMaterial,
   PlaneGeometry, Shape, ExtrudeGeometry, CanvasTexture, TextureLoader, SRGBColorSpace,
-  Raycaster, Vector2, SphereGeometry
+  Raycaster, Vector2, SphereGeometry, Box3, Vector3
 } from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
@@ -40,7 +40,7 @@ function init() {
   const add = (g, home, base, kind) => {
     const wrap = new Group(); wrap.add(g); scene.add(wrap);
     const o = { wrap, g, home, base, kind, spin: 0, spinT: 1, bounce: 0, hover: 0, phase: Math.random() * 6 };
-    wrap.position.copy(home); objs.push(o); return o;
+    wrap.position.copy(home); const sz = new Box3().setFromObject(g).getSize(new Vector3()); o.unit = Math.max(sz.x, sz.y); o.fit = 1; objs.push(o); return o;
   };
 
   // 1. Иконка: полностью объёмная модель (плитка с градиентом, выпуклая рамка, объектив, точка)
@@ -140,7 +140,8 @@ function init() {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = { logo: [0.1, 0.1], heart: [0.9, 0.36], bubble: [0.08, 0.72], badge: [0.76, 0.88] };
+  const anchors = { logo: [0.07, 0.11], heart: [0.95, 0.38], bubble: [0.05, 0.7], badge: [0.8, 0.89] };
+  const sizePx = { logo: 110, heart: 72, bubble: 86, badge: 175 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -153,6 +154,7 @@ function init() {
       const a = anchors[o.kind];
       const px = pad + a[0] * (W - 2 * pad), py = pad + a[1] * (H - 2 * pad);
       o.home = { x: (px / W - 0.5) * vw, y: (0.5 - py / H) * vh, z: 0 };
+      const ppu = H / vh; o.fit = sizePx[o.kind] * (W < 500 ? 0.8 : 1) / (ppu * o.unit);
     });
   };
   layout(); addEventListener('resize', layout);
@@ -211,7 +213,7 @@ function init() {
       if (o.spinT < 1) o.spinT = Math.min(1, o.spinT + 0.022);
       o.bounce *= 0.9;
       const sc = 1 + o.hover * 0.12 + Math.sin((1 - o.bounce) * Math.PI) * o.bounce * 0.35;
-      o.wrap.scale.setScalar(sc);
+      o.wrap.scale.setScalar(sc * o.fit);
       const look = reduce ? 0 : 1;
       o.g.rotation.x = o.base[0] + py * 0.45 * look + Math.sin(t * 0.9 + o.phase) * 0.08 * look;
       o.g.rotation.y = o.base[1] + px * 0.7 * look + Math.sin(t * 0.7 + o.phase) * 0.15 * look + (o.spinT < 1 ? ease(o.spinT) * Math.PI * 2 : 0);
