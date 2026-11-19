@@ -750,25 +750,25 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 .hb .fx .dx-ai p b{color:#c4552f}
 .hb .fx{height:auto;min-height:380px}
 /* талисман */
-.hb .msc{position:absolute;left:-70px;bottom:-34px;width:175px;z-index:9;pointer-events:none}
+.hb .msc{position:absolute;left:-84px;bottom:-40px;width:212px;z-index:9;pointer-events:none}
 .hb .msc-svg{width:100%;display:block;filter:drop-shadow(0 16px 20px rgba(0,0,0,.5));animation:mscBob 1.2s ease-in-out infinite}
-@keyframes mscBob{50%{transform:translateY(-4px) rotate(-1.5deg)}}
-.hb .msc-head{transform-origin:80px 90px;animation:mscHead 2.4s ease-in-out infinite}
-@keyframes mscHead{0%,40%{transform:rotate(0)}50%,90%{transform:rotate(8deg) translateX(3px)}}
-.hb .msc-mouth{transform-origin:118px 74px;animation:mscTalk .22s ease-in-out infinite alternate}
-@keyframes mscTalk{from{transform:scaleY(.3)}to{transform:scaleY(1.15)}}
+@keyframes mscBob{50%{transform:translateY(-4px) rotate(-1deg)}}
+.hb .msc-head{transform-origin:80px 116px;animation:mscHead 2.4s ease-in-out infinite}
+@keyframes mscHead{0%,40%{transform:rotate(0)}50%,90%{transform:rotate(2deg) translateX(1px)}}
+.hb .msc-mouth{transform-origin:80px 72px;animation:mscTalk .22s ease-in-out infinite alternate}
+@keyframes mscTalk{from{transform:scaleY(.4)}to{transform:scaleY(1.5)}}
 .hb .msc-eye{animation:mscEye 2.4s ease-in-out infinite}
-@keyframes mscEye{0%,40%{transform:translate(0,0)}50%,90%{transform:translate(3px,2px)}}
-.hb .msc-arm-r{transform-origin:112px 100px;animation:mscPhone 1.1s ease-in-out infinite}
-@keyframes mscPhone{50%{transform:rotate(-6deg)}}
-.hb .msc-cash{transform-origin:35px 135px;animation:mscCash .5s ease-in-out infinite}
-@keyframes mscCash{50%{transform:rotate(-14deg) translateY(-2px)}}
-.hb .msc-tail{transform-origin:44px 124px;animation:mscTail .8s ease-in-out infinite}
-@keyframes mscTail{50%{transform:rotate(10deg)}}
-.hb .msc-bub{position:absolute;left:70px;top:-6px;white-space:nowrap;font:800 12px 'Inter',sans-serif;color:#1b1f2c;background:#fff;padding:7px 11px;border-radius:12px 12px 12px 3px;box-shadow:0 10px 20px -10px rgba(0,0,0,.6);opacity:0;transform:scale(.6) translateY(8px);transform-origin:left bottom;animation:mscBub 6s infinite}
+@keyframes mscEye{0%,40%{transform:translate(0,0)}50%,90%{transform:translate(-2px,5px)}}
+.hb .msc-brow{animation:mscBrow .45s ease-in-out infinite alternate}
+@keyframes mscBrow{to{transform:translateY(-2px)}}
+.hb .msc-arm-r{transform-origin:137px 98px;animation:mscPhone 1.1s ease-in-out infinite}
+@keyframes mscPhone{50%{transform:rotate(-5deg)}}
+.hb .msc-cash{transform-origin:14px 132px;animation:mscCash .5s ease-in-out infinite}
+@keyframes mscCash{50%{transform:rotate(-8deg) translateY(-2px)}}
+.hb .msc-bub{position:absolute;left:108px;top:-12px;white-space:nowrap;font:800 12px 'Inter',sans-serif;color:#1b1f2c;background:#fff;padding:7px 11px;border-radius:12px 12px 12px 3px;box-shadow:0 10px 20px -10px rgba(0,0,0,.6);opacity:0;transform:scale(.6) translateY(8px);transform-origin:left bottom;animation:mscBub 6s infinite}
 .hb .msc-bub.b2{animation-delay:2s}.hb .msc-bub.b3{animation-delay:4s}
 @keyframes mscBub{0%{opacity:0;transform:scale(.6) translateY(8px)}6%,28%{opacity:1;transform:none}34%,100%{opacity:0;transform:translateY(-10px)}}
-.hb .msc-money{position:absolute;left:12px;bottom:6px;font:800 12px 'Unbounded','Inter',sans-serif;color:#06131c;background:linear-gradient(90deg,#5CFFC8,#2fbf71);padding:5px 9px;border-radius:9px;white-space:nowrap;box-shadow:0 8px 18px -8px rgba(47,191,113,.8)}
+.hb .msc-money{position:absolute;left:70px;bottom:-14px;font:800 12px 'Unbounded','Inter',sans-serif;color:#06131c;background:linear-gradient(90deg,#5CFFC8,#2fbf71);padding:5px 9px;border-radius:9px;white-space:nowrap;box-shadow:0 8px 18px -8px rgba(47,191,113,.8)}
 @media(prefers-reduced-motion:reduce){.hb .msc *{animation:none!important}.hb .msc-bub.b1{opacity:1;transform:none}}
 @media(max-width:700px){.hb .msc{left:-6px;width:110px}}
 /* документы */
@@ -963,28 +963,35 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           </div>
           <div class="msc" aria-hidden="true">
   <div class="msc-bub b1">Да! Запускаем!</div><div class="msc-bub b2">Бюджет +15 000</div><div class="msc-bub b3">ДРР 6,9% - отлично!</div>
-  <svg viewBox="0 0 160 190" class="msc-svg">
-    <defs><linearGradient id="mskin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb08a"/><stop offset="1" stop-color="#d9673f"/></linearGradient>
-    <linearGradient id="msuit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3550"/><stop offset="1" stop-color="#161c2e"/></linearGradient></defs>
-    <ellipse cx="80" cy="182" rx="46" ry="6" fill="#000" opacity=".35"/>
-    <path class="msc-tail" d="M42 132 Q8 140 6 112 Q20 126 44 118Z" fill="url(#mskin)"/>
-    <rect x="58" y="150" width="14" height="30" rx="6" fill="#161c2e"/><rect x="88" y="150" width="14" height="30" rx="6" fill="#161c2e"/>
-    <path d="M54 178h22v6H50zM84 178h22v6H84z" fill="#0b0f19"/>
-    <path d="M44 96 Q80 84 116 96 L120 156 Q80 166 40 156Z" fill="url(#msuit)"/>
-    <path d="M70 92 L80 122 L90 92Z" fill="#f4f6fb"/>
-    <path d="M78 98 L82 98 L85 124 L80 132 L75 124Z" fill="#ff7a3d"/>
-    <path d="M70 92 L80 122 L62 104Z M90 92 L80 122 L98 104Z" fill="#1d2540"/>
-    <g class="msc-arm-r"><path d="M112 100 Q132 104 132 82" stroke="url(#msuit)" stroke-width="14" fill="none" stroke-linecap="round"/><rect x="124" y="56" width="14" height="26" rx="4" fill="#0f1420" stroke="#5b6b8c" stroke-width="1.5"/><circle cx="131" cy="80" r="7" fill="url(#mskin)"/></g>
-    <g class="msc-arm-l"><path d="M48 102 Q28 118 34 136" stroke="url(#msuit)" stroke-width="14" fill="none" stroke-linecap="round"/>
-      <g class="msc-cash"><rect x="14" y="128" width="34" height="18" rx="3" fill="#2fbf71"/><rect x="18" y="124" width="34" height="18" rx="3" fill="#38d47f"/><text x="35" y="137" font-size="10" font-weight="800" text-anchor="middle" fill="#0b4d2a" font-family="Inter,sans-serif">₽</text></g>
-      <circle cx="36" cy="138" r="7" fill="url(#mskin)"/></g>
-    <g class="msc-head"><path d="M60 92 Q52 60 70 42 Q92 26 120 38 Q140 46 138 64 Q136 80 114 84 L96 86 Q80 98 60 92Z" fill="url(#mskin)"/>
-      <path d="M76 46 l6 -12 6 10 6 -12 6 10 6 -10 4 12" fill="#ff8f5f"/>
-      <ellipse cx="104" cy="54" rx="9" ry="10" fill="#fff"/><circle class="msc-eye" cx="107" cy="55" r="4.5" fill="#1b1f2c"/><circle cx="108.5" cy="53" r="1.5" fill="#fff"/>
-      <path class="msc-brow" d="M94 42 Q104 37 114 42" stroke="#7a2e14" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path class="msc-mouth" d="M110 72 Q122 78 134 70 Q124 86 110 72Z" fill="#5a1d0e"/>
-      <path d="M118 72 l2 4 2 -4 M126 72 l2 4 2 -4" stroke="#fff" stroke-width="1.5" fill="none"/>
-      <circle cx="132" cy="58" r="1.6" fill="#7a2e14"/></g>
+  <svg viewBox="0 0 160 148" class="msc-svg" shape-rendering="crispEdges">
+    <defs><linearGradient id="mskin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e88b69"/><stop offset="1" stop-color="#d2694a"/></linearGradient>
+    <linearGradient id="msuit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3753"/><stop offset="1" stop-color="#161c2e"/></linearGradient></defs>
+    <ellipse cx="80" cy="136" rx="58" ry="5" fill="#000" opacity=".35" shape-rendering="geometricPrecision"/>
+    <g fill="url(#msuit)"><rect x="35" y="116" width="9" height="16"/><rect x="53" y="116" width="9" height="16"/><rect x="98" y="116" width="9" height="16"/><rect x="116" y="116" width="9" height="16"/></g>
+    <g fill="#0b0f19"><rect x="34" y="130" width="11" height="5"/><rect x="52" y="130" width="11" height="5"/><rect x="97" y="130" width="11" height="5"/><rect x="115" y="130" width="11" height="5"/></g>
+    <g class="msc-arm-r">
+      <rect x="122" y="80" width="30" height="18" fill="url(#msuit)"/><rect x="143" y="52" width="9" height="46" fill="url(#msuit)"/>
+      <rect x="136" y="27" width="9" height="25" fill="#0f1420" stroke="#5b6b8c" stroke-width=".8"/><rect x="137.5" y="30" width="6" height="14" fill="#03d9fb" opacity=".9"/>
+      <rect x="143" y="49" width="9" height="3" fill="#f4f6fb"/><rect x="143" y="40" width="9" height="9" fill="url(#mskin)"/>
+    </g>
+    <g class="msc-arm-l">
+      <rect x="8" y="80" width="30" height="18" fill="url(#msuit)"/><rect x="8" y="80" width="9" height="44" fill="url(#msuit)"/>
+      <g class="msc-cash" shape-rendering="geometricPrecision">
+        <rect x="14" y="118" width="30" height="15" fill="#2fbf71"/><rect x="17" y="122" width="30" height="15" fill="#38d47f"/>
+        <text x="32" y="133" font-size="10" font-weight="800" text-anchor="middle" fill="#0b4d2a" font-family="Inter,sans-serif">₽</text></g>
+      <rect x="8" y="124" width="9" height="3" fill="#f4f6fb"/><rect x="8" y="127" width="9" height="9" fill="url(#mskin)"/>
+    </g>
+    <g class="msc-head">
+      <rect x="26" y="44" width="108" height="72" fill="url(#mskin)"/><rect x="26" y="44" width="108" height="4" fill="#fff" opacity=".14"/>
+      <rect x="44" y="62" width="9" height="18" fill="#fff"/><rect x="107" y="62" width="9" height="18" fill="#fff"/>
+      <g class="msc-eye" fill="#1b1f2c"><rect x="48" y="62" width="5" height="8"/><rect x="111" y="62" width="5" height="8"/></g>
+      <g class="msc-brow" fill="#7a2e14"><rect x="42" y="55" width="13" height="3"/><rect x="105" y="55" width="13" height="3"/></g>
+      <rect class="msc-mouth" x="70" y="69" width="20" height="6" fill="#5a1d0e"/>
+      <rect x="26" y="80" width="108" height="36" fill="url(#msuit)"/>
+      <rect x="62" y="80" width="6" height="14" fill="#1d2540"/><rect x="92" y="80" width="6" height="14" fill="#1d2540"/>
+      <g fill="#f4f6fb"><rect x="68" y="80" width="24" height="6"/><rect x="71" y="86" width="18" height="6"/><rect x="74" y="92" width="12" height="4"/></g>
+      <g fill="#03d9fb"><rect x="76" y="82" width="8" height="5"/><rect x="77" y="87" width="6" height="18"/><rect x="78" y="105" width="4" height="5"/></g>
+    </g>
   </svg>
   <div class="msc-money"><i class="fa-solid fa-coins"></i> <b id="msc-sum">+0 ₽</b></div>
 </div>
