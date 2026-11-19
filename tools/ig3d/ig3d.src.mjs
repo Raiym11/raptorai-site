@@ -11,7 +11,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 
 document.querySelectorAll('.ig3d,.sa3d').forEach((host) => {
   const cv = host.querySelector('canvas.ig3c');
-  if (cv) init(host, cv, host.classList.contains('pf3d') ? 'perf' : host.classList.contains('bs3d') ? 'boss' : host.classList.contains('ld3d') ? 'lead' : host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
+  if (cv) init(host, cv, host.classList.contains('fn3') ? 'fin' : host.classList.contains('pf3d') ? 'perf' : host.classList.contains('bs3d') ? 'boss' : host.classList.contains('ld3d') ? 'lead' : host.classList.contains('tr3d') ? 'tour' : host.classList.contains('sa3d') ? 'sales' : 'ig');
 });
 
 function init(host, cv, mode) {
@@ -284,7 +284,7 @@ function init(host, cv, mode) {
     g.add(rim, glass, handle);
     add(g, { x: 0, y: 0, z: 0 }, [0.2, -0.4, 0], 'lens');
   }
-  {
+  if (mode !== 'fin') {
     const g = new Group(); const hs = [0.55, 0.9, 1.3, 1.85]; const cols = [0x8c7bff, 0x6f8dff, 0x2fb7ff, 0x00d68f];
     hs.forEach((h, i) => { const m = new Mesh(new RoundedBoxGeometry(0.42, h, 0.42, 4, 0.1), phys(cols[i])); m.position.set(-0.75 + i * 0.5, h / 2 - 0.9, 0); g.add(m); });
     const arr = new Shape(); arr.moveTo(-0.08, 0); arr.lineTo(0.08, 0); arr.lineTo(0.08, 0.9); arr.lineTo(0.24, 0.9); arr.lineTo(0, 1.22); arr.lineTo(-0.24, 0.9); arr.lineTo(-0.08, 0.9); arr.closePath();
@@ -315,8 +315,8 @@ function init(host, cv, mode) {
   };
 
   // Раскладка по экрану: точки привязки в долях от размера блока
-  const anchors = mode === 'perf' ? { bottle: [0.97, 0.08], gift: [0.02, 0.85], drop: [0.03, 0.08] } : mode === 'boss' ? { cal: [0.97, 0.08], plane2: [0.0, 0.9], core: [0.02, 0.06] } : mode === 'lead' ? { target: [0.92, 0.0], bell: [0.0, 0.05], doc: [0.93, 0.97] } : mode === 'tour' ? { globe: [1.0, 0.04], plane: [0.03, 0.02], pin: [-0.01, 0.9] } : mode === 'ig' ? { logo: [0.05, 0.22], heart: [0.95, 0.4], bubble: [0.05, 0.72], badge: [0.8, 0.89] } : { lens: [0.9, 0.1], bars: [-0.01, 0.95], coin: [0.0, 0.04] };
-  const sizePx = mode === 'perf' ? { bottle: 110, gift: 90, drop: 60 } : mode === 'boss' ? { cal: 90, plane2: 110, core: 90 } : mode === 'lead' ? { target: 110, bell: 80, doc: 90 } : mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
+  const anchors = mode === 'fin' ? { lens: [1.0, 0.04], coin: [0.97, 0.93] } : mode === 'perf' ? { bottle: [0.97, 0.08], gift: [0.02, 0.85], drop: [0.03, 0.08] } : mode === 'boss' ? { cal: [0.97, 0.08], plane2: [0.0, 0.9], core: [0.02, 0.06] } : mode === 'lead' ? { target: [0.92, 0.0], bell: [0.0, 0.05], doc: [0.93, 0.97] } : mode === 'tour' ? { globe: [1.0, 0.04], plane: [0.03, 0.02], pin: [-0.01, 0.9] } : mode === 'ig' ? { logo: [0.05, 0.22], heart: [0.95, 0.4], bubble: [0.05, 0.72], badge: [0.8, 0.89] } : { lens: [0.9, 0.1], bars: [-0.01, 0.95], coin: [0.0, 0.04] };
+  const sizePx = mode === 'fin' ? { lens: 100, coin: 80 } : mode === 'perf' ? { bottle: 110, gift: 90, drop: 60 } : mode === 'boss' ? { cal: 90, plane2: 110, core: 90 } : mode === 'lead' ? { target: 110, bell: 80, doc: 90 } : mode === 'tour' ? { globe: 125, plane: 150, pin: 74 } : mode === 'ig' ? { logo: 140, heart: 72, bubble: 86, badge: 175 } : { lens: 110, bars: 120, coin: 74 };
   let W = 1, H = 1;
   const layout = () => {
     const r = cv.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
