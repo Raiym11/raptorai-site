@@ -742,7 +742,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <style id="claude-examples">
 .hb .cx3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 .hb .fx .dx-logo i{background:conic-gradient(from 200deg,#ffb08a,#d9673f,#ffb08a)}
-.hb .fx-prod{width:40px;height:44px;flex:none;border-radius:9px;display:grid;place-items:center;font-size:20px;color:#2b2f3a;background:linear-gradient(160deg,#f3eee8,#e2d8cf)}
+.hb .fx-prod{width:44px;height:46px;flex:none;border-radius:10px;display:grid;place-items:center;font-size:20px;color:#2b2f3a;background:linear-gradient(160deg,#f3eee8,#e2d8cf)}
 .hb .fx-fin{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .hb .fx-fin div{padding:7px 8px;border-radius:11px;background:#fff;box-shadow:0 4px 10px -8px rgba(0,0,0,.3)}
 .hb .fx-fin small{display:block;font-size:9px;color:#7c8193}.hb .fx-fin b{font-size:11.5px;font-weight:800;white-space:nowrap}.hb .fx-fin b.up{color:#11a36b}
@@ -954,7 +954,18 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
               <div class="dx-m on"><i class="fa-solid fa-wand-magic-sparkles"></i>Кампании<u>+</u></div><div class="dx-m"><i class="fa-solid fa-bolt"></i>Рекомендации<s>2</s></div><div class="dx-m"><i class="fa-solid fa-wallet"></i>Финансы</div></aside>
             <div class="dx-main">
               <div class="dx-top"><b>Кампании</b><span>Ноябрь <i class="fa-solid fa-angle-down"></i></span></div>
-              <div class="dx-prod"><div class="dx-pi"><span class="fx-prod"><i class="fa-solid fa-headphones"></i></span><div><b>Наушники X3 Pro</b><small>продажи за 30 дней</small></div><em class="dx-up">+23%</em></div>
+              <div class="dx-prod"><div class="dx-pi"><span class="fx-prod"><svg viewBox="0 0 44 44" width="36" height="36" aria-hidden="true">
+<defs><linearGradient id="hpo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a07c"/><stop offset="1" stop-color="#c9593a"/></linearGradient>
+<linearGradient id="hpg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6178"/><stop offset="1" stop-color="#242838"/></linearGradient></defs>
+<ellipse cx="22" cy="41" rx="14" ry="2" fill="#000" opacity=".18"/>
+<path d="M9.5 27V22C9.5 10 14 5.5 22 5.5S34.5 10 34.5 22V27" fill="none" stroke="url(#hpg)" stroke-width="4" stroke-linecap="round"/>
+<path d="M13 21C13 13 16 9.5 21 8.8" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.3" stroke-linecap="round"/>
+<rect x="7" y="23" width="4.5" height="5" rx="1.5" fill="#242838"/><rect x="32.5" y="23" width="4.5" height="5" rx="1.5" fill="#242838"/>
+<rect x="4" y="24" width="12" height="16" rx="5.5" fill="url(#hpo)"/><rect x="28" y="24" width="12" height="16" rx="5.5" fill="url(#hpo)"/>
+<rect x="13.2" y="26" width="3.6" height="12" rx="1.8" fill="#1b1f2c"/><rect x="27.2" y="26" width="3.6" height="12" rx="1.8" fill="#1b1f2c"/>
+<rect x="6" y="26.5" width="1.8" height="6" rx=".9" fill="#fff" opacity=".5"/><rect x="30" y="26.5" width="1.8" height="6" rx=".9" fill="#fff" opacity=".5"/>
+<circle cx="9.5" cy="35.5" r="1.3" fill="#1b1f2c" opacity=".45"/><circle cx="34.5" cy="35.5" r="1.3" fill="#1b1f2c" opacity=".45"/>
+</svg></span><div><b>Наушники X3 Pro</b><small>продажи за 30 дней</small></div><em class="dx-up">+23%</em></div>
                 <svg class="dx-spark" viewBox="0 0 300 70" preserveAspectRatio="none"><path class="dx-area" d="M0 60 L30 57 L60 58 L90 50 L120 52 L150 41 L180 38 L210 29 L240 24 L270 14 L300 6 L300 70 L0 70Z" fill="rgba(217,119,87,.18)"/><path class="dx-line" d="M0 60 L30 57 L60 58 L90 50 L120 52 L150 41 L180 38 L210 29 L240 24 L270 14 L300 6" fill="none" stroke="#d9673f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
               <div class="fx-fin"><div><small>Выручка</small><b id="fx-rev">0</b></div><div><small>Реклама</small><b id="fx-ad">0</b></div><div><small>ДРР</small><b>6,9%</b></div><div><small>Прибыль</small><b class="up">+18%</b></div></div>
               <div class="dx-ai"><div class="dx-ai-h"><i class="fa-solid fa-robot"></i>ИИ-финансист · совет</div><p id="fx-msg"></p></div>
@@ -1667,6 +1678,6 @@ var DT='Наушники дают <b>38% выручки</b> и растут тр
 scene(document.getElementById('dad'),[[400],[1900,function(){return typer(dm,DT)}]],function(){dm.innerHTML=''},10000);
 })();
 </script>
-<script src="/js/ig3d.js?v=15" defer></script>
+<script src="/js/ig3d.js?v=16" defer></script>
 </body>
 </html>
