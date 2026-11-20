@@ -1213,8 +1213,8 @@ html.lite .hb #chat-panel::before,html.lite .hb #chat-panel::after,html.fx-off .
 .hb .dx-m i{color:#5b7cff;width:13px}
 .hb .dx-m.on{background:#fff}
 .hb .dx-m u{margin-left:auto;text-decoration:none;width:16px;height:16px;border-radius:50%;background:#ffd43b;display:grid;place-items:center;font-weight:800}
-.hb .dx-m s{margin-left:auto;text-decoration:none;min-width:15px;height:15px;border-radius:8px;background:#ff4d6d;color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:all .4s cubic-bezier(.3,1.6,.5,1)}
-.hb .dx.s1 .dx-m s,.hb .dx.s2 .dx-m s,.hb .dx.s3 .dx-m s{opacity:1;transform:none}
+.hb .dx-m s,.hb .dx-m .dx-n{margin-left:auto;text-decoration:none;min-width:15px;height:15px;border-radius:8px;background:#ff4d6d;color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:all .4s cubic-bezier(.3,1.6,.5,1)}
+.hb .dx.s1 .dx-m s,.hb .dx.s2 .dx-m s,.hb .dx.s3 .dx-m s,.hb .dx.s1 .dx-m .dx-n,.hb .dx.s2 .dx-m .dx-n,.hb .dx.s3 .dx-m .dx-n{opacity:1;transform:none}
 .hb .dx-main{flex:1;padding:12px 12px 12px 0;display:flex;flex-direction:column;gap:9px;min-width:0}
 .hb .dx-top{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:14px;background:#fff}
 .hb .dx-top b{font-size:15px;font-weight:600}
