@@ -8,7 +8,7 @@
   var small = matchMedia('(max-width: 760px)').matches;
   var FS = [
     'precision highp float;uniform vec2 R;uniform float T,C;uniform vec2 M;uniform float H;',
-    'vec3 pal(float t){vec3 a=vec3(0.,.83,1.),b=vec3(.55,.48,1.),c=vec3(1.,.48,.88),d=vec3(.36,1.,.78);',
+    'vec3 pal(float t){vec3 a=vec3(0.,.83,1.),b=vec3(.24,.55,1.),c=vec3(.56,.91,1.),d=vec3(.36,1.,.78);',
     ' t=fract(t);return t<.25?mix(a,b,t*4.):t<.5?mix(b,c,(t-.25)*4.):t<.75?mix(c,d,(t-.5)*4.):mix(d,a,(t-.75)*4.);}',
     'float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}',
     'mat2 r2(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}',

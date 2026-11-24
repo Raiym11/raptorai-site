@@ -2,7 +2,7 @@
    и интерактивная 3D-сцена справа. Цвет акцента задаётся на секции: --acc / --acc2. */
 
 /* ---------- левая колонка ---------- */
-.hx{--acc:#00D4FF;--acc2:#8C7BFF}
+.hx{--acc:#00D4FF;--acc2:#3D8BFF}
 .hx .hero-badge{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 48%,transparent);background:linear-gradient(140deg,color-mix(in srgb,var(--acc) 20%,transparent),color-mix(in srgb,var(--acc2) 14%,transparent));margin-bottom:22px}
 .hx .hero-sub{margin-bottom:36px;max-width:none;font-size:clamp(16.5px,1.42vw,20px)}
 .hx .hero-badge{font-size:13.5px;padding:9px 18px}
@@ -202,7 +202,7 @@
 .cbg{position:absolute;inset:0;pointer-events:none}
 .cbg i{position:absolute;border-radius:50%;filter:blur(calc(var(--u)*8));animation:cbgA 9s ease-in-out infinite alternate}
 .cbg i:nth-child(1){width:calc(var(--u)*48);height:calc(var(--u)*48);left:4%;top:12%;background:color-mix(in srgb,var(--acc) 60%,transparent)}
-.cbg i:nth-child(2){width:calc(var(--u)*38);height:calc(var(--u)*38);right:2%;bottom:6%;background:rgba(140,123,255,.42);animation-duration:11s;animation-delay:-4s}
+.cbg i:nth-child(2){width:calc(var(--u)*38);height:calc(var(--u)*38);right:2%;bottom:6%;background:rgba(61,139,255,.42);animation-duration:11s;animation-delay:-4s}
 .cbg u{position:absolute;left:4%;top:20%;width:92%;height:60%;border-radius:50%;border:1px solid color-mix(in srgb,var(--acc2) 55%,transparent);transform:rotate(-16deg);-webkit-mask-image:linear-gradient(100deg,#000,transparent 45%,transparent 60%,#000);mask-image:linear-gradient(100deg,#000,transparent 45%,transparent 60%,#000);opacity:.7}
 @keyframes cbgA{from{transform:translate(0,0) scale(1)}to{transform:translate(calc(var(--u)*5),calc(var(--u)*-4)) scale(1.18)}}
 .cph{position:relative;width:calc(var(--u)*44);height:calc(var(--u)*88);transform-style:preserve-3d;transform:rotateY(24deg) rotateX(6deg) rotateZ(-3deg);font-size:calc(var(--u)*2.3);line-height:1.3;color:#F0F4F8}

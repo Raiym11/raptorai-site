@@ -371,7 +371,7 @@
         var lx = pts[LAUNCH].x, ly = pts[LAUNCH].y;
         ctx.save(); ctx.globalAlpha = lp;
         var lg = ctx.createLinearGradient(0, 14, 0, base);
-        lg.addColorStop(0, 'rgba(255,122,224,.95)'); lg.addColorStop(1, 'rgba(255,122,224,0)');
+        lg.addColorStop(0, 'rgba(143,233,255,.95)'); lg.addColorStop(1, 'rgba(143,233,255,0)');
         ctx.strokeStyle = lg; ctx.lineWidth = 1.5; ctx.setLineDash([5, 5]);
         ctx.beginPath(); ctx.moveTo(lx, 30); ctx.lineTo(lx, base); ctx.stroke(); ctx.setLineDash([]);
         var txt = 'Запуск ИИ-агента';
@@ -380,8 +380,8 @@
         var pop = back(lp);
         ctx.translate(tx + tw / 2, 18); ctx.scale(pop, pop); ctx.translate(-(tx + tw / 2), -18);
         rr(tx, 4, tw, 28, 14);
-        var bg = ctx.createLinearGradient(tx, 0, tx + tw, 0); bg.addColorStop(0, 'rgba(255,122,224,.9)'); bg.addColorStop(1, 'rgba(140,123,255,.9)');
-        ctx.fillStyle = bg; ctx.shadowColor = 'rgba(255,122,224,.7)'; ctx.shadowBlur = 18; ctx.fill(); ctx.shadowBlur = 0;
+        var bg = ctx.createLinearGradient(tx, 0, tx + tw, 0); bg.addColorStop(0, 'rgba(143,233,255,.9)'); bg.addColorStop(1, 'rgba(61,139,255,.9)');
+        ctx.fillStyle = bg; ctx.shadowColor = 'rgba(143,233,255,.7)'; ctx.shadowBlur = 18; ctx.fill(); ctx.shadowBlur = 0;
         ctx.fillStyle = '#12081a'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(txt, tx + tw / 2, 19);
         ctx.restore();
         /* shock ring when the head crosses launch */
@@ -389,7 +389,7 @@
         if (pt) {
           var age = (now - pt) / 900;
           if (age < 1) {
-            ctx.save(); ctx.globalAlpha = (1 - age) * .9; ctx.strokeStyle = '#FF7AE0'; ctx.lineWidth = 2.5;
+            ctx.save(); ctx.globalAlpha = (1 - age) * .9; ctx.strokeStyle = '#8FE9FF'; ctx.lineWidth = 2.5;
             ctx.beginPath(); ctx.arc(lx, ly, 8 + age * 70, 0, 6.2832); ctx.stroke(); ctx.restore();
           }
         }
@@ -398,7 +398,7 @@
       /* area */
       pathTo(sHead, true);
       var ag = ctx.createLinearGradient(0, pad.t, 0, base);
-      ag.addColorStop(0, 'rgba(0,212,255,.42)'); ag.addColorStop(.55, 'rgba(140,123,255,.16)'); ag.addColorStop(1, 'rgba(140,123,255,0)');
+      ag.addColorStop(0, 'rgba(0,212,255,.42)'); ag.addColorStop(.55, 'rgba(61,139,255,.16)'); ag.addColorStop(1, 'rgba(61,139,255,0)');
       ctx.fillStyle = ag; ctx.fill();
       ctx.save(); pathTo(sHead, true); ctx.clip();
       var sh = ((time * .35) % 1.6 - .3) * W;
@@ -409,9 +409,9 @@
       /* line */
       var head = at(sHead);
       var lgrad = ctx.createLinearGradient(pad.l, 0, Math.max(head.x, pad.l + 1), 0);
-      lgrad.addColorStop(0, '#00D4FF'); lgrad.addColorStop(.5, '#8C7BFF'); lgrad.addColorStop(1, '#FF7AE0');
+      lgrad.addColorStop(0, '#00D4FF'); lgrad.addColorStop(.5, '#3D8BFF'); lgrad.addColorStop(1, '#8FE9FF');
       ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-      ctx.shadowColor = 'rgba(140,123,255,.9)'; ctx.shadowBlur = 22; ctx.strokeStyle = lgrad; ctx.lineWidth = 4;
+      ctx.shadowColor = 'rgba(61,139,255,.9)'; ctx.shadowBlur = 22; ctx.strokeStyle = lgrad; ctx.lineWidth = 4;
       pathTo(sHead, false); ctx.stroke();
       ctx.shadowBlur = 0; ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 1.2;
       pathTo(sHead, false); ctx.stroke();
@@ -439,7 +439,7 @@
         ctx.shadowColor = 'rgba(0,212,255,.9)'; ctx.shadowBlur = 14;
         ctx.beginPath(); ctx.arc(0, 0, 5.5, 0, 6.2832); ctx.fill(); ctx.stroke(); ctx.shadowBlur = 0;
         ctx.font = '900 ' + (ki === N - 1 ? 22 : 15) + 'px Inter, sans-serif';
-        ctx.fillStyle = ki === N - 1 ? '#fff' : '#bff1ff'; ctx.shadowColor = 'rgba(140,123,255,.9)'; ctx.shadowBlur = ki === N - 1 ? 16 : 8;
+        ctx.fillStyle = ki === N - 1 ? '#fff' : '#bff1ff'; ctx.shadowColor = 'rgba(61,139,255,.9)'; ctx.shadowBlur = ki === N - 1 ? 16 : 8;
         var ty = ki === N - 1 ? -16 : -14;
         var tx2 = ki === N - 1 ? -Math.min(14, W - pad.r - q.x + 14) : 0;
         ctx.fillText(String(data[ki]), tx2 - (ki === N - 1 ? 8 : 0), ty); ctx.restore();
@@ -448,7 +448,7 @@
       /* head glow */
       var pulse = 1 + .25 * Math.sin(time * 6);
       var hg = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 26 * pulse);
-      hg.addColorStop(0, 'rgba(255,255,255,.95)'); hg.addColorStop(.25, 'rgba(255,122,224,.65)'); hg.addColorStop(1, 'rgba(255,122,224,0)');
+      hg.addColorStop(0, 'rgba(255,255,255,.95)'); hg.addColorStop(.25, 'rgba(143,233,255,.65)'); hg.addColorStop(1, 'rgba(143,233,255,0)');
       ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(head.x, head.y, 26 * pulse, 0, 6.2832); ctx.fill();
 
       /* ripples on the final point once done */
@@ -604,11 +604,11 @@
   function buildFlow() {
     var N = [
       { x: 16, y: 15, ic: 'fa-solid fa-globe', t: 'Сайт', c: '#00D4FF', c2: '#5CFFC8' },
-      { x: 13, y: 50, ic: 'fa-brands fa-telegram', t: 'Telegram', c: '#38BDF8', c2: '#8C7BFF' },
+      { x: 13, y: 50, ic: 'fa-brands fa-telegram', t: 'Telegram', c: '#38BDF8', c2: '#3D8BFF' },
       { x: 16, y: 85, ic: 'fa-solid fa-envelope', t: 'Почта', c: '#5CFFC8', c2: '#00D4FF' },
-      { x: 84, y: 15, ic: 'fa-solid fa-address-card', t: 'CRM', c: '#FF7AE0', c2: '#8C7BFF' },
-      { x: 87, y: 50, ic: 'fa-solid fa-table', t: 'Таблица', c: '#8C7BFF', c2: '#FF7AE0' },
-      { x: 84, y: 85, ic: 'fa-solid fa-user-tie', t: 'Менеджер', c: '#FFB86B', c2: '#FF7AE0' }
+      { x: 84, y: 15, ic: 'fa-solid fa-address-card', t: 'CRM', c: '#8FE9FF', c2: '#3D8BFF' },
+      { x: 87, y: 50, ic: 'fa-solid fa-table', t: 'Таблица', c: '#3D8BFF', c2: '#8FE9FF' },
+      { x: 84, y: 85, ic: 'fa-solid fa-user-tie', t: 'Менеджер', c: '#FFB86B', c2: '#8FE9FF' }
     ];
     var P = [
       'M16 15 C36 15, 36 50, 50 50', 'M13 50 L50 50', 'M16 85 C36 85, 36 50, 50 50',
@@ -617,7 +617,7 @@
     var h = '<div class="hv hv-flow"><svg class="hf-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs></defs>';
     P.forEach(function (d, i) { h += '<path id="hfp' + i + '" d="' + d + '"/>'; });
     if (!reduce) P.forEach(function (d, i) {
-      var out = i > 2, col = out ? '#FF7AE0' : '#00D4FF';
+      var out = i > 2, col = out ? '#8FE9FF' : '#00D4FF';
       [0, 1.3].forEach(function (off) {
         h += '<circle r="1.05" fill="' + col + '"><animateMotion dur="' + (2.2 + (i % 3) * 0.35) + 's" begin="' + (off + i * 0.28) + 's" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#hfp' + i + '"/></animateMotion></circle>';
       });
@@ -626,7 +626,7 @@
     N.forEach(function (n, i) {
       h += '<div class="hn" style="left:' + n.x + '%;top:' + n.y + '%;--i:' + i + ';--c:' + n.c + ';--c2:' + n.c2 + '"><div class="hn-card"><span class="hn-ic"><i class="' + n.ic + '"></i></span><b>' + n.t + '</b></div></div>';
     });
-    h += '<div class="hn hn-core" style="left:50%;top:50%;--i:6;--c:#00D4FF;--c2:#8C7BFF"><span class="hn-ring"></span><span class="hn-ring r2"></span><div class="hn-card"><span class="hn-ic"><i class="fa-solid fa-robot"></i></span><b>ИИ-агент</b></div></div>';
+    h += '<div class="hn hn-core" style="left:50%;top:50%;--i:6;--c:#00D4FF;--c2:#3D8BFF"><span class="hn-ring"></span><span class="hn-ring r2"></span><div class="hn-card"><span class="hn-ic"><i class="fa-solid fa-robot"></i></span><b>ИИ-агент</b></div></div>';
     h += '<div class="hn-chip" style="left:50%;top:5%;--d:0s"><i class="fa-solid fa-circle-check"></i>Лид квалифицирован</div>';
     h += '<div class="hn-chip" style="left:50%;top:95%;--d:3.5s"><i class="fa-solid fa-bolt"></i>Ответ клиенту за 2 сек</div>';
     h += '</div>';
@@ -676,7 +676,7 @@
       var R = Math.min(W, H) * 0.36, cx0 = W / 2, cy0 = H / 2;
       ctx.clearRect(0, 0, W, H);
       var g = ctx.createRadialGradient(cx0, cy0, 0, cx0, cy0, R * 1.5);
-      g.addColorStop(0, 'rgba(140,123,255,.32)'); g.addColorStop(0.5, 'rgba(0,212,255,.1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      g.addColorStop(0, 'rgba(61,139,255,.32)'); g.addColorStop(0.5, 'rgba(0,212,255,.1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
       for (i = 0; i < COUNT; i++) {
         var n = NODES[i], x1 = n.x * cy + n.z * sy, z1 = -n.x * sy + n.z * cy, y2 = n.y * ct - z1 * st, z2 = n.y * st + z1 * ct;
@@ -705,7 +705,7 @@
       }
       var pulse = 0.5 + 0.5 * Math.sin(now / 420);
       var cg = ctx.createRadialGradient(cx0, cy0, 0, cx0, cy0, R * 0.34);
-      cg.addColorStop(0, 'rgba(255,255,255,.95)'); cg.addColorStop(0.3, 'rgba(160,230,255,' + (0.55 + 0.25 * pulse) + ')'); cg.addColorStop(1, 'rgba(140,123,255,0)');
+      cg.addColorStop(0, 'rgba(255,255,255,.95)'); cg.addColorStop(0.3, 'rgba(160,230,255,' + (0.55 + 0.25 * pulse) + ')'); cg.addColorStop(1, 'rgba(61,139,255,0)');
       ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx0, cy0, R * 0.34, 0, 6.2832); ctx.fill();
       if (!reduce) raf = requestAnimationFrame(draw);
     }
