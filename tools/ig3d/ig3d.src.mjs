@@ -327,9 +327,11 @@ function init(host, cv, mode) {
     const pad = 110; // canvas выступает за блок на 70px с каждой стороны
     objs.forEach((o) => {
       const a = anchors[o.kind];
-      const px = pad + a[0] * (W - 2 * pad), py = pad + a[1] * (H - 2 * pad);
+      const hostW = W - 2 * pad, mob = hostW < 460, sc = mob ? 0.6 : 1;
+      let px = pad + a[0] * hostW, py = pad + a[1] * (H - 2 * pad);
+      if (mob) { const half = (sizePx[o.kind] * sc) / 2 + 4; px = Math.min(W - pad - half, Math.max(pad + half, px)); }
       o.home = { x: (px / W - 0.5) * vw, y: (0.5 - py / H) * vh, z: 0 };
-      const ppu = H / vh; o.fit = sizePx[o.kind] * (W < 500 ? 0.8 : 1) / (ppu * o.unit);
+      const ppu = H / vh; o.fit = sizePx[o.kind] * sc / (ppu * o.unit);
     });
   };
   layout(); addEventListener('resize', layout);
