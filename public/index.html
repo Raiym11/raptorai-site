@@ -1364,8 +1364,9 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="section-label">Почему мы</div>
     <h2 class="section-title">Чем мы отличаемся <span>от альтернатив</span></h2>
     <p class="section-sub">Сравните сами - условия выгоднее не на словах, а по факту.</p>
+    <div class="cmp-tabs" role="tablist"><span>RaptorAI против:</span><button type="button" class="on" data-c="3">Конструктора ботов</button><button type="button" data-c="4">Фрилансера</button></div>
     <div class="cmp-wrap reveal">
-    <table class="cmp-table">
+    <table class="cmp-table cmp-show3">
       <thead>
         <tr><th></th><th class="cmp-us"><img src="/assets/logo.png" alt="RaptorAI" class="cmp-logo"></th><th>Конструктор ботов</th><th>Фрилансер</th></tr>
       </thead>
@@ -2376,6 +2377,19 @@ a.service-card-link>.service-card{flex:1}
 #compare .section-label,#compare .section-title,#compare .section-sub{padding-left:20px;padding-right:20px}
 .gs-b .gs-big{white-space:nowrap;font-size:44px}.gs-b .gs-top{flex-wrap:wrap;padding-right:56px;row-gap:6px}
 }
+.cmp-tabs{display:none}
+@media(max-width:760px){
+.cmp-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 20px -14px}
+.cmp-tabs span{font-size:13.5px;color:var(--gray);width:100%}
+.cmp-tabs button{flex:1;white-space:nowrap;font-size:13.5px!important;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#cfe3f1;font:inherit;font-weight:700;font-size:14px;padding:10px 8px;border-radius:12px;cursor:pointer}
+.cmp-tabs button.on{background:rgba(0,212,255,.14);border-color:rgba(0,212,255,.6);color:#fff}
+#compare .cmp-wrap{overflow-x:visible;padding:0 12px}
+#compare .cmp-table{min-width:0;table-layout:fixed}
+#compare .cmp-table th,#compare .cmp-table td{padding:14px 10px!important;font-size:13.5px}
+#compare .cmp-table th:first-child,#compare .cmp-table td:first-child{width:34%}
+#compare .cmp-show3 tr>*:nth-child(4),#compare .cmp-show4 tr>*:nth-child(3){display:none}
+#compare .cmp-logo{max-width:100%;height:auto}
+}
 .pkc-lv{display:grid!important;grid-template-columns:repeat(3,1fr);gap:12px}.pkc-lv .pkc-sw{align-items:flex-start;line-height:1.4}@media(max-width:900px){.pkc-lv{grid-template-columns:1fr}}
 </style>
 <script>
@@ -2488,5 +2502,6 @@ new MutationObserver(function(){var on=pan.classList.contains('on');if(on&&!run)
 if(pan.classList.contains('on')){run=true;cycle()}
 })();
 </script>
+<script>(function(){var t=document.querySelectorAll('#compare .cmp-tabs button'),tb=document.querySelector('#compare .cmp-table');t.forEach(function(b){b.onclick=function(){t.forEach(function(x){x.classList.toggle('on',x===b)});tb.classList.remove('cmp-show3','cmp-show4');tb.classList.add('cmp-show'+b.dataset.c)}})})();</script>
 </body>
 </html>
