@@ -872,24 +872,144 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </section>
 
 <section id="case">
+  <style id="ag-css">
+  .ag{position:relative;border-radius:28px;padding:26px;border:1px solid rgba(0,212,255,.24);background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));margin-top:30px;overflow:hidden}
+  .ag-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+  .ag-t{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 18px 12px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:inherit;cursor:pointer;font:inherit;transition:transform .25s,border-color .25s,background .25s}
+  .ag-t>i{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.07);color:rgba(240,244,248,.7)}
+  .ag-t b{display:block;font-size:15.5px;color:rgba(240,244,248,.8)}.ag-t small{font-size:12px;color:var(--gray)}
+  .ag-t:hover{transform:translateY(-2px)}
+  .ag-t.on{border-color:rgba(0,212,255,.6);background:rgba(0,212,255,.1)}
+  .ag-t.on>i{background:linear-gradient(135deg,#00D4FF,#3D8BFF);color:#04121a;box-shadow:0 0 22px -4px #00D4FF}
+  .ag-t.on b{color:#fff}
+  .ag-p{display:none;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:34px;align-items:center}
+  .ag-p.on{display:grid;animation:agIn .55s cubic-bezier(.2,.7,.2,1)}
+  @keyframes agIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .ag-i h3{font-size:clamp(20px,2.2vw,26px);line-height:1.25;margin:0 0 14px;letter-spacing:-.01em}
+  .ag-i ul{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:9px}
+  .ag-i li{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.45;color:rgba(240,244,248,.86)}
+  .ag-i li i{flex:none;margin-top:2px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;color:#04121a;background:linear-gradient(135deg,#00D4FF,#3D8BFF)}
+  .ag-ex{margin:0 0 14px;padding:12px 15px;font-size:14.5px;line-height:1.55;border-radius:14px;border:1px dashed rgba(0,212,255,.5);background:rgba(0,212,255,.07);color:#e8fbff}
+  .ag-ex b{color:#00D4FF}
+  .ag-pr{margin:0;font-size:14px;color:var(--gray)}.ag-pr b{color:#fff;font-size:17px}
+  .ag-v{position:relative;min-width:0;height:380px;border-radius:22px;background:radial-gradient(ellipse at 50% 40%,#12243a,#0a1018 70%);border:1px solid rgba(255,255,255,.1);overflow:hidden;perspective:900px}
+  .ag-v:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 75%,rgba(0,212,255,.18),transparent 60%)}
+  /* 1: платформа */
+  .pl{position:absolute;left:50%;top:54%;width:240px;height:240px;margin:-120px 0 0 -120px;transform-style:preserve-3d;transform:rotateX(62deg) rotateZ(-38deg)}
+  .pl-t{position:absolute;inset:0;border-radius:22px;border:1px solid rgba(0,212,255,.55);background:linear-gradient(135deg,rgba(0,212,255,.22),rgba(61,139,255,.1));box-shadow:0 0 40px -6px rgba(0,212,255,.55),inset 0 0 30px rgba(0,212,255,.15);animation:plF 5s ease-in-out infinite}
+  .pl-t.a{transform:translateZ(0);background:linear-gradient(135deg,rgba(10,24,40,.9),rgba(20,50,80,.8))}
+  .pl-t.b{transform:translateZ(46px);animation-delay:-1.6s}.pl-t.c{transform:translateZ(92px);animation-delay:-3.2s}
+  .pl-t span{transform:rotateZ(38deg) rotateX(-62deg);display:block}
+  @keyframes plF{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+  .pl-b{position:absolute;left:0;right:0;height:3px;top:0;background:linear-gradient(90deg,transparent,#00D4FF,transparent);box-shadow:0 0 18px #00D4FF;transform:translateZ(120px);animation:plS 3.4s linear infinite}
+  @keyframes plS{0%{top:2%}100%{top:96%}}
+  .ag-c{position:absolute;display:flex;align-items:center;gap:7px;padding:7px 11px;border-radius:12px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(8,16,26,.82);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px);animation:agC 4.5s ease-in-out infinite;white-space:nowrap}
+  .ag-c i{width:8px;height:8px;border-radius:50%;background:#ffb020;box-shadow:0 0 10px #ffb020}.ag-c.g i{background:#33e0a1;box-shadow:0 0 10px #33e0a1}
+  @keyframes agC{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  /* 2: радар */
+  .rd{position:absolute;left:50%;top:52%;width:300px;height:300px;margin:-150px 0 0 -150px;transform-style:preserve-3d;transform:rotateX(58deg)}
+  .rd-r{position:absolute;border-radius:50%;border:1px solid rgba(0,212,255,.35);inset:0}.rd-r.s2{inset:18%}.rd-r.s3{inset:36%}
+  .rd-sw{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(0,212,255,.55),transparent 28%);animation:rdS 4s linear infinite}
+  @keyframes rdS{to{transform:rotate(360deg)}}
+  .rd-n{position:absolute;width:12px;height:12px;border-radius:50%;background:#00D4FF;box-shadow:0 0 14px #00D4FF;animation:rdP 2.4s ease-in-out infinite}
+  @keyframes rdP{50%{transform:scale(1.7);opacity:.6}}
+  /* 3: склад */
+  .wh{position:absolute;left:50%;top:56%;width:260px;height:200px;margin:-100px 0 0 -130px;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-40deg)}
+  .wh-c{position:absolute;width:56px;height:56px;transform-style:preserve-3d;--h:30px;--c:0,212,255}
+  .wh-c i{position:absolute;display:block}
+  .wh-c .t{inset:0;transform:translateZ(var(--h));background:rgba(var(--c),.75);border:1px solid rgba(255,255,255,.35);box-shadow:0 0 18px rgba(var(--c),.6)}
+  .wh-c .l{left:0;top:56px;width:56px;height:var(--h);background:rgba(var(--c),.45);transform-origin:top;transform:rotateX(90deg)}
+  .wh-c .r{left:56px;top:0;width:var(--h);height:56px;background:rgba(var(--c),.28);transform-origin:left;transform:rotateY(-90deg)}
+  .wh-c.hot{--c:255,176,32;animation:whH 2s ease-in-out infinite}
+  @keyframes whH{50%{filter:brightness(1.6)}}
+  @media(max-width:900px){.ag{padding:18px 14px}.ag-p{grid-template-columns:1fr;gap:22px}.ag-t{flex:1;min-width:0;padding:10px}.ag-t small{display:none}.ag-v{height:320px}.pl{transform:rotateX(62deg) rotateZ(-38deg) scale(.8)}.rd{transform:rotateX(58deg) scale(.85)}.wh{transform:rotateX(58deg) rotateZ(-40deg) scale(.85)}}
+  @media(max-width:480px){.ag-tabs{gap:6px}.ag-t{gap:8px;padding:8px}.ag-t>i{width:30px;height:30px;border-radius:9px;font-size:12px}.ag-t b{font-size:12.5px;line-height:1.25}.ag-c{font-size:11px;padding:5px 8px}}
+  @media(prefers-reduced-motion:reduce){.ag-p.on,.pl-t,.pl-b,.ag-c,.rd-sw,.rd-n,.wh-c.hot{animation:none}}
+  </style>
   <div class="container">
-    <div class="section-label">Кейсы</div>
-    <h2 class="section-title">Как это <span>работает на практике</span></h2>
-    <div class="cz reveal" data-bk="cz" style="margin-top:30px">
-      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-chart-line"></i><span><b>ТехноСтрой</b><small>ИИ-агент · продажи</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-store"></i><span><b>Интернет-магазин</b><small>ИИ-агент · каталог</small></span></button></div>
-      <div class="cz-pane on" data-v="chart">
-        <div class="cz-info"><h3>Квалификация входящих лидов для оптового бизнеса</h3><p>До внедрения был умеренный рост: 90-120 новых клиентов в месяц. Агент запущен в январе 2026: сам общается с новым клиентом, отсеивает нецелевые заявки и передаёт менеджеру только готовых к покупке.</p><div class="cz-kpis"><div><b><span data-count="753">753</span></b><span>клиентов в августе 2026</span></div><div><b><span data-count="6">6</span>×</b><span>рост после запуска ИИ-агента</span></div></div><a href="/case-tehnostroy.html" class="btn-secondary">Подробнее о проекте</a></div>
-        <div class="cz-vis"><div class="chart" data-launch="5" data-points="90,110,105,106,120,155,145,207,192,290,335,515,753" data-labels="Авг '25|Сен '25|Окт '25|Ноя '25|Дек '25|Янв '26|Фев '26|Мар '26|Апр '26|Май '26|Июн '26|Июл '26|Авг '26" data-alt="Рост клиентов ТехноСтрой по месяцам с августа 2025 по август 2026: 90-120 клиентов до запуска ИИ-агента в январе 2026, затем рост до 753"><div class="chart-box"><div class="chart-tip"></div></div></div></div>
+    <div class="section-label">Примеры агентов</div>
+    <h2 class="section-title">Что ИИ-агент может делать <span>в вашем бизнесе</span></h2>
+    <div class="ag reveal" id="agbox">
+      <div class="ag-tabs" role="tablist">
+        <button type="button" role="tab" class="ag-t on"><i class="fa-solid fa-magnifying-glass-dollar"></i><span><b>Поиск потерянных денег</b><small>Продажи и счета</small></span></button>
+        <button type="button" role="tab" class="ag-t"><i class="fa-solid fa-satellite-dish"></i><span><b>Разведка по конкурентам</b><small>Открытые данные</small></span></button>
+        <button type="button" role="tab" class="ag-t"><i class="fa-solid fa-boxes-stacked"></i><span><b>Прогноз залежавшихся товаров</b><small>Склад и закупки</small></span></button>
       </div>
-      <div class="cz-pane" data-v="scan">
-        <div class="cz-info"><h3>Агент знает весь каталог магазина</h3><p>Покупатель описывает задачу своими словами, агент подбирает подходящие позиции из каталога и доводит до заявки. Днём и ночью, без отдельного консультанта в штате.</p><div class="cz-kpis"><div><b><span data-count="13379">13 379</span></b><span>товаров в каталоге</span></div><div><b><span data-count="10">10</span> сек</b><span>на ответ покупателю</span></div><div><b><span data-count="30000">30 000</span> ₽</b><span>в месяц экономии</span></div></div><a href="/case-katalog.html" class="btn-secondary">Подробнее о проекте</a></div>
-        <div class="cz-vis"><div class="scan"><div class="scan-bar"><i class="fa-solid fa-magnifying-glass"></i><span>Что ищет покупатель:</span><button type="button" class="on">Подешевле</button><button type="button">Помощнее</button><button type="button">В наличии</button></div><div class="scan-grid"><i class="scan-beam"></i></div><div class="scan-res"><i class="fa-solid fa-bolt"></i><span>Подобрал <b>3 варианта</b> из 13 379 товаров</span></div></div></div>
+
+      <div class="ag-p on">
+        <div class="ag-i">
+          <h3>Агент, который ищет деньги, теряемые компанией</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i>Анализирует CRM, счета, переписки и заказы</li>
+            <li><i class="fa-solid fa-check"></i>Находит клиентов, которые перестали покупать</li>
+            <li><i class="fa-solid fa-check"></i>Обнаруживает неоплаченные счета и забытые коммерческие предложения</li>
+            <li><i class="fa-solid fa-check"></i>Выявляет повторяющиеся ошибки в выставлении счетов</li>
+            <li><i class="fa-solid fa-check"></i>Сам ставит задачи менеджерам и напоминает клиентам</li>
+          </ul>
+          <p class="ag-ex"><b>Пример сценария:</b> компания за месяц отправила 300 коммерческих предложений, 47 остались без ответа. Агент находит их и запускает цепочку follow-up.</p>
+          <p class="ag-pr">Подписка <b>от 8 000 до 40 000 ₽ в месяц</b> + разовое внедрение</p>
+        </div>
+        <div class="ag-v" aria-hidden="true">
+          <div class="pl"><div class="pl-t a"></div><div class="pl-t b"></div><div class="pl-t c"></div><i class="pl-b"></i></div>
+          <div class="ag-c g" style="left:50%;top:5%;margin-left:-92px;animation-delay:-2s"><i></i>CRM + счета + переписки</div>
+          <div class="ag-c" style="left:6%;top:22%"><i></i>Забытое КП</div>
+          <div class="ag-c" style="right:5%;top:34%;animation-delay:-1.4s"><i></i>Неоплаченный счёт</div>
+          <div class="ag-c" style="left:8%;bottom:16%;animation-delay:-2.6s"><i></i>Клиент ушёл</div>
+          <div class="ag-c g" style="right:6%;bottom:10%;animation-delay:-.8s"><i></i>Follow-up запущен</div>
+        </div>
+      </div>
+
+      <div class="ag-p">
+        <div class="ag-i">
+          <h3>Конкурентная разведка по открытым данным</h3>
+          <p style="margin:0 0 12px;font-size:15px;color:rgba(240,244,248,.75)">Агент ежедневно наблюдает за конкурентами:</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i>Изменения цен, ассортимента, новые товары и услуги</li>
+            <li><i class="fa-solid fa-check"></i>Новые рекламные кампании</li>
+            <li><i class="fa-solid fa-check"></i>Отзывы покупателей и изменения условий доставки</li>
+            <li><i class="fa-solid fa-check"></i>Новые вакансии: они могут сигнализировать о расширении бизнеса</li>
+          </ul>
+          <p class="ag-ex"><b>Пример отчёта:</b> «Ваш конкурент снизил цену на 12%, запустил три новых продукта и начал рекламировать их в Инстаграме. Рекомендуем пересмотреть ценовую стратегию».</p>
+          <p class="ag-pr">Стоимость зависит от числа конкурентов и источников, считаем в смете</p>
+        </div>
+        <div class="ag-v" aria-hidden="true">
+          <div class="rd"><i class="rd-r"></i><i class="rd-r s2"></i><i class="rd-r s3"></i><i class="rd-sw"></i>
+            <i class="rd-n" style="left:22%;top:30%"></i><i class="rd-n" style="left:70%;top:22%;animation-delay:-.7s"></i><i class="rd-n" style="left:78%;top:64%;animation-delay:-1.3s"></i><i class="rd-n" style="left:30%;top:74%;animation-delay:-.4s"></i><i class="rd-n" style="left:48%;top:48%;animation-delay:-1.9s"></i></div>
+          <div class="ag-c" style="left:6%;top:12%"><i></i>Цены</div>
+          <div class="ag-c" style="right:6%;top:14%;animation-delay:-1.2s"><i></i>Новые товары</div>
+          <div class="ag-c" style="right:5%;bottom:22%;animation-delay:-2.2s"><i></i>Реклама</div>
+          <div class="ag-c" style="left:5%;bottom:24%;animation-delay:-3s"><i></i>Вакансии</div>
+          <div class="ag-c g" style="left:50%;bottom:6%;margin-left:-60px;animation-delay:-.6s"><i></i>Отчёт готов</div>
+        </div>
+      </div>
+
+      <div class="ag-p">
+        <div class="ag-i">
+          <h3>Предсказание товаров, которые не продадутся</h3>
+          <ul>
+            <li><i class="fa-solid fa-check"></i>Анализирует скорость продаж и сезонность</li>
+            <li><i class="fa-solid fa-check"></i>Выявляет товары с низким спросом и вероятность залёживания</li>
+            <li><i class="fa-solid fa-check"></i>Предлагает скидки, комплекты и акции</li>
+            <li><i class="fa-solid fa-check"></i>Предупреждает о чрезмерных закупках</li>
+          </ul>
+          <p class="ag-ex"><b>Главное отличие:</b> агент не просто показывает остатки, а предлагает конкретные действия, чтобы освободить оборотный капитал.</p>
+          <p class="ag-pr">Стоимость зависит от размера каталога и числа складов, считаем в смете</p>
+        </div>
+        <div class="ag-v" aria-hidden="true">
+          <div class="wh" id="agwh"></div>
+          <div class="ag-c" style="left:6%;top:12%"><i></i>Риск залёживания</div>
+          <div class="ag-c g" style="right:6%;top:20%;animation-delay:-1.5s"><i></i>Комплект + скидка</div>
+          <div class="ag-c" style="right:7%;bottom:12%;animation-delay:-2.7s"><i></i>Не докупать</div>
+        </div>
       </div>
     </div>
-    
-  
     <div class="sec-cta"><a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a></div>
-</div>
+  </div>
+  <script>(function(){var b=document.getElementById('agbox');if(!b)return;var t=b.querySelectorAll('.ag-t'),p=b.querySelectorAll('.ag-p');
+  t.forEach(function(x,i){x.addEventListener('click',function(){t.forEach(function(y,k){y.classList.toggle('on',k===i)});p.forEach(function(y,k){y.classList.toggle('on',k===i)})})});
+  var w=document.getElementById('agwh'),H=[34,22,46,16,40,28,12,50,24,38,18,30],HOT={3:1,6:1,10:1},h='';
+  for(var r=0;r<3;r++)for(var c=0;c<4;c++){var n=r*4+c;h+='<div class="wh-c'+(HOT[n]?' hot':'')+'" style="left:'+(c*62)+'px;top:'+(r*62)+'px;--h:'+H[n]+'px"><i class="t"></i><i class="l"></i><i class="r"></i></div>';}
+  w.innerHTML=h;})();</script>
 </section>
 <!--hb:mid--><div class="hb">
 <section id="how">
@@ -936,36 +1056,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </div><!--/hb:mid-->
 
 
-<section id="need">
-  <div class="container">
-    <div class="section-label">Что нужно от вас</div>
-    <h2 class="section-title">От вас - <span>около часа.</span> Остальное делаем мы</h2>
-    <div class="nx reveal">
-      <div class="nx-col nx-you">
-        <div class="nx-h"><span class="nx-av"><i class="fa-regular fa-user"></i></span><b>Вы</b><em>≈ 1 час</em></div>
-        <ul>
-          <li style="--i:0"><i class="fa-solid fa-phone"></i>30 минут на созвон</li>
-          <li style="--i:1"><i class="fa-solid fa-file-lines"></i>Прайс, каталог или частые вопросы</li>
-          <li style="--i:2"><i class="fa-solid fa-key"></i>Доступ к CRM, если она есть</li>
-        </ul>
-        <div class="nx-bar"><i style="--w:9%"></i></div>
-      </div>
-      <div class="nx-mid" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
-      <div class="nx-col nx-we">
-        <div class="nx-h"><span class="nx-av"><img src="/assets/favicon.png" alt="RaptorAI"></span><b>RaptorAI</b><em>от 3 дней</em></div>
-        <ul>
-          <li style="--i:3"><i class="fa-solid fa-check"></i>Пишем сценарии диалогов под ваш бизнес</li>
-          <li style="--i:4"><i class="fa-solid fa-check"></i>Собираем базу знаний из ваших материалов</li>
-          <li style="--i:5"><i class="fa-solid fa-check"></i>Подключаем сайт, Telegram и CRM</li>
-          <li style="--i:6"><i class="fa-solid fa-check"></i>Тестируем на реальных вопросах клиентов</li>
-          <li style="--i:7"><i class="fa-solid fa-check"></i>Запускаем и показываем, как всё работает</li>
-          <li style="--i:8"><i class="fa-solid fa-check"></i>30 дней исправляем бесплатно</li>
-        </ul>
-        <div class="nx-bar"><i style="--w:100%"></i></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 
 <section id="details">
@@ -1033,26 +1124,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
       <div class="pk-sup-l"><div class="pk-sup-h"><img src="/assets/favicon.png" alt="RaptorAI">Raptor Guard: сопровождение после запуска</div><div class="pk-sup-p">от 3 000 ₽ в месяц, по желанию · <a href="/raptor-guard.html" style="color:inherit;text-decoration:underline">три пакета</a></div></div>
       <ul><li><i class="fa-solid fa-check"></i>Исправления и мелкие доработки</li><li><i class="fa-solid fa-check"></i>Ответы на вопросы команды</li><li><i class="fa-solid fa-check"></i>Обновление базы знаний</li></ul>
     </div>
-    <div class="rgx" data-rgx>
-      <i class="rgx-bar t"></i><i class="rgx-bar b"></i>
-      <div class="rgx-bg" aria-hidden="true"><i class="rgx-aur"></i><i class="rgx-grid"></i><i class="rgx-sweep"></i><i class="rgx-grain"></i></div>
-      <span class="rgx-c tl"></span><span class="rgx-c tr"></span><span class="rgx-c bl"></span><span class="rgx-c br"></span>
-      <div class="rgx-hud"><span class="rgx-tag"><i class="fa-solid fa-shield-halved"></i>Поддержка после запуска</span><span class="rgx-live"><i></i>агент под наблюдением</span></div>
-      <div class="rgx-stage">
-        <i class="rgx-radar"></i><i class="rgx-pulse"></i><i class="rgx-pulse p2"></i><i class="rgx-pulse p3"></i>
-        <div class="h3d" data-scene="guard" role="img" aria-label="Логотип RaptorAI в 3D"></div>
-      </div>
-      <h3 class="rgx-title" data-text="Raptor Guard"><span class="w">Raptor</span> <span class="w g">Guard</span></h3>
-      <p class="rgx-lead">Агент - не коробка, которую поставили и забыли. У вас появляются новые услуги, меняются цены, приходят вопросы, которых раньше не было. Raptor Guard держит агента в форме и развивает его вместе с вашим бизнесом.</p>
-      <div class="rgx-price"><b>от <i>3&nbsp;000</i> ₽</b><span>в месяц</span><small>по желанию</small></div>
-      <ul class="rgx-list">
-        <li style="--i:0"><span class="rgx-n">01</span><i class="fa-solid fa-sliders"></i><b>Контроль автоматизаций</b><span>Следим, чтобы всё работало как задумано</span></li>
-        <li style="--i:1"><span class="rgx-n">02</span><i class="fa-solid fa-percent"></i><b>Скидка 10%</b><span>На все следующие заказы</span></li>
-        <li style="--i:2"><span class="rgx-n">03</span><i class="fa-solid fa-arrows-rotate"></i><b>Обновления проектов</b><span>Дополняем то, что уже запущено</span></li>
-        <li style="--i:3"><span class="rgx-n">04</span><i class="fa-solid fa-wave-square"></i><b>Мониторинг агента</b><span>Смотрим за работой и чиним сбои</span></li>
-      </ul>
-      <p class="rgx-etc"><i class="fa-solid fa-plus"></i>и другие задачи по вашим проектам</p>
-    </div>
+    
   </div>
   </div>
   </div>
