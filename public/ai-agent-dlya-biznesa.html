@@ -963,7 +963,6 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           <h3>Агент находит <span class="g">деньги, которые теряет компания</span></h3>
           <p class="ag-l">Смотрит CRM, счета и переписки, сам ставит задачи менеджерам и напоминает клиентам.</p>
           <div class="ag-pts"><span><i class="fa-solid fa-file-invoice-dollar"></i>Неоплаченные счета</span><span><i class="fa-solid fa-envelope-open-text"></i>Забытые предложения</span><span><i class="fa-solid fa-user-clock"></i>Клиенты, которые ушли</span></div>
-          <p class="ag-pr">Подписка <b>от 8 000 до 40 000 ₽ в месяц</b> + внедрение</p>
         </div>
         <div class="cw-vis" aria-hidden="false"><div class="sa3d fn3"><canvas class="ig3c sa3c" aria-hidden="true"></canvas>
           <div class="lm" data-m="1">
@@ -1021,7 +1020,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   var tabs=b.querySelectorAll('.ag-t'),pans=b.querySelectorAll('.ag-p'),inits=[];
   function show(i){tabs.forEach(function(y,k){y.classList.toggle('on',k===i)});pans.forEach(function(y,k){y.classList.toggle('on',k===i)});if(inits[i])inits[i]()}
   tabs.forEach(function(x,i){x.addEventListener('click',function(){show(i)})});
-  b.querySelectorAll('.sa3d').forEach(function(h){h.addEventListener('pointerdown',function(e){if(e.target.closest('button'))return;var c=h.querySelector('canvas');if(c)c.dispatchEvent(new PointerEvent('pointerdown',{clientX:e.clientX,clientY:e.clientY,pointerId:e.pointerId,bubbles:true}))})});
+  b.querySelectorAll('.sa3d').forEach(function(h){h.addEventListener('pointerdown',function(e){if(e.target.closest('button'))return;var c=h.querySelector('canvas');if(c)c.dispatchEvent(new PointerEvent('pointerdown',{clientX:e.clientX,clientY:e.clientY,pointerId:e.pointerId,bubbles:false}))})});
 
   /* 1: утечки денег */
   var D1=[['fa-envelope-open-text','Коммерческие без ответа','47 из 300 · запустить цепочку',940000,'#5b7cff'],['fa-file-invoice-dollar','Неоплаченные счета','12 счетов · напомнить клиентам',380000,'#ff7a45'],['fa-user-clock','Клиенты перестали покупать','23 клиента · вернуть предложением',560000,'#a855f7'],['fa-triangle-exclamation','Ошибки в выставлении счетов','9 повторяющихся · поставить задачу',90000,'#ff4d6d']];
