@@ -786,3 +786,4 @@ section:not(.hero){padding-top:72px!important;padding-bottom:72px!important}
 .hb .stat-num .sx{color:var(--hba)!important;-webkit-text-fill-color:var(--hba)!important;text-shadow:0 0 24px rgba(var(--hba-rgb),.45)}
 .form-section{overflow-x:clip}
 @media(max-width:760px){#cx2 .cx-p>*,#cx .cx-p>*{grid-template-columns:minmax(0,1fr)!important}#cx2 .cw-txt,#cx2 .cw-vis,#cx .cw-txt,#cx .cw-vis{min-width:0;max-width:100%}#cx2 .cw-txt h3{overflow-wrap:anywhere}}
+.pkc-lv{display:grid!important;grid-template-columns:repeat(3,1fr);gap:12px}.pkc-lv .pkc-sw{align-items:flex-start;line-height:1.4}.pkc-lv{align-items:start}.pkc-lv .pkc-sw>i{margin-top:2px;flex:none}@media(max-width:900px){.pkc-lv{grid-template-columns:1fr}}

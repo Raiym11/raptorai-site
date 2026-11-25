@@ -48,6 +48,18 @@
 
   /* ---------- цены ---------- */
   INIT.pkc = function (box) {
+    if ($('.pkc-lv', box)) {
+      var cards0 = $$('.pk-card', box.parentNode), sws = $$('input[type=checkbox]', box), nm = $('.pkc-pk', box), pr = $('.pkc-price', box), last0 = null;
+      var pick0 = function () {
+        var w = 0; sws.forEach(function (x) { if (x.checked) w += +x.getAttribute('data-w'); });
+        var k0 = w >= 2 ? 2 : w, c0 = cards0[k0];
+        nm.textContent = '«' + $('.pk-name', c0).textContent.trim() + '»';
+        pr.textContent = ', ' + $('.pk-price', c0).textContent.replace(/\s+/g, ' ').trim() + '.';
+        if (k0 !== last0) { last0 = k0; cards0.forEach(function (x, i) { x.classList.toggle('is-pick', i === k0); x.classList.toggle('is-dim', i !== k0); }); }
+      };
+      sws.forEach(function (x) { x.addEventListener('change', pick0); });
+      pick0(); return;
+    }
     var n8n = box.getAttribute('data-mode') === 'n8n';
     var cards = $$('.pk-card', box.parentNode);
     var outs = $$('output', box), sw = $('input[type=checkbox]', box);
