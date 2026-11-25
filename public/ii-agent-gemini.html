@@ -874,7 +874,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <section id="case">
   <style id="ml-css">
   [data-v="mail"] .cz-vis{background:none;border:0;box-shadow:none;padding:0}
-  .ml-h{position:relative;padding:66px 40px 30px 30px;min-width:0}
+  .ml-h{position:relative;padding:44px 40px 30px 30px;min-width:0}
   .ml{position:relative;z-index:5;font-family:'Inter',sans-serif;color:#21242b}
   .ml-st{position:relative;display:flex;gap:10px;margin-bottom:10px;padding:10px 14px;border-radius:16px;background:linear-gradient(135deg,#4285F4,#9B72CB);color:#fff;box-shadow:0 18px 40px -16px rgba(66,133,244,.7)}
   .ml-st div{flex:1;min-width:0}.ml-st b{display:block;font:800 22px/1.1 'Inter',sans-serif;font-variant-numeric:tabular-nums}.ml-st small{font-size:11px;opacity:.9;line-height:1.25;display:block}
@@ -902,7 +902,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   .ph:before{content:"";position:absolute;left:50%;top:10px;width:52px;height:12px;margin-left:-26px;border-radius:8px;background:#05080c;z-index:2}
   .ph-s{height:372px;border-radius:24px;overflow:hidden;background:#0e1621;display:flex;flex-direction:column;position:relative}
   .ph-h{display:flex;align-items:center;gap:8px;padding:38px 10px 9px;background:#17212b;color:#fff}
-  .ml-h .bk-tile b img{width:88%}
+  .ml-cube{position:relative!important;margin:14px 0 0 56px;width:112px!important;height:112px!important}
+  .ml-cube b img{width:88%!important}
   .ph-lg{width:24px;height:24px;object-fit:contain;flex:none}.ph-h b{display:block;font-size:11px}.ph-h small{font-size:9px;color:#7f93a6}
   .ph-c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:8px;overflow:hidden}
   .pb{max-width:100%;padding:7px 9px;border-radius:12px 12px 12px 3px;background:#182533;color:#e8eef5;font-size:10px;line-height:1.4;animation:pbIn .45s cubic-bezier(.2,.8,.2,1.15)}
@@ -916,7 +917,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   .pb-a button:hover{background:rgba(106,179,243,.5);transform:translateY(-1px)}.pb-a button.p{background:#2AABEE}.pb-a button.ok{background:#1f9d62;cursor:default;transform:none}
   .ph-ping{position:absolute;right:10px;top:26px;width:9px;height:9px;border-radius:50%;background:#ff4d6d;opacity:0}.ph-ping.on{animation:phP 1.2s ease-out}
   @keyframes phP{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(3.4)}}
-  @media(max-width:900px){.ml-h{padding:62px 14px 26px 14px}.ml-w{flex-direction:column;align-items:stretch}.ml-ph{margin:16px auto 0}.ph{transform:none}}
+  @media(max-width:900px){.ml-h{padding:40px 14px 26px 14px}.ml-w{flex-direction:column;align-items:stretch}.ml-ph{margin:16px auto 0}.ph{transform:none}}
   @media(max-width:480px){.ml-st b{font-size:18px}.ml-st small{font-size:10px}.ml-l{min-height:270px}}
   @media(prefers-reduced-motion:reduce){.ph,.mr,.pb,.mr-c span,.ml-ag.busy i{animation:none}}
 </style>
@@ -926,9 +927,8 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="cz reveal" data-bk="cz" style="margin-top:30px">
       <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-envelope-open-text"></i><span><b>Контроль почты</b><small>ИИ-агент на Gemini</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-table"></i><span><b>Большой прайс</b><small>тысячи строк</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-image"></i><span><b>Поиск по фото</b><small>фото и сканы</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-chart-simple"></i><span><b>Сводный отчёт</b><small>несколько таблиц</small></span></button></div>
       <div class="cz-pane on" data-v="mail">
-        <div class="cz-info"><h3>ИИ-агент Gemini <span style="background:linear-gradient(90deg,#4285F4,#9B72CB);-webkit-background-clip:text;background-clip:text;color:transparent">контролирует почту</span></h3><p>Читает каждое письмо, знает вашу компанию и сразу пишет вам в Telegram, если письмо важное.</p><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Каждое письмо уходит нужному специалисту</span></li><li><i class="fa-solid fa-check"></i><span>Важное сразу в Telegram, с готовым ответом</span></li><li><i class="fa-solid fa-check"></i><span>Вы отправляете ответ или правите его</span></li></ul></div>
+        <div class="cz-info"><h3>ИИ-агент Gemini <span style="background:linear-gradient(90deg,#4285F4,#9B72CB);-webkit-background-clip:text;background-clip:text;color:transparent">контролирует почту</span></h3><p>Читает каждое письмо, знает вашу компанию и сразу пишет вам в Telegram, если письмо важное.</p><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Каждое письмо уходит нужному специалисту</span></li><li><i class="fa-solid fa-check"></i><span>Важное сразу в Telegram, с готовым ответом</span></li><li><i class="fa-solid fa-check"></i><span>Вы отправляете ответ или правите его</span></li></ul><div class="bk-buddy bk-tile ml-cube" style="--face:#f3f5fb"><span><b><i class="sh"></i><img src="/hero3d/logo-gemini.webp?v=3" alt="Gemini"></b></span></div></div>
         <div class="cz-vis"><div class="ml-h">
-          <div class="bk-buddy bk-tile" style="--face:#f3f5fb;left:-8px;top:-16px;z-index:9;width:92px!important;height:92px!important"><span><b><i class="sh"></i><img src="/hero3d/logo-gemini.webp?v=3" alt="Gemini"></b></span></div>
           <div class="ml">
             <div class="ml-st"><span class="ml-demo">пример</span><div><b class="ml-s1">+0%</b><small>скорость ответов клиентам</small></div><div><b class="ml-s2">0</b><small>важных писем без ответа</small></div></div>
             <div class="ml-w">
