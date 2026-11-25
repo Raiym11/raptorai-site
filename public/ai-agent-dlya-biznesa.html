@@ -882,49 +882,65 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   .ag-t.on{border-color:rgba(0,212,255,.6);background:rgba(0,212,255,.1)}
   .ag-t.on>i{background:linear-gradient(135deg,#00D4FF,#3D8BFF);color:#04121a;box-shadow:0 0 22px -4px #00D4FF}
   .ag-t.on b{color:#fff}
-  .ag-p{display:none;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:34px;align-items:center}
+  .ag-p{display:none;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:34px;align-items:center}
   .ag-p.on{display:grid;animation:agIn .55s cubic-bezier(.2,.7,.2,1)}
   @keyframes agIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  .ag-i h3{font-size:clamp(20px,2.2vw,26px);line-height:1.25;margin:0 0 14px;letter-spacing:-.01em}
-  .ag-i ul{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:9px}
-  .ag-i li{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.45;color:rgba(240,244,248,.86)}
-  .ag-i li i{flex:none;margin-top:2px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;color:#04121a;background:linear-gradient(135deg,#00D4FF,#3D8BFF)}
-  .ag-ex{margin:0 0 14px;padding:12px 15px;font-size:14.5px;line-height:1.55;border-radius:14px;border:1px dashed rgba(0,212,255,.5);background:rgba(0,212,255,.07);color:#e8fbff}
-  .ag-ex b{color:#00D4FF}
-  .ag-pr{margin:0;font-size:14px;color:var(--gray)}.ag-pr b{color:#fff;font-size:17px}
-  .ag-v{position:relative;min-width:0;height:380px;border-radius:22px;background:radial-gradient(ellipse at 50% 40%,#12243a,#0a1018 70%);border:1px solid rgba(255,255,255,.1);overflow:hidden;perspective:900px}
-  .ag-v:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 75%,rgba(0,212,255,.18),transparent 60%)}
-  /* 1: платформа */
-  .pl{position:absolute;left:50%;top:54%;width:240px;height:240px;margin:-120px 0 0 -120px;transform-style:preserve-3d;transform:rotateX(62deg) rotateZ(-38deg)}
-  .pl-t{position:absolute;inset:0;border-radius:22px;border:1px solid rgba(0,212,255,.55);background:linear-gradient(135deg,rgba(0,212,255,.22),rgba(61,139,255,.1));box-shadow:0 0 40px -6px rgba(0,212,255,.55),inset 0 0 30px rgba(0,212,255,.15);animation:plF 5s ease-in-out infinite}
-  .pl-t.a{transform:translateZ(0);background:linear-gradient(135deg,rgba(10,24,40,.9),rgba(20,50,80,.8))}
-  .pl-t.b{transform:translateZ(46px);animation-delay:-1.6s}.pl-t.c{transform:translateZ(92px);animation-delay:-3.2s}
-  .pl-t span{transform:rotateZ(38deg) rotateX(-62deg);display:block}
-  @keyframes plF{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
-  .pl-b{position:absolute;left:0;right:0;height:3px;top:0;background:linear-gradient(90deg,transparent,#00D4FF,transparent);box-shadow:0 0 18px #00D4FF;transform:translateZ(120px);animation:plS 3.4s linear infinite}
-  @keyframes plS{0%{top:2%}100%{top:96%}}
-  .ag-c{position:absolute;display:flex;align-items:center;gap:7px;padding:7px 11px;border-radius:12px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(8,16,26,.82);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px);animation:agC 4.5s ease-in-out infinite;white-space:nowrap}
-  .ag-c i{width:8px;height:8px;border-radius:50%;background:#ffb020;box-shadow:0 0 10px #ffb020}.ag-c.g i{background:#33e0a1;box-shadow:0 0 10px #33e0a1}
-  @keyframes agC{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  /* 2: радар */
-  .rd{position:absolute;left:50%;top:52%;width:300px;height:300px;margin:-150px 0 0 -150px;transform-style:preserve-3d;transform:rotateX(58deg)}
-  .rd-r{position:absolute;border-radius:50%;border:1px solid rgba(0,212,255,.35);inset:0}.rd-r.s2{inset:18%}.rd-r.s3{inset:36%}
-  .rd-sw{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(0,212,255,.55),transparent 28%);animation:rdS 4s linear infinite}
-  @keyframes rdS{to{transform:rotate(360deg)}}
-  .rd-n{position:absolute;width:12px;height:12px;border-radius:50%;background:#00D4FF;box-shadow:0 0 14px #00D4FF;animation:rdP 2.4s ease-in-out infinite}
-  @keyframes rdP{50%{transform:scale(1.7);opacity:.6}}
-  /* 3: склад */
-  .wh{position:absolute;left:50%;top:56%;width:260px;height:200px;margin:-100px 0 0 -130px;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-40deg)}
-  .wh-c{position:absolute;width:56px;height:56px;transform-style:preserve-3d;--h:30px;--c:0,212,255}
-  .wh-c i{position:absolute;display:block}
-  .wh-c .t{inset:0;transform:translateZ(var(--h));background:rgba(var(--c),.75);border:1px solid rgba(255,255,255,.35);box-shadow:0 0 18px rgba(var(--c),.6)}
-  .wh-c .l{left:0;top:56px;width:56px;height:var(--h);background:rgba(var(--c),.45);transform-origin:top;transform:rotateX(90deg)}
-  .wh-c .r{left:56px;top:0;width:var(--h);height:56px;background:rgba(var(--c),.28);transform-origin:left;transform:rotateY(-90deg)}
-  .wh-c.hot{--c:255,176,32;animation:whH 2s ease-in-out infinite}
-  @keyframes whH{50%{filter:brightness(1.6)}}
-  @media(max-width:900px){.ag{padding:18px 14px}.ag-p{grid-template-columns:1fr;gap:22px}.ag-t{flex:1;min-width:0;padding:10px}.ag-t small{display:none}.ag-v{height:320px}.pl{transform:rotateX(62deg) rotateZ(-38deg) scale(.8)}.rd{transform:rotateX(58deg) scale(.85)}.wh{transform:rotateX(58deg) rotateZ(-40deg) scale(.85)}}
-  @media(max-width:480px){.ag-tabs{gap:6px}.ag-t{gap:8px;padding:8px}.ag-t>i{width:30px;height:30px;border-radius:9px;font-size:12px}.ag-t b{font-size:12.5px;line-height:1.25}.ag-c{font-size:11px;padding:5px 8px}}
-  @media(prefers-reduced-motion:reduce){.ag-p.on,.pl-t,.pl-b,.ag-c,.rd-sw,.rd-n,.wh-c.hot{animation:none}}
+  .ag-i h3{font-size:clamp(24px,2.8vw,36px);line-height:1.15;margin:0 0 14px;letter-spacing:-.02em;font-weight:900}
+  .ag-i h3 .g{background:linear-gradient(100deg,#00D4FF,#3D8BFF 60%,#7ab0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ag-l{margin:0 0 22px;font-size:15.5px;line-height:1.6;color:rgba(240,244,248,.72)}
+  .ag-pts{display:grid;gap:10px}
+  .ag-pts span{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15.5px;color:#fff}
+  .ag-pts i{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:15px;color:#04121a;background:linear-gradient(135deg,#00D4FF,#3D8BFF)}
+  .ag-pr{margin:18px 0 0;font-size:13.5px;color:var(--gray)}.ag-pr b{color:#fff;font-size:15.5px}
+  .ag-v{position:relative;min-width:0;padding:26px 22px;border-radius:22px;background:radial-gradient(ellipse at 50% 30%,#12243a,#0a1018 72%);border:1px solid rgba(255,255,255,.1);perspective:1100px}
+  .ag-v:before{content:"";position:absolute;inset:0;border-radius:22px;background:radial-gradient(circle at 50% 100%,rgba(0,212,255,.2),transparent 60%);pointer-events:none}
+  .m{position:relative;border-radius:18px;padding:16px;background:linear-gradient(160deg,rgba(18,32,48,.96),rgba(9,16,26,.96));border:1px solid rgba(0,212,255,.32);box-shadow:0 30px 60px -20px rgba(0,0,0,.7),0 0 40px -12px rgba(0,212,255,.45);transition:transform .25s ease-out;transform-style:preserve-3d;font-size:13.5px}
+  .m-h{display:flex;align-items:center;gap:9px;margin-bottom:12px}.m-h i{color:#00D4FF}.m-h b{font-size:14px;color:#fff}
+  .m-tag{margin-left:auto;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#7fb7c9;border:1px solid rgba(127,183,201,.4);border-radius:20px;padding:2px 8px}
+  .m button{font:inherit;cursor:pointer;color:inherit}
+  .m-btn{padding:8px 14px;border-radius:10px;border:1px solid rgba(0,212,255,.5);background:rgba(0,212,255,.12);color:#dffaff;font-weight:700;font-size:12.5px;transition:background .2s,transform .2s}
+  .m-btn:hover{background:rgba(0,212,255,.26);transform:translateY(-1px)}
+  .m-btn.ok{border-color:rgba(51,224,161,.6);background:rgba(51,224,161,.14);color:#7dffd0;cursor:default;transform:none}
+  .m-btn.pri{background:linear-gradient(135deg,#00D4FF,#3D8BFF);color:#04121a;border:0}
+  .m-f{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .m-bub{margin-top:12px;padding:11px 13px;border-radius:14px 14px 14px 4px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:#e8fbff;line-height:1.5;min-height:44px}
+  .m-bub b{color:#00D4FF}
+  /* m1 */
+  .m1-sum{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .m1-sum small{width:100%;color:var(--gray)}.m1-sum b{font:900 34px/1 'Inter',sans-serif;background:linear-gradient(100deg,#ffb020,#ff7a5c);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+  .m1-sum span{color:#ffb020;font-weight:800}.m1-sum em{margin-left:auto;font-style:normal;color:#7dffd0;font-weight:700}
+  .m1-bar{height:5px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:12px}.m1-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#00D4FF,#33e0a1);transition:width .15s linear}
+  .r{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin-bottom:7px;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s,border-color .3s,background .3s}
+  .r.in{opacity:1;transform:none}.r.done{border-color:rgba(51,224,161,.45);background:rgba(51,224,161,.07)}
+  .r>i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,176,32,.15);color:#ffb020}.r.done>i{background:rgba(51,224,161,.15);color:#33e0a1}
+  .r b{display:block;color:#fff;font-size:13.5px}.r small{color:var(--gray);font-size:12px}
+  /* m2 */
+  .m2-c{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .m2-c button{padding:7px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font-weight:700;font-size:12.5px;color:rgba(240,244,248,.75);transition:all .2s}
+  .m2-c button.on{border-color:rgba(0,212,255,.6);background:rgba(0,212,255,.14);color:#fff}
+  .e{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;width:100%;text-align:left;padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin-bottom:7px;transition:border-color .2s,background .2s,transform .2s}
+  .e:hover{border-color:rgba(0,212,255,.5);transform:translateX(3px)}.e.on{border-color:rgba(0,212,255,.7);background:rgba(0,212,255,.1)}
+  .e>i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(0,212,255,.14);color:#00D4FF}
+  .e b{display:block;color:#fff;font-size:13.5px}.e small{color:var(--gray);font-size:12px}
+  .e em{font-style:normal;font-weight:800;font-size:12.5px;color:#ffb020}.e em.up{color:#33e0a1}
+  /* m3 */
+  .m3-top{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:12px}.m3-top small{display:block;color:var(--gray)}
+  .m3-top b{font:900 26px/1.1 'Inter',sans-serif;color:#ffb020;font-variant-numeric:tabular-nums}.m3-top em{font-style:normal;color:#7dffd0;font-weight:700}
+  .m3-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .p{position:relative;text-align:left;padding:10px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:transform .2s,border-color .2s,background .2s}
+  .p:hover{transform:translateY(-3px) rotateX(6deg)}.p.on{border-color:rgba(0,212,255,.75);background:rgba(0,212,255,.1)}
+  .p i{display:block;font-size:18px;color:#00D4FF;margin-bottom:6px}.p b{display:block;color:#fff;font-size:12.5px;line-height:1.25;overflow-wrap:anywhere}
+  .p .bar{display:block;height:4px;border-radius:4px;background:rgba(255,255,255,.1);margin:7px 0 4px;overflow:hidden}.p .bar u{display:block;height:100%;border-radius:4px;background:#ffb020}
+  .p.hot .bar u{background:#ff5c5c}.p.ok{border-color:rgba(51,224,161,.5);background:rgba(51,224,161,.08)}.p.ok .bar u{background:#33e0a1}.p.ok i{color:#33e0a1}
+  .p small{font-size:11px;color:var(--gray)}
+  .m3-a{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  /* floaty 3D chips */
+  .fl{position:absolute;z-index:3;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:20px;color:#04121a;background:linear-gradient(135deg,#7fe9ff,#3D8BFF);box-shadow:0 14px 26px -6px rgba(0,212,255,.6),inset 0 2px 0 rgba(255,255,255,.6);animation:agF 5s ease-in-out infinite;pointer-events:none}
+  .fl.a{top:-8px;right:12px}.fl.b{bottom:-10px;left:10px;animation-delay:-2.5s;background:linear-gradient(135deg,#ffd27a,#ff8a5c);box-shadow:0 14px 26px -6px rgba(255,150,80,.6),inset 0 2px 0 rgba(255,255,255,.6)}
+  @keyframes agF{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-10px) rotate(6deg)}}
+  @media(max-width:900px){.ag{padding:18px 14px}.ag-p{grid-template-columns:1fr;gap:22px}.ag-t{flex:1;min-width:0;padding:10px}.ag-t small{display:none}.ag-v{padding:20px 12px}}
+  @media(max-width:480px){.ag-tabs{gap:6px}.ag-t{gap:8px;padding:8px}.ag-t>i{width:30px;height:30px;border-radius:9px;font-size:12px}.ag-t b{font-size:12.5px;line-height:1.25}.m{padding:12px}.fl{width:38px;height:38px;font-size:16px}.m3-g{gap:6px}.p{padding:8px}}
+  @media(prefers-reduced-motion:reduce){.ag-p.on,.fl{animation:none}.r{transition:none}}
   </style>
   <div class="container">
     <div class="section-label">Примеры агентов</div>
@@ -938,78 +954,107 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 
       <div class="ag-p on">
         <div class="ag-i">
-          <h3>Агент, который ищет деньги, теряемые компанией</h3>
-          <ul>
-            <li><i class="fa-solid fa-check"></i>Анализирует CRM, счета, переписки и заказы</li>
-            <li><i class="fa-solid fa-check"></i>Находит клиентов, которые перестали покупать</li>
-            <li><i class="fa-solid fa-check"></i>Обнаруживает неоплаченные счета и забытые коммерческие предложения</li>
-            <li><i class="fa-solid fa-check"></i>Выявляет повторяющиеся ошибки в выставлении счетов</li>
-            <li><i class="fa-solid fa-check"></i>Сам ставит задачи менеджерам и напоминает клиентам</li>
-          </ul>
-          <p class="ag-ex"><b>Пример сценария:</b> компания за месяц отправила 300 коммерческих предложений, 47 остались без ответа. Агент находит их и запускает цепочку follow-up.</p>
-          <p class="ag-pr">Подписка <b>от 8 000 до 40 000 ₽ в месяц</b> + разовое внедрение</p>
+          <h3>Агент находит <span class="g">деньги, которые теряет компания</span></h3>
+          <p class="ag-l">Смотрит CRM, счета и переписки, сам ставит задачи менеджерам и напоминает клиентам.</p>
+          <div class="ag-pts"><span><i class="fa-solid fa-file-invoice-dollar"></i>Неоплаченные счета</span><span><i class="fa-solid fa-envelope-open-text"></i>Забытые предложения</span><span><i class="fa-solid fa-user-clock"></i>Клиенты, которые ушли</span></div>
+          <p class="ag-pr">Подписка <b>от 8 000 до 40 000 ₽ в месяц</b> + внедрение</p>
         </div>
-        <div class="ag-v" aria-hidden="true">
-          <div class="pl"><div class="pl-t a"></div><div class="pl-t b"></div><div class="pl-t c"></div><i class="pl-b"></i></div>
-          <div class="ag-c g" style="left:50%;top:5%;margin-left:-92px;animation-delay:-2s"><i></i>CRM + счета + переписки</div>
-          <div class="ag-c" style="left:6%;top:22%"><i></i>Забытое КП</div>
-          <div class="ag-c" style="right:5%;top:34%;animation-delay:-1.4s"><i></i>Неоплаченный счёт</div>
-          <div class="ag-c" style="left:8%;bottom:16%;animation-delay:-2.6s"><i></i>Клиент ушёл</div>
-          <div class="ag-c g" style="right:6%;bottom:10%;animation-delay:-.8s"><i></i>Follow-up запущен</div>
+        <div class="ag-v"><span class="fl a"><i class="fa-solid fa-ruble-sign"></i></span><span class="fl b"><i class="fa-solid fa-bell"></i></span>
+          <div class="m" data-m="1">
+            <div class="m-h"><i class="fa-solid fa-robot"></i><b>ИИ-агент · поиск утечек</b><span class="m-tag">демо</span></div>
+            <div class="m1-sum"><small>Под угрозой</small><b class="m1-n">0</b><span>₽</span><em class="m1-ret"></em></div>
+            <div class="m1-bar"><i></i></div>
+            <div class="m1-l"></div>
+            <div class="m-f"><button type="button" class="m-btn pri m1-all"><i class="fa-solid fa-bolt"></i> Запустить follow-up по всем</button><button type="button" class="m-btn m1-re"><i class="fa-solid fa-rotate"></i> Проверить заново</button></div>
+          </div>
         </div>
       </div>
 
       <div class="ag-p">
         <div class="ag-i">
-          <h3>Конкурентная разведка по открытым данным</h3>
-          <p style="margin:0 0 12px;font-size:15px;color:rgba(240,244,248,.75)">Агент ежедневно наблюдает за конкурентами:</p>
-          <ul>
-            <li><i class="fa-solid fa-check"></i>Изменения цен, ассортимента, новые товары и услуги</li>
-            <li><i class="fa-solid fa-check"></i>Новые рекламные кампании</li>
-            <li><i class="fa-solid fa-check"></i>Отзывы покупателей и изменения условий доставки</li>
-            <li><i class="fa-solid fa-check"></i>Новые вакансии: они могут сигнализировать о расширении бизнеса</li>
-          </ul>
-          <p class="ag-ex"><b>Пример отчёта:</b> «Ваш конкурент снизил цену на 12%, запустил три новых продукта и начал рекламировать их в Инстаграме. Рекомендуем пересмотреть ценовую стратегию».</p>
-          <p class="ag-pr">Стоимость зависит от числа конкурентов и источников, считаем в смете</p>
+          <h3>Следит за конкурентами <span class="g">каждый день</span></h3>
+          <p class="ag-l">Разведка по открытым данным: что изменилось у конкурентов и что с этим делать.</p>
+          <div class="ag-pts"><span><i class="fa-solid fa-tags"></i>Цены и ассортимент</span><span><i class="fa-solid fa-bullhorn"></i>Реклама и отзывы</span><span><i class="fa-solid fa-user-plus"></i>Вакансии и доставка</span></div>
+          <p class="ag-pr">Стоимость зависит от числа конкурентов, <b>считаем в смете</b></p>
         </div>
-        <div class="ag-v" aria-hidden="true">
-          <div class="rd"><i class="rd-r"></i><i class="rd-r s2"></i><i class="rd-r s3"></i><i class="rd-sw"></i>
-            <i class="rd-n" style="left:22%;top:30%"></i><i class="rd-n" style="left:70%;top:22%;animation-delay:-.7s"></i><i class="rd-n" style="left:78%;top:64%;animation-delay:-1.3s"></i><i class="rd-n" style="left:30%;top:74%;animation-delay:-.4s"></i><i class="rd-n" style="left:48%;top:48%;animation-delay:-1.9s"></i></div>
-          <div class="ag-c" style="left:6%;top:12%"><i></i>Цены</div>
-          <div class="ag-c" style="right:6%;top:14%;animation-delay:-1.2s"><i></i>Новые товары</div>
-          <div class="ag-c" style="right:5%;bottom:22%;animation-delay:-2.2s"><i></i>Реклама</div>
-          <div class="ag-c" style="left:5%;bottom:24%;animation-delay:-3s"><i></i>Вакансии</div>
-          <div class="ag-c g" style="left:50%;bottom:6%;margin-left:-60px;animation-delay:-.6s"><i></i>Отчёт готов</div>
+        <div class="ag-v"><span class="fl a"><i class="fa-solid fa-eye"></i></span><span class="fl b"><i class="fa-solid fa-chart-line"></i></span>
+          <div class="m" data-m="2">
+            <div class="m-h"><i class="fa-solid fa-robot"></i><b>ИИ-агент · мониторинг</b><span class="m-tag">демо</span></div>
+            <div class="m2-c"></div>
+            <div class="m2-l"></div>
+            <div class="m-bub m2-b">Нажмите на изменение, и агент подскажет, что делать.</div>
+            <div class="m-f"><button type="button" class="m-btn pri m2-rep"><i class="fa-solid fa-file-lines"></i> Собрать отчёт</button></div>
+          </div>
         </div>
       </div>
 
       <div class="ag-p">
         <div class="ag-i">
-          <h3>Предсказание товаров, которые не продадутся</h3>
-          <ul>
-            <li><i class="fa-solid fa-check"></i>Анализирует скорость продаж и сезонность</li>
-            <li><i class="fa-solid fa-check"></i>Выявляет товары с низким спросом и вероятность залёживания</li>
-            <li><i class="fa-solid fa-check"></i>Предлагает скидки, комплекты и акции</li>
-            <li><i class="fa-solid fa-check"></i>Предупреждает о чрезмерных закупках</li>
-          </ul>
-          <p class="ag-ex"><b>Главное отличие:</b> агент не просто показывает остатки, а предлагает конкретные действия, чтобы освободить оборотный капитал.</p>
-          <p class="ag-pr">Стоимость зависит от размера каталога и числа складов, считаем в смете</p>
+          <h3>Знает, какие товары <span class="g">не продадутся</span></h3>
+          <p class="ag-l">Не просто показывает остатки, а предлагает действия, чтобы освободить деньги из склада.</p>
+          <div class="ag-pts"><span><i class="fa-solid fa-triangle-exclamation"></i>Риск залёживания</span><span><i class="fa-solid fa-percent"></i>Скидки и комплекты</span><span><i class="fa-solid fa-cart-arrow-down"></i>Предупреждение о закупках</span></div>
+          <p class="ag-pr">Стоимость зависит от каталога, <b>считаем в смете</b></p>
         </div>
-        <div class="ag-v" aria-hidden="true">
-          <div class="wh" id="agwh"></div>
-          <div class="ag-c" style="left:6%;top:12%"><i></i>Риск залёживания</div>
-          <div class="ag-c g" style="right:6%;top:20%;animation-delay:-1.5s"><i></i>Комплект + скидка</div>
-          <div class="ag-c" style="right:7%;bottom:12%;animation-delay:-2.7s"><i></i>Не докупать</div>
+        <div class="ag-v"><span class="fl a"><i class="fa-solid fa-box-open"></i></span><span class="fl b"><i class="fa-solid fa-unlock"></i></span>
+          <div class="m" data-m="3">
+            <div class="m-h"><i class="fa-solid fa-robot"></i><b>ИИ-агент · склад</b><span class="m-tag">демо</span></div>
+            <div class="m3-top"><div><small>Заморожено в остатках</small><b class="m3-n">0 ₽</b></div><em class="m3-f"></em></div>
+            <div class="m3-g"></div>
+            <div class="m-bub m3-b">Выберите товар, агент оценит риск и предложит действие.</div>
+            <div class="m3-a"></div>
+          </div>
         </div>
       </div>
     </div>
     <div class="sec-cta"><a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a></div>
   </div>
-  <script>(function(){var b=document.getElementById('agbox');if(!b)return;var t=b.querySelectorAll('.ag-t'),p=b.querySelectorAll('.ag-p');
-  t.forEach(function(x,i){x.addEventListener('click',function(){t.forEach(function(y,k){y.classList.toggle('on',k===i)});p.forEach(function(y,k){y.classList.toggle('on',k===i)})})});
-  var w=document.getElementById('agwh'),H=[34,22,46,16,40,28,12,50,24,38,18,30],HOT={3:1,6:1,10:1},h='';
-  for(var r=0;r<3;r++)for(var c=0;c<4;c++){var n=r*4+c;h+='<div class="wh-c'+(HOT[n]?' hot':'')+'" style="left:'+(c*62)+'px;top:'+(r*62)+'px;--h:'+H[n]+'px"><i class="t"></i><i class="l"></i><i class="r"></i></div>';}
-  w.innerHTML=h;})();</script>
+  <script>(function(){
+  var b=document.getElementById('agbox');if(!b)return;
+  var $=function(s,r){return(r||b).querySelector(s)},fmt=function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ')};
+  var red=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function tick(el,from,to,suf,ms){suf=suf||'';if(red){el.textContent=fmt(to)+suf;return}var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/(ms||700));el.textContent=fmt(from+(to-from)*k)+suf;if(k<1)requestAnimationFrame(f)})(t0)}
+  function typ(el,html,done){clearInterval(el._t);var tmp=document.createElement('div');tmp.innerHTML=html;var txt=tmp.textContent;if(red){el.innerHTML=html;done&&done();return}var i=0;el.textContent='';el._t=setInterval(function(){i+=2;if(i>=txt.length){clearInterval(el._t);el.innerHTML=html;done&&done()}else el.textContent=txt.slice(0,i)},18)}
+  var tabs=b.querySelectorAll('.ag-t'),pans=b.querySelectorAll('.ag-p'),inits=[];
+  function show(i){tabs.forEach(function(y,k){y.classList.toggle('on',k===i)});pans.forEach(function(y,k){y.classList.toggle('on',k===i)});if(inits[i])inits[i]()}
+  tabs.forEach(function(x,i){x.addEventListener('click',function(){show(i)})});
+  b.querySelectorAll('.ag-v').forEach(function(v){var m=$('.m',v);if(!m||red||matchMedia('(hover:none)').matches)return;v.addEventListener('mousemove',function(e){var r=v.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;m.style.transform='rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg)'});v.addEventListener('mouseleave',function(){m.style.transform=''})});
+
+  /* 1: утечки денег */
+  var D1=[['fa-envelope-open-text','Коммерческие без ответа','47 из 300 · запустить цепочку',940000],['fa-file-invoice-dollar','Неоплаченные счета','12 счетов · напомнить клиентам',380000],['fa-user-clock','Клиенты перестали покупать','23 клиента · вернуть предложением',560000],['fa-triangle-exclamation','Ошибки в выставлении счетов','9 повторяющихся · поставить задачу',90000]];
+  (function(){var m=$('[data-m="1"]'),L=$('.m1-l',m),N=$('.m1-n',m),R=$('.m1-ret',m),B=$('.m1-bar i',m),left=0,ret=0,rows=[],go=0;
+    function upd(){tick(N,+N.getAttribute('data-v')||0,left,'',500);N.setAttribute('data-v',left);R.textContent=ret?'возвращено '+fmt(ret)+' ₽':''}
+    function fix(r,i){if(r.classList.contains('done'))return;r.classList.add('done');var bt=$('button',r);bt.className='m-btn ok';bt.innerHTML='<i class="fa-solid fa-check"></i> Отправлено';left-=D1[i][3];ret+=D1[i][3];upd()}
+    function run(){var id=++go;L.innerHTML='';rows=[];left=0;ret=0;N.setAttribute('data-v',0);N.textContent='0';R.textContent='';B.style.width='0';
+      D1.forEach(function(d,i){var r=document.createElement('div');r.className='r';r.innerHTML='<i class="fa-solid '+d[0]+'"></i><div><b>'+d[1]+'</b><small>'+d[2]+'</small></div><button type="button" class="m-btn">'+fmt(d[3])+' ₽ · вернуть</button>';$('button',r).addEventListener('click',function(){fix(r,i)});L.appendChild(r);rows.push(r)});
+      rows.forEach(function(r,i){setTimeout(function(){if(id!==go)return;r.classList.add('in');left+=D1[i][3];B.style.width=((i+1)/rows.length*100)+'%';upd()},red?0:450+i*550)})}
+    $('.m1-re',m).addEventListener('click',run);
+    $('.m1-all',m).addEventListener('click',function(){rows.forEach(function(r,i){if(r.classList.contains('in'))setTimeout(function(){fix(r,i)},i*220)})});
+    inits[0]=function(){if(!rows.length)run()};inits[0]();})();
+
+  /* 2: конкуренты */
+  var C2=[{n:'Конкурент А',e:[['fa-tags','Цена на ключевой товар','-12%',0,'Конкурент снизил цену на 12%. Рекомендую <b>пересмотреть ценовую стратегию</b>: удержать маржу бонусом или снизить цену на хиты.'],['fa-box-open','Три новых продукта','+3',1,'Вышли три новинки. Рекомендую <b>проверить спрос</b> на похожие позиции и подготовить ответ в течение месяца.'],['fa-bullhorn','Реклама в Инстаграме','новая',0,'Запущена кампания в Инстаграме под новые товары. Рекомендую <b>усилить свою рекламу</b> в тех же сегментах.'],['fa-user-plus','Вакансии: 4 менеджера','рост',1,'Нанимают отдел продаж: возможно, <b>конкурент расширяется</b>. Стоит закрепить ключевых клиентов.']]},
+   {n:'Конкурент Б',e:[['fa-truck-fast','Доставка за 1 день','новое',0,'Появилась быстрая доставка. Рекомендую <b>сравнить сроки</b> и предложить свой вариант.'],['fa-star-half-stroke','Отзывы: -0,4 балла','-0,4',0,'Рейтинг упал из-за сроков. Это шанс: <b>сыграть на надёжности</b> в вашей рекламе.'],['fa-list','Убрали 18 позиций','-18',1,'Ассортимент сократился. Можно <b>забрать их покупателей</b> предложением аналогов.']]},
+   {n:'Конкурент В',e:[['fa-percent','Акция до конца месяца','-20%',0,'Скидка 20% на категорию. Рекомендую <b>не снижать цену</b>, а добавить комплект или подарок.'],['fa-user-plus','Вакансия: SEO-специалист','новая',1,'Усиливают поисковый трафик. Стоит <b>проверить свои позиции</b> в поиске.']]}];
+  (function(){var m=$('[data-m="2"]'),cc=$('.m2-c',m),L=$('.m2-l',m),bb=$('.m2-b',m),cur=0;
+    function list(){L.innerHTML='';C2[cur].e.forEach(function(e,i){var x=document.createElement('button');x.type='button';x.className='e';x.innerHTML='<i class="fa-solid '+e[0]+'"></i><div><b>'+e[1]+'</b><small>сегодня</small></div><em class="'+(e[3]?'up':'')+'">'+e[2]+'</em>';x.addEventListener('click',function(){L.querySelectorAll('.e').forEach(function(y){y.classList.remove('on')});x.classList.add('on');typ(bb,e[4])});L.appendChild(x)})}
+    C2.forEach(function(c,i){var x=document.createElement('button');x.type='button';x.textContent=c.n;x.className=i?'':'on';x.addEventListener('click',function(){cur=i;cc.querySelectorAll('button').forEach(function(y,k){y.classList.toggle('on',k===i)});list();bb.textContent='Нажмите на изменение, и агент подскажет, что делать.'});cc.appendChild(x)});
+    $('.m2-rep',m).addEventListener('click',function(){L.querySelectorAll('.e').forEach(function(y){y.classList.remove('on')});typ(bb,'<b>Отчёт за день:</b> «Ваш конкурент снизил цену на 12%, запустил три новых продукта и начал рекламировать их в Инстаграме. Рекомендуем пересмотреть ценовую стратегию».')});
+    list();inits[1]=function(){};})();
+
+  /* 3: склад */
+  var P3=[['fa-vest','Куртка зимняя',38,18,'Сезон закончился, продаж почти нет',420000],['fa-shoe-prints','Кроссовки',72,9,'Спрос стабильный, остатки в норме',0],['fa-mug-hot','Кружка',25,34,'Падающий спрос, много на складе',210000],['fa-headphones','Наушники',64,12,'Хорошо продаются, докупать можно',0],['fa-lightbulb','Лампа LED',31,22,'Медленно продаётся, закупка избыточна',160000],['fa-bag-shopping','Рюкзак',18,41,'Почти не берут: высокий риск залёживания',330000]];
+  var A3=[['Скидка -15%','fa-percent','Поставил скидку -15% и запустил акцию'],['Собрать комплект','fa-cubes','Собрал комплект с ходовым товаром'],['Не докупать','fa-ban','Закупка заморожена, заявка отменена']];
+  (function(){var m=$('[data-m="3"]'),G=$('.m3-g',m),N=$('.m3-n',m),F=$('.m3-f',m),bb=$('.m3-b',m),Ac=$('.m3-a',m),tot=0,freed=0,cur=-1,tiles=[],ready=0;
+    P3.forEach(function(p){tot+=p[5]});
+    function upd(){var from=+N.getAttribute('data-v')||0,to=tot-freed;N.setAttribute('data-v',to);tick(N,from,to,' ₽',600);F.textContent=freed?'освобождено '+fmt(freed)+' ₽':''}
+    P3.forEach(function(p,i){var x=document.createElement('button');x.type='button';x.className='p'+(p[3]>30?' hot':'');x.innerHTML='<i class="fa-solid '+p[0]+'"></i><b>'+p[1]+'</b><span class="bar"><u style="width:'+p[2]+'%"></u></span><small>риск '+p[3]*2+'%</small>';
+      x.addEventListener('click',function(){cur=i;tiles.forEach(function(t,k){t.classList.toggle('on',k===i)});Ac.innerHTML='';
+        if(!p[5]){typ(bb,'<b>'+p[1]+':</b> '+p[4]+'. Действий не нужно.');return}
+        if(x.classList.contains('ok')){bb.innerHTML='<b>'+p[1]+':</b> действие уже применено.';return}
+        typ(bb,'<b>'+p[1]+':</b> '+p[4]+'. Заморожено '+fmt(p[5])+' ₽. Что делаем?',function(){A3.forEach(function(a){var y=document.createElement('button');y.type='button';y.className='m-btn';y.innerHTML='<i class="fa-solid '+a[1]+'"></i> '+a[0];y.addEventListener('click',function(){if(x.classList.contains('ok'))return;x.classList.add('ok');x.classList.remove('hot');freed+=p[5];upd();Ac.innerHTML='';bb.innerHTML='<b>Готово:</b> '+a[2]+'. Освобождено '+fmt(p[5])+' ₽ оборотного капитала.'});Ac.appendChild(y)})})});
+      G.appendChild(x);tiles.push(x)});
+    inits[2]=function(){if(!ready){ready=1;upd()}};})();
+  })();</script>
 </section>
 <!--hb:mid--><div class="hb">
 <section id="how">
