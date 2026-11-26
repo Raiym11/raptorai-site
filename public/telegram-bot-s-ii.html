@@ -744,6 +744,29 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <link rel="stylesheet" href="/css/home-blocks.css?v=40">
 <style id="hb-theme">.hb{--hba:#2AABEE;--hba-rgb:42,171,238;--hbb:#7FD4FF;--hbb-rgb:127,212,255;--hbc:#7FD4FF}</style>
 <style id="pg-acc">body{--pa:#2AABEE;--pb:#7FD4FF}</style>
+<style id="tk-css">
+#case .rc-card+.rc-card{margin-top:28px}
+.tk-wrap{position:relative;display:grid;place-items:center;min-height:380px;min-width:0}
+.tk-ph{position:relative;width:min(300px,100%);border-radius:30px;padding:12px;background:linear-gradient(165deg,#141f2d,#0a1018);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 40px 80px -40px #2AABEE}
+.tk-hd{display:flex;align-items:center;gap:10px;padding:6px 6px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.tk-av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:15px;color:#04121a;background:linear-gradient(135deg,#2AABEE,#7fd8ff)}
+.tk-hd b{display:block;font-size:13px;color:#fff;line-height:1.2}.tk-hd small{font:500 10.5px/1.2 'Manrope',sans-serif;color:var(--gray)}
+.tk-body{display:flex;flex-direction:column;gap:8px;padding:12px 2px 4px;min-height:290px}
+.tk-m{max-width:92%;padding:10px 12px;border-radius:14px 14px 14px 4px;background:#1b2838;font-size:12px;line-height:1.45;color:rgba(240,244,248,.92);opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+.tk-m.on{opacity:1;transform:none}
+.tk-m h4{margin:0 0 6px;font-size:12.5px;color:#fff}
+.tk-r{display:flex;justify-content:space-between;gap:10px;padding:3px 0;border-top:1px solid rgba(255,255,255,.06)}
+.tk-r span{color:var(--gray)}.tk-r b{color:#fff;white-space:nowrap}.tk-up{color:#5CFFC8!important;font-weight:700}
+.tk-bars{display:flex;align-items:flex-end;gap:5px;height:34px;margin-top:8px}
+.tk-bars i{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#7fd8ff,#2AABEE);height:var(--h)}
+.tk-al{background:#2a1f1b;border:1px solid rgba(255,170,90,.35)}
+.tk-img{height:84px;border-radius:10px;margin-bottom:8px;display:grid;place-items:center;font-size:28px;background:linear-gradient(135deg,#1d6fa5,#2AABEE 55%,#7fd8ff)}
+.tk-rx{display:flex;gap:6px;margin-top:8px}.tk-rx span{padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.08);font-size:11px}
+.tk-sch{align-self:center;max-width:100%;padding:6px 12px;border-radius:12px;background:rgba(42,171,238,.14);border:1px solid rgba(42,171,238,.4);font-size:11px;color:#bfe9ff}
+.tk-tag{position:absolute;right:6px;bottom:0;padding:4px 10px;border-radius:10px;font:600 10.5px/1 'Manrope',sans-serif;color:var(--gray);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+@media(max-width:860px){.tk-wrap{min-height:0;padding-bottom:22px}}
+@media(prefers-reduced-motion:reduce){.tk-m{opacity:1;transform:none;transition:none}}
+</style>
 </head>
 <body class="svc svc-brand" style="--pacc:#2AABEE;--pacc2:#7FD4FF;--pbt:#fff">
 <a class="skip-link" href="/#services">К содержимому</a>
@@ -891,6 +914,42 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <ul class="rcx-list"><li><i class="fa-solid fa-check"></i>Голосовые вместо анкет и отчётов</li><li><i class="fa-solid fa-check"></i>Анализ прогресса по каждому участнику</li><li><i class="fa-solid fa-check"></i>Данные в закрытых таблицах, доступ только у коуча</li></ul>
       </div>
       <div class="rcx-3d"><div class="h3d" data-scene="coach" role="img" aria-label="Клиент отправляет боту голосовое, бот записывает прогресс в приватную таблицу" style="--acc:#2AABEE;--acc2:#7fd8ff"></div></div>
+    </div></div>
+    <div class="rc-card reveal"><div class="case-card case-hero rcx">
+      <div class="rcx-txt">
+        <div class="case-top">
+          <span class="case-tag"><i class="fa-brands fa-telegram"></i> ИИ-бот / Телеграм</span>
+          <h3 class="case-brand">Отчётность</h3>
+        </div>
+        <div class="case-title">Бот присылает сводку по продажам каждое утро</div>
+        <p class="case-desc">Каждый день в 9:00 бот собирает данные из CRM и таблиц и присылает владельцу в Телеграм выручку, число продаж и главное за вчера. Без входа в кабинеты и ручных выгрузок.</p>
+        <ul class="rcx-list"><li><i class="fa-solid fa-check"></i>Выручка, единицы продаж и средний чек за день</li><li><i class="fa-solid fa-check"></i>Сравнение с прошлой неделей</li><li><i class="fa-solid fa-check"></i>Сигнал, если продажи по товару просели</li></ul>
+      </div>
+      <div class="tk-wrap"><div class="tk-ph" data-tk role="img" aria-label="Пример ежедневной сводки по продажам в Телеграме">
+<div class="tk-hd"><span class="tk-av"><i class="fa-solid fa-chart-line"></i></span><div><b>Бот-аналитик</b><small>бот · онлайн</small></div></div>
+<div class="tk-body">
+<div class="tk-m"><h4>Сводка за вчера</h4><div class="tk-r"><span>Выручка</span><b>184 500 ₽ <em class="tk-up">▲ 6%</em></b></div><div class="tk-r"><span>Продаж</span><b>47 шт <em class="tk-up">▲ 3</em></b></div><div class="tk-r"><span>Средний чек</span><b>3 925 ₽</b></div><div class="tk-bars"><i style="--h:45%"></i><i style="--h:60%"></i><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:55%"></i><i style="--h:65%"></i><i style="--h:90%"></i></div></div>
+<div class="tk-m tk-al">⚠️ Продажи товара Б упали на 22% к прошлой неделе. Проверить остатки и цену?</div>
+<div class="tk-m">Следующая сводка завтра в 9:00</div>
+</div></div><span class="tk-tag">Демо-данные</span></div>
+    </div></div>
+    <div class="rc-card reveal"><div class="case-card case-hero rcx">
+      <div class="rcx-txt">
+        <div class="case-top">
+          <span class="case-tag"><i class="fa-brands fa-telegram"></i> ИИ-бот / Телеграм</span>
+          <h3 class="case-brand">Контент</h3>
+        </div>
+        <div class="case-title">Бот ведёт Телеграм-канал вместо вас</div>
+        <p class="case-desc">ИИ пишет посты по вашей теме и в вашем тоне, подбирает картинку и публикует в канал по расписанию. Вам остаётся одобрить или поправить пост в личке с ботом.</p>
+        <ul class="rcx-list"><li><i class="fa-solid fa-check"></i>Контент-план на неделю за пару минут</li><li><i class="fa-solid fa-check"></i>Публикация по расписанию, с картинкой</li><li><i class="fa-solid fa-check"></i>Одобрение в личке перед выходом</li></ul>
+      </div>
+      <div class="tk-wrap"><div class="tk-ph" data-tk role="img" aria-label="Пример Телеграм-канала, который ведёт бот">
+<div class="tk-hd"><span class="tk-av"><i class="fa-solid fa-bullhorn"></i></span><div><b>Ваш канал</b><small>канал · ведёт бот</small></div></div>
+<div class="tk-body">
+<div class="tk-m"><div class="tk-img">🚀</div><h4>5 причин, почему клиенты не доходят до покупки</h4>Разбираем по шагам, что убирает сомнения и поднимает конверсию.<div class="tk-rx"><span>🔥 24</span><span>👍 18</span></div></div>
+<div class="tk-sch">⏰ Следующий пост запланирован на 18:00</div>
+<div class="tk-m">Черновик готов. Опубликовать или поправить?<div class="tk-rx"><span>✅ Опубликовать</span><span>✏️ Править</span></div></div>
+</div></div><span class="tk-tag">Пример</span></div>
     </div></div>
     <div class="sec-cta"><a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a></div>
   </div>
@@ -1377,6 +1436,7 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=11" defer></script>
+<script>(function(){function run(p){var m=[].slice.call(p.querySelectorAll('.tk-m,.tk-sch')),t=[];if(matchMedia('(prefers-reduced-motion:reduce)').matches){m.forEach(function(x){x.classList.add('on')});return}function cyc(){m.forEach(function(x){x.classList.remove('on')});m.forEach(function(x,k){t.push(setTimeout(function(){x.classList.add('on')},700+k*1500))});t.push(setTimeout(cyc,700+m.length*1500+3500))}var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){if(!t.length)cyc()}else{t.forEach(clearTimeout);t=[]}},{threshold:.25});io.observe(p)}document.querySelectorAll('[data-tk]').forEach(run)})();</script>
 <script src="/hero3d/blocks.js?v=40" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=22";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
