@@ -921,11 +921,91 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   @media(max-width:480px){.ml-st b{font-size:18px}.ml-st small{font-size:10px}.ml-l{min-height:270px}}
   @media(prefers-reduced-motion:reduce){.ph,.mr,.pb,.mr-c span,.ml-ag.busy i{animation:none}}
 </style>
+  <style id="cg-css">
+  [data-v="cmp"] .cz-vis,[data-v="gsd"] .cz-vis{background:none;border:0;box-shadow:none;padding:0}
+  .cp,.gs{position:relative;font-family:'Inter',sans-serif;color:#e8eef7;border-radius:22px;padding:14px;background:linear-gradient(160deg,rgba(44,56,104,.6),rgba(14,18,34,.88));border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 60px -22px rgba(122,92,240,.5)}
+  .cp button,.gs button{font-family:'Inter',sans-serif}
+  .cp-top,.gs-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .cp-lg{width:26px;height:26px;object-fit:contain;flex:none}
+  .cp-top b{display:block;font-size:13px}.cp-top small{display:block;font-size:10.5px;color:#9fb0d0}
+  .cp-demo{margin-left:auto;flex:none;font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.1);color:#c7d3ec;border-radius:10px;padding:2px 8px}
+  .cp-re{flex:none;font:700 10.5px 'Inter',sans-serif;border:0;border-radius:9px;padding:6px 10px;color:#fff;background:rgba(106,140,255,.28);cursor:pointer;display:inline-flex;gap:6px;align-items:center;transition:background .2s}.cp-re:hover{background:rgba(106,140,255,.5)}
+  .cp-body{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}
+  .cp-l,.cp-r2{min-width:0}
+  .cp-src{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .cp-src span{font-size:10px;font-weight:700;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.06);color:#8d9bb8;display:inline-flex;gap:5px;align-items:center;transition:all .3s}
+  .cp-src span.on{background:rgba(66,133,244,.28);color:#d6e4ff;box-shadow:0 0 14px -2px rgba(66,133,244,.7)}
+  .cp-vs{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:9px}
+  .cp-card{text-align:center;padding:10px 6px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+  .cp-card.you{border-color:rgba(66,133,244,.6);box-shadow:0 0 28px -10px rgba(66,133,244,.8)}
+  .cp-card.rv{border-color:rgba(236,72,153,.55);box-shadow:0 0 28px -10px rgba(236,72,153,.7)}
+  .cp-tile{width:46px;height:46px;margin:0 auto 6px;border-radius:14px;display:grid;place-items:center;font-size:21px;color:#fff;background:linear-gradient(145deg,#6a8cff,#3b4fd8);box-shadow:0 12px 20px -8px rgba(59,79,216,.9),inset 0 1px 0 rgba(255,255,255,.45);animation:cpF 4.5s ease-in-out infinite}
+  .cp-card.rv .cp-tile{background:linear-gradient(145deg,#f472b6,#be185d);box-shadow:0 12px 20px -8px rgba(190,24,93,.9),inset 0 1px 0 rgba(255,255,255,.45);animation-delay:-2.2s}
+  @keyframes cpF{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+  .cp-card small{display:block;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9fb0d0}.cp-card b{font-size:12px}
+  .cp-badge{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:800 10px 'Inter',sans-serif;background:#fff;color:#1b2140;box-shadow:0 6px 14px -4px rgba(0,0,0,.6)}
+  .cp-rows{display:flex;flex-direction:column;gap:5px}
+  .cp-r{display:grid;grid-template-columns:1fr 70px 1fr;align-items:stretch;gap:6px;font-size:11.5px;font-weight:700;cursor:pointer}
+  .cp-r .y,.cp-r .c{padding:6px 6px;border-radius:9px;text-align:center;background:rgba(255,255,255,.06);transition:background .35s,color .35s;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;justify-content:center}
+  .cp-r .m{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:9.5px;color:#9fb0d0}.cp-r .m i{font-size:11px;color:#c7d3ec}
+  .cp-r.win .y{background:rgba(46,204,113,.22);color:#9af0c2}.cp-r.lose .y{background:rgba(255,92,92,.2);color:#ffb3b3}.cp-r.tie .y{background:rgba(255,184,0,.18);color:#ffd988}
+  .cp-r .y em{font-style:normal;font-size:9px;font-weight:700;opacity:.9}
+  .cp-r:hover .m{color:#fff}
+  .cp-r.pop .y,.cp-r.pop .c{animation:cpPop .6s ease}
+  @keyframes cpPop{0%{transform:scale(1)}40%{transform:scale(1.07);box-shadow:0 0 18px rgba(255,255,255,.4)}100%{transform:none}}
+  .cp-sc{margin-top:9px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.06);font-size:11.5px;color:#c7d3ec}.cp-sc b{font-size:16px;color:#7ee2b0;font-variant-numeric:tabular-nums}
+  .cp-ah{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.cp-ah b{font-size:12.5px}
+  .cp-all{border:0;border-radius:9px;padding:6px 10px;font-size:10px;font-weight:800;color:#fff;background:#4285F4;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s,background .2s}.cp-all.on{opacity:1;pointer-events:auto}.cp-all:hover{background:#5a95f5}
+  .cp-adv{display:flex;flex-direction:column;gap:7px}
+  .cp-a{display:flex;gap:9px;align-items:flex-start;text-align:left;width:100%;padding:9px 10px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;cursor:pointer;opacity:0;transform:translateX(16px);transition:opacity .5s,transform .5s,background .25s,border-color .25s,box-shadow .25s}
+  .cp-a.in{opacity:1;transform:none}.cp-a:hover{background:rgba(255,255,255,.1)}
+  .cp-a .ic{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(106,140,255,.28);color:#c4d5ff;font-size:12px}
+  .cp-a span{flex:1;min-width:0}.cp-a b{display:block;font-size:11.5px;line-height:1.25}.cp-a small{display:block;font-size:10px;color:#9fb0d0;line-height:1.3;margin-top:2px}
+  .cp-a u{text-decoration:none;font-size:9.5px;font-weight:800;padding:4px 8px;border-radius:8px;background:#4285F4;color:#fff;white-space:nowrap;align-self:center}
+  .cp-a.on{border-color:rgba(46,204,113,.6);background:rgba(46,204,113,.1)}.cp-a.on u{background:#1f9d62}
+  .cp-a.hl{border-color:#8fb0ff;box-shadow:0 0 18px -4px rgba(106,140,255,.9)}
+  .cp-ev{display:none;margin-top:10px;padding:8px 10px;border-radius:12px;background:rgba(255,184,0,.14);border:1px solid rgba(255,184,0,.45);color:#ffd988;font-size:11px;font-weight:600}
+  .cp-ev.on{display:flex;gap:8px;align-items:center;animation:pbIn .45s cubic-bezier(.2,.8,.2,1.15)}
+  .gs-q{flex:1;min-width:0;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.07);font-size:12px;min-height:34px;display:flex;align-items:center}
+  .gs-qt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .gs-caret{flex:none;width:2px;height:14px;background:#8fb0ff;margin-left:2px;animation:gsC 1s steps(1) infinite}@keyframes gsC{50%{opacity:0}}
+  .gs-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .gs-chips button{font:700 10.5px 'Inter',sans-serif;border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:6px 11px;background:rgba(255,255,255,.05);color:#cfd9ee;cursor:pointer;transition:all .2s}
+  .gs-chips button:hover{background:rgba(106,140,255,.28)}.gs-chips button.on{background:#4285F4;border-color:#4285F4;color:#fff}
+  .gs-main{display:grid;grid-template-columns:.85fr 1.15fr;gap:14px;align-items:start}
+  .gs-pile{position:relative;z-index:4;min-height:206px}
+  .gs-f{position:absolute;left:var(--x);top:var(--y);width:64%;transform:rotate(var(--r));padding:6px 8px;border-radius:9px;font-size:10px;font-weight:600;display:flex;gap:6px;align-items:center;background:#fff;color:#2b3140;box-shadow:0 8px 18px -8px rgba(0,0,0,.7);transition:opacity .4s,transform .4s;white-space:nowrap}
+  .gs-f span{overflow:hidden;text-overflow:ellipsis}.gs-f i{flex:none;font-size:12px}.gs-f.s i{color:#23a566}.gs-f.d i{color:#4285F4}.gs-f.dim{opacity:.28}
+  .gs-out{min-width:0}
+  .gs-ics{display:flex;gap:12px;margin-bottom:10px;perspective:700px}
+  .gs-ic{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 6px 7px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#cfd9ee;cursor:default;transition:transform .25s,box-shadow .35s,border-color .35s}
+  .gs-ic svg{width:38px;height:50px;filter:drop-shadow(0 10px 10px rgba(0,0,0,.5));animation:cpF 4.5s ease-in-out infinite}.gs-ic.dc svg{animation-delay:-2s}
+  .gs-ic small{font-size:9.5px;font-weight:700}
+  .gs-ic.on{transform:translateZ(14px) scale(1.04)}.gs-ic.sh.on{border-color:rgba(35,165,102,.8);box-shadow:0 0 30px -4px rgba(35,165,102,.8)}.gs-ic.dc.on{border-color:rgba(66,133,244,.8);box-shadow:0 0 30px -4px rgba(66,133,244,.8)}
+  .gs-ic.hit{animation:gsHit .45s ease}@keyframes gsHit{50%{transform:scale(1.12)}}
+  .gs-res{min-height:150px}
+  .gs-empty{min-height:150px;border:1px dashed rgba(255,255,255,.18);border-radius:12px;display:grid;place-items:center;font-size:11px;color:#8d9bb8;text-align:center;padding:10px}
+  .gs-t{background:#fff;color:#2b3140;border-radius:10px;overflow:hidden;font-size:10.5px;box-shadow:0 14px 28px -12px rgba(0,0,0,.7)}
+  .gs-th,.gs-tr{display:grid;grid-template-columns:1.7fr 1fr .6fr;gap:6px;padding:5px 9px;align-items:center}
+  .gs-th{background:#23a566;color:#fff;font-weight:800}.gs-tr{border-bottom:1px solid #e8eaed;animation:mrIn .4s ease}.gs-tr>*{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .gs-tr .sec{justify-self:start;color:#fff;background:var(--c);border-radius:6px;padding:1px 6px;font-size:9px;font-weight:700}
+  .gs-t.sum .gs-th,.gs-t.sum .gs-tr{grid-template-columns:1.2fr 1.4fr .9fr}
+  .gs-bar{height:8px;border-radius:5px;background:#e6f4ea;overflow:hidden}.gs-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#23a566,#5bd39b);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+  .gs-tr b{text-align:right;font-variant-numeric:tabular-nums}
+  .gs-tot{padding:6px 9px;background:#e6f4ea;font-weight:800;display:flex;justify-content:space-between;animation:mrIn .4s ease}
+  .gs-doc{background:#fff;color:#2b3140;border-radius:10px;padding:10px 12px;font-size:10.5px;line-height:1.4;border-top:4px solid #4285F4;box-shadow:0 14px 28px -12px rgba(0,0,0,.7)}
+  .gs-doc h5{margin:0 0 6px;font-size:12px;color:#1a1f2e}.gs-doc ul{margin:0;padding:0;list-style:disc}.gs-doc li{margin:0 0 5px 14px;animation:mrIn .4s ease}
+  .gs-ft{margin-top:8px;font-size:10.5px;color:#9fe3c0;display:flex;gap:6px;align-items:center;animation:mrIn .4s ease}
+  @media(max-width:900px){.cp-body,.gs-main{grid-template-columns:1fr}.gs-pile{min-height:200px;max-width:340px}}
+  @media(max-width:480px){.cp,.gs{padding:11px}.cp-r{grid-template-columns:1fr 60px 1fr;font-size:10.5px}.cp-re{padding:6px 8px}}
+  @media(prefers-reduced-motion:reduce){.cp-tile,.gs-ic svg,.gs-caret,.cp-r.pop .y,.cp-r.pop .c{animation:none}}
+  </style>
+
   <div class="container">
     <div class="section-label">Задачи</div>
     <h2 class="section-title">Какие задачи <span>берёт на себя Gemini</span></h2>
     <div class="cz reveal" data-bk="cz" style="margin-top:30px">
-      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-envelope-open-text"></i><span><b>Контроль почты</b><small>ИИ-агент на Gemini</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-table"></i><span><b>Большой прайс</b><small>тысячи строк</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-image"></i><span><b>Поиск по фото</b><small>фото и сканы</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-chart-simple"></i><span><b>Сводный отчёт</b><small>несколько таблиц</small></span></button></div>
+      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-envelope-open-text"></i><span><b>Контроль почты</b><small>ИИ-агент на Gemini</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-chess-knight"></i><span><b>Конкуренты</b><small>разбор и советы</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-folder-tree"></i><span><b>Таблицы и Документы</b><small>порядок по запросу</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-chart-simple"></i><span><b>Сводный отчёт</b><small>несколько таблиц</small></span></button></div>
       <div class="cz-pane on" data-v="mail">
         <div class="cz-info"><h3>ИИ-агент Gemini <span style="background:linear-gradient(90deg,#4285F4,#9B72CB);-webkit-background-clip:text;background-clip:text;color:transparent">контролирует почту</span></h3><p>Читает каждое письмо, знает вашу компанию и сразу пишет вам в Telegram, если письмо важное.</p><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Каждое письмо уходит нужному специалисту</span></li><li><i class="fa-solid fa-check"></i><span>Важное сразу в Telegram, с готовым ответом</span></li><li><i class="fa-solid fa-check"></i><span>Вы отправляете ответ или правите его</span></li></ul><div class="bk-buddy bk-tile ml-cube" style="--face:#f3f5fb"><span><b><i class="sh"></i><img src="/hero3d/logo-gemini.webp?v=3" alt="Gemini"></b></span></div></div>
         <div class="cz-vis"><div class="ml-h">
@@ -942,13 +1022,13 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
             </div>
           </div></div></div>
       </div>
-      <div class="cz-pane" data-v="anim">
-        <div class="cz-info"><h3>Ответы по большому прайсу</h3><p>Агент читает прайс на тысячи строк целиком и находит нужную позицию за секунды, без нарезки файла на части.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Работает с Google Таблицами</span></li><li><i class="fa-solid fa-check"></i><span>Видит свежие цены и остатки</span></li><li><i class="fa-solid fa-check"></i><span>Не путает похожие позиции</span></li></ul><div></div></div>
-        <div class="cz-vis"><div class="an tbl" data-t="1700,2300"><div class="tbl-w"><div class="tbl-in"><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div><div class="tbl-r"><s></s><s></s><s></s><s></s></div></div><div class="tbl-hit"><s></s><s></s><s></s><s></s></div></div><div class="an-res"><i class="fa-solid fa-bolt"></i><span>Нужная строка найдена за секунды</span></div></div></div>
+      <div class="cz-pane" data-v="cmp">
+        <div class="cz-info"><h3>ИИ-агент Gemini следит за конкурентами</h3><p>Сам собирает цены, отзывы и акции конкурента, сравнивает с вашим товаром и говорит, что сделать, чтобы выиграть.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Собирает данные с сайтов и маркетплейсов</span></li><li><i class="fa-solid fa-check"></i><span>Сравнивает по пунктам с вашим товаром</span></li><li><i class="fa-solid fa-check"></i><span>Даёт чёткие шаги, как стать лучше</span></li></ul></div>
+        <div class="cz-vis"><div class="cp"></div></div>
       </div>
-      <div class="cz-pane" data-v="scan">
-        <div class="cz-info"><h3>Поиск товара по фото</h3><p>Клиент присылает фотографию, агент находит такой же или похожий товар в каталоге и называет цену.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Понимает фото, сканы и PDF</span></li><li><i class="fa-solid fa-check"></i><span>Находит похожие позиции</span></li><li><i class="fa-solid fa-check"></i><span>Сразу сообщает цену и наличие</span></li></ul><div></div></div>
-        <div class="cz-vis"><div class="scan"><div class="scan-bar"><i class="fa-solid fa-image"></i><span>Фото от клиента:</span><button type="button" class="on">Фото 1</button><button type="button">Фото 2</button><button type="button">Фото 3</button></div><div class="scan-grid"><i class="scan-beam"></i></div><div class="scan-res"><i class="fa-solid fa-magnifying-glass"></i><span>Нашёл <b>3 похожих товара</b> в каталоге</span></div></div></div>
+      <div class="cz-pane" data-v="gsd">
+        <div class="cz-info"><h3>Порядок в Google Таблицах и Документах по одному запросу</h3><p>Бросили кучу материалов, написали, что нужно. Gemini разложит всё по таблицам, сделает выжимку или найдёт ответ.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Раскладывает файлы по разделам в таблицу</span></li><li><i class="fa-solid fa-check"></i><span>Делает выжимку из длинных документов</span></li><li><i class="fa-solid fa-check"></i><span>Отвечает на вопросы сразу по всем файлам</span></li></ul></div>
+        <div class="cz-vis"><div class="gs"></div></div>
       </div>
       <div class="cz-pane" data-v="anim">
         <div class="cz-info"><h3>Отчёт из нескольких таблиц</h3><p>Агент собирает данные из разных таблиц и документов в один понятный отчёт.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Сводит данные из нескольких файлов</span></li><li><i class="fa-solid fa-check"></i><span>Обновляет отчёт по расписанию</span></li><li><i class="fa-solid fa-check"></i><span>Объясняет цифры простыми словами</span></li></ul><div></div></div>
@@ -1556,8 +1636,98 @@ window.__mailInit=function(vis){
   function start(){clr();clearTimeout(tms.nxt);gen++;n=0;pause=0;L.innerHTML='';C.innerHTML='';rows=[];counters();after(function(){step()},400)}
   start();return start;
 };})();</script>
+<script>(function(){
+var red=matchMedia('(prefers-reduced-motion:reduce)').matches,LOGO='/hero3d/logo-gemini.webp?v=3';
+function typ(el,tx,done){clearInterval(el._t);if(red){el.textContent=tx;done&&done();return}var k=0;el.textContent='';el._t=setInterval(function(){k+=2;if(k>=tx.length){clearInterval(el._t);el.textContent=tx;done&&done()}else el.textContent=tx.slice(0,k)},26)}
+function nf(v){return String(v).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+/* ---------- конкуренты ---------- */
+window.__cmpInit=function(vis){
+  var B=vis.querySelector('.cp'),tms=[],gen=0,pause=0;
+  B.innerHTML='<div class="cp-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div><b>Анализ конкурента</b><small class="cp-st">Gemini готов к сбору данных</small></div><span class="cp-demo">пример</span><button type="button" class="cp-re"><i class="fa-solid fa-rotate"></i>Обновить</button></div>'+
+  '<div class="cp-body"><div class="cp-l"><div class="cp-src"><span><i class="fa-solid fa-globe"></i>Сайт</span><span><i class="fa-solid fa-store"></i>Маркетплейс</span><span><i class="fa-solid fa-comments"></i>Отзывы</span><span><i class="fa-solid fa-hashtag"></i>Соцсети</span></div>'+
+  '<div class="cp-vs"><div class="cp-card you"><div class="cp-tile"><i class="fa-solid fa-headphones"></i></div><small>Ваш товар</small><b>Наушники А1</b></div><div class="cp-badge">VS</div><div class="cp-card rv"><div class="cp-tile"><i class="fa-solid fa-headphones-simple"></i></div><small>Товар конкурента</small><b>Наушники Б2</b></div></div>'+
+  '<div class="cp-rows"></div><div class="cp-sc">Вы впереди по <b class="cp-n">0</b> из 5 пунктов</div></div>'+
+  '<div class="cp-r2"><div class="cp-ah"><b>Что сделать, чтобы выиграть</b><button type="button" class="cp-all">Применить все</button></div><div class="cp-adv"></div></div></div><div class="cp-ev"></div>';
+  var ST=B.querySelector('.cp-st'),SRC=[].slice.call(B.querySelectorAll('.cp-src span')),RW=B.querySelector('.cp-rows'),SN=B.querySelector('.cp-n'),AD=B.querySelector('.cp-adv'),EV=B.querySelector('.cp-ev'),ALL=B.querySelector('.cp-all');
+  var R=[
+   {n:'Цена',ic:'fa-tag',y:5490,c:4990,f:function(v){return nf(v)+' ₽'},b:-1},
+   {n:'Рейтинг',ic:'fa-star',y:4.5,c:4.7,f:function(v){return String(v).replace('.',',')},b:1},
+   {n:'Доставка',ic:'fa-truck-fast',y:5,c:2,f:function(v){return v+' дн.'},b:-1},
+   {n:'Гарантия',ic:'fa-shield-halved',y:24,c:12,f:function(v){return v+' мес.'},b:1},
+   {n:'Отзывов',ic:'fa-comments',y:340,c:1280,f:function(v){return nf(v)},b:1}];
+  R.forEach(function(r){r.y0=r.y;r.c0=r.c});
+  var A=[
+   {r:2,ic:'fa-truck-fast',t:'Доставка за 1-2 дня',d:'Держите ходовые модели на складе в городе клиента.',ok:'Доставка ускорена до 1 дня',run:function(){R[2].y=1}},
+   {r:1,ic:'fa-star',t:'Отвечайте на негатив за час',d:'Просите отзыв после покупки и закрывайте плохие в день обращения.',ok:'Рейтинг растёт, отзывов больше',run:function(){R[1].y=4.8;R[4].y=520}},
+   {r:0,ic:'fa-gift',t:'Не снижайте цену, добавьте чехол',d:'Скидка съест маржу, а подарок даёт ценность без неё.',ok:'Маржа сохранена, добавлен подарок',run:function(){R[0].bonus=true}}];
+  var rows=R.map(function(r,i){var e=document.createElement('div');e.className='cp-r';e.innerHTML='<span class="y"></span><span class="m"><i class="fa-solid '+r.ic+'"></i>'+r.n+'</span><span class="c"></span>';RW.appendChild(e);e.addEventListener('click',function(){pause=Date.now();A.forEach(function(a,k){if(a.r===i&&a.el)hl(a.el)})});return e});
+  var advs=A.map(function(a,i){var b=document.createElement('button');b.type='button';b.className='cp-a';b.innerHTML='<i class="ic fa-solid '+a.ic+'"></i><span><b>'+a.t+'</b><small>'+a.d+'</small></span><u>В план</u>';AD.appendChild(b);a.el=b;b.addEventListener('click',function(){pause=Date.now();apply(i)});return b});
+  function hl(el){el.classList.add('hl');setTimeout(function(){el.classList.remove('hl')},1600)}
+  function after(f,ms){var id=setTimeout(f,red?0:ms);tms.push(id);return id}
+  function clr(){tms.forEach(clearTimeout);tms=[]}
+  function stt(R0){var d=(R0.y-R0.c)*R0.b;return R0.bonus?1:(d>0?1:(d<0?-1:0))}
+  function paint(fl){var w=0;R.forEach(function(r,i){var e=rows[i],s=r.shown?stt(r):0;e.className='cp-r'+(r.shown?(s>0?' win':(s<0?' lose':' tie')):'')+(fl===i?' pop':'');e.querySelector('.y').innerHTML=r.f(r.y)+(r.bonus?'<em><i class="fa-solid fa-gift"></i> + чехол</em>':'');e.querySelector('.c').textContent=r.shown?r.f(r.c):'...';if(r.shown&&s>0)w++});SN.textContent=w}
+  function apply(i){var a=A[i];if(a.done)return;a.done=true;a.run();a.el.classList.add('on');a.el.querySelector('u').textContent='В плане';ST.textContent=a.ok;paint(a.r);chk()}
+  function chk(){var all=A.every(function(a){return a.done});ALL.classList.toggle('on',!all&&A.some(function(a){return a.el.classList.contains('in')}))}
+  ALL.addEventListener('click',function(){pause=Date.now();A.forEach(function(a,i){if(!a.done)setTimeout(function(){apply(i)},red?0:i*350)})});
+  function start(){clr();gen++;var g=gen;pause=0;
+    R.forEach(function(r){r.y=r.y0;r.c=r.c0;r.shown=false;r.bonus=false});A.forEach(function(a){a.done=false;a.el.classList.remove('on','in','hl');a.el.querySelector('u').textContent='В план'});
+    EV.classList.remove('on');ALL.classList.remove('on');SRC.forEach(function(s){s.classList.remove('on')});paint();ST.textContent='Gemini собирает данные...';
+    if(red){R.forEach(function(r){r.shown=true});paint();A.forEach(function(a){a.el.classList.add('in')});ST.textContent='Готово: видно, где вы уступаете';chk();return}
+    SRC.forEach(function(s,i){after(function(){if(g===gen)s.classList.add('on')},300+i*420)});
+    R.forEach(function(r,i){after(function(){if(g!==gen)return;r.shown=true;paint(i)},1500+i*520)});
+    var t=1500+R.length*520;
+    after(function(){if(g!==gen)return;ST.textContent='Готово: видно, где вы уступаете'},t);
+    A.forEach(function(a,i){after(function(){if(g!==gen)return;a.el.classList.add('in');chk()},t+i*260)});
+    after(function(){if(g!==gen)return;R[0].c=4490;EV.innerHTML='<i class="fa-solid fa-bell"></i><span>Новое: у конкурента акция, цена теперь '+nf(4490)+' ₽</span>';EV.classList.add('on');ST.textContent='Нашёл изменение у конкурента';paint(0)},t+6500);
+    after(function loop(){if(g!==gen)return;if(Date.now()-pause<12000){after(loop,3000);return}start()},t+22000)}
+  B.querySelector('.cp-re').addEventListener('click',start);
+  start();return start};
+/* ---------- Таблицы и Документы ---------- */
+var SH='<svg viewBox="0 0 48 64"><defs><linearGradient id="gsA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3ccf8a"/><stop offset="1" stop-color="#13935a"/></linearGradient></defs><path d="M6 0h26l16 16v44a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z" fill="url(#gsA)"/><path d="M32 0l16 16H36a4 4 0 0 1-4-4z" fill="#fff" opacity=".4"/><rect x="12" y="28" width="24" height="21" rx="2.5" fill="#fff"/><path d="M12 35h24M12 42h24M24 28v21" stroke="#23a566" stroke-width="1.8"/></svg>';
+var DC='<svg viewBox="0 0 48 64"><defs><linearGradient id="gsB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6aa2ff"/><stop offset="1" stop-color="#2f6fe0"/></linearGradient></defs><path d="M6 0h26l16 16v44a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z" fill="url(#gsB)"/><path d="M32 0l16 16H36a4 4 0 0 1-4-4z" fill="#fff" opacity=".4"/><rect x="12" y="29" width="24" height="3.4" rx="1.7" fill="#fff"/><rect x="12" y="36" width="24" height="3.4" rx="1.7" fill="#fff"/><rect x="12" y="43" width="15" height="3.4" rx="1.7" fill="#fff"/></svg>';
+window.__gsdInit=function(vis){
+  var G=vis.querySelector('.gs'),tms=[],gen=0,pause=0,cur=-1;
+  var F=[['прайс_финал_2.xlsx','s',2,0,-7],['договор_v3.docx','d',34,12,6],['счета_ноябрь.xlsx','s',8,46,4],['заметки_встреча.docx','d',36,58,-6],['отчёт_октябрь.xlsx','s',0,92,-3],['ТЗ_клиент.docx','d',34,104,7],['база_контактов.xlsx','s',10,138,5],['письмо_юристу.docx','d',32,150,-5]];
+  var S=[{c:'Наведи порядок',q:'Наведи порядок в этих материалах',to:{s:1,d:1},res:'idx'},{c:'Выжимка по договорам',q:'Сделай выжимку по договорам и заметкам',to:{d:1},res:'doc'},{c:'Сумма за ноябрь',q:'Сколько мы заплатили за ноябрь?',to:{s:1},res:'sum'}];
+  G.innerHTML='<div class="gs-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div class="gs-q"><span class="gs-qt"></span><i class="gs-caret"></i></div><span class="cp-demo">пример</span></div><div class="gs-chips"></div>'+
+   '<div class="gs-main"><div class="gs-pile"></div><div class="gs-out"><div class="gs-ics"><div class="gs-ic sh">'+SH+'<small>Google Таблицы</small></div><div class="gs-ic dc">'+DC+'<small>Google Документы</small></div></div><div class="gs-res"></div></div></div>';
+  var QT=G.querySelector('.gs-qt'),CH=G.querySelector('.gs-chips'),PL=G.querySelector('.gs-pile'),RS=G.querySelector('.gs-res'),ICS=G.querySelector('.gs-ics'),IS=G.querySelector('.gs-ic.sh'),ID=G.querySelector('.gs-ic.dc');
+  var chips=S.map(function(s,i){var b=document.createElement('button');b.type='button';b.textContent=s.c;CH.appendChild(b);b.addEventListener('click',function(){pause=Date.now();run(i)});return b});
+  var files=F.map(function(f){var e=document.createElement('div');e.className='gs-f '+f[1];e.style.cssText='--x:'+f[2]+'%;--y:'+f[3]+'px;--r:'+f[4]+'deg';e.innerHTML='<i class="fa-solid '+(f[1]==='s'?'fa-table-cells':'fa-file-lines')+'"></i><span>'+f[0]+'</span>';PL.appendChild(e);return e});
+  function after(f,ms){var id=setTimeout(f,red?0:ms);tms.push(id)}
+  function clr(){tms.forEach(clearTimeout);tms=[]}
+  function empty(){RS.innerHTML='<div class="gs-empty">Здесь появится результат</div>'}
+  function resetF(){files.forEach(function(e){e.style.transition='opacity .5s';e.style.transform='';e.style.opacity='';e.classList.remove('dim')})}
+  function fly(e,t,d,g){after(function(){if(g!==gen)return;var a=e.getBoundingClientRect(),b=t.getBoundingClientRect(),dx=b.left+b.width/2-a.left-a.width/2,dy=b.top+b.height/2-a.top-a.height/2;e.style.transition='transform .85s cubic-bezier(.6,0,.3,1),opacity .85s';e.style.transform='translate('+dx+'px,'+dy+'px) rotate(0deg) scale(.2)';e.style.opacity='0'},d)}
+  function hit(el){el.classList.remove('hit');void el.offsetWidth;el.classList.add('hit')}
+  function addTo(box,html,d,g){after(function(){if(g!==gen)return;var t=document.createElement('div');t.innerHTML=html;box.appendChild(t.firstChild)},d)}
+  function render(kind,g){RS.innerHTML='';var box=document.createElement('div');RS.appendChild(box);
+    if(kind==='idx'){var SEC={f:['Финансы','#23a566'],c:['Договоры','#4285F4'],k:['Клиенты','#f29900']};
+      box.className='gs-t';box.innerHTML='<div class="gs-th"><span>Файл</span><span>Раздел</span><span>Дата</span></div>';
+      [['счета_ноябрь.xlsx','f','12.11'],['отчёт_октябрь.xlsx','f','03.11'],['прайс_финал_2.xlsx','f','28.10'],['договор_v3.docx','c','09.11'],['ТЗ_клиент.docx','c','05.11'],['заметки_встреча.docx','k','14.11']].forEach(function(r,i){addTo(box,'<div class="gs-tr"><span>'+r[0]+'</span><span class="sec" style="--c:'+SEC[r[1]][1]+'">'+SEC[r[1]][0]+'</span><span>'+r[2]+'</span></div>',i*260,g)});
+      after(function(){if(g!==gen)return;RS.insertAdjacentHTML('beforeend','<div class="gs-ft"><i class="fa-solid fa-circle-check"></i>8 файлов разложено по 3 разделам</div>')},6*260+200)}
+    else if(kind==='sum'){box.className='gs-t sum';box.innerHTML='<div class="gs-th"><span>Поставщик</span><span>Доля</span><span style="text-align:right">Сумма</span></div>';
+      [['Склад-Опт',62400,100],['Подрядчик',59000,95],['Логистика',38900,62],['Типография',24000,38]].forEach(function(r,i){addTo(box,'<div class="gs-tr"><span>'+r[0]+'</span><span class="gs-bar"><i style="--w:'+r[2]+'%"></i></span><b>'+nf(r[1])+' ₽</b></div>',i*260,g);after(function(){if(g!==gen)return;var b=box.querySelectorAll('.gs-bar i')[i];if(b)b.style.width=r[2]+'%'},i*260+120)});
+      after(function(){if(g!==gen)return;box.insertAdjacentHTML('beforeend','<div class="gs-tot"><span>Итого за ноябрь</span><span>'+nf(184300)+' ₽</span></div>')},4*260+200)}
+    else{box.className='gs-doc';box.innerHTML='<h5>Выжимка: договоры и заметки</h5><ul></ul>';var ul=box.querySelector('ul');
+      ['Срок поставки по договору - 14 дней','Штраф за просрочку - 0,1% в день, но не больше 10%','Из заметок встречи: клиент просит сдвинуть оплату на 5 дней','Нет пункта о форс-мажоре. Вопрос уже отправлен юристу'].forEach(function(t,i){addTo(ul,'<li>'+t+'</li>',i*520,g)});
+      after(function(){if(g!==gen)return;RS.insertAdjacentHTML('beforeend','<div class="gs-ft"><i class="fa-solid fa-circle-check"></i>4 документа прочитаны за несколько секунд</div>')},4*520+200)}}
+  function run(i){clr();gen++;var g=gen,sc=S[i];cur=i;
+    chips.forEach(function(c,k){c.classList.toggle('on',k===i)});resetF();empty();IS.classList.remove('on');ID.classList.remove('on');
+    typ(QT,sc.q);var t0=red?0:sc.q.length*14+500;
+    after(function(){if(g!==gen)return;files.forEach(function(e,k){if(!sc.to[F[k][1]])e.classList.add('dim')})},t0);
+    files.forEach(function(e,k){if(sc.to[F[k][1]])fly(e,F[k][1]==='s'?IS:ID,t0+300+k*90,g)});
+    after(function(){if(g!==gen)return;if(sc.to.s){IS.classList.add('on');hit(IS)}if(sc.to.d){ID.classList.add('on');hit(ID)}},t0+1300);
+    after(function(){if(g!==gen)return;render(sc.res,g)},t0+1700);
+    after(function(){if(g!==gen)return;resetF()},t0+2700);
+    if(!red)after(function loop(){if(g!==gen)return;if(Date.now()-pause<12000){after(loop,3000);return}run((i+1)%S.length)},t0+1700+9500)}
+  if(!red)G.addEventListener('mousemove',function(e){var r=G.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ICS.style.transform='rotateY('+(x*14)+'deg) rotateX('+(-y*10)+'deg)'});
+  G.addEventListener('mouseleave',function(){ICS.style.transform=''});
+  empty();run(0);return function(){pause=0;run(0)}};
+})();</script>
 <script src="/js/ig3d.js?v=17" defer></script>
-<script src="/hero3d/blocks.js?v=41" defer></script>
+<script src="/hero3d/blocks.js?v=42" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=10";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->
