@@ -288,6 +288,9 @@
 
   /* ---------- третий блок: кейсы ---------- */
   var VIS = {
+    coach: function () { return null; },
+    tkr: function (v) { return window.__tkInit ? window.__tkInit(v) : null; },
+    tkc: function (v) { return window.__tkInit ? window.__tkInit(v) : null; },
     mail: function (v) { return window.__mailInit ? window.__mailInit(v) : null; },
     lrs: function (v) { return window.__lrsInit ? window.__lrsInit(v) : null; },
     dph: function (v) { return window.__dphInit ? window.__dphInit(v) : null; },
