@@ -1,0 +1,4 @@
+Contact: https://t.me/Raptorairu
+Expires: 2027-11-26T00:00:00.000Z
+Preferred-Languages: ru, en
+Canonical: https://www.raptorai.ru/.well-known/security.txt

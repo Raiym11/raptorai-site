@@ -44,6 +44,7 @@ document.addEventListener('change', function (e) {
 const CONTACT_FORM_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/contact-form';
 const CONTACT_FORM_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
 
+const FORM_OPENED_AT = Date.now();
 async function submitForm() {
   const honeypot = document.getElementById('f-website').value.trim();
   if (honeypot) {
@@ -51,9 +52,15 @@ async function submitForm() {
     document.getElementById('form-success').style.display = 'block';
     return;
   }
-  const name = document.getElementById('f-name').value.trim();
-  const contact = document.getElementById('f-contact').value.trim();
-  const userTask = document.getElementById('f-task').value.trim();
+  // Слишком быстрая отправка (меньше 3 секунд после открытия страницы) похожа на бота
+  if (Date.now() - FORM_OPENED_AT < 3000) {
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return;
+  }
+  const name = document.getElementById('f-name').value.trim().slice(0, 100);
+  const contact = document.getElementById('f-contact').value.trim().slice(0, 200);
+  const userTask = document.getElementById('f-task').value.trim().slice(0, 3000);
   const qz = (window.__quiz && window.__quiz.get()) || {};
   const hot = !!qz.hot;
   const lines = [];
@@ -85,6 +92,14 @@ async function submitForm() {
     telegram = contact;
   }
 
+  // Повторную заявку с этого браузера принимаем не раньше, чем через минуту
+  try {
+    const last = +localStorage.getItem('raptorai_form_ts') || 0;
+    if (Date.now() - last < 60000) {
+      formFail('Заявка уже отправлена. Если нужно что-то добавить, напишите нам в Телеграм @Raptorairu.');
+      return;
+    }
+  } catch (e) { /* localStorage недоступен */ }
   const btn = document.getElementById('form-submit-btn');
   btn.disabled = true;
   const originalBtnText = btn.textContent;
@@ -100,6 +115,7 @@ async function submitForm() {
       body: JSON.stringify({ name, email, phone, telegram, contact, task, biz: qz.biz || '', goal: qz.goal || '', budget: qz.budget || '', hot: hot, calc_loss: qz.calc_loss || 0, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
+    try { localStorage.setItem('raptorai_form_ts', String(Date.now())); } catch (e) { /* ignore */ }
     document.getElementById('form-body').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
     if (typeof ym !== 'undefined') {

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 // Та же политика, что в <meta> файлов public/*.html
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru",
+  "script-src 'self' 'unsafe-inline' https://mc.yandex.ru",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   "img-src 'self' data: https:",

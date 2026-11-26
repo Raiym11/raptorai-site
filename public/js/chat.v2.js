@@ -94,6 +94,11 @@ function updateSendButtonState() {
 function onChatFileSelected(event) {
   const file = event.target.files[0];
   if (!file) return;
+  if (!/^image\/(png|jpe?g|webp|gif)$/i.test(file.type) || file.size > 4 * 1024 * 1024) {
+    event.target.value = '';
+    appendChatMessage('bot', 'Прикрепите картинку PNG, JPG или WebP до 4 МБ.');
+    return;
+  }
   const reader = new FileReader();
   reader.onload = function(e) {
     chatPendingImage = e.target.result;
@@ -171,6 +176,21 @@ async function sendChatMessage() {
   const text = textInput.value.trim();
   const image = chatPendingImage;
   if (!text && !image) return;
+  if (text.length > 2000) {
+    appendChatMessage('bot', 'Сообщение слишком длинное, сократите его до 2000 символов.');
+    return;
+  }
+  // Лимит на стороне страницы: не чаще раза в 1,5 с и не больше 20 сообщений за 10 минут
+  try {
+    const now = Date.now();
+    const log = JSON.parse(localStorage.getItem('raptorai_chat_rl') || '[]').filter(function (t) { return now - t < 600000; });
+    if (log.length >= 20 || (log.length && now - log[log.length - 1] < 1500)) {
+      appendChatMessage('bot', 'Слишком много сообщений подряд. Подождите немного и напишите снова.');
+      return;
+    }
+    log.push(now);
+    localStorage.setItem('raptorai_chat_rl', JSON.stringify(log));
+  } catch (e) { /* localStorage недоступен, лимит пропускаем */ }
 
   appendChatMessage('user', text, image);
   textInput.value = '';
