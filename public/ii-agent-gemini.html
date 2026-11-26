@@ -964,6 +964,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   .cp-a u{text-decoration:none;font-size:9.5px;font-weight:800;padding:4px 8px;border-radius:8px;background:#4285F4;color:#fff;white-space:nowrap;align-self:center}
   .cp-a.on{border-color:rgba(46,204,113,.6);background:rgba(46,204,113,.1)}.cp-a.on u{background:#1f9d62}
   .cp-a.hl{border-color:#8fb0ff;box-shadow:0 0 18px -4px rgba(106,140,255,.9)}
+  .cp-g{display:flex;gap:9px;margin-top:9px;padding:10px;border-radius:13px;background:linear-gradient(135deg,rgba(66,133,244,.2),rgba(155,114,203,.2));border:1px solid rgba(155,114,203,.4);min-height:118px}.cp-g img{width:22px;height:22px;object-fit:contain;flex:none}.cp-g b{display:block;font-size:10.5px;color:#c9d8ff;margin-bottom:2px}.cp-g p{margin:0;font-size:11px;line-height:1.4;color:#eef3ff}
   .cp-ev{display:none;margin-top:10px;padding:8px 10px;border-radius:12px;background:rgba(255,184,0,.14);border:1px solid rgba(255,184,0,.45);color:#ffd988;font-size:11px;font-weight:600}
   .cp-ev.on{display:flex;gap:8px;align-items:center;animation:pbIn .45s cubic-bezier(.2,.8,.2,1.15)}
   .gs-q{flex:1;min-width:0;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.07);font-size:12px;min-height:34px;display:flex;align-items:center}
@@ -1645,41 +1646,42 @@ window.__cmpInit=function(vis){
   var B=vis.querySelector('.cp'),tms=[],gen=0,pause=0;
   B.innerHTML='<div class="cp-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div><b>Анализ конкурента</b><small class="cp-st">Gemini готов к сбору данных</small></div><span class="cp-demo">пример</span><button type="button" class="cp-re"><i class="fa-solid fa-rotate"></i>Обновить</button></div>'+
   '<div class="cp-body"><div class="cp-l"><div class="cp-src"><span><i class="fa-solid fa-globe"></i>Сайт</span><span><i class="fa-solid fa-store"></i>Маркетплейс</span><span><i class="fa-solid fa-comments"></i>Отзывы</span><span><i class="fa-solid fa-hashtag"></i>Соцсети</span></div>'+
-  '<div class="cp-vs"><div class="cp-card you"><div class="cp-tile"><i class="fa-solid fa-headphones"></i></div><small>Ваш товар</small><b>Наушники А1</b></div><div class="cp-badge">VS</div><div class="cp-card rv"><div class="cp-tile"><i class="fa-solid fa-headphones-simple"></i></div><small>Товар конкурента</small><b>Наушники Б2</b></div></div>'+
+  '<div class="cp-vs"><div class="cp-card you"><div class="cp-tile"><i class="fa-solid fa-mug-hot"></i></div><small>Ваш товар</small><b>Кофемашина А1</b></div><div class="cp-badge">VS</div><div class="cp-card rv"><div class="cp-tile"><i class="fa-solid fa-mug-saucer"></i></div><small>Товар конкурента</small><b>Кофемашина Б2</b></div></div>'+
   '<div class="cp-rows"></div><div class="cp-sc">Вы впереди по <b class="cp-n">0</b> из 5 пунктов</div></div>'+
-  '<div class="cp-r2"><div class="cp-ah"><b>Что сделать, чтобы выиграть</b><button type="button" class="cp-all">Применить все</button></div><div class="cp-adv"></div></div></div><div class="cp-ev"></div>';
-  var ST=B.querySelector('.cp-st'),SRC=[].slice.call(B.querySelectorAll('.cp-src span')),RW=B.querySelector('.cp-rows'),SN=B.querySelector('.cp-n'),AD=B.querySelector('.cp-adv'),EV=B.querySelector('.cp-ev'),ALL=B.querySelector('.cp-all');
+  '<div class="cp-r2"><div class="cp-ah"><b>Что сделать, чтобы выиграть</b><button type="button" class="cp-all">Применить все</button></div><div class="cp-adv"></div><div class="cp-g"><img src="'+LOGO+'" alt="Gemini"><div><b>Gemini советует</b><p class="cp-gt"></p></div></div></div></div><div class="cp-ev"></div>';
+  var ST=B.querySelector('.cp-st'),SRC=[].slice.call(B.querySelectorAll('.cp-src span')),RW=B.querySelector('.cp-rows'),SN=B.querySelector('.cp-n'),AD=B.querySelector('.cp-adv'),GT=B.querySelector('.cp-gt'),EV=B.querySelector('.cp-ev'),ALL=B.querySelector('.cp-all');
   var R=[
-   {n:'Цена',ic:'fa-tag',y:5490,c:4990,f:function(v){return nf(v)+' ₽'},b:-1},
+   {n:'Цена',ic:'fa-tag',y:24990,c:22990,f:function(v){return nf(v)+' ₽'},b:-1},
    {n:'Рейтинг',ic:'fa-star',y:4.5,c:4.7,f:function(v){return String(v).replace('.',',')},b:1},
    {n:'Доставка',ic:'fa-truck-fast',y:5,c:2,f:function(v){return v+' дн.'},b:-1},
    {n:'Гарантия',ic:'fa-shield-halved',y:24,c:12,f:function(v){return v+' мес.'},b:1},
    {n:'Отзывов',ic:'fa-comments',y:340,c:1280,f:function(v){return nf(v)},b:1}];
   R.forEach(function(r){r.y0=r.y;r.c0=r.c});
   var A=[
-   {r:2,ic:'fa-truck-fast',t:'Доставка за 1-2 дня',d:'Держите ходовые модели на складе в городе клиента.',ok:'Доставка ускорена до 1 дня',run:function(){R[2].y=1}},
-   {r:1,ic:'fa-star',t:'Отвечайте на негатив за час',d:'Просите отзыв после покупки и закрывайте плохие в день обращения.',ok:'Рейтинг растёт, отзывов больше',run:function(){R[1].y=4.8;R[4].y=520}},
-   {r:0,ic:'fa-gift',t:'Не снижайте цену, добавьте чехол',d:'Скидка съест маржу, а подарок даёт ценность без неё.',ok:'Маржа сохранена, добавлен подарок',run:function(){R[0].bonus=true}}];
+   {r:2,ic:'fa-truck-fast',t:'Доставка за 1-2 дня',d:'Держите ходовые модели на складе в городе клиента.',ok:'Доставка ускорена до 1 дня',say:'Хорошо, доставка за 1 день. Теперь отвечайте на негатив, чтобы догнать рейтинг.',run:function(){R[2].y=1}},
+   {r:1,ic:'fa-star',t:'Отвечайте на негатив за час',d:'Просите отзыв после покупки и закрывайте плохие в день обращения.',ok:'Рейтинг растёт, отзывов больше',say:'Рейтинг выровнялся. Цену не трогайте, лучше добавьте подарок.',run:function(){R[1].y=4.8;R[4].y=520}},
+   {r:0,ic:'fa-gift',t:'Не снижайте цену, добавьте подарок',d:'Скидка съест маржу, а кофе в подарок даёт ценность без неё.',ok:'Маржа сохранена, добавлен подарок',say:'Отлично, цена остаётся, а ценность растёт.',run:function(){R[0].bonus=true}}];
   var rows=R.map(function(r,i){var e=document.createElement('div');e.className='cp-r';e.innerHTML='<span class="y"></span><span class="m"><i class="fa-solid '+r.ic+'"></i>'+r.n+'</span><span class="c"></span>';RW.appendChild(e);e.addEventListener('click',function(){pause=Date.now();A.forEach(function(a,k){if(a.r===i&&a.el)hl(a.el)})});return e});
   var advs=A.map(function(a,i){var b=document.createElement('button');b.type='button';b.className='cp-a';b.innerHTML='<i class="ic fa-solid '+a.ic+'"></i><span><b>'+a.t+'</b><small>'+a.d+'</small></span><u>В план</u>';AD.appendChild(b);a.el=b;b.addEventListener('click',function(){pause=Date.now();apply(i)});return b});
+  function say(t){typ(GT,t)}
   function hl(el){el.classList.add('hl');setTimeout(function(){el.classList.remove('hl')},1600)}
   function after(f,ms){var id=setTimeout(f,red?0:ms);tms.push(id);return id}
   function clr(){tms.forEach(clearTimeout);tms=[]}
   function stt(R0){var d=(R0.y-R0.c)*R0.b;return R0.bonus?1:(d>0?1:(d<0?-1:0))}
-  function paint(fl){var w=0;R.forEach(function(r,i){var e=rows[i],s=r.shown?stt(r):0;e.className='cp-r'+(r.shown?(s>0?' win':(s<0?' lose':' tie')):'')+(fl===i?' pop':'');e.querySelector('.y').innerHTML=r.f(r.y)+(r.bonus?'<em><i class="fa-solid fa-gift"></i> + чехол</em>':'');e.querySelector('.c').textContent=r.shown?r.f(r.c):'...';if(r.shown&&s>0)w++});SN.textContent=w}
-  function apply(i){var a=A[i];if(a.done)return;a.done=true;a.run();a.el.classList.add('on');a.el.querySelector('u').textContent='В плане';ST.textContent=a.ok;paint(a.r);chk()}
+  function paint(fl){var w=0;R.forEach(function(r,i){var e=rows[i],s=r.shown?stt(r):0;e.className='cp-r'+(r.shown?(s>0?' win':(s<0?' lose':' tie')):'')+(fl===i?' pop':'');e.querySelector('.y').innerHTML=r.f(r.y)+(r.bonus?'<em><i class="fa-solid fa-gift"></i> + кофе в подарок</em>':'');e.querySelector('.c').textContent=r.shown?r.f(r.c):'...';if(r.shown&&s>0)w++});SN.textContent=w}
+  function apply(i){var a=A[i];if(a.done)return;a.done=true;a.run();a.el.classList.add('on');a.el.querySelector('u').textContent='В плане';ST.textContent=a.ok;paint(a.r);chk();say(A.every(function(x){return x.done})?'Итог: вы впереди по 4 из 5 пунктов. Осталось догнать по числу отзывов, оно растёт вместе с продажами. Слежу за конкурентом дальше.':a.say)}
   function chk(){var all=A.every(function(a){return a.done});ALL.classList.toggle('on',!all&&A.some(function(a){return a.el.classList.contains('in')}))}
   ALL.addEventListener('click',function(){pause=Date.now();A.forEach(function(a,i){if(!a.done)setTimeout(function(){apply(i)},red?0:i*350)})});
   function start(){clr();gen++;var g=gen;pause=0;
     R.forEach(function(r){r.y=r.y0;r.c=r.c0;r.shown=false;r.bonus=false});A.forEach(function(a){a.done=false;a.el.classList.remove('on','in','hl');a.el.querySelector('u').textContent='В план'});
-    EV.classList.remove('on');ALL.classList.remove('on');SRC.forEach(function(s){s.classList.remove('on')});paint();ST.textContent='Gemini собирает данные...';
-    if(red){R.forEach(function(r){r.shown=true});paint();A.forEach(function(a){a.el.classList.add('in')});ST.textContent='Готово: видно, где вы уступаете';chk();return}
+    EV.classList.remove('on');ALL.classList.remove('on');SRC.forEach(function(s){s.classList.remove('on')});paint();ST.textContent='Gemini собирает данные...';GT.textContent='';
+    if(red){R.forEach(function(r){r.shown=true});paint();A.forEach(function(a){a.el.classList.add('in')});ST.textContent='Готово: видно, где вы уступаете';say('Вы уступаете по 4 пунктам из 5. Начните с доставки: это самый частый довод покупателей в пользу конкурента.');chk();return}
     SRC.forEach(function(s,i){after(function(){if(g===gen)s.classList.add('on')},300+i*420)});
     R.forEach(function(r,i){after(function(){if(g!==gen)return;r.shown=true;paint(i)},1500+i*520)});
     var t=1500+R.length*520;
-    after(function(){if(g!==gen)return;ST.textContent='Готово: видно, где вы уступаете'},t);
+    after(function(){if(g!==gen)return;ST.textContent='Готово: видно, где вы уступаете';say('Вы уступаете по 4 пунктам из 5. Начните с доставки: это самый частый довод покупателей в пользу конкурента.')},t);
     A.forEach(function(a,i){after(function(){if(g!==gen)return;a.el.classList.add('in');chk()},t+i*260)});
-    after(function(){if(g!==gen)return;R[0].c=4490;EV.innerHTML='<i class="fa-solid fa-bell"></i><span>Новое: у конкурента акция, цена теперь '+nf(4490)+' ₽</span>';EV.classList.add('on');ST.textContent='Нашёл изменение у конкурента';paint(0)},t+6500);
+    after(function(){if(g!==gen)return;R[0].c=20490;say('Конкурент снизил цену на 10%. В цену не вступайте: держите её и усильте предложение подарком.');EV.innerHTML='<i class="fa-solid fa-bell"></i><span>Новое: у конкурента акция, цена теперь '+nf(20490)+' ₽</span>';EV.classList.add('on');ST.textContent='Нашёл изменение у конкурента';paint(0)},t+6500);
     after(function loop(){if(g!==gen)return;if(Date.now()-pause<12000){after(loop,3000);return}start()},t+22000)}
   B.querySelector('.cp-re').addEventListener('click',start);
   start();return start};
