@@ -136,7 +136,7 @@ section { padding: 100px 24px; }
 .stars { color: var(--cyan); font-size: 13px; margin-bottom: 16px; letter-spacing: 2px; }
 .testimonial-text { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
 .testimonial-author { display: flex; align-items: center; gap: 14px; }
-.author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), #0080FF); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #000; }
+.author-avatar { width: 42px; height: 42px; border-radius: 50%; background:#1a8fb8; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #fff; }
 .author-name { font-size: 14px; font-weight: 700; }
 .author-company { font-size: 12px; color: var(--gray); }
 
@@ -877,12 +877,85 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </section>
 
 <section id="case">
+  <style id="nw-css">
+  [data-v="lrs"] .cz-vis,[data-v="dph"] .cz-vis,[data-v="tgm"] .cz-vis{background:none;border:0;box-shadow:none;padding:0}
+  .nw-stack{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}.nw-stack span{font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:10px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:#9eeaff}
+  .nw{position:relative;font-family:'Inter',sans-serif;color:#e8eef7;border-radius:22px;padding:14px;background:linear-gradient(160deg,rgba(18,40,60,.7),rgba(8,14,26,.92));border:1px solid rgba(0,212,255,.22);box-shadow:0 40px 80px -30px rgba(0,0,0,.85),0 0 60px -24px rgba(0,212,255,.5)}
+  .nw button{font-family:'Inter',sans-serif}
+  .nw-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .nw-ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:14px;color:#04121a;background:linear-gradient(135deg,#00d4ff,#3b82f6);flex:none}
+  .nw-top b{display:block;font-size:13px}.nw-top small{display:block;font-size:10.5px;color:#8fb2c7}
+  .nw-demo{margin-left:auto;flex:none;font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.1);color:#c7d3ec;border-radius:10px;padding:2px 8px}
+  .nw-kp{flex:none;text-align:right}.nw-kp b{display:inline;font-size:15px;color:#7ee2b0}.nw-kp small{display:inline;margin-left:4px}
+  .lr-b{display:grid;grid-template-columns:.95fr 1.25fr;gap:12px;align-items:start}
+  .lr-l{display:flex;flex-direction:column;gap:7px;min-width:0}
+  .lr-row{display:block;width:100%;text-align:left;padding:9px 10px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;cursor:pointer;transition:all .25s}
+  .lr-row:hover{background:rgba(255,255,255,.1)}.lr-row.sel{border-color:#00d4ff;background:rgba(0,212,255,.12);box-shadow:0 0 20px -6px rgba(0,212,255,.7)}
+  .lr-n{display:flex;justify-content:space-between;gap:6px;font-size:11.5px;font-weight:700}.lr-n u{text-decoration:none;font-size:9.5px;font-weight:800;color:#ffb36b}
+  .lr-c{font-size:10px;color:#8fb2c7;margin-top:1px}.lr-m{font-size:10.5px;color:#c7d3ec;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lr-st{display:inline-block;margin-top:5px;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:7px;background:rgba(255,179,107,.18);color:#ffb36b}.lr-row.ok .lr-st{background:rgba(46,204,113,.2);color:#7ee2b0}.lr-row.ok .lr-n u{color:#7ee2b0}
+  .lr-r{min-width:0}
+  .lr-p{display:flex;gap:5px;margin-bottom:9px}
+  .lr-s{flex:1;min-width:0;text-align:center;padding:7px 3px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-size:9px;font-weight:700;color:#8fb2c7;transition:all .35s;position:relative}
+  .lr-s i{display:block;font-size:14px;margin-bottom:3px}.lr-s.on{background:rgba(0,212,255,.16);border-color:#00d4ff;color:#fff;box-shadow:0 0 18px -4px rgba(0,212,255,.8)}.lr-s.done{color:#7ee2b0;border-color:rgba(46,204,113,.4)}
+  .lr-why{min-height:26px;margin-bottom:8px;font-size:11px;color:#c7d3ec}.lr-why span{display:inline-flex;gap:6px;align-items:center;padding:4px 9px;border-radius:9px;background:rgba(255,184,0,.14);border:1px solid rgba(255,184,0,.4);color:#ffd988;font-weight:700;animation:nwIn .4s}
+  .lr-d{border-radius:14px;background:#fff;color:#2b3140;padding:10px 12px;font-size:10.5px;line-height:1.45;min-height:128px;box-shadow:0 18px 34px -14px rgba(0,0,0,.8)}
+  .lr-d h6{margin:0 0 6px;font-size:9.5px;font-weight:800;color:#5f6368;letter-spacing:.04em;text-transform:uppercase;display:flex;gap:6px;align-items:center}.lr-d h6 i{color:#ea4335}
+  .lr-d .tx{outline:0;border-radius:6px;min-height:58px}.lr-d .tx[contenteditable="true"]{background:#f1f6ff;box-shadow:0 0 0 1.5px #4285F4;padding:3px 4px}
+  .nw-a{display:flex;gap:6px;margin-top:8px}.nw-a button{flex:1;border:0;border-radius:9px;padding:7px 6px;font-size:10px;font-weight:800;cursor:pointer;color:#2b3140;background:#e8eaed;transition:all .2s}.nw-a button.p{background:#1a73e8;color:#fff}.nw-a button:hover{filter:brightness(.95);transform:translateY(-1px)}.nw-a button.ok{background:#1f9d62;color:#fff;cursor:default;transform:none}
+  .lr-t{margin-top:8px;font-size:10px;color:#8fb2c7;display:flex;gap:6px;align-items:center;min-height:16px}.lr-t i{color:#ff7a59}
+  @keyframes nwIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .df-b{display:grid;grid-template-columns:1.1fr 1fr;gap:12px;align-items:start}.df-b>div{min-width:0}
+  .df-src{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+  .df-sc{padding:8px 6px;text-align:center;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}.df-sc i{display:block;color:#7fd8ff;font-size:14px;margin-bottom:3px}.df-sc b{font-size:15px;font-variant-numeric:tabular-nums}.df-sc small{display:block;font-size:9px;color:#8fb2c7}
+  .df-ch{position:relative;height:122px;display:flex;align-items:flex-end;gap:6px;padding:20px 8px 18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+  .df-ch em{position:absolute;left:10px;top:6px;font-style:normal;font-size:9.5px;color:#8fb2c7;font-weight:700}
+  .df-bar{flex:1;position:relative;height:100%;display:flex;align-items:flex-end}.df-bar i{display:block;width:100%;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#38bdf8,#2563eb);height:0;transition:height .8s cubic-bezier(.2,.8,.2,1),background .4s}.df-bar.hot i{background:linear-gradient(180deg,#ff8a5c,#ef4444)}.df-bar small{position:absolute;left:0;right:0;bottom:-15px;text-align:center;font-size:8.5px;color:#8fb2c7}
+  .df-flag{position:absolute;top:18px;font-size:9px;font-weight:800;color:#ffd988;background:rgba(255,184,0,.16);border:1px solid rgba(255,184,0,.45);border-radius:8px;padding:2px 6px;opacity:0;transition:opacity .4s;white-space:nowrap}.df-flag.on{opacity:1}
+  .df-cl{display:flex;flex-direction:column;gap:6px}
+  .df-c{display:block;width:100%;text-align:left;padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;cursor:pointer;opacity:0;transform:translateX(14px);transition:all .45s}.df-c.in{opacity:1;transform:none}.df-c:hover{background:rgba(255,255,255,.1)}.df-c.sel{border-color:#ff8a5c;box-shadow:0 0 18px -5px rgba(255,138,92,.8)}
+  .df-c b{display:flex;justify-content:space-between;gap:6px;font-size:11px}.df-c b u{text-decoration:none;font-size:9.5px;color:#ffb3a1;font-weight:800;white-space:nowrap}.df-c small{display:block;font-size:9.5px;color:#8fb2c7;margin-top:2px}
+  .df-c.low b u{color:#ffd988}.df-c.done{border-color:rgba(46,204,113,.5)}.df-c.done b u{color:#7ee2b0}
+  .df-d{margin-top:8px;padding:10px;border-radius:13px;background:linear-gradient(135deg,rgba(0,212,255,.14),rgba(59,130,246,.14));border:1px solid rgba(0,212,255,.35);font-size:10.5px;line-height:1.45;min-height:98px}.df-d h6{margin:0 0 4px;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#7fd8ff;display:flex;gap:6px;align-items:center}
+  .df-d .nw-a button{background:#00b8e6;color:#04121a}.df-d .nw-a button.ok{background:#1f9d62;color:#fff}
+  .tg-b{display:grid;grid-template-columns:.8fr 1.3fr;gap:12px;align-items:start}.tg-b>div{min-width:0}
+  .tg-st{display:flex;flex-direction:column;gap:7px}
+  .tg-s{display:flex;gap:9px;align-items:center;text-align:left;width:100%;padding:9px 10px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;cursor:pointer;font-size:11px;font-weight:700;transition:all .3s}
+  .tg-s i{flex:none;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.08);color:#8fb2c7;font-size:12px;transition:all .3s}.tg-s:hover{background:rgba(255,255,255,.1)}
+  .tg-s.on{border-color:#2AABEE;background:rgba(42,171,238,.14);box-shadow:0 0 18px -5px rgba(42,171,238,.8)}.tg-s.on i{background:#2AABEE;color:#fff}.tg-s.done i{background:#1f9d62;color:#fff}
+  .tg-ch{border-radius:18px;overflow:hidden;background:#0e1621;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 50px -22px rgba(0,0,0,.9)}
+  .tg-h{display:flex;align-items:center;gap:9px;padding:9px 12px;background:#17212b}.tg-h .av{width:28px;height:28px;border-radius:50%;background:#2AABEE;display:grid;place-items:center;font-size:13px;color:#fff;flex:none}.tg-h b{display:block;font-size:11.5px}.tg-h small{font-size:9.5px;color:#7f93a6}
+  .tg-f{min-height:250px;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}
+  .tg-m{max-width:94%;padding:8px 10px;border-radius:12px 12px 12px 3px;background:#182533;color:#e8eef5;font-size:10.5px;line-height:1.45;animation:nwIn .45s}
+  .tg-m h6{margin:0 0 4px;font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#6ab3f3;display:flex;gap:5px;align-items:center}
+  .tg-m.me{align-self:flex-end;border-radius:12px 12px 3px 12px;background:#2b5278}.tg-m.ag{background:#1c2f45}
+  .tg-ideas{display:flex;flex-direction:column;gap:4px;margin-top:4px}.tg-ideas span{padding:4px 8px;border-radius:8px;background:rgba(106,179,243,.16);font-size:10px;font-weight:600}.tg-ideas span.pick{background:#2AABEE;color:#fff}
+  .tg-img{height:62px;border-radius:9px;margin-bottom:6px;display:grid;place-items:center;font-size:24px;color:#fff;background:linear-gradient(135deg,#00d4ff,#7c3aed)}
+  .tg-meta{display:flex;justify-content:space-between;gap:8px;margin-top:5px;font-size:9px;color:#7f93a6}.tg-meta .ck{color:#6ab3f3}
+  .tg-r{display:flex;gap:5px;margin-top:6px}.tg-r span{font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(255,255,255,.08)}
+  @media(max-width:900px){.lr-b,.df-b,.tg-b{grid-template-columns:1fr}}
+  @media(max-width:480px){.nw{padding:11px}.lr-s{font-size:8.5px}.df-ch{padding:20px 5px 18px;gap:4px}}
+  @media(prefers-reduced-motion:reduce){.lr-why span,.tg-m,.lr-d,.df-c{animation:none;transition:none}}
+  </style>
+
   <div class="container">
-    <div class="section-label">Кейс</div>
+    <div class="section-label">Примеры</div>
     <h2 class="section-title">Как это <span>работает на практике</span></h2>
     <div class="cz reveal" data-bk="cz" style="margin-top:30px">
-      <div class="cz-tabs one" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-file-invoice"></i><span><b>Накладные в 1С</b><small>n8n · 1С</small></span></button></div>
-      <div class="cz-pane on" data-v="mt">
+      <div class="cz-tabs" role="tablist"><button type="button" role="tab" class="cz-t on"><i class="fa-solid fa-rotate-left"></i><span><b>Возврат клиентов</b><small>AI Lead Recovery</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-magnifying-glass-chart"></i><span><b>Поиск брака</b><small>AI Defect Pattern Hunter</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-brands fa-telegram"></i><span><b>Telegram-канал</b><small>ведёт канал сам</small></span></button><button type="button" role="tab" class="cz-t"><i class="fa-solid fa-file-invoice"></i><span><b>Накладные в 1С</b><small>n8n · 1С</small></span></button></div>
+      <div class="cz-pane on" data-v="lrs">
+        <div class="cz-info"><h3>ИИ возвращает клиентов, которые перестали отвечать</h3><p>Система находит заглохшие диалоги, понимает причину молчания и готовит персональное письмо. Менеджеру остаётся нажать «Отправить».</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Читает всю историю переписки</span></li><li><i class="fa-solid fa-check"></i><span>Определяет, почему клиент потерял интерес</span></li><li><i class="fa-solid fa-check"></i><span>Пишет follow-up и ставит задачу в CRM</span></li></ul><div class="nw-stack"><span>n8n</span><span>OpenAI</span><span>HubSpot</span><span>Gmail</span></div></div>
+        <div class="cz-vis"><div class="nw lr"></div></div>
+      </div>
+      <div class="cz-pane" data-v="dph">
+        <div class="cz-info"><h3>ИИ находит причину брака до того, как он станет массовым</h3><p>Агент читает жалобы, возвраты и отчёты контроля качества, собирает их в закономерности и говорит, где ломается производство.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Объединяет жалобы, возвраты и отчёты ОТК</span></li><li><i class="fa-solid fa-check"></i><span>Замечает рост брака на ранней неделе</span></li><li><i class="fa-solid fa-check"></i><span>Называет вероятную причину и что сделать</span></li></ul><div class="nw-stack"><span>n8n</span><span>OpenAI</span><span>Google Таблицы</span><span>Telegram</span></div></div>
+        <div class="cz-vis"><div class="nw df"></div></div>
+      </div>
+      <div class="cz-pane" data-v="tgm">
+        <div class="cz-info"><h3>ИИ ведёт Telegram-канал вместо вас</h3><p>Придумывает темы, пишет посты в вашем стиле, ставит их по расписанию и отвечает на вопросы в комментариях.</p><div class="cz-kpis"></div><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Предлагает темы и пишет готовые посты</span></li><li><i class="fa-solid fa-check"></i><span>Публикует в нужное время сам</span></li><li><i class="fa-solid fa-check"></i><span>Отвечает в комментариях и зовёт в заявку</span></li></ul><div class="nw-stack"><span>n8n</span><span>OpenAI</span><span>Telegram</span></div></div>
+        <div class="cz-vis"><div class="nw tg"></div></div>
+      </div>
+      <div class="cz-pane" data-v="mt">
         <div class="cz-info"><h3>Накладные поставщиков попадают в 1С без ручного ввода</h3><p>Система читает накладную в PDF, Excel или Word, сама находит товары в каталоге из 50 000 позиций и заносит их в 1С. Человек подтверждает только спорные строки, в один клик.</p><div class="cz-kpis"><div><b><span data-count="50000">50 000</span></b><span>позиций в каталоге</span></div><div><b><span data-count="1">1</span> клик</b><span>на спорную строку</span></div></div><a href="/case-nakladnye-1c.html" class="btn-secondary">Подробнее о проекте</a></div>
         <div class="cz-vis"><div class="mt"><div class="mt-col mt-a"><div class="mt-h"><i class="fa-solid fa-file-invoice"></i>Накладная<small>PDF</small></div><div class="mt-r">Бумага A4</div><div class="mt-r">Ручки синие</div><div class="mt-r">Папки</div><div class="mt-r q">Скотч</div><div class="mt-r">Маркеры</div></div><svg class="mt-svg" aria-hidden="true"></svg><div class="mt-col mt-b"><div class="mt-h"><i class="fa-solid fa-database"></i>1С<small>50 000 позиций</small></div><div class="mt-r">Бумага офисная A4</div><div class="mt-r">Ручка шариковая синяя</div><div class="mt-r">Папка-регистратор</div><div class="mt-r q">Лента клейкая 48 мм<button type="button">Подтвердить</button></div><div class="mt-r">Маркер перманентный</div></div><div class="mt-st">Занесено в 1С: <b>0</b> из 5</div></div></div>
       </div>
@@ -1374,7 +1447,79 @@ window.openCookieSettings=function(e){if(e)e.preventDefault();try{localStorage.r
 </style>
 <script src="/js/main.v2.js" defer></script>
 <script src="/js/fx.js?v=11" defer></script>
-<script src="/hero3d/blocks.js?v=40" defer></script>
+<script>(function(){
+var red=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function typ(el,tx,done){clearInterval(el._t);if(red){el.innerHTML=tx;done&&done();return}var k=0,pl=tx.replace(/<[^>]+>/g,'');el.textContent='';el._t=setInterval(function(){k+=2;if(k>=pl.length){clearInterval(el._t);el.innerHTML=tx;done&&done();return}var out='',n=0,tag=false;for(var j=0;j<tx.length&&n<k;j++){var c=tx[j];out+=c;if(c==='<')tag=true;else if(c==='>')tag=false;else if(!tag)n++}el.innerHTML=out},24)}
+function mk(){var o={tms:[],gen:0,pause:0};o.after=function(f,ms){var id=setTimeout(f,red?0:ms);o.tms.push(id)};o.clr=function(){o.tms.forEach(clearTimeout);o.tms=[]};return o}
+/* ---------- возврат клиентов ---------- */
+window.__lrsInit=function(vis){
+  var B=vis.querySelector('.nw.lr'),Z=mk(),cur=0,back=0;
+  var L=[{n:'Игорь П.',c:'ООО «Вектор»',d:12,m:'Отправили КП, ждём ответа',r:'Дорого: цена выше ожиданий',mail:'Игорь, добрый день! Пересчитали КП: при заказе от 50 шт. цена на 12% ниже, а доставку берём на себя. Удобно созвониться завтра в 11:00?'},
+   {n:'Анна С.',c:'Студия «Лайм»',d:9,m:'Нужно согласовать с директором',r:'Ждёт согласования у руководителя',mail:'Анна, добрый день! Подготовили одностраничную презентацию для директора: цели, сроки и стоимость. Прислать сегодня?'},
+   {n:'Олег К.',c:'ИП Круглов',d:17,m:'Посмотрим другие варианты',r:'Сравнивает с другим подрядчиком',mail:'Олег, добрый день! Если ещё сравниваете варианты, покажу, что входит в наш запуск и гарантию 30 дней. Нужен короткий разбор?'},
+   {n:'Марина Д.',c:'Школа «Эрудит»',d:21,m:'Сейчас совсем нет времени',r:'Нет времени: отложила на потом',mail:'Марина, добрый день! Понимаю, сейчас горячий сезон. Давайте вернёмся к задаче в декабре: напомню 1 числа и подготовлю план запуска.'}];
+  var ST=[['fa-solid fa-envelope-open-text','Читает переписку'],['fa-solid fa-brain','Ищет причину'],['fa-solid fa-pen-nib','Пишет письмо'],['fa-brands fa-hubspot','Задача в CRM']];
+  B.innerHTML='<div class="nw-top"><div class="nw-ic"><i class="fa-solid fa-rotate-left"></i></div><div><b>Возврат клиентов</b><small>AI Lead Recovery System</small></div><span class="nw-demo">пример</span><span class="nw-kp"><b class="lr-bk">0</b><small>из 4 вернулись</small></span></div><div class="lr-b"><div class="lr-l"></div><div class="lr-r"><div class="lr-p">'+ST.map(function(s){return '<div class="lr-s"><i class="'+s[0]+'"></i>'+s[1]+'</div>'}).join('')+'</div><div class="lr-why"></div><div class="lr-d"><h6><i class="fa-solid fa-envelope"></i>Черновик письма · Gmail</h6><div class="tx"></div><div class="nw-a" style="display:none"><button type="button" class="p">Отправить</button><button type="button">Изменить</button></div></div><div class="lr-t"></div></div></div>';
+  var LL=B.querySelector('.lr-l'),SS=[].slice.call(B.querySelectorAll('.lr-s')),WHY=B.querySelector('.lr-why'),TX=B.querySelector('.tx'),AC=B.querySelector('.nw-a'),BT=AC.querySelectorAll('button'),TT=B.querySelector('.lr-t'),BK=B.querySelector('.lr-bk');
+  var rows=L.map(function(l,i){var e=document.createElement('button');e.type='button';e.className='lr-row';e.innerHTML='<div class="lr-n"><span>'+l.n+'</span><u>молчит '+l.d+' дн.</u></div><div class="lr-c">'+l.c+'</div><div class="lr-m">'+l.m+'</div><span class="lr-st">Остыл</span>';LL.appendChild(e);e.addEventListener('click',function(){Z.pause=Date.now();pick(i,false)});return e});
+  function step(i,g){SS.forEach(function(s,k){s.classList.toggle('on',k===i);s.classList.toggle('done',k<i)})}
+  function send(i,g){var r=rows[i];if(r.classList.contains('ok'))return;r.classList.add('ok');r.querySelector('.lr-st').textContent='Вернулся: ответил';r.querySelector('u').textContent='ответил';back++;BK.textContent=back;BT[0].className='ok';BT[0].textContent='Отправлено';BT[1].style.display='none';TX.contentEditable='false';SS.forEach(function(s){s.classList.remove('on');s.classList.add('done')});TT.innerHTML='<i class="fa-solid fa-circle-check" style="color:#7ee2b0"></i>Письмо ушло, клиент ответил'}
+  function pick(i,auto){Z.clr();var g=++Z.gen;cur=i;rows.forEach(function(r,k){r.classList.toggle('sel',k===i)});var l=L[i];
+    SS.forEach(function(s){s.classList.remove('on','done')});WHY.innerHTML='';TX.textContent='';TX.contentEditable='false';AC.style.display='none';BT[0].className='p';BT[0].textContent='Отправить';BT[1].style.display='';TT.textContent='';
+    if(rows[i].classList.contains('ok')){WHY.innerHTML='<span><i class="fa-solid fa-circle-check"></i>Клиент уже вернулся</span>';TX.textContent=l.mail;SS.forEach(function(s){s.classList.add('done')});return}
+    step(0,g);Z.after(function(){if(g===Z.gen)step(1,g)},900);
+    Z.after(function(){if(g!==Z.gen)return;WHY.innerHTML='<span><i class="fa-solid fa-magnifying-glass"></i>Причина: '+l.r+'</span>';step(2,g);typ(TX,l.mail,function(){if(g!==Z.gen)return;step(3,g);AC.style.display='flex';TT.innerHTML='<i class="fa-solid fa-bell"></i>HubSpot: задача «Позвонить» на завтра создана';
+      BT[0].onclick=function(){Z.pause=Date.now();send(i,g)};BT[1].onclick=function(){Z.pause=Date.now();clearInterval(TX._t);TX.contentEditable='true';TX.focus();BT[1].style.display='none';BT[0].textContent='Отправить правку'};
+      if(auto)Z.after(function(){if(g===Z.gen&&Date.now()-Z.pause>9000)send(i,g)},2600);
+      if(!red)Z.after(function loop(){if(g!==Z.gen)return;if(Date.now()-Z.pause<12000){Z.after(loop,3000);return}if(back>=4){start();return}pick((cur+1)%4,true)},auto?9000:14000)})},1800)}
+  function start(){Z.clr();Z.gen++;back=0;BK.textContent='0';rows.forEach(function(r,i){r.classList.remove('ok','sel');r.querySelector('.lr-st').textContent='Остыл';r.querySelector('u').textContent='молчит '+L[i].d+' дн.'});Z.pause=0;Z.after(function(){pick(0,true)},500)}
+  start();return start};
+/* ---------- поиск брака ---------- */
+window.__dphInit=function(vis){
+  var B=vis.querySelector('.nw.df'),Z=mk(),sel=-1,W0=[2,2,3,2,3,5,7,9],W=W0.slice();
+  var C=[{t:'Трещина корпуса',s:'партия 4412',n:6,cause:'Износ формы на станке №3: 5 из 6 случаев пришли с него.',act:'Остановить станок №3',res:'Станок остановлен, форму отправили на замену.',hot:1},
+   {t:'Царапины на упаковке',s:'склад Б',n:3,cause:'Новая смена упаковщиков: жалобы пришли с вечерних отгрузок.',act:'Передать мастеру смены',res:'Мастеру смены ушло уведомление в Telegram.'},
+   {t:'Слабая пайка',s:'поставщик К',n:2,cause:'Компоненты из новой партии, сертификата в папке нет.',act:'Запросить сертификат',res:'Письмо поставщику с запросом сертификата отправлено.'}];
+  B.innerHTML='<div class="nw-top"><div class="nw-ic"><i class="fa-solid fa-magnifying-glass-chart"></i></div><div><b>Поиск брака</b><small>AI Defect Pattern Hunter</small></div><span class="nw-demo">пример</span></div><div class="df-b"><div><div class="df-src"><div class="df-sc"><i class="fa-solid fa-comment-dots"></i><b data-n="18">0</b><small>жалобы</small></div><div class="df-sc"><i class="fa-solid fa-rotate-left"></i><b data-n="7">0</b><small>возвраты</small></div><div class="df-sc"><i class="fa-solid fa-clipboard-check"></i><b data-n="12">0</b><small>отчёты ОТК</small></div></div><div class="df-ch"><em>Доля брака по неделям, %</em><span class="df-flag" style="left:48%">Агент заметил рост</span></div></div><div><div class="df-cl"></div><div class="df-d"><h6><i class="fa-solid fa-lightbulb"></i>Вероятная причина</h6><div class="df-t">Выберите закономерность слева</div><div class="nw-a" style="display:none"><button type="button"></button></div></div></div></div>';
+  var CH=B.querySelector('.df-ch'),FL=B.querySelector('.df-flag'),CL=B.querySelector('.df-cl'),DT=B.querySelector('.df-t'),AC=B.querySelector('.df-d .nw-a'),AB=AC.querySelector('button'),NS=[].slice.call(B.querySelectorAll('[data-n]'));
+  var bars=W0.map(function(v,i){var e=document.createElement('div');e.className='df-bar';e.innerHTML='<i></i><small>н'+(i+1)+'</small>';CH.appendChild(e);return e});
+  var cls=C.map(function(c,i){var e=document.createElement('button');e.type='button';e.className='df-c'+(i?' low':'');e.innerHTML='<b><span>'+c.t+'</span><u>'+c.n+' случаев</u></b><small>'+c.s+'</small>';CL.appendChild(e);e.addEventListener('click',function(){Z.pause=Date.now();show(i,false)});return e});
+  function draw(){bars.forEach(function(b,i){b.classList.toggle('hot',W[i]>=5);b.firstChild.style.height=(W[i]*10)+'%'})}
+  function count(el,to){if(red){el.textContent=to;return}var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1100);el.textContent=Math.round(to*k);if(k<1)requestAnimationFrame(f)})(t0)}
+  function done(i){var c=C[i];cls[i].classList.add('done');cls[i].querySelector('u').textContent='закрыто';AB.className='ok';AB.textContent='Выполнено';DT.innerHTML='<i class="fa-solid fa-circle-check" style="color:#7ee2b0"></i> '+c.res;if(c.hot){W=[2,2,3,2,3,4,3,2];draw();FL.classList.remove('on')}}
+  function show(i,auto){var g=++Z.gen;sel=i;cls.forEach(function(c,k){c.classList.toggle('sel',k===i)});var c=C[i];
+    if(cls[i].classList.contains('done')){DT.innerHTML='<i class="fa-solid fa-circle-check" style="color:#7ee2b0"></i> '+c.res;AC.style.display='none';return}
+    AC.style.display='none';typ(DT,c.cause,function(){if(g!==Z.gen)return;AC.style.display='flex';AB.className='';AB.textContent=c.act;AB.onclick=function(){Z.pause=Date.now();done(i)};
+      if(auto)Z.after(function(){if(g===Z.gen&&Date.now()-Z.pause>9000)done(i)},2400)});
+    if(auto&&!red)Z.after(function loop(){if(g!==Z.gen)return;if(Date.now()-Z.pause<12000){Z.after(loop,3000);return}start()},11000)}
+  function start(){Z.clr();Z.gen++;Z.pause=0;W=W0.slice();NS.forEach(function(n){n.textContent='0'});FL.classList.remove('on');bars.forEach(function(b){b.classList.remove('hot');b.firstChild.style.height='0'});cls.forEach(function(c){c.classList.remove('in','sel','done');c.querySelector('u').textContent=C[cls.indexOf(c)].n+' случаев'});DT.textContent='Агент читает жалобы, возвраты и отчёты...';AC.style.display='none';
+    Z.after(function(){NS.forEach(function(n){count(n,+n.getAttribute('data-n'))})},300);
+    Z.after(draw,800);Z.after(function(){FL.classList.add('on')},2200);
+    cls.forEach(function(c,i){Z.after(function(){c.classList.add('in')},2600+i*350)});
+    Z.after(function(){show(0,true)},4200)}
+  start();return start};
+/* ---------- Telegram-канал ---------- */
+window.__tgmInit=function(vis){
+  var B=vis.querySelector('.nw.tg'),Z=mk(),cur=-1;
+  var ST=[['fa-lightbulb','Придумать тему'],['fa-pen-nib','Написать пост'],['fa-clock','Поставить в расписание'],['fa-comments','Ответить в комментариях']];
+  var IDEAS=['Как не терять заявки ночью','3 задачи, которые можно отдать роботу','Сколько стоит запуск автоматизации'];
+  var POST='<b>🤖 3 задачи, которые можно отдать роботу</b><br>1. Ответы на типовые вопросы<br>2. Заявки в CRM без ручного ввода<br>3. Отчёты каждый понедельник<br>Как это настроить, читайте <span style="color:#6ab3f3">ЗДЕСЬ</span>';
+  B.innerHTML='<div class="nw-top"><div class="nw-ic" style="background:#2AABEE;color:#fff"><i class="fa-brands fa-telegram"></i></div><div><b>Telegram-канал</b><small>ИИ-редактор работает сам</small></div><span class="nw-demo">пример</span></div><div class="tg-b"><div class="tg-st">'+ST.map(function(s){return '<button type="button" class="tg-s"><i class="fa-solid '+s[0]+'"></i>'+s[1]+'</button>'}).join('')+'</div><div class="tg-ch"><div class="tg-h"><div class="av"><i class="fa-solid fa-bullhorn"></i></div><div><b>Канал компании</b><small>канал</small></div></div><div class="tg-f"></div></div></div>';
+  var F=B.querySelector('.tg-f'),SB=[].slice.call(B.querySelectorAll('.tg-s'));
+  SB.forEach(function(b,i){b.addEventListener('click',function(){Z.pause=Date.now();run(i,false)})});
+  function add(cls,html){var m=document.createElement('div');m.className='tg-m '+cls;m.innerHTML=html;F.appendChild(m);while(F.children.length>3)F.removeChild(F.firstChild);return m}
+  function mark(i){SB.forEach(function(b,k){b.classList.toggle('on',k===i);b.classList.toggle('done',k<i)})}
+  var post=null,meta=null;
+  function build(k,g,inst,next){
+    if(k===0){var m=add('ag','<h6><i class="fa-solid fa-lightbulb"></i>Идеи на неделю</h6><div class="tg-ideas">'+IDEAS.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>');Z.after(function(){if(g!==Z.gen)return;m.querySelectorAll('span')[1].classList.add('pick');next&&next()},inst?0:1300)}
+    else if(k===1){post=add('','<div class="tg-img"><i class="fa-solid fa-robot"></i></div><div class="t"></div><div class="tg-meta"><span>Черновик</span><span>17:42</span></div>');meta=post.querySelector('.tg-meta');if(inst){post.querySelector('.t').innerHTML=POST;next&&next()}else typ(post.querySelector('.t'),POST,function(){if(g===Z.gen)next&&next()})}
+    else if(k===2){if(!post){build(1,g,true);}meta=post.querySelector('.tg-meta');meta.innerHTML='<span>Запланировано на 18:00</span><span class="ck">17:42</span>';Z.after(function(){if(g!==Z.gen)return;meta.innerHTML='<span class="v">0 просмотров</span><span class="ck">18:00 ✓✓</span>';var v=meta.querySelector('.v'),t0=performance.now();if(red||inst){v.textContent='312 просмотров'}else(function f(t){var q=Math.min(1,(t-t0)/1400);v.textContent=Math.round(312*q)+' просмотров';if(q<1)requestAnimationFrame(f)})(t0);var r=document.createElement('div');r.className='tg-r';r.innerHTML='<span>👍 12</span><span>🔥 5</span>';post.appendChild(r);next&&next()},inst?0:1500)}
+    else{add('me','<b>Анна:</b> А сколько стоит запуск?');Z.after(function(){if(g!==Z.gen)return;var a=add('ag','<h6><i class="fa-solid fa-robot"></i>ИИ-редактор отвечает</h6><div class="t"></div>');typ(a.querySelector('.t'),'Лёгкий пакет от 4 990 ₽. Напишу подробнее в личные сообщения?',function(){if(g===Z.gen)next&&next()})},inst?0:900)}}
+  function run(i,auto,keep){Z.clr();var g=++Z.gen;cur=i;if(!keep){F.innerHTML='';post=null}mark(i);var k=keep?i:0;
+    (function go(){build(k,g,k<i,function(){if(g!==Z.gen)return;if(k<i){k++;go()}else{SB[i].classList.add('done');if(auto&&i<3)Z.after(function(){if(g===Z.gen&&Date.now()-Z.pause>9000)run(i+1,true,true)},2200);else if(auto&&!red)Z.after(function loop(){if(g!==Z.gen)return;if(Date.now()-Z.pause<12000){Z.after(loop,3000);return}run(0,true)},9000)}})})()}
+  run(0,true);return function(){Z.pause=0;run(0,true)}};
+})();</script>
+<script src="/hero3d/blocks.js?v=43" defer></script>
 <script>window.addEventListener("load",function(){function go(){var s=document.createElement("script");s.src="/hero3d/hero3d.js?v=10";s.async=true;document.body.appendChild(s)}if("requestIdleCallback" in window)requestIdleCallback(go,{timeout:1200});else setTimeout(go,200)});</script>
 </div>
 <!-- CHAT WIDGET -->

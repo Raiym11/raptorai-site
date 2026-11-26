@@ -289,6 +289,9 @@
   /* ---------- третий блок: кейсы ---------- */
   var VIS = {
     mail: function (v) { return window.__mailInit ? window.__mailInit(v) : null; },
+    lrs: function (v) { return window.__lrsInit ? window.__lrsInit(v) : null; },
+    dph: function (v) { return window.__dphInit ? window.__dphInit(v) : null; },
+    tgm: function (v) { return window.__tgmInit ? window.__tgmInit(v) : null; },
     cmp: function (v) { return window.__cmpInit ? window.__cmpInit(v) : null; },
     gsd: function (v) { return window.__gsdInit ? window.__gsdInit(v) : null; },
     /* сценки на CSS: класс go запускает анимацию, s1..sN включаются по таймингам из data-t */
