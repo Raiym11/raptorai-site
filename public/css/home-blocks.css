@@ -1323,3 +1323,5 @@ html.lite .hb #chat-panel::before,html.lite .hb #chat-panel::after,html.fx-off .
 .hb .case-kpi b,.hb .case-kpi b span:not(.kpi-from){background:none!important;-webkit-text-fill-color:var(--hba)!important;color:var(--hba)!important;text-shadow:0 0 30px rgba(var(--hba-rgb),.35)}
 /* mobile: сцены 3D-кейсов помещаются в экран */
 @media(max-width:1000px){.hb .cx-p .sacase{grid-template-columns:minmax(0,1fr)!important}.hb .sa3d{min-width:0;max-width:100%;padding:30px 4px}.hb .sa3d>canvas.sa3c{inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px)}}
+
+@media(max-width:1000px){.hb .sa3d{padding:58px 4px}}
