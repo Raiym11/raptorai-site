@@ -147,7 +147,7 @@
     0
    ],
    "parameters": {
-    "chatId": "1459995217",
+    "chatId": "ВАШ_TELEGRAM_CHAT_ID",
     "text": "=Статья вышла: {{ $('Опубликовать в GitHub').item.json.title }}\n{{ $('Опубликовать в GitHub').item.json.url }}\n(~{{ $('Опубликовать в GitHub').item.json.words }} слов, сайт обновится после деплоя)",
     "additionalFields": {}
    }
