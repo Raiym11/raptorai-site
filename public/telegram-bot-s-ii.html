@@ -136,7 +136,7 @@ section { padding: 100px 24px; }
 .stars { color: var(--cyan); font-size: 13px; margin-bottom: 16px; letter-spacing: 2px; }
 .testimonial-text { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
 .testimonial-author { display: flex; align-items: center; gap: 14px; }
-.author-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), #0080FF); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #000; }
+.author-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #04121a; }
 .author-name { font-size: 14px; font-weight: 700; }
 .author-company { font-size: 12px; color: var(--gray); }
 
@@ -483,6 +483,11 @@ body:has(#chat-panel.open) #tg-float{opacity:0;pointer-events:none;transform:sca
 @keyframes arrowNudge{0%,100%{transform:translateY(-50%) translateX(-2px)}50%{transform:translateY(-50%) translateX(3px)}}
 @keyframes arrowNudgeV{0%,100%{transform:translateX(-50%) translateY(-2px)}50%{transform:translateX(-50%) translateY(3px)}}
 
+@keyframes scrollTestimonials{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 10px))}}
+.testimonials-carousel-wrap{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.testimonials-carousel-wrap:hover .testimonials-carousel{animation-play-state:paused}
+.testimonials-carousel .testimonial-card{display:flex;flex-direction:column}.testimonials-carousel .testimonial-text{flex:1}
+@media(prefers-reduced-motion:reduce){.testimonials-carousel{animation:none!important;width:auto!important;flex-wrap:wrap}.testimonial-card[aria-hidden="true"]{display:none}}
 /* reviews: top border must stay visible */
 .testimonials-carousel{padding:18px 20px 24px !important}
 
@@ -1101,6 +1106,32 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </section>
 </div><!--/hb:low-->
 
+
+<section id="reviews" data-nosnippet style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label">Отзывы</div>
+    <h2 class="section-title">Что говорят <span>клиенты</span></h2>
+    <p class="section-sub">Отзывы клиентов, для которых мы делали Telegram-ботов с ИИ.</p>
+  </div>
+  <div class="testimonials-carousel-wrap" style="overflow:hidden;position:relative;margin:34px 0 0">
+<div class="testimonials-carousel" style="display:flex;gap:20px;width:max-content;animation:scrollTestimonials 65s linear infinite;padding:0 20px">
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«Заказали Telegram-бота с ИИ для консультации клиентов. Теперь он сам отвечает на большинство вопросов и помогает с выбором товаров. Очень удобно!»</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Андрей К.</div><div class="author-company">Владелец онлайн-магазина</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«RaptorAI сделали для нас Telegram-бота, который отвечает на вопросы учеников по нашим учебным материалам. Раньше приходилось отвечать на однотипные сообщения почти круглосуточно, теперь бот справляется сам. Отличное решение!»</p><div class="testimonial-author"><div class="author-avatar">В</div><div><div class="author-name">Виктория М.</div><div class="author-company">Основательница образовательного проекта</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«Нужен был бот, который понимает запросы клиентов, а не выдаёт заготовки. RaptorAI подключили базу знаний и передачу заинтересованных клиентов менеджерам. За первый месяц около 60% обращений обработано без сотрудников.»</p><div class="testimonial-author"><div class="author-avatar">Р</div><div><div class="author-name">Руслан Т.</div><div class="author-company">Руководитель отдела продаж</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«Бот получился классный! Клиенты узнают цены и услуги и записываются на приём прямо в Telegram. Всё работает автоматически.»</p><div class="testimonial-author"><div class="author-avatar">Д</div><div><div class="author-name">Диана С.</div><div class="author-company">Владелица салона красоты</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«Хотел обычного бота для ответов на вопросы, но RaptorAI предложили полноценного ИИ-ассистента. Он использует нашу базу знаний, понимает контекст и отвечает естественнее обычных ботов. Учли наши пожелания и не ограничились шаблоном.»</p><div class="testimonial-author"><div class="author-avatar">М</div><div><div class="author-name">Михаил Р.</div><div class="author-company">Предприниматель</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«Заказывала персонального ИИ-ассистента в Telegram для работы с документами. Отправляю боту запрос и получаю структурированный ответ или краткое содержание материала. Пользуюсь почти каждый день.»</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Алина Б.</div><div class="author-company">Независимый специалист</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal"><p class="testimonial-text">«Пробовали несколько готовых решений, ни одно не подошло. RaptorAI создали Telegram-бота с ИИ, интегрировали его с нашей базой данных и настроили сценарии общения. Бот распознаёт намерения, а не только ключевые слова. Внедрение прошло без проблем.»</p><div class="testimonial-author"><div class="author-avatar">Е</div><div><div class="author-name">Евгений Н.</div><div class="author-company">Владелец консалтинговой компании</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«Заказали Telegram-бота с ИИ для консультации клиентов. Теперь он сам отвечает на большинство вопросов и помогает с выбором товаров. Очень удобно!»</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Андрей К.</div><div class="author-company">Владелец онлайн-магазина</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«RaptorAI сделали для нас Telegram-бота, который отвечает на вопросы учеников по нашим учебным материалам. Раньше приходилось отвечать на однотипные сообщения почти круглосуточно, теперь бот справляется сам. Отличное решение!»</p><div class="testimonial-author"><div class="author-avatar">В</div><div><div class="author-name">Виктория М.</div><div class="author-company">Основательница образовательного проекта</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«Нужен был бот, который понимает запросы клиентов, а не выдаёт заготовки. RaptorAI подключили базу знаний и передачу заинтересованных клиентов менеджерам. За первый месяц около 60% обращений обработано без сотрудников.»</p><div class="testimonial-author"><div class="author-avatar">Р</div><div><div class="author-name">Руслан Т.</div><div class="author-company">Руководитель отдела продаж</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«Бот получился классный! Клиенты узнают цены и услуги и записываются на приём прямо в Telegram. Всё работает автоматически.»</p><div class="testimonial-author"><div class="author-avatar">Д</div><div><div class="author-name">Диана С.</div><div class="author-company">Владелица салона красоты</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«Хотел обычного бота для ответов на вопросы, но RaptorAI предложили полноценного ИИ-ассистента. Он использует нашу базу знаний, понимает контекст и отвечает естественнее обычных ботов. Учли наши пожелания и не ограничились шаблоном.»</p><div class="testimonial-author"><div class="author-avatar">М</div><div><div class="author-name">Михаил Р.</div><div class="author-company">Предприниматель</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«Заказывала персонального ИИ-ассистента в Telegram для работы с документами. Отправляю боту запрос и получаю структурированный ответ или краткое содержание материала. Пользуюсь почти каждый день.»</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Алина Б.</div><div class="author-company">Независимый специалист</div></div></div></div>
+<div class="testimonial-card" style="min-width:340px;max-width:340px;white-space:normal" aria-hidden="true"><p class="testimonial-text">«Пробовали несколько готовых решений, ни одно не подошло. RaptorAI создали Telegram-бота с ИИ, интегрировали его с нашей базой данных и настроили сценарии общения. Бот распознаёт намерения, а не только ключевые слова. Внедрение прошло без проблем.»</p><div class="testimonial-author"><div class="author-avatar">Е</div><div><div class="author-name">Евгений Н.</div><div class="author-company">Владелец консалтинговой компании</div></div></div></div>
+</div>
+</div>
+</section>
 
 <section id="faq" style="background:var(--bg2);">
   <div class="container">
