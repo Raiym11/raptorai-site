@@ -736,10 +736,32 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @keyframes fmShake{20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
-<link rel="stylesheet" href="/css/home-blocks.css?v=40">
+<link rel="stylesheet" href="/css/home-blocks.css?v=41">
 <style id="hb-theme">.hb{--hba:#4285F4;--hba-rgb:66,133,244;--hbb:#9B72CB;--hbb-rgb:155,114,203;--hbc:#9B72CB}</style>
 <style id="pg-acc">body{--pa:#4285F4;--pb:#9B72CB}</style>
 <style id="mn-css">.more-note{display:flex;align-items:center;justify-content:center;gap:12px;width:fit-content;max-width:min(100%,920px);margin:26px auto 0;font-size:15px;line-height:1.45;color:rgba(240,244,248,.72)}.more-note span{text-align:left}.more-note i{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:#06131c;background:linear-gradient(135deg,var(--pacc,#00D4FF),var(--pacc2,#3D8BFF))}.more-note b{color:#fff}@media(max-width:600px){.more-note{font-size:14px;align-items:flex-start;margin-left:0;margin-right:0;width:auto}.more-note i{margin-top:-1px}}</style>
+<style id="cmp-m">.cmp-c{display:flex;align-items:center;gap:10px}.cmp-c>span:first-child{flex:none;margin-right:0!important}.cmp-c .cmp-t{min-width:0}
+.cmp-tabs{display:none}
+@media(max-width:760px){
+.cmp-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 20px -14px}
+.cmp-tabs span{font-size:13.5px;color:var(--gray);width:100%}
+.cmp-tabs button{flex:1;white-space:nowrap;font-size:13.5px!important;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#cfe3f1;font:inherit;font-weight:700;font-size:14px;padding:10px 8px;border-radius:12px;cursor:pointer}
+.cmp-tabs button.on{background:rgba(0,212,255,.14);border-color:rgba(0,212,255,.6);color:#fff}
+#alt-compare .cmp-wrap{overflow-x:visible;padding:0 12px}
+#alt-compare .cmp-table{min-width:0;table-layout:fixed}
+#alt-compare .cmp-table th,#alt-compare .cmp-table td{padding:14px 10px!important;font-size:13.5px}
+#alt-compare .cmp-table th:first-child,#alt-compare .cmp-table td:first-child{width:30%}
+#alt-compare .cmp-show3 tr>*:nth-child(4),#alt-compare .cmp-show4 tr>*:nth-child(3){display:none}
+#alt-compare .cmp-logo{max-width:100%;height:auto}
+#alt-compare .cmp-table th:last-child,#alt-compare .cmp-table td:last-child{white-space:normal;min-width:0}
+#alt-compare .cmp-table td{overflow-wrap:break-word;word-break:normal}
+#alt-compare .cmp-table th,#alt-compare .cmp-table td{padding:12px 8px!important}
+#alt-compare .cmp-c{gap:6px}
+#alt-compare .cmp-yes,#alt-compare .cmp-no,#alt-compare .cmp-warn{width:20px;height:20px;font-size:11px}
+#alt-compare .cmp-table td{font-size:13px}
+}
+</style>
+<style id="cmp-m2">@media(max-width:760px){#alt-compare .cmp-wrap{padding:0 8px}#alt-compare .cmp-table th:first-child,#alt-compare .cmp-table td:first-child{width:31%}#alt-compare .cmp-table th,#alt-compare .cmp-table td{padding:11px 6px!important}#alt-compare .cmp-table td{font-size:12px;line-height:1.3;hyphens:auto;-webkit-hyphens:auto}#alt-compare .cmp-table td .cmp-t{overflow-wrap:break-word;word-break:normal}#alt-compare .cmp-yes,#alt-compare .cmp-no,#alt-compare .cmp-warn{width:17px;height:17px;font-size:10px}#alt-compare .cmp-c{gap:5px}#alt-compare .cmp-table thead th:not(.cmp-us){font-size:11px;letter-spacing:0;overflow-wrap:normal}}</style>
 </head>
 <body class="svc svc-brand" style="--pacc:#4285F4;--pacc2:#9B72CB;--pbt:#fff">
 <a class="skip-link" href="/#services">К содержимому</a>
@@ -903,7 +925,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   .ph:before{content:"";position:absolute;left:50%;top:10px;width:52px;height:12px;margin-left:-26px;border-radius:8px;background:#05080c;z-index:2}
   .ph-s{height:372px;border-radius:24px;overflow:hidden;background:#0e1621;display:flex;flex-direction:column;position:relative}
   .ph-h{display:flex;align-items:center;gap:8px;padding:38px 10px 9px;background:#17212b;color:#fff}
-  .ml-cube{position:relative!important;margin:14px 0 0 56px;width:112px!important;height:112px!important}
+  .ml-cube{position:relative!important;margin:14px auto 0;width:112px!important;height:112px!important}
   .ml-cube b img{width:88%!important}
   .ph-lg{width:24px;height:24px;object-fit:contain;flex:none}.ph-h b{display:block;font-size:11px}.ph-h small{font-size:9px;color:#7f93a6}
   .ph-c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:8px;overflow:hidden}
@@ -980,7 +1002,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   .gs-f{position:absolute;left:var(--x);top:var(--y);width:64%;transform:rotate(var(--r));padding:6px 8px;border-radius:9px;font-size:10px;font-weight:600;display:flex;gap:6px;align-items:center;background:#fff;color:#2b3140;box-shadow:0 8px 18px -8px rgba(0,0,0,.7);transition:opacity .4s,transform .4s;white-space:nowrap}
   .gs-f span{overflow:hidden;text-overflow:ellipsis}.gs-f i{flex:none;font-size:12px}.gs-f.s i{color:#23a566}.gs-f.d i{color:#4285F4}.gs-f.dim{opacity:.28}
   .gs-out{min-width:0}
-  .gs-ics{display:flex;gap:12px;margin-bottom:10px;perspective:700px}
+  .gs-ics{display:flex;justify-content:center;gap:12px;margin-bottom:10px;perspective:700px}
   .gs-ic{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 6px 7px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#cfd9ee;cursor:default;transition:transform .25s,box-shadow .35s,border-color .35s}
   .gs-ic svg{width:38px;height:50px;filter:drop-shadow(0 10px 10px rgba(0,0,0,.5));animation:cpF 4.5s ease-in-out infinite}.gs-ic.dc svg{animation-delay:-2s}
   .gs-ic small{font-size:9.5px;font-weight:700}
@@ -1013,7 +1035,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
         <div class="cz-info"><h3>ИИ-агент Gemini <span style="background:linear-gradient(90deg,#4285F4,#9B72CB);-webkit-background-clip:text;background-clip:text;color:transparent">контролирует почту</span></h3><p>Читает каждое письмо, знает вашу компанию и сразу пишет вам в Telegram, если письмо важное.</p><ul class="cz-list"><li><i class="fa-solid fa-check"></i><span>Каждое письмо уходит нужному специалисту</span></li><li><i class="fa-solid fa-check"></i><span>Важное сразу в Telegram, с готовым ответом</span></li><li><i class="fa-solid fa-check"></i><span>Вы отправляете ответ или правите его</span></li></ul><div class="bk-buddy bk-tile ml-cube" style="--face:#f3f5fb"><span><b><i class="sh"></i><img src="/hero3d/logo-gemini.webp?v=3" alt="Gemini"></b></span></div></div>
         <div class="cz-vis"><div class="ml-h">
           <div class="ml">
-            <div class="ml-st"><span class="ml-demo">пример</span><div><b class="ml-s1">+0%</b><small>скорость ответов клиентам</small></div><div><b class="ml-s2">0</b><small>важных писем без ответа</small></div></div>
+            <div class="ml-st"><div><b class="ml-s1">+0%</b><small>скорость ответов клиентам</small></div><div><b class="ml-s2">0</b><small>важных писем без ответа</small></div></div>
             <div class="ml-w">
               <div class="ml-mail">
                 <div class="ml-top"><i class="fa-solid fa-envelope"></i><span class="ml-sr">Поиск в почте</span><i class="fa-solid fa-sliders"></i></div>
@@ -1294,19 +1316,20 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="section-label">Почему мы</div>
     <h2 class="section-title">Чем мы отличаемся <span>от альтернатив</span></h2>
     <p class="section-sub">Сравните сами - условия выгоднее не на словах, а по факту.</p>
+    <div class="cmp-tabs" role="tablist"><span>RaptorAI против:</span><button type="button" class="on" data-c="3">Конструктора ботов</button><button type="button" data-c="4">Фрилансера</button></div>
     <div class="cmp-wrap reveal">
-    <table class="cmp-table">
+    <table class="cmp-table cmp-show3">
       <thead>
         <tr><th></th><th class="cmp-us"><img src="/assets/logo.png" alt="RaptorAI" class="cmp-logo"></th><th>Конструктор ботов</th><th>Фрилансер</th></tr>
       </thead>
       <tbody>
-        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-warn">?</span> частично</td><td><span class="cmp-no">&#10007;</span> часто&nbsp;плывёт</td></tr>
-        <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-no">&#10007;</span> аренда платформы</td><td><span class="cmp-warn">?</span> зависит</td></tr>
-        <tr><td>Запуск</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> от 3–7 дней</td><td><span class="cmp-warn">?</span> 1–2 дня, но шаблон</td><td><span class="cmp-warn">?</span> 2–4 недели</td></tr>
-        <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-warn">?</span> сильно ограничено</td><td><span class="cmp-warn">?</span> возможно, дороже</td></tr>
-        <tr><td>Гарантия после сдачи</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> 30 дней бесплатно</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-warn">?</span> редко</td></tr>
-        <tr><td>Оплата после запуска</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td><span class="cmp-no">&#10007;</span> фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-warn">?</span> зависит от студии</td></tr>
-        <tr class="cmp-ru"><td>Работает в России без ограничений</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да, без VPN и блокировок</td><td><span class="cmp-warn">?</span> под вопросом</td><td><span class="cmp-warn">?</span> под вопросом</td></tr>
+        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">частично</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">часто&nbsp;плывёт</span></div></td></tr>
+        <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">аренда платформы</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">зависит</span></div></td></tr>
+        <tr><td>Запуск</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">от 3–7 дней</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">1–2 дня, но шаблон</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">2–4 недели</span></div></td></tr>
+        <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">сильно ограничено</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">возможно, дороже</span></div></td></tr>
+        <tr><td>Гарантия после сдачи</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">30 дней бесплатно</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">нет</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">редко</span></div></td></tr>
+        <tr><td>Оплата после запуска</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">только реальный расход API/хостинг, обычно до 3 000 ₽/мес</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">фиксированная подписка платформе, растёт с базой подписчиков</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">зависит от студии</span></div></td></tr>
+        <tr class="cmp-ru"><td>Работает в России без ограничений</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да, без VPN и блокировок</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">под вопросом</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">под вопросом</span></div></td></tr>
       </tbody>
     </table>
     </div>
@@ -1658,7 +1681,7 @@ function CM(c,st){var p='cm'+st,B=st?['#f7f8fc','#b7bfd0','#8e97ac']:['#4a5163',
   '</svg>'}
   window.__cmpInit=function(vis){
   var B=vis.querySelector('.cp'),tms=[],gen=0,pause=0;
-  B.innerHTML='<div class="cp-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div><b>Анализ конкурента</b><small class="cp-st">Gemini готов к сбору данных</small></div><span class="cp-demo">пример</span><button type="button" class="cp-re"><i class="fa-solid fa-rotate"></i>Обновить</button></div>'+
+  B.innerHTML='<div class="cp-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div><b>Анализ конкурента</b><small class="cp-st">Gemini готов к сбору данных</small></div><button type="button" class="cp-re"><i class="fa-solid fa-rotate"></i>Обновить</button></div>'+
   '<div class="cp-body"><div class="cp-l"><div class="cp-src"><span><i class="fa-solid fa-globe"></i>Сайт</span><span><i class="fa-solid fa-store"></i>Маркетплейс</span><span><i class="fa-solid fa-comments"></i>Отзывы</span><span><i class="fa-solid fa-hashtag"></i>Соцсети</span></div>'+
   '<div class="cp-vs"><div class="cp-card you"><div class="cp-tile">'+CM('#3b4fd8',0)+'</div><small>Ваш товар</small><b>Кофемашина А1</b></div><div class="cp-badge">VS</div><div class="cp-card rv"><div class="cp-tile">'+CM('#be185d',1)+'</div><small>Товар конкурента</small><b>Кофемашина Б2</b></div></div>'+
   '<div class="cp-rows"></div><div class="cp-sc">Вы впереди по <b class="cp-n">0</b> из 5 пунктов</div></div>'+
@@ -1706,7 +1729,7 @@ window.__gsdInit=function(vis){
   var G=vis.querySelector('.gs'),tms=[],gen=0,pause=0,cur=-1;
   var F=[['прайс_финал_2.xlsx','s',2,0,-7],['договор_v3.docx','d',34,12,6],['счета_ноябрь.xlsx','s',8,46,4],['заметки_встреча.docx','d',36,58,-6],['отчёт_октябрь.xlsx','s',0,92,-3],['ТЗ_клиент.docx','d',34,104,7],['база_контактов.xlsx','s',10,138,5],['письмо_юристу.docx','d',32,150,-5]];
   var S=[{c:'Наведи порядок',q:'Наведи порядок в этих материалах',to:{s:1,d:1},res:'idx'},{c:'Выжимка по договорам',q:'Сделай выжимку по договорам и заметкам',to:{d:1},res:'doc'},{c:'Сумма за ноябрь',q:'Сколько мы заплатили за ноябрь?',to:{s:1},res:'sum'}];
-  G.innerHTML='<div class="gs-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div class="gs-q"><span class="gs-qt"></span><i class="gs-caret"></i></div><span class="cp-demo">пример</span></div><div class="gs-chips"></div>'+
+  G.innerHTML='<div class="gs-top"><img class="cp-lg" src="'+LOGO+'" alt="Gemini"><div class="gs-q"><span class="gs-qt"></span><i class="gs-caret"></i></div></div><div class="gs-chips"></div>'+
    '<div class="gs-main"><div class="gs-pile"></div><div class="gs-out"><div class="gs-ics"><div class="gs-ic sh">'+SH+'<small>Google Таблицы</small></div><div class="gs-ic dc">'+DC+'<small>Google Документы</small></div></div><div class="gs-res"></div></div></div>';
   var QT=G.querySelector('.gs-qt'),CH=G.querySelector('.gs-chips'),PL=G.querySelector('.gs-pile'),RS=G.querySelector('.gs-res'),ICS=G.querySelector('.gs-ics'),IS=G.querySelector('.gs-ic.sh'),ID=G.querySelector('.gs-ic.dc');
   var chips=S.map(function(s,i){var b=document.createElement('button');b.type='button';b.textContent=s.c;CH.appendChild(b);b.addEventListener('click',function(){pause=Date.now();run(i)});return b});
@@ -1919,5 +1942,6 @@ html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-pan
  pw.addEventListener('mouseenter',function(){hov=true;st.forEach(function(x){x.classList.remove('on')})});
  pw.addEventListener('mouseleave',function(){hov=false});
  new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!tm){go();tm=setInterval(function(){if(!hov)go()},2200)}}else{clearInterval(tm);tm=null}}).observe(pw);}})();</script>
+<script>(function(){var t=document.querySelectorAll('#alt-compare .cmp-tabs button'),tb=document.querySelector('#alt-compare .cmp-table');t.forEach(function(b){b.onclick=function(){t.forEach(function(x){x.classList.toggle('on',x===b)});tb.classList.remove('cmp-show3','cmp-show4');tb.classList.add('cmp-show'+b.dataset.c)}})})();</script>
 </body>
 </html>

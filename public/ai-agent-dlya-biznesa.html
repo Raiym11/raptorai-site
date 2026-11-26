@@ -736,10 +736,32 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 @keyframes fmShake{20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
 @media(prefers-reduced-motion:reduce){.form-msg.show,.form-group.err input,.form-group.err textarea,.form-consent.err{animation:none !important}}
 </style>
-<link rel="stylesheet" href="/css/home-blocks.css?v=40">
+<link rel="stylesheet" href="/css/home-blocks.css?v=41">
 <style id="hb-theme">.hb{--hba:#00D4FF;--hba-rgb:0,212,255;--hbb:#3D8BFF;--hbb-rgb:140,123,255;--hbc:#3D8BFF}</style>
 <style id="pg-acc">body{--pa:#00D4FF;--pb:#3D8BFF}</style>
 <style id="mn-css">.more-note{display:flex;align-items:center;justify-content:center;gap:12px;width:fit-content;max-width:min(100%,920px);margin:26px auto 0;font-size:15px;line-height:1.45;color:rgba(240,244,248,.72)}.more-note span{text-align:left}.more-note i{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:#06131c;background:linear-gradient(135deg,var(--pacc,#00D4FF),var(--pacc2,#3D8BFF))}.more-note b{color:#fff}@media(max-width:600px){.more-note{font-size:14px;align-items:flex-start;margin-left:0;margin-right:0;width:auto}.more-note i{margin-top:-1px}}</style>
+<style id="cmp-m">.cmp-c{display:flex;align-items:center;gap:10px}.cmp-c>span:first-child{flex:none;margin-right:0!important}.cmp-c .cmp-t{min-width:0}
+.cmp-tabs{display:none}
+@media(max-width:760px){
+.cmp-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 20px -14px}
+.cmp-tabs span{font-size:13.5px;color:var(--gray);width:100%}
+.cmp-tabs button{flex:1;white-space:nowrap;font-size:13.5px!important;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#cfe3f1;font:inherit;font-weight:700;font-size:14px;padding:10px 8px;border-radius:12px;cursor:pointer}
+.cmp-tabs button.on{background:rgba(0,212,255,.14);border-color:rgba(0,212,255,.6);color:#fff}
+#alt-compare .cmp-wrap{overflow-x:visible;padding:0 12px}
+#alt-compare .cmp-table{min-width:0;table-layout:fixed}
+#alt-compare .cmp-table th,#alt-compare .cmp-table td{padding:14px 10px!important;font-size:13.5px}
+#alt-compare .cmp-table th:first-child,#alt-compare .cmp-table td:first-child{width:30%}
+#alt-compare .cmp-show3 tr>*:nth-child(4),#alt-compare .cmp-show4 tr>*:nth-child(3){display:none}
+#alt-compare .cmp-logo{max-width:100%;height:auto}
+#alt-compare .cmp-table th:last-child,#alt-compare .cmp-table td:last-child{white-space:normal;min-width:0}
+#alt-compare .cmp-table td{overflow-wrap:break-word;word-break:normal}
+#alt-compare .cmp-table th,#alt-compare .cmp-table td{padding:12px 8px!important}
+#alt-compare .cmp-c{gap:6px}
+#alt-compare .cmp-yes,#alt-compare .cmp-no,#alt-compare .cmp-warn{width:20px;height:20px;font-size:11px}
+#alt-compare .cmp-table td{font-size:13px}
+}
+</style>
+<style id="cmp-m2">@media(max-width:760px){#alt-compare .cmp-wrap{padding:0 8px}#alt-compare .cmp-table th:first-child,#alt-compare .cmp-table td:first-child{width:31%}#alt-compare .cmp-table th,#alt-compare .cmp-table td{padding:11px 6px!important}#alt-compare .cmp-table td{font-size:12px;line-height:1.3;hyphens:auto;-webkit-hyphens:auto}#alt-compare .cmp-table td .cmp-t{overflow-wrap:break-word;word-break:normal}#alt-compare .cmp-yes,#alt-compare .cmp-no,#alt-compare .cmp-warn{width:17px;height:17px;font-size:10px}#alt-compare .cmp-c{gap:5px}#alt-compare .cmp-table thead th:not(.cmp-us){font-size:11px;letter-spacing:0;overflow-wrap:normal}}</style>
 </head>
 <body class="svc" style="--pacc:#00D4FF;--pacc2:#3D8BFF">
 <a class="skip-link" href="/#services">К содержимому</a>
@@ -1420,19 +1442,20 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
     <div class="section-label">Почему мы</div>
     <h2 class="section-title">Чем мы отличаемся <span>от альтернатив</span></h2>
     <p class="section-sub">Сравните сами - условия выгоднее не на словах, а по факту.</p>
+    <div class="cmp-tabs" role="tablist"><span>RaptorAI против:</span><button type="button" class="on" data-c="3">Конструктора ботов</button><button type="button" data-c="4">Фрилансера</button></div>
     <div class="cmp-wrap reveal">
-    <table class="cmp-table">
+    <table class="cmp-table cmp-show3">
       <thead>
         <tr><th></th><th class="cmp-us"><img src="/assets/logo.png" alt="RaptorAI" class="cmp-logo"></th><th>Конструктор ботов</th><th>Фрилансер</th></tr>
       </thead>
       <tbody>
-        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-warn">?</span> частично</td><td><span class="cmp-no">&#10007;</span> часто&nbsp;плывёт</td></tr>
-        <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-no">&#10007;</span> аренда платформы</td><td><span class="cmp-warn">?</span> зависит</td></tr>
-        <tr><td>Запуск</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> от 3-7 дней</td><td><span class="cmp-warn">?</span> 1-2 дня, но шаблон</td><td><span class="cmp-warn">?</span> 2-4 недели</td></tr>
-        <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да</td><td><span class="cmp-warn">?</span> сильно ограничено</td><td><span class="cmp-warn">?</span> возможно, дороже</td></tr>
-        <tr><td>Гарантия после сдачи</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> 30 дней бесплатно</td><td><span class="cmp-no">&#10007;</span> нет</td><td><span class="cmp-warn">?</span> редко</td></tr>
-        <tr><td>Оплата после запуска</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> только реальный расход API/хостинг, обычно до 3 000 ₽/мес</td><td><span class="cmp-no">&#10007;</span> фиксированная подписка платформе, растёт с базой подписчиков</td><td><span class="cmp-warn">?</span> зависит от студии</td></tr>
-        <tr class="cmp-ru"><td>Работает в России без ограничений</td><td class="cmp-us"><span class="cmp-yes">&#10003;</span> да, без VPN и блокировок</td><td><span class="cmp-warn">?</span> под вопросом</td><td><span class="cmp-warn">?</span> под вопросом</td></tr>
+        <tr><td>Цена и срок фиксируются до старта</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">частично</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">часто&nbsp;плывёт</span></div></td></tr>
+        <tr><td>Система принадлежит вам навсегда</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">аренда платформы</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">зависит</span></div></td></tr>
+        <tr><td>Запуск</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">от 3-7 дней</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">1-2 дня, но шаблон</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">2-4 недели</span></div></td></tr>
+        <tr><td>Интеграция с CRM, 1С, каталогом</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">сильно ограничено</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">возможно, дороже</span></div></td></tr>
+        <tr><td>Гарантия после сдачи</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">30 дней бесплатно</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">нет</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">редко</span></div></td></tr>
+        <tr><td>Оплата после запуска</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">только реальный расход API/хостинг, обычно до 3 000 ₽/мес</span></div></td><td><div class="cmp-c"><span class="cmp-no">&#10007;</span><span class="cmp-t">фиксированная подписка платформе, растёт с базой подписчиков</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">зависит от студии</span></div></td></tr>
+        <tr class="cmp-ru"><td>Работает в России без ограничений</td><td class="cmp-us"><div class="cmp-c"><span class="cmp-yes">&#10003;</span><span class="cmp-t">да, без VPN и блокировок</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">под вопросом</span></div></td><td><div class="cmp-c"><span class="cmp-warn">?</span><span class="cmp-t">под вопросом</span></div></td></tr>
       </tbody>
     </table>
     </div>
@@ -1893,5 +1916,6 @@ html.lite #chat-panel::before,html.lite #chat-panel::after,html.fx-off #chat-pan
  pw.addEventListener('mouseleave',function(){hov=false});
  new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!tm){go();tm=setInterval(function(){if(!hov)go()},2200)}}else{clearInterval(tm);tm=null}}).observe(pw);}})();</script>
 <script src="/js/ig3d.js?v=17" defer></script>
+<script>(function(){var t=document.querySelectorAll('#alt-compare .cmp-tabs button'),tb=document.querySelector('#alt-compare .cmp-table');t.forEach(function(b){b.onclick=function(){t.forEach(function(x){x.classList.toggle('on',x===b)});tb.classList.remove('cmp-show3','cmp-show4');tb.classList.add('cmp-show'+b.dataset.c)}})})();</script>
 </body>
 </html>
