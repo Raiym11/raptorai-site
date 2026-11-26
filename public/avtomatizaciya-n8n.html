@@ -483,6 +483,9 @@ body:has(#chat-panel.open) #tg-float{opacity:0;pointer-events:none;transform:sca
 @keyframes arrowNudge{0%,100%{transform:translateY(-50%) translateX(-2px)}50%{transform:translateY(-50%) translateX(3px)}}
 @keyframes arrowNudgeV{0%,100%{transform:translateX(-50%) translateY(-2px)}50%{transform:translateX(-50%) translateY(3px)}}
 
+/* n8n reviews masonry */
+.rv-cols{margin-top:34px;column-count:3;column-gap:20px}.rv-cols .testimonial-card{break-inside:avoid;margin-bottom:20px;display:block}
+@media(max-width:1000px){.rv-cols{column-count:2}}@media(max-width:640px){.rv-cols{column-count:1}}
 /* reviews: top border must stay visible */
 .testimonials-carousel{padding:18px 20px 24px !important}
 
@@ -1102,6 +1105,22 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 </section>
 </div><!--/hb:low-->
 
+
+<section id="reviews" data-nosnippet style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label">Отзывы</div>
+    <h2 class="section-title">Что говорят <span>клиенты</span></h2>
+    <p class="section-sub">Отзывы клиентов, для которых мы настраивали автоматизацию на n8n.</p>
+    <div class="rv-cols">
+<div class="testimonial-card"><p class="testimonial-text">«Настроили автоматическую обработку заявок через n8n. Всё работает отлично, менеджеры наконец избавились от рутины. Спасибо RaptorAI!»</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Алексей К.</div><div class="author-company">Владелец маркетингового агентства</div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">«Давно хотели автоматизировать работу с заказами, но никак не доходили руки. Команда RaptorAI подключила сайт, CRM и Telegram через n8n. Теперь заказы автоматически распределяются, а клиенты получают уведомления. Очень удобно, рекомендую.»</p><div class="testimonial-author"><div class="author-avatar">М</div><div><div class="author-name">Мария В.</div><div class="author-company">Основательница интернет-магазина</div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">«Обратились с задачей автоматизировать сбор и обработку лидов. До этого сотрудники вручную переносили информацию из разных источников, из-за чего регулярно возникали задержки.<br><br>RaptorAI разработали для нас полноценную связку на n8n, интегрировали CRM и настроили автоматическое распределение заявок. За первый месяц удалось сократить время обработки лидов примерно на 65%. Результатом полностью довольны.»</p><div class="testimonial-author"><div class="author-avatar">Д</div><div><div class="author-name">Дмитрий С.</div><div class="author-company">Руководитель отдела продаж</div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">«Хорошая команда. Сделали автоматизацию через n8n, связали несколько сервисов. Всё объяснили и помогли разобраться.»</p><div class="testimonial-author"><div class="author-avatar">Т</div><div><div class="author-name">Тимур А.</div><div class="author-company">Предприниматель</div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">«Для меня главным преимуществом стало то, что больше не нужно ежедневно собирать отчёты вручную. RaptorAI настроили связку n8n с несколькими рабочими сервисами, и теперь данные автоматически собираются в одном месте. Экономлю около 12 часов в неделю. Отдельное спасибо за оперативную поддержку после внедрения.»</p><div class="testimonial-author"><div class="author-avatar">Е</div><div><div class="author-name">Екатерина М.</div><div class="author-company">Независимый консультант</div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">«Заказывал автоматизацию личных задач. Нужно было связать Telegram с несколькими сервисами, чтобы не переключаться постоянно между приложениями. Ребята из RaptorAI всё настроили на n8n. Получилось даже лучше, чем ожидал.»</p><div class="testimonial-author"><div class="author-avatar">А</div><div><div class="author-name">Арман Р.</div><div class="author-company">Частное лицо</div></div></div></div>
+    </div>
+  </div>
+</section>
 
 <section id="faq" style="background:var(--bg2);">
   <div class="container">
