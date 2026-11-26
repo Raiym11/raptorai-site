@@ -739,6 +739,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
 <link rel="stylesheet" href="/css/home-blocks.css?v=40">
 <style id="hb-theme">.hb{--hba:#00D4FF;--hba-rgb:0,212,255;--hbb:#3D8BFF;--hbb-rgb:140,123,255;--hbc:#3D8BFF}</style>
 <style id="pg-acc">body{--pa:#00D4FF;--pb:#3D8BFF}</style>
+<style id="mn-css">.more-note{display:flex;align-items:center;justify-content:center;gap:10px;margin:24px auto 0;max-width:680px;text-align:center;font-size:15px;line-height:1.5;color:rgba(240,244,248,.72)}.more-note i{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:#06131c;background:linear-gradient(135deg,#00D4FF,#3D8BFF)}.more-note b{color:#fff}@media(max-width:600px){.more-note{font-size:14px;text-align:left}}</style>
 </head>
 <body class="svc" style="--pacc:#00D4FF;--pacc2:#3D8BFF">
 <a class="skip-link" href="/#services">К содержимому</a>
@@ -947,6 +948,27 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
   @media(max-width:900px){.ag{padding:18px 14px}.ag-p{grid-template-columns:1fr;gap:18px}.ag-t{flex:1;min-width:0;padding:10px}.ag-t small{display:none}.sa3d{padding:34px 22px 34px 14px}}
   @media(max-width:480px){.ag-tabs{gap:6px}.ag-t{gap:8px;padding:8px}.ag-t>i{width:30px;height:30px;border-radius:9px;font-size:12px}.ag-t b{font-size:12.5px;line-height:1.25}.lm{padding:11px}.lm-big b{font-size:22px}.lm-g{gap:5px}.lm-p{padding:6px}.lm-btn{padding:6px 8px;font-size:10.5px}}
   @media(prefers-reduced-motion:reduce){.ag-p.on,.lm-live:before,.lm-btn.go,.lm-toast{animation:none}.lm-row{transition:none}}
+  /* разные темы у трёх мини-приложений */
+  .lm[data-m="2"]{background:linear-gradient(160deg,#0c1730,#0a1020 60%,#111a33);color:#e6edff;box-shadow:0 40px 80px -24px rgba(0,0,0,.8),0 0 0 1px rgba(0,212,255,.28) inset,0 0 60px -20px rgba(0,212,255,.5)}
+  .lm[data-m="2"] .lm-h b{color:#fff}.lm[data-m="2"] .lm-h i.d{background:conic-gradient(from 200deg,#00D4FF,#3D8BFF,#00D4FF)}
+  .lm[data-m="2"] .lm-live{background:rgba(0,212,255,.15);color:#6fe3ff}.lm[data-m="2"] .lm-live:before{background:#6fe3ff}
+  .lm[data-m="2"] .lm-seg{background:rgba(255,255,255,.06)}.lm[data-m="2"] .lm-seg button{color:#93a3c9}.lm[data-m="2"] .lm-seg button.on{background:rgba(0,212,255,.18);color:#fff;box-shadow:0 0 0 1px rgba(0,212,255,.5) inset}
+  .lm[data-m="2"] .lm-ch{background-color:rgba(255,255,255,.04);background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:100% 25%,12.5% 100%;border:1px solid rgba(255,255,255,.09)}
+  .lm[data-m="2"] .lm-ch svg{height:110px}.lm[data-m="2"] .lm-ch .me{stroke:#6fa0ff;filter:drop-shadow(0 0 4px #5b7cff)}.lm[data-m="2"] .lm-ch .cp{stroke:#ff9a5c;filter:drop-shadow(0 0 4px #ff7a45)}
+  .lm[data-m="2"] .lm-lg{color:#93a3c9}
+  .lm[data-m="2"] .lm-ev button{background:rgba(255,255,255,.06);box-shadow:0 0 0 1px rgba(255,255,255,.12) inset;color:#dbe5ff}.lm[data-m="2"] .lm-ev button.on{background:rgba(0,212,255,.16);box-shadow:0 0 0 1.6px #00D4FF inset}.lm[data-m="2"] .lm-ev i{color:#6fe3ff}
+  .lm[data-m="2"] .lm-ai{background:rgba(255,255,255,.06);box-shadow:0 0 0 1px rgba(0,212,255,.28) inset}.lm[data-m="2"] .lm-ai p{color:#dbe5ff}.lm[data-m="2"] .lm-ai p b,.lm[data-m="2"] .lm-ai h6{color:#6fe3ff}
+  .lm[data-m="3"]{background:linear-gradient(160deg,#2f1c12,#1b1210 62%,#26160f);color:#fbeee4;box-shadow:0 40px 80px -24px rgba(0,0,0,.8),0 0 0 1px rgba(255,150,70,.3) inset,0 0 60px -22px rgba(255,120,40,.5)}
+  .lm[data-m="3"] .lm-h b{color:#fff}.lm[data-m="3"] .lm-h i.d{background:conic-gradient(from 200deg,#ff9a3c,#ff5b3c,#ff9a3c)}
+  .lm[data-m="3"] .lm-live{background:rgba(255,154,60,.18);color:#ffb36b}.lm[data-m="3"] .lm-live:before{background:#ffb36b}
+  .lm[data-m="3"] .lm-big{background:rgba(255,255,255,.06)}.lm[data-m="3"] .lm-big small{color:#c9a994}.lm[data-m="3"] .lm-big b{color:#ff9a3c}.lm[data-m="3"] .lm-big em{color:#7be3b0}
+  .lm[data-m="3"] .lm-stack{height:16px;background:rgba(255,255,255,.1)}.lm[data-m="3"] .lm-stack i{background:linear-gradient(180deg,#ff9a3c,#e0562a)}.lm[data-m="3"] .lm-stack i.ok{background:linear-gradient(180deg,#3fd09a,#1b8a60)}
+  .lm[data-m="3"] .lm-p{background:linear-gradient(160deg,#c93b4f,#8f2236);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset}
+  .lm[data-m="3"] .lm-p.mid{background:linear-gradient(160deg,#e59a2e,#a8661a)}.lm[data-m="3"] .lm-p.low,.lm[data-m="3"] .lm-p.ok{background:linear-gradient(160deg,#2fae7b,#1b7a55)}
+  .lm[data-m="3"] .lm-p i.ic{background:rgba(255,255,255,.22)}.lm[data-m="3"] .lm-p polyline,.lm[data-m="3"] .lm-p.hot polyline,.lm[data-m="3"] .lm-p.ok polyline{stroke:#fff}
+  .lm[data-m="3"] .lm-pill,.lm[data-m="3"] .lm-p.mid .lm-pill,.lm[data-m="3"] .lm-p.low .lm-pill,.lm[data-m="3"] .lm-p.ok .lm-pill{background:rgba(0,0,0,.28);color:#fff}
+  .lm[data-m="3"] .lm-p.on,.lm[data-m="3"] .lm-p.ok{box-shadow:0 0 0 2px #fff inset}
+  .lm[data-m="3"] .lm-ai{background:rgba(255,255,255,.07);box-shadow:0 0 0 1px rgba(255,150,70,.28) inset}.lm[data-m="3"] .lm-ai p{color:#fbeee4}.lm[data-m="3"] .lm-ai p b,.lm[data-m="3"] .lm-ai h6{color:#ffb36b}
 </style>
   <div class="container">
     <div class="section-label">Примеры агентов</div>
@@ -1008,6 +1030,7 @@ html.lite .case-hero::after,html.lite .hn-core .hn-card::after{animation:none !i
           </div></div></div>
       </div>
     </div>
+    <p class="more-note"><i class="fa-solid fa-plus"></i><span><b>Это не все примеры.</b> Агента можно настроить под любую задачу вашего бизнеса.</span></p>
     <div class="sec-cta"><a href="#contact" class="btn-primary">Получить расчёт за 1 минуту</a></div>
   </div>
   <script>(function(){
