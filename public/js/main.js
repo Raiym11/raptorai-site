@@ -44,6 +44,38 @@ document.addEventListener('change', function (e) {
 const CONTACT_FORM_WEBHOOK_URL = 'https://functions.yandexcloud.net/d4erfg6tb5en26f40a8r?r=contact';
 
 const FORM_OPENED_AT = Date.now();
+
+const CAPTCHA_SITEKEY = 'ysc1_AAs342bYdUDQDkSIzQZOs1yFKtBjQUUR7HfmzSQgc8adb649';
+let captchaToken = '';
+let captchaWidget = null;
+function initCaptcha() {
+  const box = document.getElementById('captcha-box');
+  if (!box || box.dataset.ready) return;
+  box.dataset.ready = '1';
+  window.onRaptorCaptchaLoad = function () {
+    try {
+      captchaWidget = window.smartCaptcha.render(box, {
+        sitekey: CAPTCHA_SITEKEY,
+        hl: 'ru',
+        callback: function (t) { captchaToken = t; }
+      });
+    } catch (e) { /* капча недоступна */ }
+  };
+  const s = document.createElement('script');
+  s.src = 'https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onRaptorCaptchaLoad';
+  s.async = true;
+  document.head.appendChild(s);
+}
+(function () {
+  const box = document.getElementById('captcha-box');
+  if (!box) return;
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { io.disconnect(); initCaptcha(); }
+    }, { rootMargin: '600px' });
+    io.observe(box);
+  } else { initCaptcha(); }
+})();
 async function submitForm() {
   const honeypot = document.getElementById('f-website').value.trim();
   if (honeypot) {
@@ -99,6 +131,10 @@ async function submitForm() {
       return;
     }
   } catch (e) { /* localStorage недоступен */ }
+  if (!captchaToken) {
+    formFail('Подтвердите, что вы не робот (галочка над кнопкой).');
+    return;
+  }
   const btn = document.getElementById('form-submit-btn');
   btn.disabled = true;
   const originalBtnText = btn.textContent;
@@ -110,7 +146,7 @@ async function submitForm() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name, email, phone, telegram, contact, task, biz: qz.biz || '', goal: qz.goal || '', budget: qz.budget || '', hot: hot, calc_loss: qz.calc_loss || 0, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
+      body: JSON.stringify({ name, email, phone, telegram, contact, task, biz: qz.biz || '', goal: qz.goal || '', budget: qz.budget || '', hot: hot, calc_loss: qz.calc_loss || 0, captcha_token: captchaToken, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
     });
     if (!response.ok) throw new Error('Request failed with status ' + response.status);
     try { localStorage.setItem('raptorai_form_ts', String(Date.now())); } catch (e) { /* ignore */ }
@@ -122,6 +158,8 @@ async function submitForm() {
     }
   } catch (err) {
     formFail('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Телеграм @Raptorairu.');
+    captchaToken = '';
+    try { if (window.smartCaptcha && captchaWidget !== null) window.smartCaptcha.reset(captchaWidget); } catch (e) { /* ignore */ }
     btn.disabled = false;
     btn.textContent = originalBtnText;
   }

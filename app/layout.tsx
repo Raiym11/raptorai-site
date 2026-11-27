@@ -29,12 +29,12 @@ export const metadata: Metadata = {
 // Та же политика, что в <meta> файлов public/*.html
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://mc.yandex.ru",
+  "script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://smartcaptcha.yandexcloud.net",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   "img-src 'self' data: https:",
-  "connect-src 'self' https://functions.yandexcloud.net https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru",
-  "frame-src 'self' https://mc.yandex.ru https://mc.yandex.md",
+  "connect-src 'self' https://functions.yandexcloud.net https://smartcaptcha.yandexcloud.net https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru",
+  "frame-src 'self' https://smartcaptcha.yandexcloud.net https://mc.yandex.ru https://mc.yandex.md",
   "object-src 'none'",
   "base-uri 'self'",
 ].join("; ");
