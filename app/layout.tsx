@@ -33,7 +33,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   "img-src 'self' data: https:",
-  "connect-src 'self' https://n8n.raptorai.ru https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru",
+  "connect-src 'self' https://functions.yandexcloud.net https://mc.yandex.ru https://mc.yandex.md https://mc.yandex.com https://yandex.ru https://ya.ru wss://mc.yandex.ru",
   "frame-src 'self' https://mc.yandex.ru https://mc.yandex.md",
   "object-src 'none'",
   "base-uri 'self'",

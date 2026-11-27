@@ -1,7 +1,6 @@
 // ===== CHAT WIDGET (ИИ-ассистент RaptorAI, n8n) =====
 // TODO: замените на реальный webhook-адрес вашего workflow в n8n
-const CHAT_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/raptorai-chat';
-const CHAT_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
+const CHAT_WEBHOOK_URL = 'https://functions.yandexcloud.net/d4erfg6tb5en26f40a8r?r=chat';
 
 let chatOpened = false;
 let chatGatePassed = false;
@@ -94,9 +93,9 @@ function updateSendButtonState() {
 function onChatFileSelected(event) {
   const file = event.target.files[0];
   if (!file) return;
-  if (!/^image\/(png|jpe?g|webp|gif)$/i.test(file.type) || file.size > 4 * 1024 * 1024) {
+  if (!/^image\/(png|jpe?g|webp|gif)$/i.test(file.type) || file.size > 2 * 1024 * 1024) {
     event.target.value = '';
-    appendChatMessage('bot', 'Прикрепите картинку PNG, JPG или WebP до 4 МБ.');
+    appendChatMessage('bot', 'Прикрепите картинку PNG, JPG или WebP до 2 МБ.');
     return;
   }
   const reader = new FileReader();
@@ -203,8 +202,7 @@ async function sendChatMessage() {
     const response = await fetch(CHAT_WEBHOOK_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-Webhook-Secret': CHAT_WEBHOOK_SECRET
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: chatUserName,

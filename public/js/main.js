@@ -41,8 +41,7 @@ document.addEventListener('change', function (e) {
   if (box) box.classList.remove('err');
 });
 
-const CONTACT_FORM_WEBHOOK_URL = 'https://n8n.raptorai.ru/webhook/contact-form';
-const CONTACT_FORM_WEBHOOK_SECRET = '6f28d42d47e4ef822578b38add66af30c3c4aba234db8eaf';
+const CONTACT_FORM_WEBHOOK_URL = 'https://functions.yandexcloud.net/d4erfg6tb5en26f40a8r?r=contact';
 
 const FORM_OPENED_AT = Date.now();
 async function submitForm() {
@@ -109,8 +108,7 @@ async function submitForm() {
     const response = await fetch(CONTACT_FORM_WEBHOOK_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-Webhook-Secret': CONTACT_FORM_WEBHOOK_SECRET
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ name, email, phone, telegram, contact, task, biz: qz.biz || '', goal: qz.goal || '', budget: qz.budget || '', hot: hot, calc_loss: qz.calc_loss || 0, consent: true, consent_version: '2026-10-31', page: location.href, submitted_at: new Date().toISOString() })
     });
